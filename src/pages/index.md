@@ -6,22 +6,22 @@ title: "Вводное занятие"
 ## Социальные сети
 
 * vk:
-  * [Закрытая группа - FITmospolytech](https://vk.com/fitmospolytech.team)
-  * [Открытая группа - ИТ-факультет Московского Политеха](https://vk.com/fit.mospolytech)
+    * [Закрытая группа - FITmospolytech](//vk.com/fitmospolytech.team)
+    * [Открытая группа - ИТ-факультет Московского Политеха](//vk.com/fit.mospolytech)
 * telegram:
-  * [Официальная группа потока](https://t.me/+KOo1mwORG5UyYTNi)
-  * [Общая группа профиля Веб](https://t.me/joinchat/b1k0ZPStUPY0M2Ji)
+    * [Официальная группа потока](//t.me/+KOo1mwORG5UyYTNi)
+    * [Общая группа профиля Веб](//t.me/joinchat/b1k0ZPStUPY0M2Ji)
 * discord:
-  * [Работа с наставниками](https://discord.gg/6vM44ugx)
+    * [Работа с наставниками](//discord.gg/6vM44ugx)
 
 
 ## Регистрации
 
-1. [Github](github.com)
-1. [Cайт факультета](https://fit.mospolytech.ru)
-  1. Подтвердить почту
-  1. Отправить завку на сервер на [странице Серверы](https://fit.mospolytech.ru/systems/servers)
-1. [Figma](figma.com)
+1. [Github](//github.com)
+1. [Cайт факультета](//fit.mospolytech.ru)
+    1. Подтвердить почту
+    1. Отправить завку на сервер на [странице Серверы](//fit.mospolytech.ru/systems/servers)
+1. [Figma](//figma.com)
 
 
 ## Установка ПО
@@ -34,9 +34,26 @@ title: "Вводное занятие"
 
 ## Базовые команды
 
-Команды git (add, commit, init, clone, push...)
-Команды терминала (cd, mkdir, cp, rm, pwd...)
+Команды git:
 
+```
+git add
+git commit
+git init
+git status
+git log
+```
+
+Команды терминала
+
+```
+pwd
+cd
+mkdir
+touch
+rm
+cp
+```
 ## Проба пера
 
 1. Создать index.html
