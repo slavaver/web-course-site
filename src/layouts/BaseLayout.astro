@@ -1,0 +1,28 @@
+---
+import '../styles/global.css';
+
+export interface Props {
+	content: {
+		title: string;
+	};
+}
+
+const {
+	content: { title },
+} = Astro.props;
+---
+
+<html lang="ru">
+	<head>
+	</head>
+
+	<body>
+		<main>
+			<article>
+				<h1 class="title">{title}</h1>
+				<hr/>
+				<slot />
+			</article>
+		</main>
+	</body>
+</html>
