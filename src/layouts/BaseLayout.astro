@@ -1,28 +1,45 @@
 ---
-import '../styles/global.css';
+import Footer from "../components/Footer.astro";
 
 export interface Props {
-	content: {
-		title: string;
-	};
+  content: {
+    title: string;
+  };
 }
 
 const {
-	content: { title },
+  content: { title },
 } = Astro.props;
 ---
 
 <html lang="ru">
-	<head>
-	</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Веб-технологии</title>
+  </head>
 
-	<body>
-		<main>
-			<article>
-				<h1 class="title">{title}</h1>
-				<hr/>
-				<slot />
-			</article>
-		</main>
-	</body>
+  <body>
+    <header>
+      <div class="max-w-3xl mx-auto my-4">
+        <nav>
+          <a
+            href="/web-course-site/"
+            class="p-2 rounded-md border-2 border-current hover:bg-gray-100"
+            >На главную</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+		<div class="max-w-3xl mx-auto">
+      <article class="prose lg:prose-xl">
+        <h1>{title}</h1>
+        <hr />
+        <slot />
+      </article>
+	</div>
+    </main>
+    <Footer />
+  </body>
 </html>
