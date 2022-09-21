@@ -1,5 +1,5 @@
 ---
-layout: "../layouts/BaseLayout.astro"
+layout: "../../layouts/BaseLayout.astro"
 title: "Лабораторная работа №1"
 ---
 
