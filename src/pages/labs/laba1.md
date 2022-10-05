@@ -27,11 +27,11 @@ title: "Лабораторная работа №1"
 
 ### Дополнительные источники
 
-- MDN основы - https://developer.mozilla.org/ru/docs/Learn/Getting_started_with_the_web/HTML_basics
-- Элементы HTML - https://developer.mozilla.org/ru/docs/Web/HTML/Element
-- Справочная информация - https://html5book.ru/
-- Проверка тегов и свойств на степень внедрения - https://caniuse.com/
-- Проверка тегов на возможность вложения - https://caninclude.glitch.me/
+- [MDN основы](https://developer.mozilla.org/ru/docs/Learn/Getting_started_with_the_web/HTML_basics)
+- [Элементы HTML](https://developer.mozilla.org/ru/docs/Web/HTML/Element)
+- [Справочная информация](https://html5book.ru/)
+- [Проверка тегов и свойств на степень внедрения](https://caniuse.com/)
+- [Проверка тегов на возможность вложения](https://caninclude.glitch.me/)
 - Emmet в VS Code - https://habr.com/ru/post/573032/
 - Chrome DevTools - https://habr.com/ru/post/548898/
 - VS Code - https://code.visualstudio.com/, полезные расширения: Live Server, Path Intellisense, Prettier
