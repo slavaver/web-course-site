@@ -1,5 +1,6 @@
 ---
 import Footer from "../components/Footer.astro";
+import NavBar from "../components/NavBar.astro";
 ---
 
 <!DOCTYPE html>
@@ -10,8 +11,11 @@ import Footer from "../components/Footer.astro";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Веб-технологии</title>
   </head>
-  <body>
-    <main class="prose lg:prose-xl max-w-3xl mx-auto">
+  <body class="flex flex-col min-h-screen">
+    <header class="bg-gray-100">
+      <NavBar />
+    </header>
+    <main class="prose lg:prose-xl max-w-3xl mx-auto flex-grow mt-16">
       <h1 class="text-center">Основы веб-технологий</h1>
       <h2>Лабораторные работы</h2>
       <ul>

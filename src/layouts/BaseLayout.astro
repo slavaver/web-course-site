@@ -1,5 +1,6 @@
 ---
 import Footer from "../components/Footer.astro";
+import NavBar from "../components/NavBar.astro";
 
 export interface Props {
   content: {
@@ -20,26 +21,19 @@ const {
     <title>Веб-технологии</title>
   </head>
 
-  <body>
-    <header>
-      <div class="max-w-3xl mx-auto my-4">
-        <nav>
-          <a
-            href="/web-course-site/"
-            class="p-2 rounded-md border-2 border-current hover:bg-gray-100"
-            >На главную</a>
-        </nav>
-      </div>
+  <body class="flex flex-col min-h-screen">
+    <header class="bg-gray-100">
+        <NavBar />
     </header>
-    <main>
-		<div class="max-w-3xl mx-auto">
-      <article class="prose lg:prose-xl">
-        <h1>{title}</h1>
-        <hr />
-        <slot />
-      </article>
-	</div>
+    <main class="flex-grow">
+      <div class="max-w-3xl mx-auto mt-16">
+        <article class="prose lg:prose-xl">
+          <h1>{title}</h1>
+          <slot />
+        </article>
+      </div>
     </main>
     <Footer />
   </body>
 </html>
+<!-- class="p-2 rounded-md border-2 border-current hover:bg-gray-100" -->
