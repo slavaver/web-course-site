@@ -59,7 +59,7 @@ title: "Лабораторная работа №3"
 
 * [Блочная модель](https://codepen.io/frontendmax/pen/EBvvLB)
 * [Позиционирование](https://codepen.io/rohini-girase/pen/rNNJLKL)
-*
+* [Codepen преподавателя](https://codepen.io/slavaver/pen/eYrLYyK)
 
 ### Вопросы для защиты
 
