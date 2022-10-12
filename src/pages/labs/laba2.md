@@ -1,6 +1,7 @@
 ---
 layout: "../../layouts/BaseLayout.astro"
 title: "Лабораторная работа №2"
+tag: "Лабораторные"
 ---
 
 ## Основы CSS

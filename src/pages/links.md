@@ -1,6 +1,7 @@
 ---
 layout: "../layouts/BaseLayout.astro"
 title: "Полезные ссылки"
+tag: "Полезное"
 ---
 
 ## СДО Московского Политеха

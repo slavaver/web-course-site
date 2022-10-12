@@ -1,6 +1,7 @@
 ---
 layout: "../layouts/BaseLayout.astro"
 title: "Правила курса"
+tag: "Полезное"
 ---
 
 ## Общие правила

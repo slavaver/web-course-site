@@ -1,6 +1,7 @@
 ---
 layout: "../../layouts/BaseLayout.astro"
 title: "Вводное занятие"
+tag: "Лабораторные"
 ---
 
 ## Социальные сети
