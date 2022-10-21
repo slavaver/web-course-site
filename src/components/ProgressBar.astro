@@ -8,5 +8,5 @@ const progress = Math.round((today - startDate) / (endDate - startDate) * 100)
 ---
 <aside class="max-w-3xl w-full mx-auto py-10">
 <p class="text-center text-2xl">Прошло {progress}% cеместра</p>
-<progress class="progress progress-warning w-full" value={progress} max="100"></progress>
+<progress class="progress progress-warning w-full -z-10" value={progress} max="100"></progress>
 </aside>
