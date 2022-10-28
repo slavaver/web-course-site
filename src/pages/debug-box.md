@@ -19,16 +19,16 @@ tag: "Полезное"
 ```css
 * {
   outline: 1px solid red;
-  background: rgba(255, 0, 0, 0.1);
+  background-color: rgba(255, 0, 0, 0.1);
 }
 ```
 
-Так как у универсального селектора `*` низкая специфичность, то для того чтобы сойвство точно изменило свое значение применятеся `!important`.
+Так как у универсального селектора `*` низкая специфичность, то для того чтобы свойство точно изменило свое значение применяется `!important`.
 
 ```css
 * {
   outline: 1px solid red !important;
-  background: rgba(255, 0, 0, 0.1) !important;
+  background-color: rgba(255, 0, 0, 0.1) !important;
 }
 ```
 
