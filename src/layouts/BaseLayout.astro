@@ -23,17 +23,14 @@ const {
 
   <body class="flex flex-col min-h-screen">
     <header class="bg-gray-100">
-        <NavBar />
+      <NavBar />
     </header>
     <main class="flex-grow">
-      <div class="max-w-3xl mx-auto mt-16">
-        <article class="prose lg:prose-xl">
-          <h1>{title}</h1>
-          <slot />
-        </article>
+      <div class="container mx-auto mt-16 prose lg:prose-ls px-2">
+        <h1>{title}</h1>
+        <slot />
       </div>
     </main>
     <Footer />
   </body>
-</html>
-<!-- class="p-2 rounded-md border-2 border-current hover:bg-gray-100" -->
+</html><!-- class="p-2 rounded-md border-2 border-current hover:bg-gray-100" -->
