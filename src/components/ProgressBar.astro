@@ -3,10 +3,15 @@ const today = new Date();
 const startDate = new Date(2022, 8, 15);
 const endDate = new Date(2023, 0, 15);
 
-const progress = Math.round((today - startDate) / (endDate - startDate) * 100)
-
+const progress = Math.round(
+  ((today - startDate) / (endDate - startDate)) * 100
+);
 ---
-<aside class="max-w-3xl w-full mx-auto py-10">
-<p class="text-center text-2xl">Прошло {progress}% cеместра</p>
-<progress class="progress progress-warning w-full -z-10" value={progress} max="100"></progress>
+
+<aside class="max-w-3xl w-full mx-auto py-10 px-2">
+  <p class="text-center text-2xl">Прошло {progress}% cеместра</p>
+  <progress
+    class="progress progress-warning w-full -z-10"
+    value={progress}
+    max="100"></progress>
 </aside>
