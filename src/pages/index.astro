@@ -10,6 +10,14 @@ import ProgressBar from "../components/ProgressBar.astro";
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .columns {
+        columns: 2 1em;
+      }
+      .columns > li {
+        margin-top: 0;
+      }
+    </style>
     <title>Веб-технологии</title>
   </head>
   <body class="flex flex-col min-h-screen">
@@ -20,17 +28,22 @@ import ProgressBar from "../components/ProgressBar.astro";
     <main class="prose lg:prose-lg container mx-auto flex-grow px-2">
       <h1 class="text-center">Основы веб-технологий</h1>
       <h2>Лабораторные работы</h2>
-      <ul>
-        <li><a href="/web-course-site/labs/intro">Вводное занятие</a></li>
-        <li><a href="/web-course-site/labs/laba1">Работа №1</a></li>
-        <li><a href="/web-course-site/labs/laba2">Работа №2</a></li>
-        <li><a href="/web-course-site/labs/laba3">Работа №3</a></li>
-        <li><a href="/web-course-site/labs/laba4">Работа №4</a></li>
-        <li><a href="/web-course-site/labs/laba5">Работа №5</a></li>
-        <li><a href="/web-course-site/labs/laba6">Работа №6</a></li>
-        <li><a href="/web-course-site/labs/laba7">Работа №7</a></li>
-        <li><a href="/web-course-site/labs/laba8">Работа №8</a></li>
-      </ul>
+      <ol class="columns" start="0">
+        <li><a href="/web-course-site/labs/intro">Вводная</a></li>
+        <li><a href="/web-course-site/labs/laba1">Разметка HTML</a></li>
+        <li><a href="/web-course-site/labs/laba2">CSS: работа с текстом</a></li>
+        <li><a href="/web-course-site/labs/laba3">Блочная модель</a></li>
+        <li><a href="/web-course-site/labs/laba4">Flexbox</a></li>
+        <li><a href="/web-course-site/labs/laba5">Изображения</a></li>
+        <li><a href="/web-course-site/labs/laba6">Формы и ссылки</a></li>
+        <li>
+          <a href="/web-course-site/labs/laba7">Псевдоклассы и -элементы</a>
+        </li>
+        <li><a href="/web-course-site/labs/laba8">Переходы, анимации</a></li>
+        <li>
+          <a href="/web-course-site/labs/laba9">JS переменные, операторы</a>
+        </li>
+      </ol>
       <h2>Дополнительно</h2>
       <ul>
         <li><a href="/web-course-site/rules">Правила</a></li>
