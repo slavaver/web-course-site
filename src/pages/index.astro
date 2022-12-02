@@ -10,6 +10,7 @@ import ProgressBar from "../components/ProgressBar.astro";
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <style>
       .columns {
         columns: 2 1em;
@@ -21,7 +22,7 @@ import ProgressBar from "../components/ProgressBar.astro";
     <title>Веб-технологии</title>
   </head>
   <body class="flex flex-col min-h-screen">
-    <header class="bg-gray-100">
+    <header class="bg-gray-100 sticky top-0">
       <NavBar />
     </header>
     <ProgressBar />
