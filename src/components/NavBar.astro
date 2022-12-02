@@ -2,7 +2,8 @@
 import NavItem from "./navigation/NavItem.astro";
 
 const posts = await Astro.glob("../pages/**/*.md");
-const unique = [...new Set(posts.map((item) => item.frontmatter.tag))];
+const nonDraftPosts = posts.filter((post) => !post.frontmatter.draft);
+const unique = [...new Set(nonDraftPosts.map((item) => item.frontmatter.tag))];
 const filteredLinks = unique.map((item) => ({
   tag: item,
   links: posts.filter((post) => post.frontmatter.tag === item),
