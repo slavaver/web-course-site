@@ -12,11 +12,13 @@ import ProgressBar from "../components/ProgressBar.astro";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/web-course-site/favicon.svg" />
     <style>
-      .columns {
-        columns: 2 1em;
-      }
-      .columns > li {
-        margin-top: 0;
+      @media screen and (min-width: 425px) {
+        .columns {
+          columns: 2 1em;
+        }
+        .columns > li {
+          margin-top: 0;
+        }
       }
     </style>
     <title>Веб-технологии</title>
