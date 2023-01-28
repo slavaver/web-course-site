@@ -21,11 +21,11 @@
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
       localStorage.setItem("theme", "halloween");
       document.documentElement.setAttribute("data-theme", "halloween");
-      icon.innerHTML = iconThemeDark;
+      icon.innerHTML = iconThemeLight;
     } else {
       localStorage.setItem("theme", "bumblebee");
       document.documentElement.setAttribute("data-theme", "bumblebee");
-      icon.innerHTML = iconThemeLight;
+      icon.innerHTML = iconThemeDark;
     }
   }
 
