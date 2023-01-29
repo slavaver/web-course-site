@@ -1,7 +1,9 @@
 ---
 const { url } = Astro.props;
-const posts = await Astro.glob("../../pages/labs/*.md");
+const posts = await Astro.glob("../../pages/labs/*.md"); // запрос на файлы
 let urls;
+
+// функция сортировки
 function sortLabs(arr) {
   arr.sort(function (a, b) {
     var labA = parseInt(a.split("/")[a.split("/").length - 1].slice(4));
@@ -10,20 +12,27 @@ function sortLabs(arr) {
   });
   return arr;
 }
+
 urls = sortLabs(posts.map((lab) => lab.url));
-
 const urlindex = urls.indexOf(url);
-let showDiv;
 
-if (urlindex == "-1") {
-  showDiv = "F";
+let showDiv; // добавлен вывод кнопок только для лаб
+let showDiv2;
+
+if (urlindex - 1 == -1 || urlindex == -1) {
+  showDiv = "visibility: hidden;";
+}
+
+if (urlindex == -1 || urlindex == urls.length - 1) {
+  showDiv2 = "visibility: hidden;";
 }
 ---
 
-<div id={showDiv} class="btn-group grid grid-cols-2 mt-20">
-  <a href={urls[urlindex - 1]} class="btn btn-outline">Предыдущая страница</a>
-  <a href={urls[urlindex + 1]} class="btn btn-outline">Следующая</a>
+<div class="btn-group grid grid-cols-2 mt-20">
+  <a href={urls[urlindex - 1]} class="btn btn-outline" style={showDiv}
+    >Предыдущая страница</a
+  >
+  <a href={urls[urlindex + 1]} class="btn btn-outline" style={showDiv2}
+    >Следующая</a
+  >
 </div>
-<script>
-  document.getElementById("F").style.display = "none";
-</script>
