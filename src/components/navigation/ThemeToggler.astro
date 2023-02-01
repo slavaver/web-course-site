@@ -1,60 +1,66 @@
 ---
 ---
 
-<button id="btndarkmode" class="">
-  <svg
-    id="icon"
-    class="mt-3 ml-2"
-    viewBox="0 0 35 35"
-    height="35px"
-    width="35px"
-    data-name="sun"
-  >
-    <path></path>
+<button id="btndarkmode">
+  <svg class="mt-3 ml-2" viewBox="0 0 35 35" height="35px" width="35px">
+    <defs>
+      <path
+        id="dark-icon"
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M12.0972 2.53039C12.2913 2.8649 12.2752 3.28136 12.0557 3.5998C11.3898 4.56594 11 5.73595 11 7.00002C11 10.3137 13.6863 13 17 13C18.2641 13 19.4341 12.6102 20.4002 11.9443C20.7187 11.7249 21.1351 11.7087 21.4696 11.9028C21.8041 12.0969 21.9967 12.4665 21.9642 12.8519C21.5313 17.9765 17.236 22 12 22C6.47715 22 2 17.5229 2 12C2 6.76398 6.02351 2.46874 11.1481 2.03585C11.5335 2.0033 11.9031 2.19588 12.0972 2.53039ZM9.42424 4.42352C6.26994 5.49553 4 8.48306 4 12C4 16.4183 7.58172 20 12 20C15.517 20 18.5045 17.7301 19.5765 14.5758C18.7676 14.8508 17.9008 15 17 15C12.5817 15 9 11.4183 9 7.00002C9 6.09922 9.1492 5.2324 9.42424 4.42352Z"
+        fill="#000000"></path>
+      <path
+        id="light-icon"
+        d="M5 12H3M12 5V3M21 12H19M12 21V19M16.9496 16.9498L18.3638 18.364M5.63602 5.63608L7.05023 7.05029M16.9496 7.0502L18.3638 5.63599M5.63602 18.3639L7.05023 16.9497M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z"
+        stroke="#000000"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </defs>
+
+    <use id="slot"></use>
   </svg>
 </button>
 <script>
-  const icon = document.getElementById("icon");
-  const iconThemeDark = `<path fill-rule="evenodd" clip-rule="evenodd" d="M12.0972 2.53039C12.2913 2.8649 12.2752 3.28136 12.0557 3.5998C11.3898 4.56594 11 5.73595 11 7.00002C11 10.3137 13.6863 13 17 13C18.2641 13 19.4341 12.6102 20.4002 11.9443C20.7187 11.7249 21.1351 11.7087 21.4696 11.9028C21.8041 12.0969 21.9967 12.4665 21.9642 12.8519C21.5313 17.9765 17.236 22 12 22C6.47715 22 2 17.5229 2 12C2 6.76398 6.02351 2.46874 11.1481 2.03585C11.5335 2.0033 11.9031 2.19588 12.0972 2.53039ZM9.42424 4.42352C6.26994 5.49553 4 8.48306 4 12C4 16.4183 7.58172 20 12 20C15.517 20 18.5045 17.7301 19.5765 14.5758C18.7676 14.8508 17.9008 15 17 15C12.5817 15 9 11.4183 9 7.00002C9 6.09922 9.1492 5.2324 9.42424 4.42352Z" fill="#000000"/>`;
-  const iconThemeLight = `<path d="M5 12H3M12 5V3M21 12H19M12 21V19M16.9496 16.9498L18.3638 18.364M5.63602 5.63608L7.05023 7.05029M16.9496 7.0502L18.3638 5.63599M5.63602 18.3639L7.05023 16.9497M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
-  function setTheme() {
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      localStorage.setItem("theme", "halloween");
-      document.documentElement.setAttribute("data-theme", "halloween");
-      icon.innerHTML = iconThemeLight;
+  function themeBtn() {
+    const darkTheme = "halloween";
+    const ligthTheme = "bumblebee";
+    const iconSlot = document.getElementById("slot");
+    if (localStorage.getItem("theme") === null) {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.setAttribute("data-theme", darkTheme);
+        localStorage.setItem("theme", darkTheme);
+      } else {
+        document.documentElement.setAttribute("data-theme", ligthTheme);
+        localStorage.setItem("theme", ligthTheme);
+      }
     } else {
-      localStorage.setItem("theme", "bumblebee");
-      document.documentElement.setAttribute("data-theme", "bumblebee");
-      icon.innerHTML = iconThemeDark;
+      document.documentElement.setAttribute(
+        "data-theme",
+        localStorage.getItem("theme")
+      );
     }
-  }
-
-  function Toggle() {
-    const icon = document.getElementById("icon");
-    let theme = localStorage.getItem("theme");
-    if (theme === "halloween") {
-      localStorage.setItem("theme", "bumblebee");
-      document.documentElement.setAttribute("data-theme", "bumblebee");
-      icon.innerHTML = iconThemeDark;
+    if (localStorage.getItem("theme") === darkTheme) {
+      iconSlot.setAttribute("href", "#light-icon");
     } else {
-      localStorage.setItem("theme", "halloween");
-      document.documentElement.setAttribute("data-theme", "halloween");
-      icon.innerHTML = iconThemeLight;
+      iconSlot.setAttribute("href", "#dark-icon");
     }
+    document.getElementById("btndarkmode").addEventListener("click", () => {
+      let theme = localStorage.getItem("theme");
+      if (theme === darkTheme) {
+        localStorage.setItem("theme", ligthTheme);
+        document.documentElement.setAttribute("data-theme", ligthTheme);
+        iconSlot.setAttribute("href", "#dark-icon");
+      } else {
+        localStorage.setItem("theme", darkTheme);
+        document.documentElement.setAttribute("data-theme", darkTheme);
+        iconSlot.setAttribute("href", "#light-icon");
+      }
+    });
   }
 
-  document.getElementById("btndarkmode").addEventListener("click", Toggle);
-
-  if (localStorage.getItem("theme")) {
-    document.documentElement.setAttribute(
-      "data-theme",
-      localStorage.getItem("theme")
-    );
-    icon.innerHTML =
-      localStorage.getItem("theme") === "halloween"
-        ? iconThemeLight
-        : iconThemeDark;
-  } else {
-    setTheme();
-  }
+  document.addEventListener("DOMContentLoaded", function () {
+    themeBtn();
+  });
 </script>
