@@ -2,6 +2,7 @@
 import Footer from "../components/Footer.astro";
 import NavBar from "../components/NavBar.astro";
 import Breadcrumbs from "../components/navigation/Breadcrumbs.astro";
+import Pagination from "../components/navigation/Pagination.astro";
 
 export interface Props {
   content: {
@@ -12,6 +13,8 @@ export interface Props {
 const {
   content: { title },
 } = Astro.props;
+
+const { url } = Astro.props;
 ---
 
 <html lang="ru">
@@ -28,10 +31,11 @@ const {
       <NavBar />
     </header>
     <main class="flex-grow">
-      <div class="container mx-auto mt-16 prose lg:prose-ls px-2">
+      <div class="container mx-auto mt-16 prose lg:prose-ls px-2 mb-6">
         <Breadcrumbs title={title} />
         <h1>{title}</h1>
         <slot />
+        <Pagination url={url} />
       </div>
     </main>
     <Footer />
