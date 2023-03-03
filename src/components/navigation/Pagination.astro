@@ -1,9 +1,9 @@
 ---
 const { url } = Astro.props;
 const posts = await Astro.glob("../../pages/labs/*.md"); // запрос на файлы
-let urls;
+let urls: string | any[];
 
-// функция сортировки
+// Функция сортирует массив файлов по номеру лабораторной
 function sortLabs(arr) {
   arr.sort(function (a, b) {
     var labA = parseInt(a.split("/")[a.split("/").length - 1].slice(4));
@@ -16,23 +16,28 @@ function sortLabs(arr) {
 urls = sortLabs(posts.map((lab) => lab.url));
 const urlindex = urls.indexOf(url);
 
-let showDiv; // добавлен вывод кнопок только для лаб
-let showDiv2;
+let isVisiblePrevButton; // управляют видимостью кнопок "Предыдущая страница" и "Следующая"
+let isVisibleNextButton;
 
-if (urlindex - 1 == -1 || urlindex == -1) {
-  showDiv = "visibility: hidden;";
+// urlindex - индекс текущей страницы, urls - массив url-ов
+if (urlindex == 0 || urlindex == -1) {
+  isVisiblePrevButton = "visibility: hidden;";
 }
 
-if (urlindex == -1 || urlindex == urls.length - 1) {
-  showDiv2 = "visibility: hidden;";
+if (urlindex == urls.length - 1) {
+  isVisibleNextButton = "visibility: hidden;";
 }
 ---
 
 <div class="btn-group grid grid-cols-2 mt-20">
-  <a href={urls[urlindex - 1]} class="btn btn-outline" style={showDiv}
-    >Предыдущая страница</a
+  <a
+    href={urls[urlindex - 1]}
+    class="btn btn-outline"
+    style={isVisiblePrevButton}>Предыдущая страница</a
   >
-  <a href={urls[urlindex + 1]} class="btn btn-outline" style={showDiv2}
-    >Следующая</a
+  <a
+    href={urls[urlindex + 1]}
+    class="btn btn-outline"
+    style={isVisibleNextButton}>Следующая</a
   >
 </div>
