@@ -26,7 +26,7 @@ tag: "Лабораторные"
 
    1. Воспроизвести одну из картин Пита Мондриана.
    1. Воспроизвести одну из работ Яна Чихольда.
-   1. Информационную панель (dashboard): боковая панель со ссылками, в основной части в первом ряду один график, во втором три, в четвертом два. Использовать именованные области для сетки. Для генерации сетки используйте сервис https://www.magicpattern.design/tools/svg-chart-generator или ему подобные.
+   1. Информационную панель (dashboard): боковая панель со ссылками, в основной части в первом ряду один график, во втором — три, в третьем — два. Использовать именованные области для сетки. Для генерации сетки используйте сервис https://www.magicpattern.design/tools/svg-chart-generator или ему подобные.
    1. Галерею из квадратных изображений с использованием шаблона RAM. При наведении, на которые проявляется ссылка в виде кнопки поверх изображения. Ссылку позиционировать используя только grid, без position.
 
 ### Картины Пита Мондриана
@@ -57,18 +57,11 @@ tag: "Лабораторные"
 
 ## Источники
 
-Спецификация CSS Grid Layout - https://www.w3.org/TR/css-grid-1/
-
-MDN - https://developer.mozilla.org/ru/docs/Web/CSS/CSS_Grid_Layout
-
-Grid guide - https://mozilladevelopers.github.io/playground/css-grid/
-
-Игры для тренировки - http://cssgridgarden.com/#ru
-
-Шпаргалки - https://grid.malven.co/, https://github.com/alsacreations/guidelines/blob/master/grid-cheatsheet.pdf
-
-Примеры - https://gridbyexample.com/
-
-Генератор - https://grid.layoutit.com/
-
-Журнальная верстка в Web - https://youtu.be/eUeoLUjOUHw
+1. [Спецификация CSS Grid Layout - w3](https://www.w3.org/TR/css-grid-1/)
+1. [CSS Grid Layout - MDN](https://developer.mozilla.org/ru/docs/Web/CSS/CSS_Grid_Layout)
+1. [Grid guide](https://mozilladevelopers.github.io/playground/css-grid/)
+1. [Игра для тренировки](http://cssgridgarden.com/#ru)
+1. Шпаргалки [1](https://grid.malven.co/), [2](https://github.com/alsacreations/guidelines/blob/master/grid-cheatsheet.pdf)
+1. [Примеры сеток](https://gridbyexample.com/)
+1. [Генератор](https://grid.layoutit.com/)
+1. [Журнальная верстка в Web](https://youtu.be/eUeoLUjOUHw)
