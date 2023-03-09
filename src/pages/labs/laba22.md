@@ -60,8 +60,21 @@ tag: "Лабораторные"
 1. [Спецификация CSS Grid Layout - w3](https://www.w3.org/TR/css-grid-1/)
 1. [CSS Grid Layout - MDN](https://developer.mozilla.org/ru/docs/Web/CSS/CSS_Grid_Layout)
 1. [Grid guide](https://mozilladevelopers.github.io/playground/css-grid/)
+1. [Ten modern layouts in one line of CSS](https://web.dev/one-line-layouts/#05-classic-holy-grail-layout-grid-template-auto-1fr-auto-auto-1fr-auto)
 1. [Игра для тренировки](http://cssgridgarden.com/#ru)
 1. Шпаргалки [1](https://grid.malven.co/), [2](https://github.com/alsacreations/guidelines/blob/master/grid-cheatsheet.pdf)
 1. [Примеры сеток](https://gridbyexample.com/)
 1. [Генератор](https://grid.layoutit.com/)
 1. [Журнальная верстка в Web](https://youtu.be/eUeoLUjOUHw)
+
+## Вопросы для защиты
+
+1. Что такое CSS Grid и чем она отличается от flexbox?
+1. Что такое линия, полоса, ячейка и область в CSS grid?
+1. Как создать grid-контейнер и какие свойства используются для определения его характеристик?
+1. Что такое полосы в grid и как их задать?
+1. Как указать положение grid-элемента в сетке с помощью линий и областей?
+1. Как задать размер полос в CSS grid и какие единицы измерения можно использовать?
+1. Что такое шаблон RAM?
+1. Что такое auto-fit и auto-fill в CSS grid и чем они отличаются?
+1. Каковы различные типы выравнивания в CSS grid и как они работают?
