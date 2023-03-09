@@ -43,6 +43,8 @@ tag: "Лабораторные"
 - Зачем нужен БЭМ? - https://htmlacademy.ru/blog/boost/frontend/short-5
 - Примеры имен классов - https://tpverstak.ru/common-css-class-names/
 - Emmet в VS Code - https://habr.com/ru/post/573032/
+- https://getbem.com/
+- [Battling BEM CSS](https://www.smashingmagazine.com/2016/06/battling-bem-extended-edition-common-problems-and-how-to-avoid-them/)
 
 ### GIT
 
