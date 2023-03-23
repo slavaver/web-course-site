@@ -1,7 +1,7 @@
 ---
 layout: "../../layouts/BaseLayout.astro"
-title: "Лабораторная работа №2-2"
-tag: "Лабораторные"
+title: "Лабораторная работа №2"
+tag: "2 семестр"
 ---
 
 ## Grid
