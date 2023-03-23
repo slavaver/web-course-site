@@ -1,7 +1,7 @@
 ---
 layout: "../../layouts/BaseLayout.astro"
 title: "Лабораторная работа №4"
-tag: "Основы web"
+tag: "Лабораторные"
 ---
 
 ## CSS: flexbox, цвета, единицы измерения; пути к файлам
@@ -11,29 +11,29 @@ tag: "Основы web"
 ### Порядок выполнения лабораторной работы:
 
 1. Изучить принципы работы flexbox и его свойств:
-   - flex-контейнер, flex-элементы;
-   - главная и поперечная оси;
-   - изменение направления осей;
-   - выравнивание элементов;
-   - управление размерами элементов;
-   - порядок элементов;
+    - flex-контейнер, flex-элементы;
+    - главная и поперечная оси;
+    - изменение направления осей;
+    - выравнивание элементов;
+    - управление размерами элементов;
+    - порядок элементов;
 1. Изучить модели и способы задания цветов:
-   - Имена;
-   - HEX;
-   - RGB;
-   - RGBA;
-   - HSL;
-   - HSLA;
-1. Изучить единицы измерения:
-   - относительные: %, em, rem, ch, vw, vh
-   - абсолютные: px, pt, cm, mm, in
-1. Для выполнения работы необходимо в style.css из третьей работы:
-   - добавить `display: flex` для расположения элементов согласно макету;
-   - использовать необходимые свойства для контейнера и элементов для их выравнивания, расположения и управления размерами;
-   - задать цвета разными способами;
-   - использовать для задания размеров элементов относительные единицы измерения;
-1. Зафиксировать результаты работы с помощью системы контроля версий git и отправить репозиторий на github.
-1. Загрузить проект на сервер через sftp или используя ssh.
+    - Имена;
+    - HEX;
+    - RGB;
+    - RGBA;
+    - HSL;
+    - HSLA;
+3. Изучить единицы измерения:
+    - относительные: %, em, rem, ch, vw, vh
+    - абсолютные: px, pt, cm, mm, in
+4. Для выполнения работы необходимо в style.css из третьей работы:
+    - добавить `display: flex` для расположения элементов согласно макету;
+    - использовать необходимые свойства для контейнера и элементов для их выравнивания, расположения и управления размерами;
+    - задать цвета разными способами;
+    - использовать для задания размеров элементов относительные единицы измерения;
+5. Зафиксировать результаты работы с помощью системы контроля версий git и отправить репозиторий на github.
+6. Загрузить проект на сервер через sftp или используя ssh.
 
 #### Требования к html и css:
 
@@ -44,24 +44,24 @@ tag: "Основы web"
 
 ## Результаты выполнения лабораторной работы:
 
-Результаты работы _проверены наставником_.
+Результаты работы *проверены наставником*.
 
 Статическая веб-страница на хостинге проверенная, со структурой и оформлением, которая соответствует требованиям и сохранена в системе контроля версий.
 
 ## Дополнительные источники
 
-- [Гайд по flexbox](https://doka.guide/css/flexbox-guide/)
-- [Спецификация CSS Flexible Box Layout](https://www.w3.org/TR/css-flexbox-1/)
-- [Flexbox MDN](https://developer.mozilla.org/ru/docs/Learn/CSS/CSS_layout/Flexbox)
-- Игры для тренировки:
-  - [Froggy](http://flexboxfroggy.com/)
-  - [Defence](http://www.flexboxdefense.com/)
-- [Интерактивная демонстрация](https://codepen.io/enxaneta/full/adLPwv)
-- [Цвета](https://developer.mozilla.org/ru/docs/Web/HTML/Applying_color)
-- [Единицы измерения](https://developer.mozilla.org/ru/docs/Learn/CSS/Building_blocks/Values_and_units)
-- [Flexbox](https://semicolon.dev/tutorial/css/complete-css-flex-tutorial)
-- [Шпаргалка по flexbox](https://dev.to/joyshaheb/flexbox-cheat-sheets-in-2021-css-2021-3edl)
-- [Интерактивная шпаргалка по flexbox](https://tpverstak.ru/flex-cheatsheet/)
+* [Гайд по flexbox](https://doka.guide/css/flexbox-guide/)
+* [Спецификация CSS Flexible Box Layout](https://www.w3.org/TR/css-flexbox-1/)
+* [Flexbox MDN](https://developer.mozilla.org/ru/docs/Learn/CSS/CSS_layout/Flexbox)
+* Игры для тренировки:
+    * [Froggy](http://flexboxfroggy.com/)
+    * [Defence](http://www.flexboxdefense.com/)
+* [Интерактивная демонстрация](https://codepen.io/enxaneta/full/adLPwv)
+* [Цвета](https://developer.mozilla.org/ru/docs/Web/HTML/Applying_color)
+* [Единицы измерения](https://developer.mozilla.org/ru/docs/Learn/CSS/Building_blocks/Values_and_units)
+* [Flexbox](https://semicolon.dev/tutorial/css/complete-css-flex-tutorial)
+* [Шпаргалка по flexbox](https://dev.to/joyshaheb/flexbox-cheat-sheets-in-2021-css-2021-3edl)
+* [Интерактивная шпаргалка по flexbox](https://tpverstak.ru/flex-cheatsheet/)
 
 ### Вопросы для защиты
 

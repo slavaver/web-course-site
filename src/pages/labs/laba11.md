@@ -1,7 +1,7 @@
 ---
 layout: "../../layouts/BaseLayout.astro"
 title: "Лабораторная работа №11"
-tag: "Основы web"
+tag: "Лабораторные"
 ---
 
 ## JavaScript: DOM, события и их обработка

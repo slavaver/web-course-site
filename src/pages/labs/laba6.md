@@ -1,7 +1,7 @@
 ---
 layout: "../../layouts/BaseLayout.astro"
 title: "Лабораторная работа №6"
-tag: "Основы web"
+tag: "Лабораторные"
 ---
 
 ## Ссылки и формы
