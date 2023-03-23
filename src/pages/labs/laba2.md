@@ -1,7 +1,7 @@
 ---
 layout: "../../layouts/BaseLayout.astro"
 title: "Лабораторная работа №2"
-tag: "Лабораторные"
+tag: "Основы web"
 ---
 
 ## Основы CSS
@@ -11,25 +11,25 @@ tag: "Лабораторные"
 ### Порядок выполнения лабораторной работы:
 
 1. Изучить принципы оформления статических веб-страниц, в том числе:
-    - Основы CSS;
-    - Селекторы;
-    - Свойства и значения;
-    - Принципы наследования;
-    - Каскадирование и специфичность;
+   - Основы CSS;
+   - Селекторы;
+   - Свойства и значения;
+   - Принципы наследования;
+   - Каскадирование и специфичность;
 1. К результату первой лабораторной работы в папку css добавить **или** normalize.css **или** reseter.css **или** reset.css.
 1. [Подключить стилевые таблицы](https://doka.guide/css/adding-styles/) css к index.html в head.
 1. Проанализировать макет на предмет используемых шрифтов и цветов.
 1. Цвета в style.css организовать с помощью [пользовательских свойств](https://doka.guide/css/custom-properties/) (Custom Properties/CSS Variables) на корневом элементе `:root {}`.
 1. В style.css сформировать стили для текста:
-    - подключить шрифты из макета или визуально похожие из Google Fonts,
-    - создать переменные для основных цветов,
-    - задать размер текста (font-size) и жирность (font-weight),
-    - изменить межстрочный интервал (line-height),
-    - выровнять текст (text-align)
-    - задать цвета к тексту и ссылкам (color) с помощью `var()`,
-    - задать фонам элементов (background-color),
-    - убрать подчеркивание у ссылок если требуется по макету (text-decoration)
-    - задать границы и их скругления (border, border-radius)
+   - подключить шрифты из макета или визуально похожие из Google Fonts,
+   - создать переменные для основных цветов,
+   - задать размер текста (font-size) и жирность (font-weight),
+   - изменить межстрочный интервал (line-height),
+   - выровнять текст (text-align)
+   - задать цвета к тексту и ссылкам (color) с помощью `var()`,
+   - задать фонам элементов (background-color),
+   - убрать подчеркивание у ссылок если требуется по макету (text-decoration)
+   - задать границы и их скругления (border, border-radius)
 1. Зафиксировать результаты работы с помощью системы контроля версий git и отправить репозиторий на github.
 1. Загрузить проект на сервер через sftp или используя ssh.
 
@@ -40,28 +40,27 @@ tag: "Лабораторные"
 - Корректное использование тегов;
 - Отсутствие ошибок на валидаторе для html и css.
 
-
 ### Результаты выполнения лабораторной работы:
 
-Результаты работы *проверены наставником*.
+Результаты работы _проверены наставником_.
 
 Статическая веб-страница на хостинге, со структурой и оформлением, которая соответствует требованиям и сохранена в системе контроля версий.
 
 ### Материалы
 
-* [Normalize](https://necolas.github.io/normalize.css/)
-* [Reseter](https://github.com/resetercss/reseter.css/blob/main/css/reseter.css)
-* [Шрифты](https://fonts.google.com/)
-* [Google Fonts Helper](https://google-webfonts-helper.herokuapp.com/fonts)
+- [Normalize](https://necolas.github.io/normalize.css/)
+- [Reseter](https://github.com/resetercss/reseter.css/blob/main/css/reseter.css)
+- [Шрифты](https://fonts.google.com/)
+- [Google Fonts Helper](https://google-webfonts-helper.herokuapp.com/fonts)
 
 ### Дополнительные источники
 
-* [Интерактивный курс «Основы CSS»](https://htmlacademy.ru/courses/307)
-* [MDN CSS](https://developer.mozilla.org/ru/docs/Web/CSS)
-* [Справочная информация](https://html5book.ru/)
-* [Проверка тегов и свойств на степень внедрения](https://caniuse.com/)
-* [Проверка тегов на возможность вложения](https://caninclude.glitch.me/)
-* [Chrome DevTools](https://habr.com/ru/post/548898/)
+- [Интерактивный курс «Основы CSS»](https://htmlacademy.ru/courses/307)
+- [MDN CSS](https://developer.mozilla.org/ru/docs/Web/CSS)
+- [Справочная информация](https://html5book.ru/)
+- [Проверка тегов и свойств на степень внедрения](https://caniuse.com/)
+- [Проверка тегов на возможность вложения](https://caninclude.glitch.me/)
+- [Chrome DevTools](https://habr.com/ru/post/548898/)
 
 ### Вопросы для защиты
 
