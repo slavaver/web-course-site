@@ -1,7 +1,7 @@
 ---
 layout: "../../layouts/BaseLayout.astro"
 title: "Лабораторная работа №10"
-tag: "Лабораторные"
+tag: "1 семестр"
 ---
 
 ## JavaScript: функции, массивы, объекты
