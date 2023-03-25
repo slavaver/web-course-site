@@ -1,7 +1,7 @@
 ---
 layout: "../../layouts/BaseLayout.astro"
 title: "Лабораторная работа №3"
-tag: "Лабораторные"
+tag: "1 семестр"
 ---
 
 ## CSS: поток, размеры, позиционирование
@@ -11,20 +11,21 @@ tag: "Лабораторные"
 ### Порядок выполнения лабораторной работы:
 
 1. Изучить следующие темы:
-    - Блочная модель;
-    - Размеры элемента, отступы, поля, границы;
-    - Переполнение;
-    - Поток документа;
-    - Позиционирование элементов (static, relative, absolute, fixed);
-    - Слои (z-index);
-    - Обтекание.
+
+   - Блочная модель;
+   - Размеры элемента, отступы, поля, границы;
+   - Переполнение;
+   - Поток документа;
+   - Позиционирование элементов (static, relative, absolute, fixed);
+   - Слои (z-index);
+   - Обтекание.
 
 1. Для выполнения работы необходимо в style.css из второй работы:
-    - Для всех элементов задать расчет через `box-sizing: border-box`;
-    - Задать размеры для элементов (`height`, `width`, `max-height`, `max-width`, `min-height`, `min-width`);
-    - Начать расставлять `padding`, `margin` для элементов идущих в нормальном потоке.
-    - Использовать подходящее позиционирование (`relative`, `absolute`...) для случаев когда один элемент находится поверх другого;
-    - При необходимости использовать `z-index`.
+   - Для всех элементов задать расчет через `box-sizing: border-box`;
+   - Задать размеры для элементов (`height`, `width`, `max-height`, `max-width`, `min-height`, `min-width`);
+   - Начать расставлять `padding`, `margin` для элементов идущих в нормальном потоке.
+   - Использовать подходящее позиционирование (`relative`, `absolute`...) для случаев когда один элемент находится поверх другого;
+   - При необходимости использовать `z-index`.
 1. Убедиться в том, что нигде нет переполнений.
 1. Зафиксировать результаты работы с помощью системы контроля версий git и отправить репозиторий на github.
 1. Загрузить проект на сервер через sftp или используя ssh.
@@ -36,33 +37,32 @@ tag: "Лабораторные"
 - Корректное использование тегов;
 - Отсутствие ошибок на валидаторе для html и css.
 
-
 ## Результаты выполнения лабораторной работы:
 
-Результаты работы *проверены наставником*.
+Результаты работы _проверены наставником_.
 
 Статическая веб-страница на хостинге, со структурой и оформлением, которая соответствует требованиям и сохранена в системе контроля версий.
 
 ### Материалы
 
-* [Блочная модель - mdn](https://developer.mozilla.org/ru/docs/Learn/CSS/Building_blocks/The_box_model)
-* [Блочная модель - doka.guide](https://doka.guide/css/box-model/)
-* [Свойства блочной модели - mdn](https://developer.mozilla.org/ru/docs/Web/CSS/CSS_Box_Model)
-* [Введение в CSS вёрстку](https://developer.mozilla.org/ru/docs/Learn/CSS/CSS_layout/Introduction)
-* [Основы CSS](https://developer.mozilla.org/ru/docs/Learn/CSS)
-* [MDN CSS](https://developer.mozilla.org/ru/docs/Web/CSS)
+- [Блочная модель - mdn](https://developer.mozilla.org/ru/docs/Learn/CSS/Building_blocks/The_box_model)
+- [Блочная модель - doka.guide](https://doka.guide/css/box-model/)
+- [Свойства блочной модели - mdn](https://developer.mozilla.org/ru/docs/Web/CSS/CSS_Box_Model)
+- [Введение в CSS вёрстку](https://developer.mozilla.org/ru/docs/Learn/CSS/CSS_layout/Introduction)
+- [Основы CSS](https://developer.mozilla.org/ru/docs/Learn/CSS)
+- [MDN CSS](https://developer.mozilla.org/ru/docs/Web/CSS)
 
 ### Дополнительные источники
 
-* [Getting Started With CSS Layout](https://www.smashingmagazine.com/2018/05/guide-css-layout/)
-* [CSS ALMANAC - position](https://css-tricks.com/almanac/properties/p/position/)
-* [Chrome DevTools](https://habr.com/ru/post/548898/)
+- [Getting Started With CSS Layout](https://www.smashingmagazine.com/2018/05/guide-css-layout/)
+- [CSS ALMANAC - position](https://css-tricks.com/almanac/properties/p/position/)
+- [Chrome DevTools](https://habr.com/ru/post/548898/)
 
 ### Codepens
 
-* [Блочная модель](https://codepen.io/frontendmax/pen/EBvvLB)
-* [Позиционирование](https://codepen.io/rohini-girase/pen/rNNJLKL)
-* [Codepen преподавателя](https://codepen.io/slavaver/pen/eYrLYyK)
+- [Блочная модель](https://codepen.io/frontendmax/pen/EBvvLB)
+- [Позиционирование](https://codepen.io/rohini-girase/pen/rNNJLKL)
+- [Codepen преподавателя](https://codepen.io/slavaver/pen/eYrLYyK)
 
 ### Вопросы для защиты
 

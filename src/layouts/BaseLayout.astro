@@ -31,8 +31,7 @@ const { url } = Astro.props;
       <NavBar />
     </header>
     <main class="flex-grow">
-      <div class="container mx-auto mt-16 prose lg:prose-ls px-2 mb-6">
-        <Breadcrumbs title={title} />
+      <div class="container mx-auto mt-16 prose lg:prose-ls px-2 pb-6">
         <h1>{title}</h1>
         <slot />
         <Pagination url={url} />

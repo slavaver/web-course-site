@@ -1,7 +1,7 @@
 ---
 layout: "../../layouts/BaseLayout.astro"
-title: "Лабораторная работа №2-2"
-tag: "Лабораторные"
+title: "Лабораторная работа №2"
+tag: "2 семестр"
 ---
 
 ## Grid
@@ -24,9 +24,9 @@ tag: "Лабораторные"
 1. Принять задание по ссылке https://classroom.github.com/a/L2qumu9h. Клонировать репозиторий и приступить к работе по заданию. Разработка по этой и следующей лабораторной работе должна вестись в отдельной ветке.
 1. Создать демо страницу, которая состоит из нескольких секций:
 
-   1. Воспроизвести одну из картин Пита Мондриана.
-   1. Воспроизвести одну из работ Яна Чихольда.
-   1. Информационную панель (dashboard): боковая панель со ссылками, в основной части в первом ряду один график, во втором три, в четвертом два. Использовать именованные области для сетки. Для генерации сетки используйте сервис https://www.magicpattern.design/tools/svg-chart-generator или ему подобные.
+   1. Воспроизвести одну из картин Пита Мондриана. _Точность размеров не важна, только примерное соотношение._
+   1. Воспроизвести одну из работ Яна Чихольда. _Точность размеров не важна, только примерное соотношение._
+   1. Информационную панель (dashboard): боковая панель со ссылками, в основной части в первом ряду один график, во втором — три, в третьем — два. Использовать именованные области для сетки. Для генерации сетки используйте сервис https://www.magicpattern.design/tools/svg-chart-generator или ему подобные.
    1. Галерею из квадратных изображений с использованием шаблона RAM. При наведении, на которые проявляется ссылка в виде кнопки поверх изображения. Ссылку позиционировать используя только grid, без position.
 
 ### Картины Пита Мондриана
@@ -57,18 +57,24 @@ tag: "Лабораторные"
 
 ## Источники
 
-Спецификация CSS Grid Layout - https://www.w3.org/TR/css-grid-1/
+1. [Спецификация CSS Grid Layout - w3](https://www.w3.org/TR/css-grid-1/)
+1. [CSS Grid Layout - MDN](https://developer.mozilla.org/ru/docs/Web/CSS/CSS_Grid_Layout)
+1. [Grid guide](https://mozilladevelopers.github.io/playground/css-grid/)
+1. [Ten modern layouts in one line of CSS](https://web.dev/one-line-layouts/#05-classic-holy-grail-layout-grid-template-auto-1fr-auto-auto-1fr-auto)
+1. [Игра для тренировки](http://cssgridgarden.com/#ru)
+1. Шпаргалки [1](https://grid.malven.co/), [2](https://github.com/alsacreations/guidelines/blob/master/grid-cheatsheet.pdf)
+1. [Примеры сеток](https://gridbyexample.com/)
+1. [Генератор](https://grid.layoutit.com/)
+1. [Журнальная верстка в Web](https://youtu.be/eUeoLUjOUHw)
 
-MDN - https://developer.mozilla.org/ru/docs/Web/CSS/CSS_Grid_Layout
+## Вопросы для защиты
 
-Grid guide - https://mozilladevelopers.github.io/playground/css-grid/
-
-Игры для тренировки - http://cssgridgarden.com/#ru
-
-Шпаргалки - https://grid.malven.co/, https://github.com/alsacreations/guidelines/blob/master/grid-cheatsheet.pdf
-
-Примеры - https://gridbyexample.com/
-
-Генератор - https://grid.layoutit.com/
-
-Журнальная верстка в Web - https://youtu.be/eUeoLUjOUHw
+1. Что такое CSS Grid и чем она отличается от flexbox?
+1. Что такое линия, полоса, ячейка и область в CSS grid?
+1. Как создать grid-контейнер и какие свойства используются для определения его характеристик?
+1. Что такое полосы в grid и как их задать?
+1. Как указать положение grid-элемента в сетке с помощью линий и областей?
+1. Как задать размер полос в CSS grid и какие единицы измерения можно использовать?
+1. Что такое шаблон RAM?
+1. Что такое auto-fit и auto-fill в CSS grid и чем они отличаются?
+1. Каковы различные типы выравнивания в CSS grid и как они работают?

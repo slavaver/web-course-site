@@ -1,7 +1,7 @@
 ---
 layout: "../../layouts/BaseLayout.astro"
-title: "Лабораторная работа №2-1"
-tag: "Лабораторные"
+title: "Лабораторная работа №1"
+tag: "2 семестр"
 ---
 
 ## Ветвление в Git и методология BEM.
@@ -43,6 +43,8 @@ tag: "Лабораторные"
 - Зачем нужен БЭМ? - https://htmlacademy.ru/blog/boost/frontend/short-5
 - Примеры имен классов - https://tpverstak.ru/common-css-class-names/
 - Emmet в VS Code - https://habr.com/ru/post/573032/
+- https://getbem.com/
+- [Battling BEM CSS](https://www.smashingmagazine.com/2016/06/battling-bem-extended-edition-common-problems-and-how-to-avoid-them/)
 
 ### GIT
 
@@ -57,3 +59,17 @@ tag: "Лабораторные"
 - GitFlow - https://nvie.com/posts/a-successful-git-branching-model/
 - Про GitFlow на Хабре - https://habr.com/ru/post/106912/
 - GitHub Flow на Хабре - https://habr.com/ru/post/346066/
+
+## Вопросы для защиты
+
+1. Что такое Блок/Элемент/Модификатор?
+1. Когда создавать блок, когда — элемент?
+1. Что такое микс и для чего его можно использовать?
+1. Как BEM обрабатывает именование вложенных элементов внутри блока или элемента?
+1. Как связан BEM и специфичность CSS?
+1. Как работать с глобальными утилитарными классами или стилями, которые не вписываются в соглашение об именовании BEM?
+1. Как BEM может помочь с семантическим HTML?
+1. Как создать новую ветку в Git?
+1. Как переключаться между ветками в Git?
+1. Как объединить ветку с другой веткой в Git?
+1. Как просмотреть список всех веток в репозитории Git?
