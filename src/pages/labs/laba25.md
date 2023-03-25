@@ -1,6 +1,6 @@
 ---
 layout: "../../layouts/BaseLayout.astro"
-title: "Лабораторная работа №4"
+title: "Лабораторная работа №5"
 tag: "2 семестр"
 ---
 
