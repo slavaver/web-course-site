@@ -21,7 +21,7 @@ const urlindex = urls.indexOf(url);
 let isVisiblePrevButton =
   urlindex == 0 || urlindex == -1 ? "visibility: hidden;" : "";
 let isVisibleNextButton =
-  urlindex == urls.length - 1 ? "visibility: hidden;" : "";
+  urlindex == urls.length - 1 || urlindex == -1 ? "visibility: hidden;" : "";
 ---
 
 <div class="btn-group grid grid-cols-2 my-10">
