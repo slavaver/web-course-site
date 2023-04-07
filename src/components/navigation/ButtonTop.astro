@@ -1,0 +1,30 @@
+---
+---
+
+<script>
+  const button = document.createElement("button");
+  button.id = "back-to-top-btn";
+  button.style.display = "none";
+  button.style.position = "fixed";
+  button.style.bottom = "20px";
+  button.style.right = "20px";
+  button.innerHTML =
+    '<svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M450 896V370L202 618l-42-42 320-320 320 320-42 42-248-248v526h-60Z"/></svg>';
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 100) {
+      button.style.display = "block";
+    } else {
+      button.style.display = "none";
+    }
+  });
+
+  button.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+
+  document.body.appendChild(button);
+</script>
