@@ -33,7 +33,7 @@ const filteredLinks = unique.map((item) => ({
       </svg>
     </a>
   </div>
-  <div class="dropdown">
+  <div class="dropdown dropdown-bottom">
     <label tabindex="0" class="btn btn-primary lg:hidden">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +53,7 @@ const filteredLinks = unique.map((item) => ({
       tabindex="0"
       class="menu menu-compact dropdown-content mt-3 p-2 shadow btn-primary rounded-box w-102"
     >
-      <ul class="menu menu-horizontal p-0">
+      <ul class="menu menu-vertical p-0 sm:menu-horizontal">
         {filteredLinks.map((data) => <NavItem tagLinks={data} />)}
       </ul>
     </ul>

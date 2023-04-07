@@ -2,14 +2,14 @@
 const { links } = Astro.props;
 
 const sortByTitle = (a, b) => {
-  let titleA = (a.frontmatter.shortTitle || a.frontmatter.title)
-  let titleB = (b.frontmatter.shortTitle || b.frontmatter.title)
+  let titleA = a.frontmatter.shortTitle || a.frontmatter.title;
+  let titleB = b.frontmatter.shortTitle || b.frontmatter.title;
 
-  const matchesA = titleA.match(/(\d+)/)
-  const matchesB = titleB.match(/(\d+)/)
+  const matchesA = titleA.match(/(\d+)/);
+  const matchesB = titleB.match(/(\d+)/);
 
-  titleA = matchesA?.length > 0 ? parseInt(matchesA[0]) : titleA
-  titleB = matchesB?.length > 0 ? parseInt(matchesB[0]) : titleB
+  titleA = matchesA?.length > 0 ? parseInt(matchesA[0]) : titleA;
+  titleB = matchesB?.length > 0 ? parseInt(matchesB[0]) : titleB;
 
   if (titleA < titleB) {
     return -1;
@@ -18,15 +18,16 @@ const sortByTitle = (a, b) => {
     return 1;
   }
   return 0;
-}
-
+};
 ---
 
-<ul class="p-2 bg-primary">
+<ul class="dropdown-content menu shadow bg-primary rounded-box -left-1">
   {
     links.sort(sortByTitle).map((data) => (
       <li>
-        <a href={data.url}>{data.frontmatter.shortTitle || data.frontmatter.title}</a>
+        <a href={data.url} class="text-xs">
+          {data.frontmatter.shortTitle || data.frontmatter.title}
+        </a>
       </li>
     ))
   }

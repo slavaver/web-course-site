@@ -3,8 +3,8 @@ import DropdownList from "./DropdownList.astro";
 const { tagLinks } = Astro.props;
 ---
 
-<li tabindex="0">
-  <a>
+<li tabindex="0" class="dropdown">
+  <a class="text-xs sm:text-base">
     {tagLinks.tag}
     <svg
       class="fill-current"
@@ -16,5 +16,5 @@ const { tagLinks } = Astro.props;
       ></path>
     </svg>
   </a>
-  <DropdownList links={tagLinks.links}/>
+  <DropdownList links={tagLinks.links} />
 </li>
