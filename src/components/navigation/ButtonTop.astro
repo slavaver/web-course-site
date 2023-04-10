@@ -1,25 +1,33 @@
 ---
 ---
 
-<button id="back-to-top-btn" class="fixed bottom-5 right-5"
-  ><svg
-    xmlns="http://www.w3.org/2000/svg"
-    height="48"
-    viewBox="0 96 960 960"
-    width="48"
-    ><path
-      d="M450 896V370L202 618l-42-42 320-320 320 320-42 42-248-248v526h-60Z"
-    ></path></svg
-  ></button
->
+<div class="hidden sm:block">
+  <button
+    id="back-to-top-btn"
+    aria-label="Кнопка наверх"
+    class="fixed bottom-5 right-5 hidden"
+    tabindex="1"
+    ><svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="48"
+      viewBox="0 96 960 960"
+      width="48"
+      ><path
+        d="M450 896V370L202 618l-42-42 320-320 320 320-42 42-248-248v526h-60Z"
+      ></path></svg
+    ></button
+  >
+</div>
 <script>
   const button = document.getElementById("back-to-top-btn");
 
   window.addEventListener("scroll", () => {
-    if (window.scrollY > 100) {
-      button.style.display = "block";
+    if (window.scrollY > 200) {
+      button.classList.add("block");
+      button.classList.remove("hidden");
     } else {
-      button.style.display = "none";
+      button.classList.add("hidden");
+      button.classList.remove("block");
     }
   });
 
@@ -29,6 +37,4 @@
       behavior: "smooth",
     });
   });
-
-  document.body.appendChild(button);
 </script>
