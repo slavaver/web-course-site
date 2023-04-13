@@ -65,3 +65,14 @@ tag: "2 семестр"
 - [Checklist](https://www.a11yproject.com/checklist/)
 - [A Complete Guide To Accessible Front-End Components](https://www.smashingmagazine.com/2021/03/complete-guide-accessible-front-end-components/)
 - [Innovation Studio LogoWeb Accessibility Guidelines v1.0](http://web-accessibility.carnegiemuseums.org/)
+
+## Вопросы для защиты
+
+1. Теги помогающие сделать страницу доступной.
+1. Аттрибуты используемые для доступности.
+1. Что следует соблюдать при стилизации кнопок и ссылок?
+1. Четыре основных принципа доступности описанных в WCAG.
+1. Единицы измерения для работы с размером текста для сохранения доступности.
+1. Как тестировать на доступность?
+1. Контраст цветов.
+1. Пример идеальной формы с точки зрения доступности.
