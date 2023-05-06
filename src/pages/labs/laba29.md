@@ -24,6 +24,7 @@ tag: "2 семестр"
 
 ## Источники
 
+- [Асинхронное программирование в однопоточных средах JavaScript](https://habr.com/ru/articles/651037/)
 - [Асинхронность](https://doka.guide/js/async-in-js/)
 - [MDN: Асинхронность](https://developer.mozilla.org/ru/docs/Learn/JavaScript/Asynchronous)
 - [Функции обратного вызова](https://learn.javascript.ru/callbacks)
