@@ -1,0 +1,32 @@
+---
+const { headings } = Astro.props;
+console.log(headings);
+let hid = headings && headings.length > 0 ? "inline-block" : "hidden";
+---
+
+<div class={hid}>
+  <ul
+    class="menu fixed max-h-screen overflow-y-auto w-auto top-36 left-4 bg-primary rounded-3xl p-5 text-lg hidden xl:inline-block"
+  >
+    {
+      headings
+        .filter(({ depth }) => depth > 1 && depth < 3)
+        .map((header) => {
+          return (
+            <li class="max-w-sm text-ellipsis overflow-hidden whitespace-nowrap">
+              <a class="link link-neutral" href={`#${header.slug}`}>
+                {header.text}
+              </a>
+            </li>
+          );
+        })
+    }
+  </ul>
+</div>
+
+<style is:global>
+  h2 {
+    margin-top: -100px !important;
+    padding-top: 100px !important;
+  }
+</style>
