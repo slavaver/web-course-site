@@ -1,5 +1,4 @@
 import { defineConfig } from "astro/config";
-import astroRemark from "@astrojs/markdown-remark";
 import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
