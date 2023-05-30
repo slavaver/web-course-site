@@ -1,31 +1,67 @@
 ---
 const { headings } = Astro.props;
-let hid = headings && headings.length > 0 ? "inline-block" : "hidden";
 ---
 
-<div class={hid}>
-  <ul
-    class="menu fixed max-h-screen overflow-y-auto w-auto top-36 left-4 bg-primary text-primary-content rounded-3xl p-5 text-lg hidden xl:inline-block"
-  >
-    {
-      headings
-        .filter(({ depth }) => depth > 1 && depth < 3)
-        .map((header) => {
-          return (
-            <li class="max-w-sm">
-              <a class="" href={`#${header.slug}`}>
-                {header.text}
-              </a>
-            </li>
-          );
-        })
+<ul
+  class="menu fixed max-h-screen overflow-y-auto w-auto top-36 left-4 bg-primary text-primary-content rounded-3xl p-5 text-lg hidden xl:inline-block"
+>
+  {
+    headings
+      .filter(({ depth }) => depth > 1 && depth < 3)
+      .map((header) => {
+        return (
+          <li class="max-w-sm">
+            <a class="lonk" href={`#${header.slug}`}>
+              {header.text}
+            </a>
+          </li>
+        );
+      })
+  }
+</ul>
+
+<script>
+  const links = document.querySelectorAll(".lonk");
+  let activeLinkIndex = -1; // Индекс активной ссылки
+
+  // Функция для отслеживания скролла и подсветки активной ссылки
+  function trackScroll() {
+    const windowHeight = window.innerHeight; // Высота окна браузера
+    const scrollPosition = window.scrollY; // Позиция скролла
+
+    // Определяем индекс активной ссылки на основе положения скролла
+    for (let i = 0; i < links.length; i++) {
+      const sectionId = links[i].getAttribute("href"); // Получаем идентификатор раздела, на который ссылается ссылка
+      const section = document.querySelector(sectionId); // Получаем элемент раздела по идентификатору
+
+      // Если раздел существует и его верхняя граница находится в пределах видимой области экрана
+      if (section && section.offsetTop <= scrollPosition + 120) {
+        activeLinkIndex = i; // Запоминаем индекс активной ссылки
+      }
     }
-  </ul>
-</div>
+
+    // Подсвечиваем активную ссылку и снимаем подсветку с предыдущей активной ссылки
+    links.forEach((link, index) => {
+      if (index === activeLinkIndex) {
+        link.classList.add("text-secondary");
+      } else {
+        link.classList.remove("text-secondary");
+      }
+    });
+  }
+
+  // Обработчик события прокрутки
+  window.addEventListener("scroll", trackScroll);
+
+  // Инициализация отслеживания скролла
+  trackScroll();
+</script>
 
 <style is:global>
+  :root {
+    scroll-behavior: smooth;
+  }
   h2 {
-    margin-top: -100px !important;
-    padding-top: 100px !important;
+    scroll-margin: 100px;
   }
 </style>
