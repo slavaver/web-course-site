@@ -38,6 +38,7 @@ tag: "2 семестр"
 
 ##### Отображение комментариев
 
+1. На странице есть переключатель, от состояния которого зависит получаете ли вы новые комментарии в реальном времени или нет.
 1. При запуске приложения в браузере вы получаете список комментариев и подписываетесь на обновления с сервера для получение новых комментариев в реальном времени.
 1. Комментарии отрисовываются с учетом их вложенности, так как один комментарий может быть ответом на другой это определяется по полю parentId.
 1. Есть счетчик указывающий общее число комментариев.
@@ -79,6 +80,8 @@ tag: "2 семестр"
 - [Doka: Date + Intl](https://doka.guide/js/date/)
 - [server-sent events](https://developer.mozilla.org/ru/docs/Web/API/Server-sent_events/Using_server-sent_events)
 - [EventSource](https://developer.mozilla.org/en-US/docs/Web/API/EventSource)
+- [Vue recursive component](https://blog.logrocket.com/rendering-nested-comments-recursive-components-vue/)
+- [Creating a Recursive Tree Component in Vue.js](https://www.digitalocean.com/community/tutorials/vuejs-recursive-components)
 
 ## Вопросы для защиты
 
