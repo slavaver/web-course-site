@@ -3,15 +3,15 @@
 
 <aside class="max-w-3xl w-full mx-auto py-10 px-2">
   <script>
-    const percent = document.getElementById("percent");
-    const progressBar = document.getElementsByTagName("progress")[0];
+    const percent = document.getElementById('percent');
+    const progressBar = document.getElementsByTagName('progress')[0];
     const today = new Date();
     const startDate = new Date(2023, 1, 17);
     const endDate = new Date(2023, 5, 13);
 
-    const progress = Math.round(
+    const progress = Math.max( Math.round(
       ((today - startDate) / (endDate - startDate)) * 100
-    );
+    ), 100;
 
     percent.innerText = progress;
     progressBar.value = progress;
