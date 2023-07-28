@@ -16,13 +16,17 @@ tag: "Полезное"
 
 https://roadmap.sh/frontend
 
-## Сайты
+## Сайты по веб-разработке
 
 - [Документация для разработчиков на человеческом языке](https://doka.guide/)
 - [HTML Академия](https://htmlacademy.ru/)
 - [MDN](https://developer.mozilla.org/ru/)
 - [Smashing Magazine](https://www.smashingmagazine.com/)
 - [CSS Tricks](https://css-tricks.com/)
+
+## Сайты
+
+- Дату прекращения поддержки можно посмотреть на [Endoflife](https://endoflife.date/)
 
 ## Сервисы
 
