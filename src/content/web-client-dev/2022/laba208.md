@@ -1,5 +1,5 @@
 ---
-number: "1"
+number: "8"
 title: "Anime.js"
 type: "labs"
 ---

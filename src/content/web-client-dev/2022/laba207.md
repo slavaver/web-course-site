@@ -1,5 +1,5 @@
 ---
-number: "1"
+number: "7"
 title: "JS: повтор"
 type: "labs"
 ---
