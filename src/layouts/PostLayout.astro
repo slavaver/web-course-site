@@ -1,0 +1,25 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import ButtonTop from "../components/navigation/ButtonTop.astro";
+
+const { frontmatter } = Astro.props;
+
+---
+
+<BaseLayout title={frontmatter.title}>
+  <main class="prose lg:prose-lg mx-auto">
+    <ButtonTop />
+      <article class="md">
+        <slot />
+      </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .md :global(h1), .md :global(h2) {
+    text-wrap: balance;
+  }
+  .md :global(a), .md :global(code) {
+    word-wrap: break-word;
+  }
+</style>

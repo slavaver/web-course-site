@@ -2,19 +2,19 @@
 import NavItem from "./navigation/NavItem.astro";
 import ThemeToggler from "./navigation/ThemeToggler.astro";
 
-const posts = await Astro.glob("../pages/**/*.md");
-const nonDraftPosts = posts.filter((post) => !post.frontmatter.draft);
-const unique = [...new Set(nonDraftPosts.map((item) => item.frontmatter.tag))];
-const filteredLinks = unique.map((item) => ({
-  tag: item,
-  links: posts.filter((post) => post.frontmatter.tag === item),
-}));
+// const posts = await Astro.glob("../pages/**/*.md");
+// const nonDraftPosts = posts.filter((post) => !post.frontmatter.draft);
+// const unique = [...new Set(nonDraftPosts.map((item) => item.frontmatter.tag))];
+// const filteredLinks = unique.map((item) => ({
+//   tag: item,
+//   links: posts.filter((post) => post.frontmatter.tag === item),
+// }));
 ---
 
 <nav class="navbar max-w-3xl mx-auto text-neutral">
   <div class="lg:flex-1">
     <a
-      class="btn btn-primary normal-case text-xl"
+      class="normal-case text-xl"
       href="/web-course-site/"
       aria-label="На главную"
       ><svg
@@ -53,18 +53,18 @@ const filteredLinks = unique.map((item) => ({
       tabindex="0"
       class="menu menu-compact dropdown-content mt-3 p-2 shadow btn-primary rounded-box w-102"
     >
-      <ul class="menu menu-horizontal p-0">
+      <!-- <ul class="menu menu-horizontal p-0">
         {filteredLinks.map((data) => <NavItem tagLinks={data} />)}
-      </ul>
+      </ul> -->
     </ul>
   </div>
 
   <div class="hidden lg:flex">
-    <ul class="menu menu-horizontal p-0">
+    <!-- <ul class="menu lg:menu-horizontal p-0">
       {filteredLinks.map((data) => <NavItem tagLinks={data} />)}
-    </ul>
+    </ul> -->
   </div>
-
+<!--
   <a
     href="https://drive.google.com/drive/folders/1gqy63arTmR91RA67cOOXYh9U1GtcfqUA?usp=sharing"
     class="btn btn-ghost normal-case ml-auto"
@@ -83,6 +83,6 @@ const filteredLinks = unique.map((item) => ({
         d="M7.5 7.5h-.75A2.25 2.25 0 004.5 9.75v7.5a2.25 2.25 0 002.25 2.25h7.5a2.25 2.25 0 002.25-2.25v-7.5a2.25 2.25 0 00-2.25-2.25h-.75m0-3l-3-3m0 0l-3 3m3-3v11.25m6-2.25h.75a2.25 2.25 0 012.25 2.25v7.5a2.25 2.25 0 01-2.25 2.25h-7.5a2.25 2.25 0 01-2.25-2.25v-.75"
       ></path>
     </svg>
-  </a>
+  </a> -->
   <ThemeToggler />
 </nav>

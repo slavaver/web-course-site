@@ -1,0 +1,45 @@
+---
+import { getCollection } from "astro:content";
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const yearOnMain = "2022";
+
+const allWebTech = await getCollection("web-tech");
+const allWebClient = await getCollection("web-client-dev");
+
+const lastWebtech = allWebTech
+  .filter((material) => material.id.startsWith(yearOnMain))
+  .sort((a, b) => a.data.number - b.data.number);
+
+const lastWebClient = allWebClient
+  .filter((material) => material.id.startsWith(yearOnMain))
+  .sort((a, b) => a.data.number - b.data.number);
+---
+
+<BaseLayout>
+  <div class="prose lg:prose-lg mx-auto">
+    <h1>Архив</h1>
+    <h2>{yearOnMain} год</h2>
+    <h3>Основы веб-технологий</h3>
+    <ol class="columns">
+      {
+        lastWebtech.map((post) => (
+          <li>
+            <a href={`/web-course-site/labs/web-tech/${post.slug}`}>{post.data.title}</a>
+          </li>
+        ))
+      }
+    </ol>
+    <h3>Основы веб-разработки на стороне клиента</h3>
+    <ol class="columns">
+      {
+        lastWebClient.map((post) => (
+          <li>
+            <a href={`/web-course-site/labs/web-client-dev/${post.slug}`}>{post.data.title}</a>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</BaseLayout>

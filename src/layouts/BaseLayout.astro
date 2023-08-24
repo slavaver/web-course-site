@@ -1,45 +1,30 @@
 ---
 import Footer from "../components/Footer.astro";
-import NavBar from "../components/NavBar.astro";
-import Breadcrumbs from "../components/navigation/Breadcrumbs.astro";
-import ButtonTop from "../components/navigation/ButtonTop.astro";
-import Pagination from "../components/navigation/Pagination.astro";
-
-export interface Props {
-  content: {
-    title: string;
-  };
-}
-
-const {
-  content: { title },
-} = Astro.props;
-
-const { url } = Astro.props;
+// import NavBar from "../components/NavBar.astro";
+import NavbarDrawer from "../components/NavbarDrawer.astro";
+import { ViewTransitions } from "astro:transitions";
+const { title } = Astro.props;
 ---
 
-<html lang="ru">
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth scroll-pt-16">
   <head>
+    <script is:inline src="/web-course-site/themetoggle.js"></script>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/web-course-site/favicon.svg" />
-    <title>Веб-технологии</title>
+    <ViewTransitions />
+    <title>{title ? title : "Веб-технологии"}</title>
   </head>
-
   <body class="flex flex-col min-h-screen">
-    <ButtonTop />
-    <header class="bg-primary sticky top-0">
-      <NavBar />
+    <header class="bg-primary sticky top-0 z-50 px-2">
+      <NavbarDrawer>
+      <!-- <NavBar /> -->
     </header>
-    <main class="flex-grow">
-      <div class="container mx-auto mt-16 prose lg:prose-ls px-2">
-        <Breadcrumbs title={title} />
-        <h1>{title}</h1>
-        <slot />
-        <Pagination url={url} />
-      </div>
+    <main class="px-2 py-12 flex-grow">
+      <slot />
     </main>
     <Footer />
+  </NavbarDrawer>
   </body>
 </html>

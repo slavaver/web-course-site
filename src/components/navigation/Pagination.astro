@@ -1,38 +1,69 @@
 ---
-const { url } = Astro.props;
-const posts = await Astro.glob("../../pages/labs/*.md"); // запрос на файлы
-let urls: string | any[];
+import { getCollection } from "astro:content";
 
-// Функция сортирует массив файлов по номеру лабораторной
-function sortLabs(arr) {
-  arr.sort(function (a, b) {
-    var labA = parseInt(a.split("/")[a.split("/").length - 1].slice(4));
-    var labB = parseInt(b.split("/")[b.split("/").length - 1].slice(4));
-    return labA - labB;
-  });
-  return arr;
-}
+const { number, collection } = Astro.props;
 
-urls = sortLabs(posts.map((lab) => lab.url));
-const urlindex = urls.indexOf(url);
+const yearOnMain = "2023";
+const allMaterials = await getCollection(collection);
+const materialsOfYear = allMaterials
+  .filter(
+    (material) =>
+      material.id.startsWith(yearOnMain) && material.data.type === "labs"
+  )
+  .sort((a, b) => a.data.number - b.data.number);
 
-// управляют видимостью кнопок "Предыдущая страница" и "Следующая"
-// urlindex - индекс текущей страницы, urls - массив url-ов
-let isVisiblePrevButton =
-  urlindex == 0 || urlindex == -1 ? "visibility: hidden;" : "";
-let isVisibleNextButton =
-  urlindex == urls.length - 1 || urlindex == -1 ? "visibility: hidden;" : "";
+const currentIdx = materialsOfYear.findIndex((a) => a.data.number === number);
 ---
 
-<div class="btn-group grid grid-cols-2 my-10">
-  <a
-    href={urls[urlindex - 1]}
-    class="btn btn-outline"
-    style={isVisiblePrevButton}>Предыдущая страница</a
-  >
-  <a
-    href={urls[urlindex + 1]}
-    class="btn btn-outline"
-    style={isVisibleNextButton}>Следующая</a
-  >
+<div class="join max-w-xs sm:max-w-prose grid sm:grid-cols-2 mx-auto gap-1 mt-10">
+  {
+    currentIdx - 1 >= 0 && (
+      <a
+        href={`/web-course-site/labs/${collection}/${materialsOfYear[currentIdx - 1].slug}`}
+        class="btn btn-outline join-item sm:col-start-1 px-2"
+      >
+        <svg
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 19.5L8.25 12l7.5-7.5"
+          />
+        </svg>
+        {`К работе №${materialsOfYear[currentIdx - 1].data.number}`}
+      </a>
+    )
+  }
+  {
+    currentIdx + 1 < materialsOfYear.length && (
+      <a
+      href={`/web-course-site/labs/${collection}/${materialsOfYear[currentIdx + 1].slug}`}
+        class="btn btn-outline join-item sm:col-start-2 px-2"
+      >
+        {`К работе №${materialsOfYear[currentIdx + 1].data.number}`}
+        <svg
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M8.25 4.5l7.5 7.5-7.5 7.5"
+          />
+        </svg>
+      </a>
+    )
+  }
 </div>

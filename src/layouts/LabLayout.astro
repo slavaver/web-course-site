@@ -1,0 +1,44 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+// import Breadcrumbs from "../components/navigation/Breadcrumbs.astro";
+import ButtonTop from "../components/navigation/ButtonTop.astro";
+import FancyHeading from "../components/FancyHeading.astro";
+import TOC from "../components/navigation/TOC.astro";
+import Pagination from "../components/navigation/Pagination.astro";
+
+const { slug, frontmatter, headinglist, collection } = Astro.props;
+
+let number;
+
+if (frontmatter.number && frontmatter.number?.length == 1) {
+  number = "0" + frontmatter.number;
+}
+---
+
+<BaseLayout title={frontmatter.title}>
+  <ButtonTop />
+  <article class="max-w-prose xl:max-w-full mx-auto">
+    <FancyHeading heading={frontmatter.title} number={number} />
+    <div class="xl:grid grid-cols-[1fr_600px_1fr] gap-4 items-start">
+      <aside
+        class="prose self-start justify-self-end top-16 pt-6 xl:pr-6 xl:pt-0 mb-14 xl:mb-0 xl:sticky"
+      >
+  {frontmatter.type !== "schedule" && <TOC headings={headinglist} />}
+      </aside>
+      <div class="md prose lg:prose-lg">
+        <slot />
+      </div>
+    </div>
+  </article>
+  {frontmatter.type === "labs" && <Pagination number={frontmatter.number} collection={collection}/>}
+</BaseLayout>
+
+<style>
+  .md > :global(h1) {
+    display: none;
+  }
+
+  .md :global(a) {
+    word-wrap: break-word;
+  }
+</style>

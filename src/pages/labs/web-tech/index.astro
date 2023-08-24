@@ -5,33 +5,36 @@ import BaseLayout from "/src/layouts/BaseLayout.astro";
 
 const yearOnMain = "2023";
 
-const allMaterials = await getCollection("web-tech");
+const allWebTech = await getCollection("web-tech");
 
-const materialsOfYear = allMaterials.filter((material) =>
-  material.id.startsWith(yearOnMain)
-);
-
+const lastWebtech = allWebTech
+  .filter((material) => material.id.startsWith(yearOnMain))
+  .sort((a, b) => a.data.number - b.data.number);
 ---
 
 <BaseLayout>
   <div class="prose lg:prose-lg mx-auto">
-    <h1>Материалы курсов</h1>
-
-    <h2>Основы веб-технологий</h2>
+    <h1>Основы веб-технологий</h1>
     {
-      materialsOfYear
+      lastWebtech
         .filter((post) => post.data.type === "schedule")
-        .map((post) => <a href={`labs/web-tech/${post.slug}`}>{post.data.title}</a>)
+        .map((post) => (
+          <a href={`/web-course-site/labs/web-tech/${post.slug}`}>
+            {post.data.title}
+          </a>
+        ))
     }
-    <h3>Лабораторные работы</h3>
+    <h2>Лабораторные работы</h2>
     <ol class="columns">
       {
-        materialsOfYear
+        lastWebtech
           .filter((post) => post.data.type === "labs")
           .sort((a, b) => a.data.number - b.data.number)
           .map((post) => (
             <li>
-              <a href={`labs/web-tech/${post.slug}`}>{post.data.title}</a>
+              <a href={`/web-course-site/labs/web-tech/${post.slug}`}>
+                {post.data.title}
+              </a>
             </li>
           ))
       }
@@ -39,14 +42,16 @@ const materialsOfYear = allMaterials.filter((material) =>
     <h3>Рубежные контроли</h3>
     <ol class="columns">
       <!-- {
-        materialsOfYear
+        lastWebtech
           .filter((post) => post.data.type === "rk")
           .map((post) => (
             <li>
-              <a href={`labs/web-tech/${post.slug}`}>{post.data.title}</a>
+              <a href={`/web-course-site/labs/web-tech/${post.slug}`}>
+                {post.data.title}
+              </a>
             </li>
-          ))
-        } -->
+          )) || <li>Будут опубликованы к дате контроля</li>
+      } -->
         <li>Будут опубликованы к дате контроля</li>
     </ol>
   </div>
