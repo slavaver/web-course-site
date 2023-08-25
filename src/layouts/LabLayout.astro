@@ -6,7 +6,7 @@ import FancyHeading from "../components/FancyHeading.astro";
 import TOC from "../components/navigation/TOC.astro";
 import Pagination from "../components/navigation/Pagination.astro";
 
-const { slug, frontmatter, headinglist, collection } = Astro.props;
+const { slug , frontmatter, headinglist, collection } = Astro.props;
 
 let number;
 
@@ -30,7 +30,7 @@ if (frontmatter.number && frontmatter.number?.length == 1) {
       </div>
     </div>
   </article>
-  {frontmatter.type === "labs" && <Pagination number={frontmatter.number} collection={collection}/>}
+  {frontmatter.type === "labs" && <Pagination collection={collection} slug={slug} />}
 </BaseLayout>
 
 <style>

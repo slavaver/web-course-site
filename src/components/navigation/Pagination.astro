@@ -1,25 +1,30 @@
 ---
 import { getCollection } from "astro:content";
 
-const { number, collection } = Astro.props;
+const { collection, slug } = Astro.props;
 
-const yearOnMain = "2023";
 const allMaterials = await getCollection(collection);
 const materialsOfYear = allMaterials
-  .filter(
-    (material) =>
-      material.id.startsWith(yearOnMain) && material.data.type === "labs"
-  )
-  .sort((a, b) => a.data.number - b.data.number);
+  .filter((material) => material.data.type === "labs")
+  .sort((a, b) => (a.id < b.id ? -1 : 1));
 
-const currentIdx = materialsOfYear.findIndex((a) => a.data.number === number);
+const currentIdx = materialsOfYear.findIndex((a) => a.slug === slug);
+
+function isSameYear(a, b) {
+  return b?.split("/")[0] === a?.split("/")[0];
+}
 ---
 
-<div class="join max-w-xs sm:max-w-prose grid sm:grid-cols-2 mx-auto gap-1 mt-10">
+<div
+  class="join max-w-xs sm:max-w-prose grid sm:grid-cols-2 mx-auto gap-1 mt-10"
+>
   {
-    currentIdx - 1 >= 0 && (
+    currentIdx - 1 >= 0 &&
+    isSameYear(slug, materialsOfYear[currentIdx - 1].slug) ? (
       <a
-        href={`/web-course-site/labs/${collection}/${materialsOfYear[currentIdx - 1].slug}`}
+        href={`/web-course-site/labs/${collection}/${
+          materialsOfYear[currentIdx - 1].slug
+        }`}
         class="btn btn-outline join-item sm:col-start-1 px-2"
       >
         <svg
@@ -39,12 +44,17 @@ const currentIdx = materialsOfYear.findIndex((a) => a.data.number === number);
         </svg>
         {`К работе №${materialsOfYear[currentIdx - 1].data.number}`}
       </a>
+    ) : (
+      <div />
     )
   }
   {
-    currentIdx + 1 < materialsOfYear.length && (
+    currentIdx + 1 < materialsOfYear.length &&
+    isSameYear(slug, materialsOfYear[currentIdx + 1].slug) ? (
       <a
-      href={`/web-course-site/labs/${collection}/${materialsOfYear[currentIdx + 1].slug}`}
+        href={`/web-course-site/labs/${collection}/${
+          materialsOfYear[currentIdx + 1].slug
+        }`}
         class="btn btn-outline join-item sm:col-start-2 px-2"
       >
         {`К работе №${materialsOfYear[currentIdx + 1].data.number}`}
@@ -64,6 +74,8 @@ const currentIdx = materialsOfYear.findIndex((a) => a.data.number === number);
           />
         </svg>
       </a>
+    ) : (
+      <div />
     )
   }
 </div>

@@ -13,6 +13,6 @@ const { entry } = Astro.props;
 const { Content, headings } = await entry.render();
 ---
 
-<LabLayout frontmatter={entry.data} headinglist={headings} collection={'web-client-dev'}>
+<LabLayout slug={entry.slug} frontmatter={entry.data} headinglist={headings} collection={'web-client-dev'}>
   <Content />
 </LabLayout>
