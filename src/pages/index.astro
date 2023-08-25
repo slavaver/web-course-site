@@ -1,54 +1,48 @@
 ---
-import { getCollection } from "astro:content";
-
 import BaseLayout from "/src/layouts/BaseLayout.astro";
-
-const yearOnMain = "2023";
-
-const allMaterials = await getCollection("web-tech");
-
-const materialsOfYear = allMaterials.filter((material) =>
-  material.id.startsWith(yearOnMain)
-);
-
 ---
 
 <BaseLayout>
   <div class="prose lg:prose-lg mx-auto">
-    <h1>Материалы курсов</h1>
-
-    <h2>Основы веб-технологий</h2>
-    {
-      materialsOfYear
-        .filter((post) => post.data.type === "schedule")
-        .map((post) => <a href={`labs/web-tech/${post.slug}`}>{post.data.title}</a>)
-    }
-    <h3>Лабораторные работы</h3>
-    <ol class="columns">
-      {
-        materialsOfYear
-          .filter((post) => post.data.type === "labs")
-          .sort((a, b) => a.data.number - b.data.number)
-          .map((post) => (
-            <li>
-              <a href={`labs/web-tech/${post.slug}`}>{post.data.title}</a>
-            </li>
-          ))
-      }
+    <h1 class="[text-wrap:balance]">Курсы для профиля веб-технологии</h1>
+    <ol>
+      <li>Основы веб-технологий</li>
+      <li>Основы веб-разработки на стороне клиента</li>
     </ol>
-    <h3>Рубежные контроли</h3>
-    <ol class="columns">
-      <!-- {
-        materialsOfYear
-          .filter((post) => post.data.type === "rk")
-          .map((post) => (
-            <li>
-              <a href={`labs/web-tech/${post.slug}`}>{post.data.title}</a>
-            </li>
-          ))
-        } -->
-        <li>Будут опубликованы к дате контроля</li>
-    </ol>
+    <div class="alert alert-warning max-w-max">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="stroke-current shrink-0 h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        ><path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+        ></path></svg
+      >
+      <span
+        ><a class="link text-neutral" href="/web-course-site/retake"
+          >Информация о пересдаче</a
+        ></span
+      >
+    </div>
+    <p>
+      Два курса последовательно погружают в разработку на стороне клиента. В
+      рамках основ веб-технологий разбирается работа браузера и общие принципы
+      построения веб-платформы, также изучается адаптивная верстка и изучаются
+      принципы доступности. А в курсе основ веб-разработки на стороне клиента
+      изучаются основы Javascript и различные API, которые предоставляет
+      браузер.
+    </p>
+    <h2>Преподаватели</h2>
+    <p>Верещагин Владислав Юрьевич, к.т.н.</p>
+    <h2>Наставники</h2>
+    <ul>
+      <li>Довгий Роман</li>
+      <li>Шахназаров Вячеслав</li>
+    </ul>
   </div>
 </BaseLayout>
 
