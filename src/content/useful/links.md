@@ -15,24 +15,26 @@ https://roadmap.sh/frontend
 
 ## Сайты по веб-разработке
 
-- [Документация whatwg](https://html.spec.whatwg.org/dev/)
 - [Документация для разработчиков на человеческом языке](https://doka.guide/)
 - [HTML Академия](https://htmlacademy.ru/)
 - [MDN](https://developer.mozilla.org/ru/)
 - [Smashing Magazine](https://www.smashingmagazine.com/)
 - [CSS Tricks](https://css-tricks.com/)
-
-## Сайты
-
-- Дату прекращения поддержки можно посмотреть на [Endoflife](https://endoflife.date/)
+- [Документация whatwg](https://html.spec.whatwg.org/dev/)
 
 ## Сервисы
 
+- [Валидатор](https://validator.w3.org/)
 - [html дерево](https://yoksel.github.io/html-tree/)
 - [Can I Include](https://caninclude.glitch.me/)
 - [Can I Use](https://caniuse.com/)
-- [Валидатор](https://validator.w3.org/)
 - [Google Fonts Helper](https://google-webfonts-helper.herokuapp.com/fonts)
+
+## Обучение
+
+- https://web.dev/
+- https://htmlacademy.ru/blog
+- https://fonts.google.com/knowledge
 
 ## Шпаргалки
 
@@ -43,12 +45,48 @@ https://roadmap.sh/frontend
 - [VS Code](https://code.visualstudio.com/)
 - [GIT](https://git-scm.com/)
 
+## YouTube
+
+### Веб-разработка
+
+- [Вадим Макеев](https://www.youtube.com/@pepelsbey)
+- [Фронтенд от Yandex](https://www.youtube.com/@user-kd6bu2qj1v)
+- [Kevin Powell](https://www.youtube.com/@KevinPowell)
+- [Julia Miocene](https://www.youtube.com/@julia_miocene)
+- [Theo - t3.gg](https://www.youtube.com/@t3dotgg)
+- [James Q Quick](https://www.youtube.com/@JamesQQuick)
+- [Developed by Ed](https://www.youtube.com/@developedbyed)
+- [Web Dev Simplified](https://www.youtube.com/@WebDevSimplified)
+- [Google Chrome Developers](https://www.youtube.com/@ChromeDevs)
+
+### Разработка
+
+- [Listen IT](https://www.youtube.com/@ListenIT_channel)
+- [Fireship](https://www.youtube.com/@Fireship)
+- [CodeAesthetic](https://www.youtube.com/@CodeAesthetic)
+
+## Подкасты
+
+- [Веб-стандарты](https://web-standards.ru/)
+- [Про код](https://procode.mave.digital/)
+- [Инклюзивный ананас](https://inclusivepineapple.github.io/)
+- [The CSS Podcast](https://thecsspodcast.libsyn.com/)
+- [Syntax.](https://syntax.fm/)
+- [devtools.fm](https://www.devtools.fm/)
+- [The F-Word](https://f-word.dev/)
+
 ## Люди
-- https://www.joshwcomeau.com/
+
+- https://pepelsbey.dev/
 - https://ishadeed.com/
+- https://www.joshwcomeau.com/
 - https://www.bram.us/
 - https://joshcollinsworth.com/
-- https://pepelsbey.dev/
+- https://chriscoyier.net/
+
+## Другие блоги
+
+- https://evilmartians.com/
 
 ## Опросы
 
@@ -57,7 +95,6 @@ https://roadmap.sh/frontend
 - https://almanac.httparchive.org/ru/
 - https://risingstars.js.org/
 
-## Обучение
-- https://web.dev/
-- https://htmlacademy.ru/blog
-- https://fonts.google.com/knowledge
+## Сайты
+
+- Дату прекращения поддержки можно посмотреть на [Endoflife](https://endoflife.date/)
