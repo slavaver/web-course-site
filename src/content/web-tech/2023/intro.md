@@ -1,5 +1,5 @@
 ---
-number: "1"
+number: "0"
 title: "Вводное занятие"
 type: "labs"
 ---

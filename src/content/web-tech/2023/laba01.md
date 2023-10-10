@@ -1,5 +1,5 @@
 ---
-number: "2"
+number: "1"
 title: "Структура документа"
 type: "labs"
 ---
