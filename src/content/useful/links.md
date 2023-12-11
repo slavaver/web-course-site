@@ -50,7 +50,7 @@ https://roadmap.sh/frontend
 ### Веб-разработка
 
 - [Вадим Макеев](https://www.youtube.com/@pepelsbey)
-- [Фронтенд от Yandex](https://www.youtube.com/@user-kd6bu2qj1v)
+- [Фронтенд от Yandex](https://www.youtube.com/@YandexforFrontend)
 - [Kevin Powell](https://www.youtube.com/@KevinPowell)
 - [Julia Miocene](https://www.youtube.com/@julia_miocene)
 - [Theo - t3.gg](https://www.youtube.com/@t3dotgg)
