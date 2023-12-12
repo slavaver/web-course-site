@@ -31,7 +31,7 @@ const lastWebtech = allWebTech
         ))
     }
     <h2>Лабораторные работы</h2>
-    <ol class="columns">
+    <ol class="columns" start="0">
       {
         lastWebtech
           .filter((post) => post.data.type === "labs")
