@@ -85,6 +85,7 @@ type: "labs"
 - [Checklist](https://www.a11yproject.com/checklist/)
 - [A Complete Guide To Accessible Front-End Components](https://www.smashingmagazine.com/2021/03/complete-guide-accessible-front-end-components/)
 - [Innovation Studio LogoWeb Accessibility Guidelines v1.0](http://web-accessibility.carnegiemuseums.org/)
+- [Template for accessibility guidelines](https://www.htmhell.dev/adventcalendar/2023/10/)
 
 ## Вопросы для защиты
 
