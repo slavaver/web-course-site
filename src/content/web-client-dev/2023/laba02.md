@@ -60,7 +60,7 @@ let student = {
 **Пример вывода:**
 
 ```
-> Список свойств: group, last_name, first_name
+> Список свойств: group, lastName, firstName
 > Студент Иван Иванов учится в 201 группе
 ```
 
