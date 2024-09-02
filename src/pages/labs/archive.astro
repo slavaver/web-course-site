@@ -19,27 +19,34 @@ const lastWebClient = allWebClient
 
 <BaseLayout>
   <div class="prose lg:prose-lg mx-auto">
-    <h1>Архив</h1>
-    <h2>{yearOnMain} год</h2>
-    <h3>Основы веб-технологий</h3>
-    <ol class="columns">
-      {
-        lastWebtech.map((post) => (
-          <li>
-            <a href={`/web-course-site/labs/web-tech/${post.slug}`}>{post.data.title}</a>
-          </li>
-        ))
-      }
-    </ol>
-    <h3>Основы веб-разработки на стороне клиента</h3>
-    <ol class="columns">
-      {
-        lastWebClient.map((post) => (
-          <li>
-            <a href={`/web-course-site/labs/web-client-dev/${post.slug}`}>{post.data.title}</a>
-          </li>
-        ))
-      }
-    </ol>
+    <h1>Архив {yearOnMain} год</h1>
+    <details>
+      <summary>Основы веб-технологий</summary>
+      <ol class="columns">
+        {
+          lastWebtech.map((post) => (
+            <li>
+              <a href={`/web-course-site/labs/web-tech/${post.slug}`}>
+                {post.data.title}
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </details>
+    <details>
+      <summary>Основы веб-разработки на стороне клиента</summary>
+      <ol class="columns">
+        {
+          lastWebClient.map((post) => (
+            <li>
+              <a href={`/web-course-site/labs/web-client-dev/${post.slug}`}>
+                {post.data.title}
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </details>
   </div>
 </BaseLayout>

@@ -16,14 +16,20 @@ const clinetMaterials = await getCollection("web-client-dev");
 const lastClinetMaterials = clinetMaterials
   .filter((material) => material.id.startsWith(yearOnMain))
   .sort((a, b) => a.data.number - b.data.number);
+
+const clinetMaterialsTs = await getCollection("web-client-dev-ts");
+
+const lastClinetMaterialsTs = clinetMaterialsTs
+  .filter((material) => material.id.startsWith(yearOnMain))
+  .sort((a, b) => a.data.number - b.data.number);
 ---
 
 <div class="drawer">
   <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
   <div class="drawer-content flex flex-col">
     <!-- Navbar -->
-    <div class="navbar max-w-3xl mx-auto text-neutral">
-      <div class="flex-none md:hidden">
+    <div class="navbar max-w-4xl mx-auto text-neutral">
+      <div class="flex-none lg:hidden">
         <label for="my-drawer-3" class="btn btn-square btn-ghost">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -58,17 +64,21 @@ const lastClinetMaterials = clinetMaterials
           </svg>
         </a>
       </div>
-      <div class="flex-none hidden md:block">
+      <div class="flex-none hidden lg:block">
         <ul class="menu menu-horizontal">
           <!-- Navbar menu content here -->
+          <li>
+            <a href="/web-course-site/labs/web-tech">Основы веб-технологий</a>
+          </li>
           <li>
             <a href="/web-course-site/labs/web-client-dev"
               >Основы веб-разработки</a
             >
           </li>
-
           <li>
-            <a href="/web-course-site/labs/web-tech">Основы веб-технологий</a>
+            <a href="/web-course-site/labs/web-client-dev-ts"
+              >Веб-разработка на клиенте</a
+            >
           </li>
           <li><a href="/web-course-site/useful">Полезное</a></li>
           <li><a href="/web-course-site/labs/archive">Архив</a></li>
@@ -83,7 +93,25 @@ const lastClinetMaterials = clinetMaterials
     <ul class="menu p-4 w-80 h-full bg-base-200 flex-nowrap overflow-x-auto">
       <!-- Sidebar content here -->
       <li>
-        <details open>
+        <details>
+          <summary>Основы веб-технологий</summary>
+          <ul>
+            {
+              lastWebtech
+                .sort((a, b) => a.data.number - b.data.number)
+                .map((post) => (
+                  <li>
+                    <a href={`/web-course-site/labs/web-tech/${post.slug}`}>
+                      {post.data.title}
+                    </a>
+                  </li>
+                ))
+            }
+          </ul>
+        </details>
+      </li>
+      <li>
+        <details>
           <summary>Основы веб-разработки на стороне клиента</summary>
           <ul>
             {
@@ -103,14 +131,15 @@ const lastClinetMaterials = clinetMaterials
       </li>
       <li>
         <details>
-          <summary>Основы веб-технологий</summary>
+          <summary>Веб-разработка на стороне клиента</summary>
           <ul>
             {
-              lastWebtech
+              lastClinetMaterialsTs
                 .sort((a, b) => a.data.number - b.data.number)
                 .map((post) => (
                   <li>
-                    <a href={`/web-course-site/labs/web-tech/${post.slug}`}>
+                    <a
+                      href={`/web-course-site/labs/web-client-dev-ts/${post.slug}`}>
                       {post.data.title}
                     </a>
                   </li>
