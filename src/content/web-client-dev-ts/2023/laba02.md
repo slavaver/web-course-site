@@ -24,6 +24,12 @@ type: "labs"
 
 Код удовлетворяющий требованиям сохраненный в коммите на удаленном репозитории.
 
+## Источники для занятия
+
+- [Отладка кода в VS Code](https://code.visualstudio.com/docs/typescript/typescript-tutorial#_debugging)
+- [TS руководство по стилю](https://mkosir.github.io/typescript-style-guide/)
+- [ECMA Script совместимость](https://compat-table.github.io/compat-table/es2016plus/)
+
 ## Основные источники по TS
 
 - [The TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
