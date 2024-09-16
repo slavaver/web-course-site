@@ -30,3 +30,4 @@ _Ссылка на telegram:_ [@MacalllanS](https://t.me/MacalllanS)
 
 **Якушева Елена Владимировна**  
 _Ссылка на telegram:_ [@l3n04k4](https://t.me/l3n04k4)
+
