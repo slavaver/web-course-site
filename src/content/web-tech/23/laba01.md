@@ -11,15 +11,8 @@ type: "labs"
 ## Порядок выполнения лабораторной работы:
 
 1. Изучить основные теги языка разметки HTML: html, head, title, body, header, nav, h1-h6, main, section, footer, form, input, button, p, a, img, ul, ol, li, hr, q, blockquote и атрибуты, связанные с соответствующими тегами.
-1. Открыть макет согласно варианту в ведомости на figma.com.
-   - [Вариант 1 - Серфинг](https://www.figma.com/design/J0nNbgw4YC2XWgcG8jA6VR/Web2024-v1?node-id=0-1&t=gSE2WXkbrTptlwtd-1)
-   - [Вариант 2 - Рыбный ресторан](https://www.figma.com/design/RAhnddyD8n4WZrvrpwVk2Z/Web2024-v2?node-id=0-1&t=MXaJzpGhmnsM81dT-1)
-   - [Вариант 3 - Питомник](https://www.figma.com/design/XIqpFH5vQKoO2tf8K74OlR/Web2024-v3?node-id=0-1&t=PCtgNqeYXcexokBO-1)
-   - [Вариант 4 - AI/ML](https://www.figma.com/design/SfVMkGZuEFa1XJxR2n7FEw/Web2024-v4?node-id=1-23&t=xxlbyDTwhSTcH04z-1)
-   - [Вариант 5 - Ветеринарная клиника](https://www.figma.com/design/f0Mew2sPfAJ0bijMthNmgB/Web2024-v5?node-id=324-82&t=j4vVqsHm0bDsbJpc-1)
-   - [Вариант 6 - Планетарий](https://www.figma.com/design/nC0cVR2JqOrXDq6kcWbwer/Web-v6?node-id=0-1&t=SXEpOOvkOg3cX4NO-1)
-   - [Макеты для закрытия РУПов](https://disk.yandex.ru/d/q7nLRZhH9-oGBw)
-1. Получить [задание](https://classroom.github.com/a/Ira8v_VK) на Github Classroom, клонировать полученный репозиторий на компьютер и приступить к работе.
+1. Скачать макет согласно варианту в [ведомости](https://drive.google.com/drive/folders/1Ifv2U1KM9Xu-n8btd0lYwXjttPSIfc1j?usp=sharing) и импортировать его на figma.com. [Ссылка на макеты](https://disk.yandex.ru/d/q7nLRZhH9-oGBw).
+1. Получить [задание](https://classroom.github.com/a/0cMsCLBH) на Github Classroom, клонировать полученный репозиторий на компьютер и приступить к работе.
 1. Создать файл index.html и сформировать в нем корректную структуру документа в соответствии с макетом. Корректность определяется соответствием использованных тегов их семантике и отсутствием ошибок на валидаторе. В этой работе требуется только создать структуру, стили и изображения будут добавлены в будущих работах.
 1. По мере работы необходимо делать коммиты и отправлять изменения на удаленный репозиторий на github classroom.
 1. Загрузить работу на netlify.

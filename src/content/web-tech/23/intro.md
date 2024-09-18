@@ -4,15 +4,27 @@ title: "Вводное занятие"
 type: "labs"
 ---
 
+## Социальные сети
+
+- [Cайт факультета](//fit.mospolytech.ru)
+- vk:
+  - [Закрытая группа - FITmospolytech](//vk.com/fitmospolytech.team)
+  - [Открытая группа - ИТ-факультет Московского Политеха](//vk.com/fit.mospolytech)
+- telegram:
+  - [Официальная группа потока](//t.me/+50W-nlZa-s8xODEy)
+  - [Общая группа профиля Веб](//t.me/joinchat/b1k0ZPStUPY0M2Ji)
+- discord:
+  - [Работа с наставниками](//discord.gg/YZy7CF37gN)
+
 ## Регистрации
 
 1. [Github](//github.com)
 1. [Figma](//figma.com)
-1. [Netlify](//www.netlify.com) - лучше сделать дома
+1. [Netlify](//www.netlify.com)
 
 ## Установка ПО
 
-1. VS Code или любая альтернатива
+1. VS Code или альтернатива
    1. Расширение к VSCode - Live Server
 1. Git
 1. Terminal

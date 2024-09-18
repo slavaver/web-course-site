@@ -45,20 +45,8 @@ const lastWebtech = allWebTech
           ))
       }
     </ol>
-    <h3>Рубежные контроли</h3>
-    <ol class="columns">
-      {
-        lastWebtech
-          .filter((post) => post.data.type === "rk")
-          .map((post) => (
-            <li>
-              <a href={`/web-course-site/labs/web-tech/${post.slug}`}>
-                {post.data.title}
-              </a>
-            </li>
-          )) || <li>Будут опубликованы к дате контроля</li>
-      }
-    </ol>
+    <h3>Рубежный контроль</h3>
+    <p>Будет опубликован к дате контроля</p>
   </div>
 </BaseLayout>
 
