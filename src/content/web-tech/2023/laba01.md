@@ -14,7 +14,7 @@ type: "labs"
 1. Открыть макет согласно варианту [в ведомости](https://docs.google.com/spreadsheets/d/1ex4WJz5JM003zWcFaSMEy-rjsCUg_umqwixbh-9DJAo/edit?gid=0#gid=0) на figma.com.
    - [Вариант 1 - Серфинг](https://www.figma.com/design/J0nNbgw4YC2XWgcG8jA6VR/Web2024-v1?node-id=0-1&t=gSE2WXkbrTptlwtd-1)
    - [Вариант 2 - Рыбный ресторан](https://www.figma.com/design/RAhnddyD8n4WZrvrpwVk2Z/Web2024-v2?node-id=0-1&t=MXaJzpGhmnsM81dT-1)
-   - [Вариант 3 - Питомник](https://www.figma.com/design/XIqpFH5vQKoO2tf8K74OlR/Web2024-v3?node-id=0-1&t=PCtgNqeYXcexokBO-1)
+   - [Вариант 3 - Питомник](https://www.figma.com/design/XIqpFH5vQKoO2tf8K74OlR/Web2024-v3?node-id=0-1&t=YVSjthlVtbM2hQIr-1)
    - [Вариант 4 - AI/ML](https://www.figma.com/design/SfVMkGZuEFa1XJxR2n7FEw/Web2024-v4?node-id=1-23&t=xxlbyDTwhSTcH04z-1)
    - [Вариант 5 - Ветеринарная клиника](https://www.figma.com/design/f0Mew2sPfAJ0bijMthNmgB/Web2024-v5?node-id=324-82&t=j4vVqsHm0bDsbJpc-1)
    - [Вариант 6 - Планетарий](https://www.figma.com/design/nC0cVR2JqOrXDq6kcWbwer/Web-v6?node-id=0-1&t=SXEpOOvkOg3cX4NO-1)
