@@ -3,6 +3,8 @@ title: "HTML"
 description: "Как создать шапку, подвал и основную часть страницы."
 ---
 
+# HTML:
+
 [Шаг 1. Ключевые блоки](/web-course-site/html/html-1)
 
 [Шаг 2. Крупные логические блоки](/web-course-site/html/html-2)
