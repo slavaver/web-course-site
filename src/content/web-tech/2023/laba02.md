@@ -24,7 +24,7 @@ type: "labs"
 1. Цвета в style.css организовать с помощью [пользовательских свойств](https://doka.guide/css/custom-properties/) (Custom Properties/CSS Variables) на корневом элементе `:root {}`.
 1. Задать размер текста (font-size) для в rem. Рекомендуется в этом случае для html (селектор - `:root`) задать font-size в 62.5%, тогда будет проще рассчитывать rem для остального текста.
 1. В style.css сформировать стили для текста:
-   - подключить шрифты из макета или визуально похожие из Google Fonts c помощью [Google Fonts Helper](https://google-webfonts-helper.herokuapp.com/fonts),
+   - подключить шрифты из макета или визуально похожие из Google Fonts c помощью [Google Fonts Helper](https://gwfh.mranftl.com/fonts),
    - создать переменные для основных цветов,
    - задать размер текста (font-size) и жирность (font-weight),
    - изменить межстрочный интервал (line-height),
