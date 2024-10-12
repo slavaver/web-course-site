@@ -2,7 +2,7 @@
 import Footer from "../components/Footer.astro";
 // import NavBar from "../components/NavBar.astro";
 import NavbarDrawer from "../components/NavbarDrawer.astro";
-import { ViewTransitions } from "astro:transitions";
+// import { ViewTransitions } from "astro:transitions";
 const { title } = Astro.props;
 ---
 
@@ -13,7 +13,7 @@ const { title } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/web-course-site/favicon.svg" />
-    <ViewTransitions />
+    <!-- <ViewTransitions /> -->
     <title>{title ? title : "Веб-технологии"}</title>
   </head>
   <body class="flex flex-col min-h-screen">
