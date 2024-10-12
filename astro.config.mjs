@@ -7,7 +7,4 @@ export default defineConfig({
   site: 'https://slavaver.github.io',
   base: '/web-course-site',
   integrations: [tailwind()],
-  experimental: {
-    viewTransitions: true,
-  },
 });
