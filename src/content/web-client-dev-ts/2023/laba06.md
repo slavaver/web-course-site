@@ -111,3 +111,4 @@ TupleToObject<typeof tuple> ---> {'a': 'a', 'b': 'b', 'c': 'c'}
 1. Сопоставленные типы (Mapped Types)
 1. Keyof и Typeof
 1. ES модули
+1. Словами объяснить как работают `Record<Keys, Type>` / `Omit<Type, Keys>` / `Readonly<Type>`
