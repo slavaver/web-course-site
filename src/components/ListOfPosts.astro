@@ -11,7 +11,7 @@ const { allusefull } = Astro.props
           <h3 class="card-title">{post.data.title}</h3>
           <p>{post.data.description}</p>
           <div class="card-actions justify-end">
-            <a class="btn btn-primary" href={`useful/${post.slug}`}>
+            <a class="btn btn-primary" href={post.slug}>
               <span class="sr-only">Материал о {post.data.title}</span>
               <svg
                 aria-hidden="true"
