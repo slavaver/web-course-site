@@ -5,6 +5,8 @@ description: "Самые базовые команды консоли и для 
 
 # Базовые команды
 
+*Автор: Хаметов Артём*
+
 ## Команды для консоли
 
 pwd, ls, ls -la, cd, cp, mv, rm, mkdir
@@ -102,6 +104,7 @@ git pull = git fetch + git merge
 `git log`
 
 ## Help!
+
 Открытие руководства об определенной команде
 
 `git help <команда>`
@@ -111,6 +114,7 @@ git pull = git fetch + git merge
 `man git <команда>`
 
 ## Руководства по Git
+
 - https://githowto.com/ru
 - https://git-scm.com/book/ru/v2
 - https://habr.com/ru/post/337196/
@@ -118,14 +122,17 @@ git pull = git fetch + git merge
 - http://freesource.info/wiki/RuslanHihin/gitusermanual?v=b7s
 
 ## Онлайн обучение
+
 - http://git-school.github.io/visualizing-git/#free
 - https://stepik.org/course/3145/promo
 - https://learngitbranching.js.org/
 
 ## Документация Git
+
 - https://git-scm.com/docs
 
 ## Шпаргалки по командам Git
+
 - https://github.github.com/training-kit/downloads/ru/github-git-cheat-sheet/
 - https://img4.wsimg.com/support/images/hosting/12141/gitcheatsheet.pdf
 - https://medium.com/@ABatickaya/%D1%88%D0%BF%D0%B0%D1%80%D0%B3%D0%B0%D0%BB%D0%BA%D0%B0-%D0%BF%D0%BE-git-55eeea487676
