@@ -13,6 +13,7 @@ type: "labs"
 1. Изучить:
    - Псевдоклассы: :root, :link, :visited, :hover, :active, :focus, Псевдоклассы группы child, Псевдоклассы группы type, :checked, :disabled, :enabled, :required, :placeholder-shown;
    - Псевдоэлементы: ::before, ::after, ::placeholder, ::marker, ::selection, ::first-letter;
+   - [Статья по псевдоклассам и псевдоэлементам](/web-course-site/useful/pseudo)
    - transform;
    - transition;
    - animation и keyframes;
