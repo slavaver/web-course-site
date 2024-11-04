@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+import { getCollection } from "astro:content";
+import ListOfPosts from "../../components/ListOfPosts.astro";
+const allUsefull = await getCollection("rwd");
+---
+
+<BaseLayout title="Полезное">
+  <div class="prose lg:prose-lg mx-auto">
+    <ListOfPosts allusefull={allUsefull} />
+  </div>
+</BaseLayout>
