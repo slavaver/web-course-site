@@ -19,6 +19,8 @@ type: "labs"
 
 ## Базовые команды
 
+[Гайд по Git](/web-course-site/useful/git)
+
 Команды git:
 
 ```
