@@ -21,6 +21,19 @@ const lastWebtech = allWebTech
         target="_blank">Ведомость и доп. материалы</a
       >
     </p>
+
+    {
+      lastWebtech
+        .filter((post) => post.data.type === "schedule")
+        .map((post) => (
+          <a href={`/web-course-site/labs/web-client-dev-ts/${post.slug}`}>
+            {post.data.title}
+          </a>
+        ))
+    }
+
+    <h2>Лекции</h2>
+
     <p>
       <a href="http://labcolor.space/lecture1/index.html" target="_blank"
         >Лекция 1</a
@@ -42,15 +55,6 @@ const lastWebtech = allWebTech
         >Лекция 9</a
       >
     </p>
-    {
-      lastWebtech
-        .filter((post) => post.data.type === "schedule")
-        .map((post) => (
-          <a href={`/web-course-site/labs/web-client-dev-ts/${post.slug}`}>
-            {post.data.title}
-          </a>
-        ))
-    }
     <h2>Лабораторные работы</h2>
     <ol class="columns">
       {
