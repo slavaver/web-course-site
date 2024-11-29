@@ -71,7 +71,19 @@ const lastWebtech = allWebTech
       }
     </ol>
     <h3>Рубежный контроль</h3>
-    <p>Будет опубликован к дате контроля</p>
+    <ol class="columns">
+      {
+        lastWebtech
+          .filter((post) => post.data.type === "rk")
+          .map((post) => (
+            <li>
+              <a href={`/web-course-site/labs/web-client-dev-ts/${post.slug}`}>
+                {post.data.title}
+              </a>
+            </li>
+          )) || <li>Будут опубликованы к дате контроля</li>
+      }
+    </ol>
   </div>
 </BaseLayout>
 
