@@ -1,0 +1,13 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+const { title } = Astro.props;
+---
+
+<script type="module" src="/src/scripts/snow-fall.js"></script>
+
+<!--  -->
+<BaseLayout title={title}>
+  <snow-fall style="--snow-fall-color: oklch(62.02% 0.204 255.18 / 50.74%)"
+  ></snow-fall>
+  <slot />
+</BaseLayout>

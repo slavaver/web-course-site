@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 
-import BaseLayout from "/src/layouts/BaseLayout.astro";
+import BaseLayoutSnow from "../../../layouts/BaseLayoutSnow.astro";
 
 const yearOnMain = "2023";
 
@@ -12,7 +12,7 @@ const lastWebtech = allWebTech
   .sort((a, b) => a.data.number - b.data.number);
 ---
 
-<BaseLayout>
+<BaseLayoutSnow>
   <div class="prose lg:prose-lg mx-auto">
     <h1>Веб-разработка на стороне клиента</h1>
     <p>
@@ -85,7 +85,7 @@ const lastWebtech = allWebTech
       }
     </ol>
   </div>
-</BaseLayout>
+</BaseLayoutSnow>
 
 <style>
   @media screen and (min-width: 500px) {
