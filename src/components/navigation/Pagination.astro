@@ -15,9 +15,7 @@ function isSameYear(a, b) {
 }
 ---
 
-<div
-  class="join max-w-xs sm:max-w-prose grid sm:grid-cols-2 mx-auto gap-1 mt-10"
->
+<div class="join max-w-xs sm:max-w-prose grid grid-cols-2 mx-auto gap-1 mt-10">
   {
     currentIdx - 1 >= 0 &&
     isSameYear(slug, materialsOfYear[currentIdx - 1].slug) ? (
@@ -25,8 +23,7 @@ function isSameYear(a, b) {
         href={`/web-course-site/labs/${collection}/${
           materialsOfYear[currentIdx - 1].slug
         }`}
-        class="btn btn-outline join-item sm:col-start-1 px-2"
-      >
+        class="btn btn-outline join-item sm:col-start-1 px-2">
         <svg
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
@@ -34,8 +31,7 @@ function isSameYear(a, b) {
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
-          class="w-6 h-6"
-        >
+          class="w-6 h-6">
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -55,8 +51,7 @@ function isSameYear(a, b) {
         href={`/web-course-site/labs/${collection}/${
           materialsOfYear[currentIdx + 1].slug
         }`}
-        class="btn btn-outline join-item sm:col-start-2 px-2"
-      >
+        class="btn btn-outline join-item sm:col-start-2 px-2">
         {`К работе №${materialsOfYear[currentIdx + 1].data.number}`}
         <svg
           aria-hidden="true"
@@ -65,8 +60,7 @@ function isSameYear(a, b) {
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
-          class="w-6 h-6"
-        >
+          class="w-6 h-6">
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
