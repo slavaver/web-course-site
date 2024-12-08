@@ -6,7 +6,7 @@ import FancyHeading from "../components/FancyHeading.astro";
 import TOC from "../components/navigation/TOC.astro";
 import Pagination from "../components/navigation/Pagination.astro";
 
-const { slug , frontmatter, headinglist, collection } = Astro.props;
+const { slug, frontmatter, headinglist, collection } = Astro.props;
 
 let number;
 
@@ -21,16 +21,19 @@ if (frontmatter.number && frontmatter.number?.length == 1) {
     <FancyHeading heading={frontmatter.title} number={number} />
     <div class="xl:grid grid-cols-[1fr_600px_1fr] gap-4 items-start">
       <aside
-        class="prose self-start justify-self-end top-16 pt-6 xl:pr-6 xl:pt-0 mb-14 xl:mb-0 xl:sticky"
-      >
-  {frontmatter.type !== "schedule" && <TOC headings={headinglist} />}
+        class="prose self-start xl:justify-self-end top-16 pt-6 xl:pr-6 xl:pt-0 mb-14 xl:mb-0 xl:sticky">
+        {frontmatter.type !== "schedule" && <TOC headings={headinglist} />}
       </aside>
       <div class="md prose lg:prose-lg">
         <slot />
       </div>
     </div>
   </article>
-  {frontmatter.type === "labs" && <Pagination collection={collection} slug={slug} />}
+  {
+    frontmatter.type === "labs" && (
+      <Pagination collection={collection} slug={slug} />
+    )
+  }
 </BaseLayout>
 
 <style>
