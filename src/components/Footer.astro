@@ -2,7 +2,7 @@
 const today = new Date();
 ---
 
-<footer class="py-6 bg-primary text-neutral px-2">
+<footer class="py-6 bg-primary text-neutral px-2 mt-10">
   <div class="max-w-prose mx-auto">
     <p class="mb-4">
       Если вы заметили ошибку или хотите предложить изменения, пожалуйста, <a
@@ -14,3 +14,19 @@ const today = new Date();
     <p class="text-center">&copy; {today.getFullYear()} Московский Политех</p>
   </div>
 </footer>
+
+<style>
+  footer::before {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 150px;
+    aspect-ratio: 3/4;
+    background-image: url("/web-course-site/tree.webp");
+    background-size: contain;
+    translate: 0 -155px;
+    right: calc(50% - 17ch);
+    z-index: -1;
+    rotate: 4deg;
+  }
+</style>
