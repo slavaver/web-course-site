@@ -10,4 +10,27 @@ const { title } = Astro.props;
   <snow-fall style="--snow-fall-color: oklch(62.02% 0.204 255.18 / 50.74%)"
   ></snow-fall>
   <slot />
+  <div id="tree"></div>
 </BaseLayout>
+
+<style>
+  #tree {
+    height: 80px;
+    position: relative;
+  }
+
+  #tree::after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 150px;
+    aspect-ratio: 3/4;
+    background-image: url("/web-course-site/tree.webp");
+    background-size: contain;
+    translate: 0 4rem;
+    right: calc(50% - 17ch);
+    bottom: 0;
+    z-index: -1;
+    rotate: 4deg;
+  }
+</style>
