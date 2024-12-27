@@ -1,32 +1,84 @@
 ---
 const today = new Date();
+
+const contacts = [
+    {
+        name: "Верещагин Владислав Юрьевич",
+        role: "кандидат технических наук",
+        tg: "@slavaver",
+    },
+    {
+        name: "Гнибеда Артем Юрьевич",
+        role: "преподаватель",
+        tg: "@GnibedaArtemy",
+    },
+    {
+        name: "Мелихова Ева-София Бориславовна",
+        role: "ассистент преподавателя",
+        tg: "@sshultse",
+    },
+]; //TODO: Можно будет потом парсить с какой-нить API-шки
 ---
 
-<footer class="py-6 bg-primary text-neutral px-2 mt-20">
-  <div class="max-w-prose mx-auto">
-    <p class="mb-4">
-      Если вы заметили ошибку или хотите предложить изменения, пожалуйста, <a
-        class="link"
-        href="https://github.com/slavaver/web-course-site/issues/new"
-        >создайте issue</a
-      > в репозитории.
-    </p>
-    <p class="text-center">&copy; {today.getFullYear()} Московский Политех</p>
-  </div>
+<footer class="bg-bg-primary z-99 rounded-t-[60px] px-10 py-14">
+    <div class="top-content flex justify-between max-w-screen-xl mx-auto mb-20">
+        <img
+            class="mb-auto"
+            src="./src/assets/img/logo-full.svg"
+            alt="Логотип Московского Политеха"
+        />
+        <div>
+            <h3 class="mb-2">Контакты</h3>
+            <ul class="flex gap-19">
+                {
+                    contacts.map((contact) => (
+                        <li class="flex flex-col gap-1 max-w-[205px]">
+                            <p class="line-height-none">{contact.name}</p>
+                            <p class="text-sm mb-1">{contact.role}</p>
+                            <div class="flex gap-1">
+                                <img
+                                    src="./src/assets/img/tg-logo.svg"
+                                    alt="telegram-logo"
+                                />
+                                <a
+                                    class="text-sm"
+                                    href={`https://t.me/${contact.tg.slice(1)}`}
+                                >
+                                    {contact.tg}
+                                </a>
+                            </div>
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="bot-content max-w-prose mx-auto">
+        <p class="mb-4 text-center">
+            Если вы заметили ошибку или хотите предложить изменения, пожалуйста, <a
+                class="border-b-2"
+                href="https://github.com/slavaver/web-course-site/issues/new"
+                >создайте issue</a
+            > в репозитории.
+        </p>
+        <p class="text-center text-size-sm">
+            &copy; {today.getFullYear()} Московский Политех
+        </p>
+    </div>
 </footer>
 
-<style>
-  footer::before {
-    content: "";
-    display: block;
-    position: absolute;
-    height: 150px;
-    aspect-ratio: 3/4;
-    background-image: url("/web-course-site/tree.webp");
-    background-size: contain;
-    translate: 0 -155px;
-    right: calc(50% - 17ch);
-    z-index: -1;
-    rotate: 4deg;
-  }
-</style>
+<!-- <style>
+    footer::before {
+        content: "";
+        display: block;
+        position: absolute;
+        height: 150px;
+        aspect-ratio: 3/4;
+        background-image: url("/web-course-site/tree.webp");
+        background-size: contain;
+        translate: 0 -155px;
+        right: calc(50% - 17ch);
+        z-index: -1;
+        rotate: 4deg;
+    }
+</style> -->

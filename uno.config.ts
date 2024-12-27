@@ -24,10 +24,6 @@ export default defineConfig({
             texts: ["Gilroy", "sans-serif"],
             titles: ["NextArt", "sans-serif"],
         },
-        h2: {
-            fontSize: "10rem",
-            lineHeight: "3em",
-        },
     },
 
     rules: [
@@ -53,8 +49,8 @@ export default defineConfig({
                 "--color-text-tertiary": "#C5D6FF",
                 "--color-bg-screen": "#01001C",
                 "--color-bg-menu": "#0B163B99",
-                "--color-bg-primary": "#3A4F96",
-                "--color-bg-secondary": "#0B163B",
+                "--color-bg-primary": "#0B163B",
+                "--color-bg-secondary": "#3A4F96",
                 "--color-bg-accent-first": "#10215A",
                 "--color-bg-accent-second": "#FF5391",
             },
@@ -65,15 +61,16 @@ export default defineConfig({
             getCSS: () => `
             @font-face {
                 font-family: "Gilroy";
-                src: url("./src/assets/fonts/gilroy/Gilroy-Medium.ttf");
-                font-weight: 500;
+                src: url(./src/assets/fonts/gilroy/Gilroy-Regular.ttf);
+                font-weight: 400;
             }
 
             @font-face {
                 font-family: "Gilroy";
-                src: url(./src/assets/fonts/gilroy/Gilroy-Regular.ttf);
-                font-weight: 400;
+                src: url("./src/assets/fonts/gilroy/Gilroy-Medium.ttf");
+                font-weight: 500;
             }
+                
             @font-face {
                 font-family: "NextArt";
                 src: url("./src/assets/fonts/nextart/NEXTART_Regular.otf");
@@ -110,6 +107,7 @@ export default defineConfig({
 
             p, a, span{
                 font-size:20px;
+                font-weight: 400;
             }
             `,
         },

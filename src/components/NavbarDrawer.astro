@@ -1,8 +1,6 @@
 ---
 import ThemeToggler from "./navigation/ThemeToggler.astro";
 
-import LogoSvg from "../assets/LogoSvg.astro";
-
 import { getCollection } from "astro:content";
 
 const yearOnMain = "2023";
@@ -33,10 +31,10 @@ const lastClinetMaterialsTs = clinetMaterialsTs
         <div
             class="drawer-content-vertical flex w-full justify-between items-center mx-auto max-w-screen-xl"
         >
-            <LogoSvg />
+            <img class="w-10 h-10" src="./src/assets/img/logo.svg" alt="logo" />
             <nav class="drawer-nav flex gap-10">
                 <a href="/">Главная</a>
-                <a class="ddd" href="/">Курсы</a>
+                <a class="" href="/">Курсы</a>
                 <a href="/">База знаний</a>
             </nav>
             <ThemeToggler />
