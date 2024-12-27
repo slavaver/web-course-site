@@ -31,16 +31,12 @@ const isProd = import.meta.env.PROD;
         <title>{title ? title : "Веб-технологии"}</title>
     </head>
     <body
-        class="flex flex-col min-h-screen transition bg-bg-screen text-text-primary"
+        class="flex flex-col min-h-screen transition bg-bg-screen text-text-primary font-texts"
     >
-        <header class="sticky top-0 z-50 px-2">
-            <NavbarDrawer>
-                <!-- <NavBar /> -->
-            </NavbarDrawer>
-            <main class="px-2 py-12 flex-grow">
-                <slot />
-            </main>
-            <Footer />
-        </header>
+        <NavbarDrawer />
+        <main class="py-12 flex-grow">
+            <slot />
+        </main>
+        <Footer />
     </body>
 </html>

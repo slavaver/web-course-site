@@ -1,6 +1,8 @@
 ---
 import ThemeToggler from "./navigation/ThemeToggler.astro";
 
+import LogoSvg from "../assets/LogoSvg.astro";
+
 import { getCollection } from "astro:content";
 
 const yearOnMain = "2023";
@@ -8,148 +10,37 @@ const yearOnMain = "2023";
 const allWebTech = await getCollection("web-tech");
 
 const lastWebtech = allWebTech
-  .filter((material) => material.id.startsWith(yearOnMain))
-  .sort((a, b) => a.data.number - b.data.number);
+    .filter((material) => material.id.startsWith(yearOnMain))
+    .sort((a, b) => a.data.number - b.data.number);
 
 const clinetMaterials = await getCollection("web-client-dev");
 
 const lastClinetMaterials = clinetMaterials
-  .filter((material) => material.id.startsWith(yearOnMain))
-  .sort((a, b) => a.data.number - b.data.number);
+    .filter((material) => material.id.startsWith(yearOnMain))
+    .sort((a, b) => a.data.number - b.data.number);
 
 const clinetMaterialsTs = await getCollection("web-client-dev-ts");
 
 const lastClinetMaterialsTs = clinetMaterialsTs
-  .filter((material) => material.id.startsWith(yearOnMain))
-  .sort((a, b) => a.data.number - b.data.number);
+    .filter((material) => material.id.startsWith(yearOnMain))
+    .sort((a, b) => a.data.number - b.data.number);
 ---
 
-<div class="drawer">
-  <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
-  <div class="drawer-content flex flex-col">
-    <!-- Navbar -->
-    <div class="navbar max-w-4xl mx-auto text-neutral">
-      <div class="flex-none lg:hidden">
-        <label for="my-drawer-3" class="btn btn-square btn-ghost">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            class="inline-block w-6 h-6 stroke-current"
-            ><path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"></path></svg
-          >
-        </label>
-      </div>
-      <div class="flex-1 px-2 mx-2">
-        <a
-          class="normal-case text-xl"
-          href="/web-course-site/"
-          aria-label="На главную"
-          ><svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-            ></path>
-          </svg>
-        </a>
-      </div>
-      <div class="flex-none hidden lg:block">
-        <ul class="menu menu-horizontal">
-          <!-- Navbar menu content here -->
-          <li>
-            <a href="/web-course-site/labs/web-tech">Основы веб-технологий</a>
-          </li>
-          <li>
-            <a href="/web-course-site/labs/web-client-dev"
-              >Основы веб-разработки</a
-            >
-          </li>
-          <li>
-            <a href="/web-course-site/labs/web-client-dev-ts"
-              >Веб-разработка на клиенте</a
-            >
-          </li>
-          <li><a href="/web-course-site/useful">Полезное</a></li>
-          <li><a href="/web-course-site/labs/archive">Архив</a></li>
-        </ul>
-      </div>
-      <ThemeToggler />
+<header class="drawer-container w-full fixed z-50 p-2.5">
+    <div
+        class="drawer bg-bg-menu text-text-primary flex px-10 py-3.75 rounded-2xl backdrop-blur-xl box-border"
+    >
+        <div
+            class="drawer-content-vertical flex w-full justify-between items-center mx-auto max-w-screen-xl"
+        >
+            <LogoSvg />
+            <nav class="drawer-nav flex gap-10">
+                <a href="/">Главная</a>
+                <a class="ddd" href="/">Курсы</a>
+                <a href="/">База знаний</a>
+            </nav>
+            <ThemeToggler />
+        </div>
+        <div class="drawer-side flex-none"></div>
     </div>
-    <slot />
-  </div>
-  <div class="drawer-side">
-    <label for="my-drawer-3" class="drawer-overlay"></label>
-    <ul class="menu p-4 w-80 h-full bg-base-200 flex-nowrap overflow-x-auto">
-      <!-- Sidebar content here -->
-      <li>
-        <details>
-          <summary>Основы веб-технологий</summary>
-          <ul>
-            {
-              lastWebtech
-                .sort((a, b) => a.data.number - b.data.number)
-                .map((post) => (
-                  <li>
-                    <a href={`/web-course-site/labs/web-tech/${post.slug}`}>
-                      {post.data.title}
-                    </a>
-                  </li>
-                ))
-            }
-          </ul>
-        </details>
-      </li>
-      <li>
-        <details>
-          <summary>Основы веб-разработки на стороне клиента</summary>
-          <ul>
-            {
-              lastClinetMaterials
-                .sort((a, b) => a.data.number - b.data.number)
-                .map((post) => (
-                  <li>
-                    <a
-                      href={`/web-course-site/labs/web-client-dev/${post.slug}`}>
-                      {post.data.title}
-                    </a>
-                  </li>
-                ))
-            }
-          </ul>
-        </details>
-      </li>
-      <li>
-        <details>
-          <summary>Веб-разработка на стороне клиента</summary>
-          <ul>
-            {
-              lastClinetMaterialsTs
-                .sort((a, b) => a.data.number - b.data.number)
-                .map((post) => (
-                  <li>
-                    <a
-                      href={`/web-course-site/labs/web-client-dev-ts/${post.slug}`}>
-                      {post.data.title}
-                    </a>
-                  </li>
-                ))
-            }
-          </ul>
-        </details>
-      </li>
-      <li><a href="/web-course-site/useful">Полезное</a></li>
-      <li><a href="/web-course-site/labs/archive">Архив</a></li>
-    </ul>
-  </div>
-</div>
+</header>
