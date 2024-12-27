@@ -1,5 +1,4 @@
 ---
-import { isAborted } from "astro:schema";
 import Footer from "../components/Footer.astro";
 // import NavBar from "../components/NavBar.astro";
 import NavbarDrawer from "../components/NavbarDrawer.astro";
@@ -8,26 +7,40 @@ const { title } = Astro.props;
 const isProd = import.meta.env.PROD;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru" class="scroll-smooth scroll-pt-16">
-  <head>
-    <script is:inline src="/web-course-site/themetoggle.js"></script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/web-course-site/favicon.svg" />
-    <!-- <ViewTransitions /> -->
-    {isProd && <script defer src="https://cloud.umami.is/script.js" data-website-id="b6ab8e19-a315-491e-931e-41ec87b0957f"></script>}
-    <title>{title ? title : "Веб-технологии"}</title>
-  </head>
-  <body class="flex flex-col min-h-screen">
-    <header class="bg-primary sticky top-0 z-50 px-2">
-      <NavbarDrawer>
-      <!-- <NavBar /> -->
-    </header>
-    <main class="px-2 py-12 flex-grow">
-      <slot />
-    </main>
-    <Footer />
-  </NavbarDrawer>
-  </body>
+    <head>
+        <script is:inline src="/web-course-site/themetoggle.js"></script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="icon"
+            type="image/svg+xml"
+            href="/web-course-site/favicon.svg"
+        />
+        <!-- <ViewTransitions /> -->
+        {
+            isProd && (
+                <script
+                    defer
+                    src="https://cloud.umami.is/script.js"
+                    data-website-id="b6ab8e19-a315-491e-931e-41ec87b0957f"
+                />
+            )
+        }
+        <title>{title ? title : "Веб-технологии"}</title>
+    </head>
+    <body
+        class="flex flex-col min-h-screen transition bg-bg-screen text-text-primary"
+    >
+        <header class="sticky top-0 z-50 px-2">
+            <NavbarDrawer>
+                <!-- <NavBar /> -->
+            </NavbarDrawer>
+            <main class="px-2 py-12 flex-grow">
+                <slot />
+            </main>
+            <Footer />
+        </header>
+    </body>
 </html>

@@ -3,23 +3,25 @@ import { defineConfig, presetAttributify, presetUno } from "unocss";
 export default defineConfig({
     presets: [presetUno(), presetAttributify()],
     theme: {
-        extend: {
-            colors: {
-                text_primary: "var(--color-text-primary)",
-                text_secondary: "var(--color-text-secondary)",
-                text_tertiary: "var(--color-text-tertiary)",
-                bg_screen: "var(--color-bg-screen)",
-                bg_primary: "var(--color-bg-primary)",
-                bg_secondary: "var(--color-bg-secondary)",
-                bg_accent_first: "var(--color-bg-accent-first)",
-                bg_accent_second: "var(--color-bg-accent-second)",
-                border: "#F6FBFF",
+        colors: {
+            text: {
+                primary: "var(--color-text-primary)",
+                secondary: "var(--color-text-secondary)",
+                tertiary: "var(--color-text-tertiary)",
+            },
+            bg: {
+                screen: "var(--color-bg-screen)",
+                primary: "var(--color-bg-primary)",
+                secondary: "var(--color-bg-secondary)",
+                accent_first: "var(--color-bg-accent-first)",
+                accent_second: "var(--color-bg-accent-second)",
             },
         },
     },
+
     rules: [
         [
-            "root-light",
+            "light",
             {
                 "--color-text-primary": "#FFFFFF",
                 "--color-text-secondary": "#0B163B",
@@ -32,7 +34,7 @@ export default defineConfig({
             },
         ],
         [
-            "root-dark",
+            "dark",
             {
                 "--color-text-primary": "#FFFFFF",
                 "--color-text-secondary": "#0B163B",
@@ -44,11 +46,5 @@ export default defineConfig({
                 "--color-bg-accent-second": "#FF5391",
             },
         ],
-    ],
-    variants: [
-        (matcher) => ({
-            matcher: `dark:${matcher}`,
-            selector: (s) => `.dark ${s}`,
-        }),
     ],
 });
