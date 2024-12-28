@@ -7,7 +7,7 @@ import DataBaseSvg from "../assets/img/databaseSvg.astro";
 
 <style>
     .burger-menu {
-        /* position: relative; */
+        cursor: pointer;
     }
 
     .burger-icon {
@@ -16,7 +16,7 @@ import DataBaseSvg from "../assets/img/databaseSvg.astro";
         justify-content: space-around;
         width: 30px;
         height: 30px;
-        cursor: pointer;
+
         z-index: 10;
     }
 
@@ -25,79 +25,73 @@ import DataBaseSvg from "../assets/img/databaseSvg.astro";
         height: 2px;
         background: var(--color-text-primary);
         border-radius: 2px;
-        transition: all 0.3s ease-in-out;
+        transition: all 0.2s ease-in-out;
     }
 
     .burger-icon.open div:nth-child(1) {
-        transform: rotate(45deg) translate(9px, 5px);
+        transform: translateY(10px) rotate(45deg);
     }
 
     .burger-icon.open div:nth-child(2) {
+        transform: scale(0);
         opacity: 0;
     }
 
     .burger-icon.open div:nth-child(3) {
-        transform: rotate(-45deg) translate(9px, -5px);
+        transform: translateY(-10px) rotate(-45deg);
     }
 
     .menu {
         position: absolute;
         box-sizing: border-box;
-        top: 50%;
+        top: 33px;
         left: 0;
         margin: 0 25vw 0 calc(25vw - 10px);
         width: 0vw;
-        height: 70px;
+        height: 80px;
         opacity: 0;
-        transform: translateX(25vw) translateY(-23%);
+        transform: scale(0) translateY(-23%);
         transform-origin: top right;
         transition: all 0.2s ease-in-out;
     }
 
     .menu.open {
-        transform: translate(0vw) translateY(-23%);
+        transform: scale(1) translateY(-23%);
         width: 50vw;
-
         opacity: 1;
     }
 
     .menu a {
         display: block;
-        text-decoration: none;
-        margin-bottom: 0.5rem;
-        transition: color 0.2s;
-    }
-
-    .menu a:hover {
-        color: #007acc;
     }
 </style>
-
-<div class="burger-menu inline-block sm:hidden">
-    <div class="burger-icon">
-        <div></div>
-        <div></div>
-        <div></div>
+<div class="inline-block sm:hidden">
+    <div class="burger-menu userActionsLink">
+        <div class="burger-icon">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
-
     <nav class="menu text-text-primary justify-around flex">
-        <a><HouseSvg /></a>
-        <a><BookSvg /></a>
-        <a><DataBaseSvg /></a>
+        <a href={links[0].href} class="userActionsLink"><HouseSvg /></a>
+        <a href={links[1].href} class="userActionsLink"><BookSvg /></a>
+        <a href={links[2].href} class="userActionsLink"><DataBaseSvg /></a>
     </nav>
 </div>
 
 <script defer>
     let isOpen = false;
 
-    const burgerMenu = document.querySelector(".burger-menu .menu");
+    const menu = document.querySelector(".menu");
+    const burgerMenu = document.querySelector(".burger-menu");
     const burgerIcon = document.querySelector(".burger-icon");
 
     const toggleMenu = () => {
         isOpen = !isOpen;
-        burgerMenu.classList.toggle("open", isOpen);
+        menu.classList.toggle("open", isOpen);
         burgerIcon.classList.toggle("open", isOpen);
     };
 
-    burgerIcon ? burgerIcon.addEventListener("click", toggleMenu) : null;
+    burgerMenu ? burgerMenu.addEventListener("click", toggleMenu) : null;
 </script>
