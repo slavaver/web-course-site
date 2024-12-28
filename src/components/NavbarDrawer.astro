@@ -22,11 +22,32 @@ const clinetMaterialsTs = await getCollection("web-client-dev-ts");
 const lastClinetMaterialsTs = clinetMaterialsTs
     .filter((material) => material.id.startsWith(yearOnMain))
     .sort((a, b) => a.data.number - b.data.number);
+
+const courses = [
+    {
+        title: "Основы веб-технологий",
+        href: `/web-course-site/labs/web-tech`,
+        materials: lastWebtech,
+    },
+    {
+        title: "Основы веб-разработки",
+        href: `/web-course-site/labs/web-client-dev`,
+        materials: lastClinetMaterials,
+    },
+    {
+        title: "Веб-разработка на клиенте",
+        href: `/web-course-site/labs/web-client-dev-ts`,
+        materials: lastClinetMaterialsTs,
+    },
+];
+let isDropdownOpen = false;
+
+// isDropdownOpen.onToggled(() => {});
 ---
 
 <header class="drawer-container w-full fixed z-50 p-2.5">
     <div
-        class="drawer bg-bg-menu text-text-primary flex px-10 py-3.75 rounded-2xl backdrop-blur-xl box-border"
+        class="drawer bg-bg-menu text-text-primary flex flex-col gap-2 px-10 py-3.75 rounded-2xl box-border backdrop-blur-xl"
     >
         <div
             class="drawer-content-vertical flex w-full justify-between items-center mx-auto max-w-screen-xl"
@@ -34,11 +55,30 @@ const lastClinetMaterialsTs = clinetMaterialsTs
             <img class="w-10 h-10" src="./src/assets/img/logo.svg" alt="logo" />
             <nav class="drawer-nav flex gap-10">
                 <a href="/">Главная</a>
-                <a class="" href="/">Курсы</a>
+                <a
+                    onclick="isDropdownOpen = !isDropdownOpen"
+                    class="cursor-pointer">Курсы</a
+                >
                 <a href="/">База знаний</a>
             </nav>
             <ThemeToggler />
         </div>
-        <div class="drawer-side flex-none"></div>
+        {
+            isDropdownOpen ? (
+                <ul class="dropdown__list flex justify-center gap-3">
+                    {courses.map((course) => (
+                        <li class="dropdown__item">
+                            <a
+                                class="dropdown__link text-sm"
+                                href={course.href}
+                            >
+                                {course.title}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            ) : null
+        }
+        <!-- <div class="drawer-side flex-none"></div> -->
     </div>
 </header>

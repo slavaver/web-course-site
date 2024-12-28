@@ -37,8 +37,9 @@ export default defineConfig({
                 "--color-bg-menu": "#203EA999",
                 "--color-bg-primary": "#203EA9",
                 "--color-bg-secondary": "#4969DC",
-                "--color-bg-accent-first": "#D4DDFF",
+                "--color-bg-accent-first": "#2653BA",
                 "--color-bg-accent-second": "#FF5391",
+                "--color-border": "#F6FBFF",
             },
         ],
         [
@@ -53,6 +54,7 @@ export default defineConfig({
                 "--color-bg-secondary": "#3A4F96",
                 "--color-bg-accent-first": "#10215A",
                 "--color-bg-accent-second": "#FF5391",
+                "--color-border": "#F6FBFF",
             },
         ],
     ],
