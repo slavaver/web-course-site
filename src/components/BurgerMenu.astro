@@ -1,0 +1,103 @@
+---
+const { links } = Astro.props;
+import BookSvg from "../assets/img/bookSvg.astro";
+import HouseSvg from "../assets/img/houseSvg.astro";
+import DataBaseSvg from "../assets/img/databaseSvg.astro";
+---
+
+<style>
+    .burger-menu {
+        /* position: relative; */
+    }
+
+    .burger-icon {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    .burger-icon div {
+        width: 100%;
+        height: 2px;
+        background: var(--color-text-primary);
+        border-radius: 2px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .burger-icon.open div:nth-child(1) {
+        transform: rotate(45deg) translate(9px, 5px);
+    }
+
+    .burger-icon.open div:nth-child(2) {
+        opacity: 0;
+    }
+
+    .burger-icon.open div:nth-child(3) {
+        transform: rotate(-45deg) translate(9px, -5px);
+    }
+
+    .menu {
+        position: absolute;
+        box-sizing: border-box;
+        top: 50%;
+        left: 0;
+        margin: 0 25vw 0 calc(25vw - 10px);
+        width: 0vw;
+        height: 70px;
+        opacity: 0;
+        transform: translateX(25vw) translateY(-23%);
+        transform-origin: top right;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .menu.open {
+        transform: translate(0vw) translateY(-23%);
+        width: 50vw;
+
+        opacity: 1;
+    }
+
+    .menu a {
+        display: block;
+        text-decoration: none;
+        margin-bottom: 0.5rem;
+        transition: color 0.2s;
+    }
+
+    .menu a:hover {
+        color: #007acc;
+    }
+</style>
+
+<div class="burger-menu inline-block sm:hidden">
+    <div class="burger-icon">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <nav class="menu text-text-primary justify-around flex">
+        <a><HouseSvg /></a>
+        <a><BookSvg /></a>
+        <a><DataBaseSvg /></a>
+    </nav>
+</div>
+
+<script defer>
+    let isOpen = false;
+
+    const burgerMenu = document.querySelector(".burger-menu .menu");
+    const burgerIcon = document.querySelector(".burger-icon");
+
+    const toggleMenu = () => {
+        isOpen = !isOpen;
+        burgerMenu.classList.toggle("open", isOpen);
+        burgerIcon.classList.toggle("open", isOpen);
+    };
+
+    burgerIcon ? burgerIcon.addEventListener("click", toggleMenu) : null;
+</script>

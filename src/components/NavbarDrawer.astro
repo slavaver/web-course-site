@@ -1,4 +1,5 @@
 ---
+import BurgerMenu from "./BurgerMenu.astro";
 import ThemeToggler from "./navigation/ThemeToggler.astro";
 
 import { getCollection } from "astro:content";
@@ -40,6 +41,24 @@ const courses = [
         materials: lastClinetMaterialsTs,
     },
 ];
+
+const links = [
+    {
+        title: "Главная",
+        href: `/web-course-site/`,
+        icon: "./src/assets/img/house.svg",
+    },
+    {
+        title: "Курсы",
+        href: `#courses`,
+        icon: "./src/assets/img/book.svg",
+    },
+    {
+        title: "База знаний",
+        href: `#useful`,
+        icon: "./src/assets/img/database.svg",
+    },
+];
 let isDropdownOpen = false;
 
 // isDropdownOpen.onToggled(() => {});
@@ -47,20 +66,26 @@ let isDropdownOpen = false;
 
 <header class="drawer-container w-full fixed z-50 p-2.5">
     <div
-        class="drawer bg-bg-menu text-text-primary flex flex-col gap-2 px-10 py-3.75 rounded-2xl box-border backdrop-blur-xl"
+        class="drawer bg-bg-menu text-text-primary flex-col gap-2 px-10 py-3.75 rounded-2xl box-border backdrop-blur-xl"
     >
         <div
-            class="drawer-content-vertical flex w-full justify-between items-center mx-auto max-w-screen-xl"
+            class="drawer-content-vertical w-full justify-between items-center mx-auto max-w-screen-xl flex"
         >
-            <img class="w-10 h-10" src="./src/assets/img/logo.svg" alt="logo" />
-            <nav class="drawer-nav flex gap-10">
-                <a href="/">Главная</a>
-                <a
-                    onclick="isDropdownOpen = !isDropdownOpen"
-                    class="cursor-pointer">Курсы</a
-                >
-                <a href="/">База знаний</a>
+            <img
+                class="w-10 h-10 hidden sm:block"
+                src="./src/assets/img/logo.svg"
+                alt="logo"
+            />
+            <nav class="drawer-nav gap-10 hidden sm:flex">
+                {
+                    links.map((link) => (
+                        <a class="text-sm" href={link.href}>
+                            {link.title}
+                        </a>
+                    ))
+                }
             </nav>
+            <BurgerMenu links={links} />
             <ThemeToggler />
         </div>
         {

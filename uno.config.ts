@@ -16,9 +16,11 @@ export default defineConfig({
                 menu: "var(--color-bg-menu)",
                 primary: "var(--color-bg-primary)",
                 secondary: "var(--color-bg-secondary)",
+                tertiary: "var(--color-bg-tertiary)",
                 accent_first: "var(--color-bg-accent-first)",
                 accent_second: "var(--color-bg-accent-second)",
             },
+            border: "var(--color-border)",
         },
         fontFamily: {
             texts: ["Gilroy", "sans-serif"],
@@ -37,6 +39,7 @@ export default defineConfig({
                 "--color-bg-menu": "#203EA999",
                 "--color-bg-primary": "#203EA9",
                 "--color-bg-secondary": "#4969DC",
+                "--color-bg-tertiary": "#D4DDFF",
                 "--color-bg-accent-first": "#2653BA",
                 "--color-bg-accent-second": "#FF5391",
                 "--color-border": "#F6FBFF",
@@ -52,12 +55,16 @@ export default defineConfig({
                 "--color-bg-menu": "#0B163B99",
                 "--color-bg-primary": "#0B163B",
                 "--color-bg-secondary": "#3A4F96",
+                "--color-bg-tertiary": "#10215A",
                 "--color-bg-accent-first": "#10215A",
                 "--color-bg-accent-second": "#FF5391",
                 "--color-border": "#F6FBFF",
             },
         ],
     ],
+    shortcuts: {
+        title: "text-center mb-10",
+    },
     preflights: [
         {
             getCSS: () => `
@@ -110,6 +117,34 @@ export default defineConfig({
             p, a, span{
                 font-size:20px;
                 font-weight: 400;
+            }
+            @media(max-width: 1200px) {
+                h1 {
+                    font-size: 72px;
+                }
+                h2 {
+                    font-size: 40px;
+                }
+                h3{
+                    font-size: 24px;
+                }
+                p, a, span{
+                    font-size:18px;
+                }
+            }
+                @media(max-width: 768px) {
+                h1 {
+                    font-size: 32px;
+                }
+                h2 {
+                    font-size: 28px;
+                }
+                h3{
+                    font-size: 24px;
+                }
+                p, a, span{
+                    font-size:14px;
+                }
             }
             `,
         },

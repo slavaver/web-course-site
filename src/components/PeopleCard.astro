@@ -1,0 +1,33 @@
+---
+const { person } = Astro.props;
+---
+
+<li class="persons-item">
+    {
+        person.imgUrl ? (
+            <div class="bg-bg-tertiary md:h-[380px] rounded-[30px] mb-5 overflow-hidden flex items-end">
+                <img
+                    class="w-full"
+                    src={person.imgUrl}
+                    alt={"фото" + person.name}
+                />
+            </div>
+        ) : (
+            <div class="bg-bg-tertiary md:h-[380px] rounded-[30px] mb-5 overflow-hidden px-6.5 flex items-end">
+                <img class="w-full " src="./src/assets/img/cat-glasses.svg" />
+            </div>
+        )
+    }
+    <h3
+        class="persons-item-name light:text-text-secondary mb-2 line-height-[1]"
+    >
+        {person.name}
+    </h3>
+    {
+        person.role ? (
+            <p class="persons-item-role line-height-[1] text-text-tertiary">
+                {person.role}
+            </p>
+        ) : null
+    }
+</li>
