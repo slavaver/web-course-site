@@ -35,7 +35,7 @@ const teachers = [
 
 <BaseLayoutSnow>
     <section
-        class="section-hero bg-bg-primary rounded-b-[60px] h-3xl relative z-1 mb-30"
+        class="section-hero bg-bg-primary rounded-b-[60px] h-3xl relative mb-30 z-1"
     >
         <div
             class="hero-container flex flex-col justify-end h-full text-center items-center"
@@ -58,7 +58,7 @@ const teachers = [
             <ul class="courses-list flex flex-col gap-5">
                 {
                     courses.map((course) => (
-                        <li class="courses-item rounded-[30px] bg-bg-secondary p-10 z-1">
+                        <li class="courses-item rounded-[30px] bg-bg-secondary p-10">
                             <div class="flex justify-between ">
                                 <h3 class="courses-item-title">
                                     {course.title}
@@ -84,7 +84,7 @@ const teachers = [
             >
                 {
                     teachers.map((teacher) => (
-                        <li class="teachers-item max-w-[380px] z-1">
+                        <li class="teachers-item max-w-[380px] ">
                             {teacher.imgUrl ? (
                                 <div class="bg-bg-accent_first max-h-[380px] rounded-[30px] mb-5 overflow-hidden">
                                     <img
@@ -112,6 +112,7 @@ const teachers = [
             </ul>
         </div>
     </section>
+    <section></section>
 </BaseLayoutSnow>
 
 <style>
