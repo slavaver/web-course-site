@@ -94,7 +94,7 @@ const usefulRender = useful.slice(2);
 
 <BaseLayoutSnow>
     <section
-        class="section-hero bg-bg-primary rounded-b-[60px] h-[600px] sm:h-2xl md:h-3xl relative mb-15 z-1"
+        class="section-hero bg-bg-primary rounded-b-[60px] h-[600px] sm:h-2xl md:h-3xl relative mb-15"
     >
         <div
             class="hero-container flex flex-col justify-end h-full text-center items-center"
@@ -230,12 +230,15 @@ const usefulRender = useful.slice(2);
     </section>
 
     <style>
-        .section-hero {
+        .section-hero,
+        .section-useful {
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
 
-        .section-hero::before {
+        .section-hero::before,
+        .section-useful::before {
             content: "";
             position: absolute;
             z-index: -1;
