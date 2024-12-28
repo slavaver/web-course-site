@@ -18,6 +18,19 @@ const courses = [
         descr: "Изучаем основы работы с типами и язык TypeScript, а также осваиваем применение фреймворка Vue",
     },
 ];
+
+const teachers = [
+    {
+        name: "Верещагин Владислав Юрьевич",
+        imgUrl: "./src/assets/img/photos/slavaver.png",
+        role: "Кандидат технических наук",
+    },
+    {
+        name: "Гнибеда Артем Юрьевич",
+        imgUrl: "./src/assets/img/photos/gnibedaArtem.png",
+        role: "",
+    },
+];
 ---
 
 <BaseLayoutSnow>
@@ -45,7 +58,7 @@ const courses = [
             <ul class="courses-list flex flex-col gap-5">
                 {
                     courses.map((course) => (
-                        <li class="courses-item rounded-[30px] bg-bg-secondary p-10">
+                        <li class="courses-item rounded-[30px] bg-bg-secondary p-10 z-1">
                             <div class="flex justify-between ">
                                 <h3 class="courses-item-title">
                                     {course.title}
@@ -57,6 +70,42 @@ const courses = [
                                     <button class="courses-item-btn" />
                                 </div>
                             </div>
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+    </section>
+    <section class="section-teachers mb-30">
+        <div class="teachers-container max-w-screen-xl mx-auto">
+            <h2 class="teachers-title text-center mb-5">Преподаватели</h2>
+            <ul
+                class="teachers-list grid gap-4 grid-cols-3 grid-justify-items-center"
+            >
+                {
+                    teachers.map((teacher) => (
+                        <li class="teachers-item max-w-[380px] z-1">
+                            {teacher.imgUrl ? (
+                                <div class="bg-bg-accent_first max-h-[380px] rounded-[30px] mb-5 overflow-hidden">
+                                    <img
+                                        src={teacher.imgUrl}
+                                        alt={"фото" + teacher.name}
+                                    />
+                                </div>
+                            ) : (
+                                <div class="bg-bg-accent_first px-13 pt-13 rounded-[30px] mb-5">
+                                    <p class="mb-7.5 font-400 max-w-[269px] uppercase font-titles">
+                                        Мастер знаний, временно в облике кота
+                                    </p>
+                                    <img src="./src/assets/img/cat-glasses.svg" />
+                                </div>
+                            )}
+                            <h3 class="teachers-item-name mb-2 line-height-[1]">
+                                {teacher.name}
+                            </h3>
+                            <p class="teachers-item-role line-height-[1] text-text-tertiary">
+                                {teacher.role}
+                            </p>
                         </li>
                     ))
                 }
