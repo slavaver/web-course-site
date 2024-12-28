@@ -2,40 +2,42 @@
 const { useful } = Astro.props;
 ---
 
-<li
-    class="useful-card card rounded-[30px] min-h-[380px] flex flex-col bg-bg-secondary p-5 md:p-7.5 lg:p-10 justify-between w-full"
->
-    <div class="card__top-content">
-        <ul class="useful-item-chips flex gap-1.5 mb-5">
-            {
-                useful.chips.map((chip) => (
-                    <li class="useful-item-chip px-2 py-0.5 border-border border rounded-[10px] text-sm lg:text-base">
-                        {chip}
-                    </li>
-                ))
-            }
-        </ul>
-        <h3 class="useful-item-title">
-            {useful.title}
-        </h3>
-        <p class="useful-item-descr">
-            {useful.description}
-        </p>
-    </div>
-    <div class="card__bottom-content flex justify-end">
-        <button
-            onclick={`window.location.href='${useful.href}'`}
-            class="useful-item-btn"></button>
-    </div>
-</li>
+<a href={useful.href}>
+    <li
+        class="useful-card card rounded-[30px] min-h-[380px] flex flex-col bg-bg-secondary p-5 md:p-7.5 lg:p-10 justify-between w-full userActions"
+    >
+        <div class="card__top-content">
+            <ul class="useful-item-chips flex gap-1.5 mb-5">
+                {
+                    useful.chips.map((chip) => (
+                        <li class="useful-item-chip px-2 py-0.5 border-border border rounded-[10px] text-sm lg:text-base">
+                            {chip}
+                        </li>
+                    ))
+                }
+            </ul>
+            <h3 class="useful-item-title">
+                {useful.title}
+            </h3>
+            <p class="useful-item-descr">
+                {useful.description}
+            </p>
+        </div>
+        <div class="card__bottom-content flex justify-end">
+            <button
+                onclick={`window.location.href='${useful.href}'`}
+                class="useful-item-btn"></button>
+        </div>
+    </li>
 
-<style>
-    .useful-item-btn {
-        background: url("./src/assets/img/goto.svg") no-repeat center;
-        width: 50px;
-        height: 50px;
-        border: 1.5px solid var(--color-border);
-        border-radius: 100%;
-        color: var(--color-border);
-    }
-</style>
+    <style>
+        .useful-item-btn {
+            background: url("./src/assets/img/goto.svg") no-repeat center;
+            width: 50px;
+            height: 50px;
+            border: 1.5px solid var(--color-border);
+            border-radius: 100%;
+            color: var(--color-border);
+        }
+    </style>
+</a>

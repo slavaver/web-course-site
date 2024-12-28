@@ -19,6 +19,8 @@ export default defineConfig({
                 tertiary: "var(--color-bg-tertiary)",
                 accent_first: "var(--color-bg-accent-first)",
                 accent_second: "var(--color-bg-accent-second)",
+                hover: "#F71365",
+                active: "#B70E4B",
             },
             border: "var(--color-border)",
         },
@@ -64,6 +66,11 @@ export default defineConfig({
     ],
     shortcuts: {
         title: "text-center mb-10",
+        userActionsLink:
+            "transition p-5 rounded-[10px] hover:bg-bg-accent_second active:bg-bg-primary",
+        userActions:
+            "transition hover:bg-bg-accent_second active:bg-bg-primary",
+        userActionsLinkAlt: "transition hover:bg-bg-hover active:bg-bg-active",
     },
     preflights: [
         {
@@ -115,6 +122,7 @@ export default defineConfig({
             }
 
             p, a, span{
+                transition: all 0.2s ease-in-out;
                 font-size:20px;
                 font-weight: 400;
             }

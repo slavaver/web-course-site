@@ -71,15 +71,20 @@ let isDropdownOpen = false;
         <div
             class="drawer-content-vertical w-full justify-between items-center mx-auto max-w-screen-xl flex"
         >
-            <img
-                class="w-10 h-10 hidden sm:block"
-                src="./src/assets/img/logo.svg"
-                alt="logo"
-            />
+            <a class="userActionsLink" href="web-course-site/">
+                <img
+                    class="w-10 h-10 hidden sm:block"
+                    src="/src/assets/img/logo.svg"
+                    alt="logo"
+                />
+            </a>
             <nav class="drawer-nav gap-10 hidden sm:flex">
                 {
                     links.map((link) => (
-                        <a class="text-sm" href={link.href}>
+                        <a
+                            class="header__link userActionsLink"
+                            href={link.href}
+                        >
                             {link.title}
                         </a>
                     ))
