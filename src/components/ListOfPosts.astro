@@ -1,38 +1,141 @@
 ---
-const { allusefull } = Astro.props
+import { custom } from "astro:schema";
+import CustomSelect from "./CustomSelect.astro";
+import SearchInput from "./SearchInput.astro";
+import UsefulCard from "./UsefulCard.astro";
+
+const { allusefull } = Astro.props;
 const baseUrl = import.meta.env.BASE_URL;
+
+const chips = [
+    "Инфо",
+    "1 сем",
+    "2 сем",
+    "3 сем",
+    "CSS",
+    "HTML",
+    "Git",
+    "Утилиты",
+    "Debug",
+    "Flex",
+    "Grid",
+    "Псевдо",
+    "Адаптив",
+    "Изображения",
+    "Селекторы",
+];
+const options = [
+    {
+        label: "Все",
+        value: `all`,
+    },
+    {
+        label: chips[0],
+        value: `info`,
+    },
+    {
+        label: chips[1],
+        value: `first-sem`,
+    },
+    {
+        label: chips[2],
+        value: `second-sem`,
+    },
+    {
+        label: chips[3],
+        value: `third-sem`,
+    },
+    {
+        label: chips[4],
+        value: `css`,
+    },
+    {
+        label: chips[5],
+        value: `html`,
+    },
+    {
+        label: chips[6],
+        value: `git`,
+    },
+    {
+        label: chips[7],
+        value: `utils`,
+    },
+    {
+        label: chips[8],
+        value: `debug`,
+    },
+    {
+        label: chips[9],
+        value: `flex`,
+    },
+    {
+        label: chips[10],
+        value: `grid`,
+    },
+    {
+        label: chips[11],
+        value: `pseudo`,
+    },
+    {
+        label: chips[12],
+        value: `adaptive`,
+    },
+    {
+        label: chips[13],
+        value: `images`,
+    },
+    {
+        label: chips[14],
+        value: `selectors`,
+    },
+];
+
+// const filteredUseful =
+//     selectedValue === "all"
+//         ? allusefull
+//         : allusefull.filter((post) => post.data.chips.includes(selectedValue));
 ---
 
-<h2>Полезное</h2>
-<div class="grid sm:grid-cols-2 gap-3 text-sm">
-  {
-    allusefull.map((post) => (
-      <div class="card w-auto bg-base-100 shadow-xl">
-        <div class="card-body">
-          <h3 class="card-title">{post.data.title}</h3>
-          <p>{post.data.description}</p>
-          <div class="card-actions justify-end">
-            <a class="btn btn-primary" href={baseUrl+'/useful/'+post.slug}>
-              <span class="sr-only">Материал о {post.data.title}</span>
-              <svg
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-5 h-5"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"
-                />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    ))
-  }
-</div>
+<script>
+    let selectedValue = "all";
+    // const select = document.getElementById("select-test");
+    // select?.addEventListener("change", (event) => {
+    //     selectedValue = event.target.value;
+    //     console.log(selectedValue);
+    // });
+
+    const getValue = document.getElementById("getValue");
+    getValue?.addEventListener("click", () => {
+        console.log(selectedValue);
+    });
+
+    const handleCustomEvent = (event) => {
+        console.log("Получено сообщение:", event.detail.message);
+    };
+
+    const handleSelectChange = (value) => {
+        selectedValue = value;
+        console.log(selectedValue);
+    };
+</script>
+
+<h2 class="title">Полезное</h2>
+
+<ul
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5"
+>
+    <div class="grid-col-span-1 mb-5">
+        <CustomSelect options={options} />
+    </div>
+    <div class="grid-col-span-2 mt-auto mb-5">
+        <SearchInput placeholder="Введите название статьи" />
+    </div>
+    <select name="" id="select-test">
+        <option value="all">Все</option>
+        <option value="info">Инфо</option>
+    </select>
+    <button id="getValue">getValue</button>
+    <button onclick="handleSelectChange()">render</button>
+    {allusefull.map((post) => <UsefulCard useful={post} />)}
+</ul>

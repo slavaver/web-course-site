@@ -1,6 +1,7 @@
 ---
 title: "Отладка блоков"
 description: "Эти примеры кода помогут вам с отладкой блочной модели и проверки на переполнение."
+chips: ["1 сем", "2 сем", "CSS", "Debug"]
 ---
 
 # "Console.log" для верстки
@@ -11,7 +12,7 @@ _Автор: Верещагин Владислав_
 
 ```css
 * {
-  outline: 1px solid red;
+    outline: 1px solid red;
 }
 ```
 
@@ -19,8 +20,8 @@ _Автор: Верещагин Владислав_
 
 ```css
 * {
-  outline: 1px solid red;
-  background-color: rgba(255, 0, 0, 0.1);
+    outline: 1px solid red;
+    background-color: rgba(255, 0, 0, 0.1);
 }
 ```
 
@@ -28,8 +29,8 @@ _Автор: Верещагин Владислав_
 
 ```css
 * {
-  outline: 1px solid red !important;
-  background-color: rgba(255, 0, 0, 0.1) !important;
+    outline: 1px solid red !important;
+    background-color: rgba(255, 0, 0, 0.1) !important;
 }
 ```
 
@@ -37,33 +38,33 @@ _Автор: Верещагин Владислав_
 
 ```css
 * {
-  color: #0f0 !important;
-  outline: solid #f00 1px !important;
-  background-color: rgba(255, 0, 0, 0.2) !important;
+    color: #0f0 !important;
+    outline: solid #f00 1px !important;
+    background-color: rgba(255, 0, 0, 0.2) !important;
 }
 * * {
-  background-color: rgba(0, 255, 0, 0.2) !important;
+    background-color: rgba(0, 255, 0, 0.2) !important;
 }
 * * * {
-  background-color: rgba(0, 0, 255, 0.2) !important;
+    background-color: rgba(0, 0, 255, 0.2) !important;
 }
 * * * * {
-  background-color: rgba(255, 0, 255, 0.2) !important;
+    background-color: rgba(255, 0, 255, 0.2) !important;
 }
 * * * * * {
-  background-color: rgba(0, 255, 255, 0.2) !important;
+    background-color: rgba(0, 255, 255, 0.2) !important;
 }
 * * * * * * {
-  background-color: rgba(255, 255, 0, 0.2) !important;
+    background-color: rgba(255, 255, 0, 0.2) !important;
 }
 * * * * * * * {
-  background-color: rgba(255, 0, 0, 0.2) !important;
+    background-color: rgba(255, 0, 0, 0.2) !important;
 }
 * * * * * * * * {
-  background-color: rgba(0, 255, 0, 0.2) !important;
+    background-color: rgba(0, 255, 0, 0.2) !important;
 }
 * * * * * * * * * {
-  background-color: rgba(0, 0, 255, 0.2) !important;
+    background-color: rgba(0, 0, 255, 0.2) !important;
 }
 ```
 

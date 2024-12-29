@@ -1,0 +1,45 @@
+---
+const { options, onChange } = Astro.props as CustomSelectProps;
+interface CustomSelectProps {
+    options: { label: string; value: string }[];
+    onChange?: (value: string) => void;
+}
+---
+
+<script>
+    const select = document.getElementById("custom-select");
+
+    select?.addEventListener("change", (event) => {
+        select.blur();
+        onChange?.(event.target.value);
+    });
+
+    const handleClick = () => {
+        // Создаем пользовательское событие
+        dispatchEvent(
+            new CustomEvent("custom-event", {
+                detail: { message: "Привет из дочернего компонента!" },
+            })
+        );
+    };
+
+    const btn = document.getElementById("test");
+    btn?.addEventListener("click", handleClick);
+</script>
+<button id="test">Отправить данные</button>
+<label for="custom-select">Отсортировать по</label>
+<div class="custom-select-box">
+    <select class="custom-select" id="custom-select">
+        {
+            options ? (
+                options.map((option) => (
+                    <option value={option.value}>{option.label}</option>
+                ))
+            ) : (
+                <option selected disabled hidden value="null">
+                    Нет доступных вариантов
+                </option>
+            )
+        }
+    </select>
+</div>

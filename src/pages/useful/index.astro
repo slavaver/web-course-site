@@ -7,7 +7,9 @@ const allUsefull = await getCollection("useful");
 ---
 
 <BaseLayoutSnow title="Полезное">
-  <div class="prose lg:prose-lg mx-auto">
-    <ListOfPosts allusefull={allUsefull} />
-  </div>
+    <div
+        class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-lg 2xl:max-w-screen-xl mx-auto pb-30 pt-45"
+    >
+        <ListOfPosts allusefull={allUsefull} />
+    </div>
 </BaseLayoutSnow>

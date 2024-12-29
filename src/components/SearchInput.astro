@@ -1,0 +1,11 @@
+---
+const { placeholder } = Astro.props;
+---
+
+<div class="search-box">
+    <input
+        placeholder={placeholder ? placeholder : "Поиск..."}
+        type="text"
+        class="search"
+    />
+</div>
