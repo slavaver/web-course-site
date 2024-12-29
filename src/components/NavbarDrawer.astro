@@ -45,7 +45,7 @@ const courses = [
 const links = [
     {
         title: "Главная",
-        href: `/web-course-site/`,
+        href: `/web-course-site`,
         icon: "./src/assets/img/house.svg",
     },
     {
@@ -59,7 +59,6 @@ const links = [
         icon: "./src/assets/img/database.svg",
     },
 ];
-let isDropdownOpen = false;
 
 // isDropdownOpen.onToggled(() => {});
 ---
@@ -71,19 +70,19 @@ let isDropdownOpen = false;
         <div
             class="drawer-content-vertical w-full justify-between items-center mx-auto max-w-screen-xl flex"
         >
-            <a class="userActionsLink hidden sm:block" href="/web-course-site/">
+            <a class="userActionsLink hidden md:block" href="/web-course-site/">
                 <img
                     class="w-10 h-10"
                     src="/src/assets/img/logo.svg"
                     alt="logo"
                 />
             </a>
-            <nav class="drawer-nav gap-10 hidden sm:flex">
+            <nav class="drawer-nav gap-10 hidden md:flex">
                 {
                     links.map((link) => (
                         <a
-                            class="header__link userActionsLink"
-                            href={link.href}
+                            class="header__link cursor-pointer userActionsLink"
+                            id={link.href.slice(1) + "-link"}
                         >
                             {link.title}
                         </a>
@@ -94,12 +93,12 @@ let isDropdownOpen = false;
             <ThemeToggler />
         </div>
         {
-            isDropdownOpen ? (
-                <ul class="dropdown__list flex justify-center gap-3">
+            (
+                <ul class="dropdown__list hidden md:flex justify-center gap-0 lg:gap-3">
                     {courses.map((course) => (
                         <li class="dropdown__item">
                             <a
-                                class="dropdown__link text-sm"
+                                class="dropdown__link text-sm md:text-base lg:text-xl p-3 lg:p-5 userActionsLink"
                                 href={course.href}
                             >
                                 {course.title}
@@ -107,8 +106,74 @@ let isDropdownOpen = false;
                         </li>
                     ))}
                 </ul>
-            ) : null
+            )
         }
         <!-- <div class="drawer-side flex-none"></div> -->
     </div>
 </header>
+
+<script>
+    let isDropdownOpen = false;
+
+    const dropdown = document.querySelector(".dropdown__list");
+    const coursesLink = document.querySelector("#courses-link");
+    const mainLink = document.querySelector("#web-course-site-link");
+    const usefulLink = document.querySelector("#useful-link");
+
+    const toggleDropdown = () => {
+        isDropdownOpen = !isDropdownOpen;
+        dropdown?.classList.toggle("open", isDropdownOpen);
+        coursesLink?.classList.toggle("open", isDropdownOpen);
+    };
+
+    const goToLink = (link) => {
+        const slicedLink =
+            link.id === "web-course-site-link"
+                ? link.id.slice(0, -5)
+                : "web-course-site/" + link.id.slice(0, -5);
+        window.location.href = `/${slicedLink}/`;
+    };
+
+    mainLink?.addEventListener("click", () => goToLink(mainLink));
+    coursesLink?.addEventListener("click", toggleDropdown);
+    usefulLink?.addEventListener("click", () => goToLink(usefulLink));
+</script>
+
+<style>
+    #courses-link {
+        position: relative;
+        padding-right: 40px;
+    }
+
+    #courses-link::after {
+        transition: all 0.3s ease-in-out;
+        content: "";
+        position: absolute;
+        top: 25px;
+        right: 15px;
+        width: 21px;
+        height: 20px;
+        background: url("/src/assets/img/cheveron-down.svg") center no-repeat;
+    }
+
+    .dropdown__list {
+        transition: all 0.3s ease-in-out;
+        max-height: 0px;
+        width: 100%;
+        padding: 0;
+        pointer-events: none;
+        opacity: 0;
+    }
+
+    .dropdown__list.open {
+        pointer-events: all;
+        max-height: 100px;
+        width: 100%;
+        opacity: 1;
+        padding: 15px 0;
+    }
+
+    #courses-link.open::after {
+        transform: rotate(180deg);
+    }
+</style>
