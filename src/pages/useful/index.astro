@@ -3,13 +3,33 @@ import BaseLayoutSnow from "../../layouts/BaseLayoutSnow.astro";
 
 import { getCollection } from "astro:content";
 import ListOfPosts from "../../components/ListOfPosts.astro";
-const allUsefull = await getCollection("useful");
+const allUseful = await getCollection("useful");
+const lengths = allUseful.map((post) => post.body.length);
 ---
 
 <BaseLayoutSnow title="Полезное">
     <div
         class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-lg 2xl:max-w-screen-xl mx-auto pb-30 pt-45"
     >
-        <ListOfPosts allusefull={allUsefull} />
+        <h2 class="title">Полезное</h2>
+
+        <ul
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5"
+        >
+            <!-- <div class="grid-col-span-1 mb-5">
+                <CustomSelect options={options} />
+            </div> -->
+            <!-- <div class="grid-col-span-2 mt-auto mb-5">
+                <SearchInput placeholder="Введите название статьи" />
+            </div>
+            <select name="" id="select-test">
+                <option value="all">Все</option>
+                <option value="info">Инфо</option>
+            </select>
+            <button id="getValue">getValue</button>
+            <button onclick="handleSelectChange()">render</button> -->
+
+            <ListOfPosts allUseful={allUseful} , lengths={lengths} />
+        </ul>
     </div>
 </BaseLayoutSnow>

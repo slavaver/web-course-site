@@ -2,6 +2,20 @@
 const { useful } = Astro.props;
 const baseUrl = import.meta.env.BASE_URL;
 const href = `${baseUrl}/useful/${useful.slug}`;
+
+const date = new Date(useful.data.date);
+const formattedDate = date.toLocaleDateString("ru-RU", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+});
+
+const length = useful.length;
+const avgReadingSpeed = 160;
+const avgWordLength = 5;
+const getTimeToRead = (length) => {
+    return Math.ceil(length / (avgWordLength * avgReadingSpeed));
+};
 ---
 
 <a href={href}>
@@ -9,17 +23,6 @@ const href = `${baseUrl}/useful/${useful.slug}`;
         class="useful-card card rounded-[30px] min-h-[380px] flex flex-col bg-bg-secondary p-5 md:p-7.5 lg:p-10 justify-between w-full userActions"
     >
         <div class="card__top-content">
-            <ul class="useful-item-chips flex gap-1.5 mb-5">
-                {
-                    useful.data.chips
-                        ? useful.data.chips.map((chip) => (
-                              <li class="useful-item-chip px-2 py-0.5 border-border border rounded-[10px] text-sm lg:text-base">
-                                  {chip}
-                              </li>
-                          ))
-                        : null
-                }
-            </ul>
             <h3 class="useful-item-title">
                 {useful.data.title}
             </h3>
@@ -27,7 +30,24 @@ const href = `${baseUrl}/useful/${useful.slug}`;
                 {useful.data.description}
             </p>
         </div>
-        <div class="card__bottom-content flex justify-end">
+        <div class="card__bottom-content flex justify-between">
+            <div class="flex items-end gap-4">
+                <div class="flex items-center gap-2">
+                    <img
+                        class="mb-1"
+                        src="/src/assets/img/time-icon.svg"
+                        alt="time-icon"
+                    />
+
+                    <span class="text-[16px]">~{getTimeToRead(length)} мин</span
+                    >
+                </div>
+                {
+                    useful.data.date && (
+                        <span class="text-[16px]">{formattedDate}</span>
+                    )
+                }
+            </div>
             <button
                 onclick={`window.location.href=${href}`}
                 class="useful-item-btn"></button>

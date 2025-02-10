@@ -1,11 +1,15 @@
 ---
-import { custom } from "astro:schema";
+// import { custom } from "astro:schema";
+import Index from "../pages/index.astro";
 import CustomSelect from "./CustomSelect.astro";
 import SearchInput from "./SearchInput.astro";
 import UsefulCard from "./UsefulCard.astro";
 
-const { allusefull } = Astro.props;
-const baseUrl = import.meta.env.BASE_URL;
+const { allUseful, lengths } = Astro.props;
+const items = allUseful.map((item, index) => ({
+    ...item,
+    length: lengths[index],
+}));
 
 const chips = [
     "Инфо",
@@ -120,22 +124,4 @@ const options = [
     };
 </script>
 
-<h2 class="title">Полезное</h2>
-
-<ul
-    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5"
->
-    <div class="grid-col-span-1 mb-5">
-        <CustomSelect options={options} />
-    </div>
-    <div class="grid-col-span-2 mt-auto mb-5">
-        <SearchInput placeholder="Введите название статьи" />
-    </div>
-    <select name="" id="select-test">
-        <option value="all">Все</option>
-        <option value="info">Инфо</option>
-    </select>
-    <button id="getValue">getValue</button>
-    <button onclick="handleSelectChange()">render</button>
-    {allusefull.map((post) => <UsefulCard useful={post} />)}
-</ul>
+{items.map((post) => <UsefulCard useful={post} />)}

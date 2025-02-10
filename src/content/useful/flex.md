@@ -2,6 +2,7 @@
 title: "Flexbox"
 description: "Как начать использовать flexbox и примеры работы основных свойств."
 chips: ["1 сем", "CSS", "Flex"]
+date: ["2025-09-01"]
 ---
 
 # Flexbox. Знакомство

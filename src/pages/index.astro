@@ -57,48 +57,26 @@ const mentors = [
     },
 ];
 
-const useful = [
-    {
-        data: {
-            title: "Правила курса",
-            description:
-                "Небольшой свод правил, который поможет успешно пройти курс",
-            chips: ["1 cем"],
-        },
-        slug: "rules",
-    },
-    {
-        data: {
-            title: "Полезные ссылки",
-            description:
-                "Подборки ссылок на полезные материалы, ресурсы, людей, опросы",
-            chips: ["1 cем", "2 сем", "HTML", "CSS", "JS"],
-        },
-        slug: "useful-links",
-    },
-    //TODO: Переделать статику на полустатику, чтобы подтягивало все из одного места и чтобы было типизоровано по одному интерфейсу на тип данных
-    {
-        data: {
-            title: "Отладка блоков",
-            description:
-                "Эти примеры кода помогут вам с отладкой блочной модели и проверки на переполнение",
-            chips: ["1 сем", "CSS"],
-        },
-        slug: "debug-blocks",
-    },
-    {
-        data: {
-            title: "Сверка верстки",
-            description:
-                "Рецепт, который упростит вам процесс верстки по макету",
-            chips: ["1 сем", "CSS"],
-        },
-        slug: "comparison",
-    },
+import { getCollection } from "astro:content";
+const allUseful = await getCollection("useful");
+const lengths = allUseful.map((post) => post.body.length);
+
+const usefulItems = allUseful.map((item, index) => ({
+    ...item,
+    length: lengths[index],
+}));
+
+const usefulStatic = [
+    usefulItems.find((post) => post.slug === "rules")!,
+    usefulItems.find((post) => post.slug === "links")!,
 ];
 
-const usefulStatic = useful.slice(0, 2);
-const usefulRender = useful.slice(2);
+const usefulDynamic = usefulItems
+    .filter((post) => post.slug !== "rules" && post.slug !== "links")
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 2);
+
+const useful = [...usefulStatic, ...usefulDynamic];
 ---
 
 <BaseLayoutSnow>
@@ -173,13 +151,17 @@ const usefulRender = useful.slice(2);
             <ul
                 class="useful-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5"
             >
-                {usefulStatic.map((useful) => <UsefulCard useful={useful} />)}
+                {
+                    useful
+                        .slice(0, 2)
+                        .map((useful) => <UsefulCard useful={useful} />)
+                }
                 <p class="order--1 md:order-0">
                     Здесь вы найдете подборки полезных ресурсов, конспекты, а
                     также статьи с теорией, раскрывающие ключевые темы курсов
                 </p>
                 <div class="hidden md:block">
-                    <UsefulCard useful={usefulRender[0]} />
+                    <UsefulCard useful={useful[2]} />
                 </div>
                 <div
                     class="other-useful flex flex-col gap-5 order-1 2xl:order-0"
@@ -195,7 +177,7 @@ const usefulRender = useful.slice(2);
                     >
                 </div>
                 <div class="hidden md:block">
-                    <UsefulCard useful={usefulRender[1]} />
+                    <UsefulCard useful={useful[3]} />
                 </div>
             </ul>
         </div>
