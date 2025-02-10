@@ -30,6 +30,12 @@ export default defineConfig({
                 primary: "var(--color-bg-primary)",
                 secondary: "#B70E4B",
             },
+            input: {
+                text: "var(--color-text-input)",
+                placeholder: "var(--color-placeholder-input)",
+                border: "var(--color-border-input)",
+                hover: "var(--color-bg-hover-input)",
+            },
             border: "var(--color-border)",
         },
         fontFamily: {
@@ -53,6 +59,10 @@ export default defineConfig({
                 "--color-bg-accent-first": "#2653BA",
                 "--color-bg-accent-second": "#FF5391",
                 "--color-border": "#F6FBFF",
+                "--color-placeholder-input": "#4969DC",
+                "--color-text-input": "#0B163B",
+                "--color-border-input": "#4969DC",
+                "--color-bg-hover-input": "#D4DDFF",
             },
         ],
         [
@@ -69,6 +79,10 @@ export default defineConfig({
                 "--color-bg-accent-first": "#10215A",
                 "--color-bg-accent-second": "#FF5391",
                 "--color-border": "#F6FBFF",
+                "--color-placeholder-input": "#C5D6FF",
+                "--color-text-input": "#FFFFFF",
+                "--color-border-input": "#3A4F96",
+                "--color-bg-hover-input": "#3A4F96",
             },
         ],
     ],
@@ -139,53 +153,10 @@ export default defineConfig({
             select, input{
                 transition: all 0.2s ease-in-out;
                 appearance: none;
-                background: var(--color-bg-screen);
-                border: 1px solid var(--color-border);
-                color: var(--color-text-primary);
                 font-size:20px;
                 padding: 20px;
                 border-radius: 20px;
                 width: 100%;
-            }
-
-            div.search-box:has(input.search){
-                position: relative;
-            }
-
-            div.search-box:has(input.search):after{
-                content: "";
-                position: absolute;
-                top: 25px;
-                right: 15px;
-                width: 21px;
-                height: 20px;
-                background: url("/src/assets/img/search.svg") center no-repeat;
-            }
-
-            div.custom-select-box:has(select.custom-select){
-                display: flex;
-                flex-direction: column;
-                position: relative;
-            }
-
-            div.custom-select-box:has(select.custom-select)::after{
-                transition: all 0.2s ease-in-out;
-                content: "";
-                position: absolute;
-                top: 25px;
-                right: 15px;
-                width: 21px;
-                height: 20px;
-                background: url("/src/assets/img/cheveron-down.svg") center no-repeat;
-            }
-
-            select:hover, input:hover{
-                background: var(--color-bg-accent-second);
-            }
-
-            select:focus, input:focus{
-                outline:none;
-                background: var(--color-bg-primary);
             }
 
             @media(max-width: 1200px) {

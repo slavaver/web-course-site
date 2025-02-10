@@ -6,6 +6,28 @@ const { placeholder } = Astro.props;
     <input
         placeholder={placeholder ? placeholder : "Поиск..."}
         type="text"
-        class="search"
+        class="search placeholder:text-input-placeholder border-1 bg-bg-screen border-input-border focus:bg-input-hover focus:border-transparent outline-none text-input-text"
     />
 </div>
+
+<style>
+    div.search-box:has(input.search) {
+        position: relative;
+    }
+
+    div.search-box:has(input.search):after {
+        content: "";
+        position: absolute;
+        top: 25px;
+        right: 15px;
+        width: 21px;
+        height: 20px;
+        background-color: var(--color-placeholder-input);
+        -webkit-mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 16 16"%3E%3Cpath d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/%3E%3C/svg%3E');
+        mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 16 16"%3E%3Cpath d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/%3E%3C/svg%3E');
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-size: cover;
+        mask-size: cover;
+    }
+</style>

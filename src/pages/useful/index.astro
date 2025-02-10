@@ -2,27 +2,52 @@
 import BaseLayoutSnow from "../../layouts/BaseLayoutSnow.astro";
 
 import { getCollection } from "astro:content";
+import CustomSelect from "../../components/CustomSelect.astro";
+import Heading from "../../components/Heading.astro";
 import ListOfPosts from "../../components/ListOfPosts.astro";
+import SearchInput from "../../components/SearchInput.astro";
 const allUseful = await getCollection("useful");
 const lengths = allUseful.map((post) => post.body.length);
+
+const chips = ["1 семестр", "2 семестр", "3 семестр"];
+const options = [
+    {
+        label: chips[0],
+        value: `first-sem`,
+    },
+    {
+        label: chips[1],
+        value: `second-sem`,
+    },
+    {
+        label: chips[2],
+        value: `third-sem`,
+    },
+];
 ---
 
-<BaseLayoutSnow title="Полезное">
-    <div
-        class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-lg 2xl:max-w-screen-xl mx-auto pb-30 pt-45"
-    >
-        <h2 class="title">Полезное</h2>
+<script>
+    console.log(dispatchEvent);
+</script>
 
+<BaseLayoutSnow title="Полезное">
+    <Heading
+        title="База знаний"
+        description="Здесь вы найдете подборки полезных ресурсов, статьи с теорией, раскрывающие темы курсов"
+    />
+    <div
+        class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-lg 2xl:max-w-screen-xl mx-auto pb-30"
+    >
         <ul
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5"
         >
-            <!-- <div class="grid-col-span-1 mb-5">
+            <div class="grid-col-span-1 mb-5">
                 <CustomSelect options={options} />
-            </div> -->
-            <!-- <div class="grid-col-span-2 mt-auto mb-5">
+            </div>
+            <div class="grid-col-span-2 mt-auto mb-5">
                 <SearchInput placeholder="Введите название статьи" />
             </div>
-            <select name="" id="select-test">
+            <!-- <select name="" id="select-test">
                 <option value="all">Все</option>
                 <option value="info">Инфо</option>
             </select>

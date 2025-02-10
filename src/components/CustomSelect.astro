@@ -11,30 +11,28 @@ interface CustomSelectProps {
 
     select?.addEventListener("change", (event) => {
         select.blur();
-        onChange?.(event.target.value);
+        console.log("123");
     });
-
-    const handleClick = () => {
-        // Создаем пользовательское событие
-        dispatchEvent(
-            new CustomEvent("custom-event", {
-                detail: { message: "Привет из дочернего компонента!" },
-            })
-        );
-    };
-
-    const btn = document.getElementById("test");
-    btn?.addEventListener("click", handleClick);
 </script>
-<button id="test">Отправить данные</button>
-<label for="custom-select">Отсортировать по</label>
+
+<!-- <label for="custom-select">Отсортировать по</label> -->
 <div class="custom-select-box">
-    <select class="custom-select" id="custom-select">
+    <select
+        class="custom-select bg-bg-screen text-input-placeholder border-1 border-input-border focus:border-transparent focus:bg-input-hover outline-none"
+        id="custom-select"
+    >
         {
             options ? (
-                options.map((option) => (
-                    <option value={option.value}>{option.label}</option>
-                ))
+                <>
+                    {
+                        <option disabled selected hidden>
+                            Выберите курс
+                        </option>
+                    }
+                    {options.map((option) => (
+                        <option value={option.value}>{option.label}</option>
+                    ))}
+                </>
             ) : (
                 <option selected disabled hidden value="null">
                     Нет доступных вариантов
@@ -43,3 +41,28 @@ interface CustomSelectProps {
         }
     </select>
 </div>
+
+<style>
+    div.custom-select-box:has(select.custom-select) {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+
+    div.custom-select-box:has(select.custom-select)::after {
+        transition: all 0.2s ease-in-out;
+        content: "";
+        position: absolute;
+        top: 25px;
+        right: 15px;
+        width: 21px;
+        height: 20px;
+        background-color: var(--color-placeholder-input);
+        -webkit-mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none"%3E%3Cpath d="M16.3337 7.5L10.5003 13.3333L4.66699 7.5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/%3E%3C/svg%3E');
+        mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none"%3E%3Cpath d="M16.3337 7.5L10.5003 13.3333L4.66699 7.5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/%3E%3C/svg%3E');
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-size: cover;
+        mask-size: cover;
+    }
+</style>

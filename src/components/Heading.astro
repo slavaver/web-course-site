@@ -1,0 +1,60 @@
+---
+const { title, description } = Astro.props;
+---
+
+<section
+    class="section-hero bg-bg-primary rounded-b-[60px] h-[440px] pb-20 mb-20 relative"
+>
+    <div
+        class="hero-container flex flex-col justify-end h-full text-center items-center"
+    >
+        <button
+            onclick="history.back()"
+            class="flex gap-2 font-bold font-titles text-[20px] items-center"
+            ><img
+                src="/src/assets/img/chevron-right.svg"
+                alt=""
+                class="mb-1"
+            /><span>Назад</span></button
+        >
+        <h1 class="line-height-[1]">{title}</h1>
+        <p class="mb-7.5 sm:max-w-1/3">
+            {description}
+        </p>
+    </div>
+</section>
+<style>
+    .section-hero,
+    .section-useful {
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    .section-hero::before,
+    .section-useful::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--color-bg-accent-first);
+        -webkit-mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 728" fill="none"%3E%3Cpath d="M-384.828 550.33C-279.518 431.882 -29.173 211.72 129.724 278.664C328.344 362.345 -156.414 623.403 -2.48331 780.746C176.815 964.017 967.034 -77.2714 1180.55 48.249C1394.07 173.769 1062.62 452.507 1180.55 550.33C1274.9 628.589 1460.28 401.827 1541.17 278.664" stroke="black" stroke-width="150"/%3E%3C/svg%3E');
+        mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 728" fill="none"%3E%3Cpath d="M-384.828 550.33C-279.518 431.882 -29.173 211.72 129.724 278.664C328.344 362.345 -156.414 623.403 -2.48331 780.746C176.815 964.017 967.034 -77.2714 1180.55 48.249C1394.07 173.769 1062.62 452.507 1180.55 550.33C1274.9 628.589 1460.28 401.827 1541.17 278.664" stroke="black" stroke-width="150"/%3E%3C/svg%3E');
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-size: cover;
+        mask-size: cover;
+    }
+
+    .courses-item-btn {
+        background: url("./src/assets/img/goto.svg") no-repeat center;
+        width: 50px;
+        height: 50px;
+        border: 1.5px solid var(--color-border);
+        border-radius: 100%;
+        color: var(--color-border);
+    }
+</style>
