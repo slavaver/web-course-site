@@ -1,4 +1,5 @@
 ---
+import YandexSchedule from "../components/YandexSchedule.astro";
 import BaseLayout from "/src/layouts/BaseLayout.astro";
 ---
 
@@ -6,33 +7,35 @@ import BaseLayout from "/src/layouts/BaseLayout.astro";
   <div class="prose lg:prose-lg mx-auto">
     <h1>Пересдачи</h1>
     <section>
-      <h2>График консультаций</h2>
-      <p>
-        Возможны изменения в графике консультаций, поэтому регулярно проверяйте
-        его.
-      </p>
-      <h3>Верещагин Владислав Юрьевич</h3>
-      <p>На консультациях принимаю задолженности по:</p>
+      <h2>Верещагин Владислав Юрьевич</h2>
+      <p>Можно сдать задолженности по:</p>
       <ul>
         <li>Веб-разработка на стороне клиента</li>
         <li>Веб-технологии (САПР)</li>
       </ul>
 
-      <h4>Ближайшие консультации</h4>
+      <h3>Ближайшие консультации</h3>
 
-      <div id="consultations"></div>
+      <p>
+        Возможны изменения в графиках консультаций, поэтому проверяйте их перед
+        посещением консультации.
+      </p>
+      <YandexSchedule token="55ac0157c84d9d0a2e56435599669603b1aefe18" />
 
-      <h3>Гнибеда Артем Юрьевич</h3>
-      <p>На консультациях принимаю задолженности по:</p>
+      <h2>Гнибеда Артем Юрьевич</h2>
+      <p>Можно сдать задолженности по:</p>
       <ul>
         <li>Основы веб-технологий</li>
         <li>Веб-технологии (САПР)</li>
       </ul>
-      <iframe
-        class="w-full"
-        title="График консультаций"
-        src="https://calendar.yandex.ru/export/html.xml?private_token=f29a08d044cd1f95949548408ba99da9a9d7daae&tz_id=Europe/Moscow&limit=90"
-      ></iframe>
+
+      <h3>Ближайшие консультации</h3>
+
+      <p>
+        Возможны изменения в графиках консультаций, поэтому проверяйте их перед
+        посещением консультации.
+      </p>
+      <YandexSchedule token="f29a08d044cd1f95949548408ba99da9a9d7daae" />
     </section>
     <h2>Информация по дисциплинам</h2>
     <h3>Бакалавриат</h3>
@@ -146,97 +149,4 @@ import BaseLayout from "/src/layouts/BaseLayout.astro";
       </p>
     </details>
   </div>
-
-  <template id="event-template">
-    <li>
-      <span class="font-semibold title"></span>:
-      <span class="date"></span>
-      <span class="start-time"></span> -
-      <span class="end-time"></span>
-    </li>
-  </template>
 </BaseLayout>
-
-<script>
-  const URL =
-    "https://slavaver.space/api/consultation?private_token=55ac0157c84d9d0a2e56435599669603b1aefe18";
-
-  function getDateAndTimeYaCalendar(text) {
-    const arr = text.split(" ");
-    const time = arr.pop();
-    const date = arr.join(" ");
-    return {
-      date,
-      time,
-    };
-  }
-
-  async function getData(url) {
-    try {
-      const res = await fetch(url);
-      if (!res.ok) {
-        return null;
-      }
-      const data = await res.text();
-      return data;
-    } catch {
-      return null;
-    }
-  }
-
-  function appendError(parrent, errorMessage) {
-    const message = document.createElement("p");
-    message.innerText = errorMessage;
-    parrent.appendChild(message);
-  }
-
-  const parser = new DOMParser();
-
-  document.addEventListener("DOMContentLoaded", async () => {
-    const divConsultations = document.querySelector("#consultations");
-
-    const eventsHTML = await getData(URL);
-
-    if (!eventsHTML) {
-      appendError(
-        divConsultations,
-        "Ошибка загрузки расписания. Попробуйте перезагрузить страницу."
-      );
-      return;
-    }
-
-    const eventList = document.createElement("ol");
-
-    const dom = parser.parseFromString(eventsHTML, "text/html");
-    const template = document.querySelector("#event-template");
-
-    const listOfEvents = [...dom.querySelectorAll("div.b-content-event")].slice(
-      0,
-      5
-    );
-
-    listOfEvents.forEach((eventElement) => {
-      const clone = template.content.cloneNode(true);
-
-      clone.querySelector(".title").innerText =
-        eventElement.querySelector("h1").innerText;
-
-      const startTimeValue = eventElement.querySelector(
-        ".e-time span:nth-child(1)"
-      ).innerText;
-      const { date, time: startTime } =
-        getDateAndTimeYaCalendar(startTimeValue);
-      clone.querySelector(".date").innerText = date;
-      clone.querySelector(".start-time").innerText = startTime;
-
-      const endTimeValue = eventElement.querySelector(
-        ".e-time span:nth-child(2)"
-      ).innerText;
-      const { time: endTime } = getDateAndTimeYaCalendar(endTimeValue);
-      clone.querySelector(".end-time").innerText = endTime;
-      eventList.appendChild(clone);
-    });
-
-    divConsultations.append(eventList);
-  });
-</script>
