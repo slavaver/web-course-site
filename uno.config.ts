@@ -184,7 +184,7 @@ export default defineConfig({
                     font-size: 24px;
                 }
                 p, a, span, label{
-                    font-size:14px;
+                    font-size:16px;
                 }
             }
             `,
