@@ -8,27 +8,4 @@ const items = allUseful.map((item, index) => ({
 }));
 ---
 
-<script>
-    let selectedValue = "all";
-    // const select = document.getElementById("select-test");
-    // select?.addEventListener("change", (event) => {
-    //     selectedValue = event.target.value;
-    //     console.log(selectedValue);
-    // });
-
-    const getValue = document.getElementById("getValue");
-    getValue?.addEventListener("click", () => {
-        console.log(selectedValue);
-    });
-
-    const handleCustomEvent = (event) => {
-        console.log("Получено сообщение:", event.detail.message);
-    };
-
-    const handleSelectChange = (value) => {
-        selectedValue = value;
-        console.log(selectedValue);
-    };
-</script>
-
 {items.map((post) => <UsefulCard useful={post} />)}

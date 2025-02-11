@@ -1,9 +1,7 @@
 ---
-const { options, onChange } = Astro.props as CustomSelectProps;
-interface CustomSelectProps {
+const { options } = Astro.props as {
     options: { label: string; value: string }[];
-    onChange?: (value: string) => void;
-}
+};
 ---
 
 <script>
@@ -11,11 +9,19 @@ interface CustomSelectProps {
 
     select?.addEventListener("change", (event) => {
         select.blur();
-        console.log("123");
+        if (event.target) {
+            const value = (event.target as HTMLSelectElement).value;
+
+            const customEvent = new CustomEvent("selectChanged", {
+                detail: { value },
+                bubbles: true,
+            });
+
+            select.dispatchEvent(customEvent);
+        }
     });
 </script>
 
-<!-- <label for="custom-select">Отсортировать по</label> -->
 <div class="custom-select-box">
     <select
         class="custom-select bg-bg-screen text-input-placeholder border-1 border-input-border focus:border-transparent focus:bg-input-hover outline-none"
@@ -24,11 +30,9 @@ interface CustomSelectProps {
         {
             options ? (
                 <>
-                    {
-                        <option disabled selected hidden>
-                            Выберите курс
-                        </option>
-                    }
+                    <option disabled selected hidden>
+                        Выберите курс
+                    </option>
                     {options.map((option) => (
                         <option value={option.value}>{option.label}</option>
                     ))}

@@ -9,25 +9,38 @@ import SearchInput from "../../components/SearchInput.astro";
 const allUseful = await getCollection("useful");
 const lengths = allUseful.map((post) => post.body.length);
 
-const chips = ["1 семестр", "2 семестр", "3 семестр"];
-const options = [
-    {
-        label: chips[0],
-        value: `first-sem`,
-    },
-    {
-        label: chips[1],
-        value: `second-sem`,
-    },
-    {
-        label: chips[2],
-        value: `third-sem`,
-    },
+const values = ["all", "first-sem", "second-sem", "third-sem", "unbound"];
+const labels = [
+    "Все",
+    "1 семестр",
+    "2 семестр",
+    "3 семестр",
+    "Без привязки к курсу",
 ];
+const options = labels.map((label, index) => ({
+    label,
+    value: values[index],
+}));
 ---
 
 <script>
-    console.log(dispatchEvent);
+    function filterPosts(selectedValue) {
+        const posts = document.querySelectorAll(".useful-card");
+        posts.forEach((post) => {
+            const course = post.getAttribute("data-course");
+            const isVisible =
+                selectedValue === "all" ||
+                (selectedValue === "unbound" && !course) ||
+                course === selectedValue;
+
+            post.classList.toggle("hidden", !isVisible);
+        });
+    }
+
+    document.addEventListener("selectChanged", (event) => {
+        const { value: selectedValue } = (event as CustomEvent).detail;
+        filterPosts(selectedValue);
+    });
 </script>
 
 <BaseLayoutSnow title="Полезное">
@@ -47,14 +60,7 @@ const options = [
             <div class="grid-col-span-2 mt-auto mb-5">
                 <SearchInput placeholder="Введите название статьи" />
             </div>
-            <!-- <select name="" id="select-test">
-                <option value="all">Все</option>
-                <option value="info">Инфо</option>
-            </select>
-            <button id="getValue">getValue</button>
-            <button onclick="handleSelectChange()">render</button> -->
-
-            <ListOfPosts allUseful={allUseful} , lengths={lengths} />
+            <ListOfPosts client:load allUseful={allUseful} lengths={lengths} />
         </ul>
     </div>
 </BaseLayoutSnow>
