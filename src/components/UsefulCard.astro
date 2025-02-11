@@ -18,7 +18,11 @@ const getTimeToRead = (length) => {
 };
 ---
 
-<li class="useful-card" data-course={useful.data.course}>
+<li
+    class="useful-card"
+    data-course={useful.data.course}
+    data-title={useful.data.title}
+>
     <a
         class="card rounded-[30px] min-h-[395px] flex flex-col bg-bg-secondary p-5 md:p-7.5 lg:p-10 justify-between w-full userActions"
         href={href}

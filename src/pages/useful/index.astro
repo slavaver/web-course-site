@@ -24,22 +24,40 @@ const options = labels.map((label, index) => ({
 ---
 
 <script>
-    function filterPosts(selectedValue) {
+    let currentCourseFilter = "all";
+    let currentSearchQuery = "";
+
+    function applyFilters() {
         const posts = document.querySelectorAll(".useful-card");
+
         posts.forEach((post) => {
             const course = post.getAttribute("data-course");
-            const isVisible =
-                selectedValue === "all" ||
-                (selectedValue === "unbound" && !course) ||
-                course === selectedValue;
+            const title = post.getAttribute("data-title")?.toLowerCase() || "";
 
+            const matchesCourse =
+                currentCourseFilter === "all" ||
+                (currentCourseFilter === "unbound" && !course) ||
+                course === currentCourseFilter;
+
+            const matchesSearch =
+                currentSearchQuery === "" ||
+                title.includes(currentSearchQuery.toLowerCase());
+
+            const isVisible = matchesCourse && matchesSearch;
             post.classList.toggle("hidden", !isVisible);
         });
     }
 
     document.addEventListener("selectChanged", (event) => {
         const { value: selectedValue } = (event as CustomEvent).detail;
-        filterPosts(selectedValue);
+        currentCourseFilter = selectedValue;
+        applyFilters();
+    });
+
+    document.addEventListener("searchInput", (event) => {
+        const { value } = (event as CustomEvent).detail;
+        currentSearchQuery = value;
+        applyFilters();
     });
 </script>
 

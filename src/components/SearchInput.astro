@@ -2,10 +2,41 @@
 const { placeholder } = Astro.props;
 ---
 
+<script>
+    const search = document.getElementById("custom-search");
+
+    function debounce(fn, delay) {
+        let timeoutId;
+        return function (...args) {
+            const context = this;
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                fn.apply(context, args);
+            }, delay);
+        };
+    }
+
+    const handleInput = (value) => {
+        const customEvent = new CustomEvent("searchInput", {
+            detail: { value },
+            bubbles: true,
+        });
+        search?.dispatchEvent(customEvent);
+    };
+
+    const debouncedHandleInput = debounce(handleInput, 500);
+
+    search?.addEventListener("input", (event) => {
+        const value = (event.target as HTMLInputElement).value;
+        debouncedHandleInput(value);
+    });
+</script>
+
 <div class="search-box">
     <input
         placeholder={placeholder ? placeholder : "Поиск..."}
         type="text"
+        id="custom-search"
         class="search placeholder:text-input-placeholder border-1 bg-bg-screen border-input-border focus:bg-input-hover focus:border-transparent outline-none text-input-text"
     />
 </div>
