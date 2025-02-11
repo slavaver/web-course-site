@@ -1,7 +1,7 @@
 ---
 title: "Flexbox"
 description: "Как начать использовать flexbox и примеры работы основных свойств."
-chips: ["1 сем", "CSS", "Flex"]
+course: "first-sem"
 date: ["2025-09-01"]
 ---
 

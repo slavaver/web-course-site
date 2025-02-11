@@ -1,7 +1,7 @@
 ---
 title: "RWD"
 description: "Адаптивные интерфейсы и графика"
-chips: ["1 сем", "CSS", "Адаптив"]
+course: "first-sem"
 ---
 
 # RWD

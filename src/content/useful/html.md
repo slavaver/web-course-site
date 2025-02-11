@@ -1,7 +1,7 @@
 ---
 title: "HTML"
 description: "Как создать шапку, подвал и основную часть страницы."
-chips: ["1 сем", "HTML"]
+course: "first-sem"
 ---
 
 # HTML

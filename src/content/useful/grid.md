@@ -1,7 +1,7 @@
 ---
 title: "Grid"
 description: "Работа с расположением элементов в сетке."
-chips: ["1 сем", "HTML", "CSS", "Grid"]
+course: "first-sem"
 ---
 
 _Автор: Самойленко Марк_
