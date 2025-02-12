@@ -89,7 +89,7 @@ const { options } = Astro.props as {
 <style>
     .custom-select {
         position: relative;
-        transition: all 0.3s ease-in-out;
+        transition: 0.3s ease-in-out;
         appearance: none;
         font-size: 20px;
         width: 100%;
@@ -98,6 +98,7 @@ const { options } = Astro.props as {
     }
 
     .selected-option {
+        transition: 0.3s ease-in-out;
         padding: 20px;
         border-radius: 20px;
     }
@@ -117,6 +118,10 @@ const { options } = Astro.props as {
         mask-repeat: no-repeat;
         -webkit-mask-size: cover;
         mask-size: cover;
+    }
+
+    .custom-select.open .selected-option {
+        background-color: var(--color-bg-hover-input);
     }
 
     .custom-select.open .selected-option::after {
