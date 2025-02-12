@@ -3,8 +3,8 @@ import BaseLayoutSnow from "../../layouts/BaseLayoutSnow.astro";
 import { getCollection } from "astro:content";
 import CustomSelect from "../../components/CustomSelect.astro";
 import Heading from "../../components/Heading.astro";
-import ListOfPosts from "../../components/ListOfPosts.astro";
 import SearchInput from "../../components/SearchInput.astro";
+import ListOfPosts from "../../components/ListOfPosts.astro";
 
 const allUseful = await getCollection("useful");
 const lengths = allUseful.map((post) => post.body.length);
@@ -27,18 +27,16 @@ const options = labels.map((label, index) => ({
     let currentCourseFilter = "all";
     let currentSearchQuery = "";
 
-    const clearBtn = document.getElementById("clear-btn");
-
-    clearBtn?.addEventListener("click", () => {
-        window.location.reload();
-    });
+    const postsContainer = document.getElementById("posts-container");
+    const allWrappers = Array.from(postsContainer!.children);
 
     function applyFilters() {
-        const posts = document.querySelectorAll(".useful-card");
-
-        posts.forEach((post) => {
-            const course = post.getAttribute("data-course");
-            const title = post.getAttribute("data-title")?.toLowerCase() || "";
+        const visibleWrappers = allWrappers.filter((wrapper) => {
+            const card = wrapper.querySelector(".useful-card");
+            const course = card?.getAttribute("data-course");
+            const title = (
+                card?.getAttribute("data-title") || ""
+            ).toLowerCase();
 
             const matchesCourse =
                 currentCourseFilter === "all" ||
@@ -49,16 +47,45 @@ const options = labels.map((label, index) => ({
                 currentSearchQuery === "" ||
                 title.includes(currentSearchQuery.toLowerCase());
 
-            const isVisible = matchesCourse && matchesSearch;
-            post.classList.toggle("hidden", !isVisible);
+            return matchesCourse && matchesSearch;
+        });
+        if (postsContainer) postsContainer.innerHTML = "";
+
+        visibleWrappers.forEach((wrapper, index) => {
+            if (index % 7 === 0) {
+                const customBlock = document.createElement("div");
+                customBlock.className = "flex";
+                switch (Math.floor(index / 7) % 3) {
+                    case 0:
+                        customBlock.innerHTML = `
+                            <img
+                            src="/src/assets/img/paw-heart.svg"
+                            alt="лапка котика с сердечками"
+                            class="mx-auto"/>`;
+                        break;
+                    case 1:
+                        customBlock.innerHTML = `
+                            <img
+                            src="/src/assets/img/cat-table.svg"
+                            alt="котик сидит за столом"
+                            class="mx-auto rounded-[20px]"/>`;
+                        break;
+                    case 2:
+                        customBlock.innerHTML = `
+                            <img
+                            src="/src/assets/img/cat-cute.svg"
+                            alt="котик кайфует"
+                            class="mx-auto"/>`;
+                        break;
+                }
+
+                postsContainer?.appendChild(customBlock);
+            }
+            postsContainer?.appendChild(wrapper);
         });
 
-        const visiblePosts = document.querySelectorAll(
-            ".useful-card:not(.hidden)"
-        );
         const noResultsElement = document.getElementById("no-results");
-
-        if (visiblePosts.length === 0) {
+        if (visibleWrappers.length === 0) {
             noResultsElement?.classList.remove("hidden");
         } else {
             noResultsElement?.classList.add("hidden");
@@ -76,6 +103,13 @@ const options = labels.map((label, index) => ({
         currentSearchQuery = value;
         applyFilters();
     });
+
+    const clearBtn = document.getElementById("clear-btn");
+    clearBtn?.addEventListener("click", () => {
+        window.location.reload();
+    });
+
+    applyFilters();
 </script>
 
 <BaseLayoutSnow title="Полезное">
@@ -95,29 +129,34 @@ const options = labels.map((label, index) => ({
             <div class="grid-col-span-1 2xl:col-span-2 mt-auto mb-5">
                 <SearchInput placeholder="Введите название статьи" />
             </div>
-            <ListOfPosts client:load allUseful={allUseful} lengths={lengths} />
-            <div
-                id="no-results"
-                class="col-span-full text-center mt-10 hidden text-text-inverted"
-            >
-                <h2 class="font-400">Ой, что-то лапка дрогнула!</h2>
-                <p class="mb-3 mx-auto w-full md:w-2/3">
-                    Котик проверил всю базу и даже заглянул под диван, но ничего
-                    не нашёл. Наверное, это что-то слишком сложное для его
-                    пушистых лапок. Попробуйте ещё раз
-                </p>
-                <img
-                    src="/src/assets/img/paw-heart.svg"
-                    alt="лапка котика с сердечками"
-                    class="mx-auto mb-3"
-                />
-                <button
-                    class="border-1 rounded-[20px] border-text-tertiary p-[20px] w-full md:w-2/3 color-text-tertiary font-titles hover:bg-bg-tertiary hover:text-text-inverted transition duration-300"
-                    id="clear-btn"
-                >
-                    Вернуться к статьям</button
-                >
-            </div>
         </ul>
+        <ul
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5"
+            id="posts-container"
+        >
+            <ListOfPosts client:load allUseful={allUseful} lengths={lengths} />
+        </ul>
+        <div
+            id="no-results"
+            class="col-span-full text-center mt-10 hidden text-text-inverted"
+        >
+            <h2 class="font-400">Ой, что-то лапка дрогнула!</h2>
+            <p class="mb-3 mx-auto w-full md:w-2/3">
+                Котик проверил всю базу и даже заглянул под диван, но ничего не
+                нашёл. Наверное, это что-то слишком сложное для его пушистых
+                лапок. Попробуйте ещё раз
+            </p>
+            <img
+                src="/src/assets/img/paw-heart.svg"
+                alt="лапка котика с сердечками"
+                class="mx-auto mb-3"
+            />
+            <button
+                class="border-1 rounded-[20px] border-text-tertiary p-[20px] w-full md:w-2/3 color-text-tertiary font-titles hover:bg-bg-tertiary hover:text-text-inverted transition duration-300"
+                id="clear-btn"
+            >
+                Вернуться к статьям
+            </button>
+        </div>
     </div>
 </BaseLayoutSnow>

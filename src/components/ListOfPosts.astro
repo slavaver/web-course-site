@@ -8,4 +8,10 @@ const items = allUseful.map((item, index) => ({
 }));
 ---
 
-{items.map((post) => <UsefulCard useful={post} />)}
+{
+    items.map((post) => (
+        <div class="post-wrapper">
+            <UsefulCard useful={post} />
+        </div>
+    ))
+}
