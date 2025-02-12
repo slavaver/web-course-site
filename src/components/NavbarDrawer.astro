@@ -63,9 +63,9 @@ const links = [
 // isDropdownOpen.onToggled(() => {});
 ---
 
-<header class="drawer-container w-full fixed z-50 p-2.5">
+<header class="drawer-container w-full fixed z-50">
     <div
-        class="drawer bg-bg-menu text-text-primary flex-col gap-2 py-2.5 px-2.5 sm:px-10 sm:py-3.75 rounded-2xl box-border backdrop-blur-xl"
+        class="drawer bg-bg-menu text-text-primary flex-col gap-2 py-2.5 px-2.5 md:px-10 md:py-3.75 rounded-2xl box-border backdrop-blur-xl"
     >
         <div
             class="drawer-content-vertical w-full justify-between items-center mx-auto max-w-screen-xl flex"
@@ -77,18 +77,35 @@ const links = [
                     alt="logo"
                 />
             </a>
-            <nav class="drawer-nav gap-10 hidden md:flex">
+            <nav class="drawer-nav menu">
                 {
                     links.map((link) => (
                         <a
-                            class="header__link cursor-pointer userActionsLink"
+                            class="header__link cursor-pointer userActionsLink font-titles md:font-texts "
                             id={link.href.slice(1) + "-link"}
                         >
                             {link.title}
                         </a>
                     ))
                 }
+                {
+                    (
+                        <ul class="dropdown__list-sm flex flex-col md:hidden justify-center gap-0">
+                            {courses.map((course) => (
+                                <li class="dropdown__item">
+                                    <a
+                                        class="dropdown__link text-[16px] px-7 py-5  userActionsLink"
+                                        href={course.href}
+                                    >
+                                        {course.title}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    )
+                }
             </nav>
+
             <BurgerMenu links={links} />
             <ThemeToggler />
         </div>
@@ -108,7 +125,6 @@ const links = [
                 </ul>
             )
         }
-        <!-- <div class="drawer-side flex-none"></div> -->
     </div>
 </header>
 
@@ -120,10 +136,12 @@ const links = [
     const mainLink = document.querySelector("#web-course-site-link");
     const usefulLink = document.querySelector("#useful-link");
 
-    const toggleDropdown = () => {
+    const dropdownSm = document.querySelector(".dropdown__list-sm");
+
+    const toggleDropdown = (activeBtn, list) => {
         isDropdownOpen = !isDropdownOpen;
-        dropdown?.classList.toggle("open", isDropdownOpen);
-        coursesLink?.classList.toggle("open", isDropdownOpen);
+        list?.classList.toggle("open", isDropdownOpen);
+        activeBtn?.classList.toggle("open", isDropdownOpen);
     };
 
     const goToLink = (link) => {
@@ -134,19 +152,46 @@ const links = [
         window.location.href = `/${slicedLink}/`;
     };
 
+    let screenSize = window.screen.width;
+
+    window.addEventListener("resize", () => {
+        screenSize = window.screen.width;
+    });
+
+    const handleToggleDropDown = () => {
+        if (screenSize < 768) {
+            toggleDropdown(coursesLink, dropdownSm);
+            return;
+        }
+        toggleDropdown(coursesLink, dropdown);
+    };
+
     mainLink?.addEventListener("click", () => goToLink(mainLink));
-    coursesLink?.addEventListener("click", toggleDropdown);
+    coursesLink?.addEventListener("click", handleToggleDropDown);
+
     usefulLink?.addEventListener("click", () => goToLink(usefulLink));
 </script>
 
 <style>
+    .drawer-container {
+        transition: 0.3s ease-in-out;
+        padding-top: 0.625rem;
+        padding-bottom: 0.625rem;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    .drawer-content-vertical {
+        transition: 0.3s ease-in-out;
+    }
+
     #courses-link {
         position: relative;
         padding-right: 40px;
     }
 
     #courses-link::after {
-        transition: all 0.3s ease-in-out;
+        transition: 0.3s ease-in-out;
         content: "";
         position: absolute;
         top: 25px;
@@ -154,10 +199,11 @@ const links = [
         width: 21px;
         height: 20px;
         background: url("/src/assets/img/cheveron-down.svg") center no-repeat;
+        transform: rotate(-90deg);
     }
 
     .dropdown__list {
-        transition: all 0.3s ease-in-out;
+        transition: 0.3s ease-in-out;
         max-height: 0px;
         width: 100%;
         padding: 0;
@@ -173,7 +219,81 @@ const links = [
         padding: 15px 0;
     }
 
+    .dropdown__list-sm {
+        transition: all 0.3s ease-in-out;
+        max-height: 0px;
+        width: 100%;
+        padding: 0;
+        pointer-events: none;
+        opacity: 0;
+    }
+
+    .dropdown__list-sm.open {
+        pointer-events: all;
+        max-height: 200px;
+        width: 100%;
+        opacity: 1;
+        padding: 0;
+        background-color: var(--color-bg-secondary);
+    }
+
     #courses-link.open::after {
-        transform: rotate(180deg);
+        transform: rotate(0deg);
+    }
+
+    .menu {
+        display: flex;
+        gap: 40px;
+    }
+
+    @media (max-width: 768px) {
+        .drawer-container:has(.menu.open) {
+            padding: 0;
+            z-index: 999;
+        }
+
+        .drawer-content-vertical:has(.menu.open) {
+            padding-top: 0.625rem;
+            padding-bottom: 0.625rem;
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+        }
+
+        .header__link {
+            padding-left: calc(1.25rem + 0.6875rem);
+            padding-right: calc(1.25rem + 0.6875rem);
+        }
+
+        .menu {
+            gap: 0;
+            padding: 0px;
+            /* display: none; */
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            flex-direction: column;
+            background-color: var(--color-bg-primary);
+            z-index: 10;
+            height: 0vh;
+            transition: 0.3s ease-in-out;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+        .menu.open {
+            opacity: 1;
+            display: flex;
+            height: 100vh;
+            padding-top: calc(72px + (0.625rem * 2));
+        }
+
+        .menu a {
+            display: block;
+        }
+
+        #useful-link {
+            order: 1;
+        }
     }
 </style>

@@ -8,6 +8,7 @@ import DataBaseSvg from "../assets/img/databaseSvg.astro";
 <style>
     .burger-menu {
         cursor: pointer;
+        z-index: 9999;
     }
 
     .burger-icon {
@@ -16,8 +17,6 @@ import DataBaseSvg from "../assets/img/databaseSvg.astro";
         justify-content: space-around;
         width: 30px;
         height: 30px;
-
-        z-index: 10;
     }
 
     .burger-icon div {
@@ -40,44 +39,15 @@ import DataBaseSvg from "../assets/img/databaseSvg.astro";
     .burger-icon.open div:nth-child(3) {
         transform: translateY(-10px) rotate(-45deg);
     }
-
-    .menu {
-        position: absolute;
-        box-sizing: border-box;
-        top: 33px;
-        left: 0;
-        margin: 0 25vw 0 calc(25vw - 10px);
-        width: 0vw;
-        height: 80px;
-        opacity: 0;
-        transform: scale(0) translateY(-23%);
-        transform-origin: top right;
-        transition: all 0.2s ease-in-out;
-    }
-
-    .menu.open {
-        transform: scale(1) translateY(-23%);
-        width: 50vw;
-        opacity: 1;
-    }
-
-    .menu a {
-        display: block;
-    }
 </style>
-<div class="inline-block md:hidden">
-    <div class="burger-menu userActions p-2.75 sm:p-5 rounded-[10px]">
+<div class="inline-block md:hidden order--1 z-99">
+    <div class="burger-menu userActions p-2.75 rounded-[10px]">
         <div class="burger-icon">
             <div></div>
             <div></div>
             <div></div>
         </div>
     </div>
-    <nav class="menu text-text-primary justify-around flex">
-        <a href={links[0].href} class="userActionsLink"><HouseSvg /></a>
-        <a href={links[1].href} class="userActionsLink"><BookSvg /></a>
-        <a href={links[2].href} class="userActionsLink"><DataBaseSvg /></a>
-    </nav>
 </div>
 
 <script defer>
