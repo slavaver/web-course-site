@@ -61,12 +61,9 @@ const { options } = Astro.props as {
     }
 </script>
 
-<div
-    id="custom-select"
-    class="custom-select bg-bg-screen text-input-placeholder focus:border-transparent focus:bg-input-hover outline-none"
->
+<div id="custom-select" class="custom-select">
     <div
-        class="selected-option border-1 border-input-border"
+        class="selected-option text-input-placeholder bg-bg-screen border-1 border-input-border hover:bg-bg-tertiary hover:text-text-inverted transition duration-300"
         id="selected-option"
     >
         Выберите курс

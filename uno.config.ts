@@ -10,6 +10,7 @@ export default defineConfig({
                 primary: "var(--color-text-primary)",
                 secondary: "var(--color-text-secondary)",
                 tertiary: "var(--color-text-tertiary)",
+                inverted: "var(--color-text-inverted)",
             },
             bg: {
                 screen: "var(--color-bg-screen)",
@@ -51,6 +52,7 @@ export default defineConfig({
                 "--color-text-primary": "#FFFFFF",
                 "--color-text-secondary": "#0B163B",
                 "--color-text-tertiary": "#0752FF",
+                "--color-text-inverted": "#0B163B",
                 "--color-bg-screen": "#F6FBFF",
                 "--color-bg-menu": "#203EA999",
                 "--color-bg-primary": "#203EA9",
@@ -71,6 +73,7 @@ export default defineConfig({
                 "--color-text-primary": "#FFFFFF",
                 "--color-text-secondary": "#0B163B",
                 "--color-text-tertiary": "#C5D6FF",
+                "--color-text-inverted": "#FFFFFF",
                 "--color-bg-screen": "#01001C",
                 "--color-bg-menu": "#0B163B99",
                 "--color-bg-primary": "#0B163B",
