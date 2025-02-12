@@ -65,7 +65,7 @@ const links = [
 
 <header class="drawer-container w-full fixed z-50">
     <div
-        class="drawer bg-bg-menu text-text-primary flex-col gap-2 py-2.5 px-2.5 md:px-10 md:py-3.75 rounded-2xl box-border backdrop-blur-xl"
+        class="drawer md:bg-bg-menu text-text-primary flex-col gap-2 py-2.5 px-2.5 md:px-10 md:py-3.75 rounded-2xl box-border md:backdrop-blur-xl"
     >
         <div
             class="drawer-content-vertical w-full justify-between items-center mx-auto max-w-screen-xl flex"
@@ -250,6 +250,18 @@ const links = [
         .drawer-container:has(.menu.open) {
             padding: 0;
             z-index: 999;
+            background-color: transparent;
+        }
+
+        .drawer {
+            transition: background-color 0.3s ease-in-out;
+            background-color: var(--color-bg-menu);
+            backdrop-filter: blur(40px);
+        }
+
+        .drawer:has(.menu.open) {
+            background-color: transparent;
+            backdrop-filter: none;
         }
 
         .drawer-content-vertical:has(.menu.open) {
@@ -267,17 +279,17 @@ const links = [
         .menu {
             gap: 0;
             padding: 0px;
-            /* display: none; */
             position: fixed;
             width: 100%;
             top: 0;
             left: 0;
             flex-direction: column;
-            background-color: var(--color-bg-primary);
             z-index: 10;
             height: 0vh;
             transition: 0.3s ease-in-out;
             overflow: hidden;
+            background-color: var(--color-bg-menu);
+            backdrop-filter: blur(40px);
             opacity: 0;
         }
 
@@ -289,7 +301,14 @@ const links = [
         }
 
         .menu a {
-            display: block;
+            transition: color 0.3 ease-in-out;
+            color: transparent;
+            font-size: 0px;
+        }
+
+        .menu.open a {
+            color: var(--color-text-primary);
+            font-size: 16px;
         }
 
         #useful-link {
