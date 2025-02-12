@@ -6,55 +6,104 @@ const { options } = Astro.props as {
 
 <script>
     const select = document.getElementById("custom-select");
+    const selectedDiv = document.getElementById("selected-option");
+    const optionsList = document.getElementById("options-list");
 
-    select?.addEventListener("change", (event) => {
-        select.blur();
-        if (event.target) {
-            const value = (event.target as HTMLSelectElement).value;
-
-            const customEvent = new CustomEvent("selectChanged", {
-                detail: { value },
-                bubbles: true,
-            });
-
-            select.dispatchEvent(customEvent);
+    let isOpen = false;
+    if (select && selectedDiv && optionsList) {
+        function toggleDropdown(select, list) {
+            isOpen = !isOpen;
+            if (isOpen) {
+                list.classList.add("open");
+                select.classList.add("open");
+            } else {
+                list.classList.remove("open");
+                select.classList.remove("open");
+            }
         }
-    });
+
+        selectedDiv.addEventListener("click", (e) => {
+            e.stopPropagation();
+            toggleDropdown(select, optionsList);
+        });
+
+        const optionElements = optionsList.querySelectorAll(
+            ".option-item:not(.disabled)"
+        );
+        optionElements.forEach((optionElement) => {
+            optionElement.addEventListener("click", (event) => {
+                event.stopPropagation();
+
+                const value = optionElement.getAttribute("data-value");
+                const label = optionElement.textContent;
+
+                selectedDiv.textContent = label;
+
+                const customEvent = new CustomEvent("selectChanged", {
+                    detail: { value },
+                    bubbles: true,
+                });
+                select.dispatchEvent(customEvent);
+
+                isOpen = false;
+                optionsList?.classList.remove("open");
+                select.classList.remove("open");
+            });
+        });
+
+        document.addEventListener("click", (event) => {
+            if (!select.contains(event.target as Node | null)) {
+                isOpen = false;
+                optionsList?.classList.remove("open");
+                select.classList.remove("open");
+            }
+        });
+    }
 </script>
 
-<div class="custom-select-box">
-    <select
-        class="custom-select bg-bg-screen text-input-placeholder border-1 border-input-border focus:border-transparent focus:bg-input-hover outline-none"
-        id="custom-select"
+<div
+    id="custom-select"
+    class="custom-select bg-bg-screen text-input-placeholder focus:border-transparent focus:bg-input-hover outline-none"
+>
+    <div
+        class="selected-option border-1 border-input-border"
+        id="selected-option"
     >
+        Выберите курс
+    </div>
+    <div class="options-list bg-bg-menu backdrop-blur-2xl" id="options-list">
         {
-            options ? (
-                <>
-                    <option disabled selected hidden>
-                        Выберите курс
-                    </option>
-                    {options.map((option) => (
-                        <option value={option.value}>{option.label}</option>
-                    ))}
-                </>
+            options && options.length ? (
+                options.map((option) => (
+                    <div class="option-item" data-value={option.value}>
+                        {option.label}
+                    </div>
+                ))
             ) : (
-                <option selected disabled hidden value="null">
-                    Нет доступных вариантов
-                </option>
+                <div class="option-item disabled">Нет доступных вариантов</div>
             )
         }
-    </select>
+    </div>
 </div>
 
 <style>
-    div.custom-select-box:has(select.custom-select) {
-        display: flex;
-        flex-direction: column;
+    .custom-select {
         position: relative;
+        transition: all 0.3s ease-in-out;
+        appearance: none;
+        font-size: 20px;
+        width: 100%;
+        cursor: pointer;
+        box-sizing: border-box;
     }
 
-    div.custom-select-box:has(select.custom-select)::after {
-        transition: all 0.2s ease-in-out;
+    .selected-option {
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    .selected-option::after {
+        transition: 0.3s ease-in-out;
         content: "";
         position: absolute;
         top: 25px;
@@ -68,5 +117,42 @@ const { options } = Astro.props as {
         mask-repeat: no-repeat;
         -webkit-mask-size: cover;
         mask-size: cover;
+    }
+
+    .custom-select.open .selected-option::after {
+        transform: rotate(180deg);
+    }
+
+    .options-list {
+        position: absolute;
+        top: calc(100% + 2px);
+        left: 0;
+        right: 0;
+        overflow-y: hidden;
+        z-index: 9;
+        transition: 0.3s ease-in-out;
+        max-height: 0px;
+        border-radius: 20px;
+        padding: 0 10px;
+        pointer-events: none;
+    }
+
+    .options-list.open {
+        display: block;
+        max-height: 300px;
+        padding: 10px 10px;
+        pointer-events: all;
+    }
+
+    .option-item {
+        color: var(--color-text-primary);
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 10px;
+        transition: 0.2s ease-in-out;
+    }
+
+    .option-item:hover {
+        background-color: var(--color-bg-secondary);
     }
 </style>
