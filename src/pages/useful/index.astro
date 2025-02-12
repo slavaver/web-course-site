@@ -72,10 +72,10 @@ const options = labels.map((label, index) => ({
         <ul
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5"
         >
-            <div class="grid-col-span-1 mb-5">
+            <div class="grid-col-span-1 2xl:col-span-1 mb-5">
                 <CustomSelect options={options} />
             </div>
-            <div class="grid-col-span-2 mt-auto mb-5">
+            <div class="grid-col-span-1 2xl:col-span-2 mt-auto mb-5">
                 <SearchInput placeholder="Введите название статьи" />
             </div>
             <ListOfPosts client:load allUseful={allUseful} lengths={lengths} />

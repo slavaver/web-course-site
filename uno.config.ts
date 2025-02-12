@@ -133,7 +133,7 @@ export default defineConfig({
                 font-family: "NextArt", sans-serif;
             }
             h1 {
-                font-size: 82px;
+                font-size: clamp(72px, 5vw, 82px);
                 font-weight: 700;
             }
             h2 {
@@ -162,7 +162,7 @@ export default defineConfig({
 
             @media(max-width: 1200px) {
                 h1 {
-                    font-size: 72px;
+                    font-size: clamp(32px, 5vw, 72px);
                 }
                 h2 {
                     font-size: 40px;
