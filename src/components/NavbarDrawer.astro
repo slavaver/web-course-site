@@ -185,23 +185,6 @@ const links = [
         transition: 0.3s ease-in-out;
     }
 
-    #courses-link {
-        position: relative;
-        padding-right: 40px;
-    }
-
-    #courses-link::after {
-        transition: 0.3s ease-in-out;
-        content: "";
-        position: absolute;
-        top: 25px;
-        right: 15px;
-        width: 21px;
-        height: 20px;
-        background: url("/src/assets/img/cheveron-down.svg") center no-repeat;
-        transform: rotate(-90deg);
-    }
-
     .dropdown__list {
         transition: 0.3s ease-in-out;
         max-height: 0px;
@@ -235,6 +218,23 @@ const links = [
         opacity: 1;
         padding: 0;
         background-color: var(--color-bg-secondary);
+    }
+
+    #courses-link {
+        position: relative;
+        padding-right: 40px;
+    }
+
+    #courses-link::after {
+        transition: 0.3s ease-in-out;
+        content: "";
+        position: absolute;
+        top: 23px;
+        right: 15px;
+        width: 21px;
+        height: 20px;
+        background: url("/src/assets/img/cheveron-down.svg") center no-repeat;
+        transform: rotate(-90deg);
     }
 
     #courses-link.open::after {
