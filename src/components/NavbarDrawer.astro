@@ -202,24 +202,6 @@ const links = [
         padding: 15px 0;
     }
 
-    .dropdown__list-sm {
-        transition: all 0.3s ease-in-out;
-        max-height: 0px;
-        width: 100%;
-        padding: 0;
-        pointer-events: none;
-        opacity: 0;
-    }
-
-    .dropdown__list-sm.open {
-        pointer-events: all;
-        max-height: 200px;
-        width: 100%;
-        opacity: 1;
-        padding: 0;
-        background-color: var(--color-bg-secondary);
-    }
-
     #courses-link {
         position: relative;
         padding-right: 40px;
@@ -291,24 +273,51 @@ const links = [
             background-color: var(--color-bg-menu);
             backdrop-filter: blur(40px);
             opacity: 0;
+            padding-top: calc(72px + (0.625rem * 2));
+            transform: scale(0.95);
         }
 
         .menu.open {
             opacity: 1;
             display: flex;
             height: 100vh;
-            padding-top: calc(72px + (0.625rem * 2));
+            transform: scale(1);
         }
 
         .menu a {
-            transition: color 0.3 ease-in-out;
-            color: transparent;
-            font-size: 0px;
+            display: block;
         }
 
-        .menu.open a {
-            color: var(--color-text-primary);
-            font-size: 16px;
+        .dropdown__list-sm {
+            transition: 0.3s ease-in-out;
+            max-height: 0px;
+            width: 100%;
+            padding: 0;
+            pointer-events: none;
+            opacity: 0;
+            background-color: transparent;
+        }
+
+        .dropdown__list-sm .dropdown__link {
+            transition:
+                max-height 0.3s ease-in-out,
+                padding 0.3s ease-in-out;
+            max-height: 0px;
+            padding: 0px 20px;
+            overflow: hidden;
+        }
+
+        .dropdown__list-sm.open .dropdown__link {
+            max-height: 60px;
+            padding: 20px 20px;
+        }
+
+        .menu.open .dropdown__list-sm.open {
+            pointer-events: all;
+            max-height: 200px;
+            width: 100%;
+            opacity: 1;
+            background-color: var(--color-bg-secondary);
         }
 
         #useful-link {
