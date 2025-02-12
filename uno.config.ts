@@ -92,11 +92,11 @@ export default defineConfig({
     shortcuts: {
         title: "text-center mb-10",
         userActionsLink:
-            "p-5 rounded-[10px] transition md:hover:bg-hover-primary md:active:bg-active-primary focus-visible:bg-hover-primary motion-reduce:transition-none",
+            "p-5 rounded-[10px] transition duration-300 md:hover:bg-hover-primary md:active:bg-active-primary focus-visible:bg-hover-primary motion-reduce:transition-none",
         userActions:
-            "transition md:hover:bg-hover-primary md:active:bg-active-primary focus-visible:bg-hover-primary motion-reduce:transition-none",
+            "transition md:hover:bg-hover-primary duration-300 md:active:bg-active-primary focus-visible:bg-hover-primary motion-reduce:transition-none",
         userActionsLinkAlt:
-            "transition md:hover:bg-hover-secondary md:active:bg-active-secondary focus-visible:bg-hover-secondary motion-reduce:transition-none",
+            "transition md:hover:bg-hover-secondary duration-300 md:active:bg-active-secondary focus-visible:bg-hover-secondary motion-reduce:transition-none",
     },
 
     preflights: [

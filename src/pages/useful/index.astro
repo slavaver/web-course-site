@@ -134,7 +134,7 @@ const options = labels.map((label, index) => ({
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5"
             id="posts-container"
         >
-            <ListOfPosts client:load allUseful={allUseful} lengths={lengths} />
+            <ListOfPosts allUseful={allUseful} lengths={lengths} />
         </ul>
         <div
             id="no-results"
