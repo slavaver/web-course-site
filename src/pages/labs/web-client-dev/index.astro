@@ -1,74 +1,39 @@
 ---
 import { getCollection } from "astro:content";
 
-import BaseLayoutSnow from "../../../layouts/BaseLayoutSnow.astro";
+import CourseLayout from "../../../layouts/CourseLayout.astro";
 
 const yearOnMain = "2023";
 
 const allWebTech = await getCollection("web-client-dev");
 
 const lastWebtech = allWebTech
-  .filter((material) => material.id.startsWith(yearOnMain))
-  .sort((a, b) => a.data.number - b.data.number);
+    .filter((material) => material.id.startsWith(yearOnMain))
+    .sort((a, b) => a.data.number - b.data.number);
+
+const statementHref =
+    "https://drive.google.com/drive/folders/1Ifv2U1KM9Xu-n8btd0lYwXjttPSIfc1j?usp=drive_link";
+const labs = lastWebtech.filter((post) => post.data.type === "labs");
+const rk = lastWebtech.filter((post) => post.data.type === "rk");
+const schedule = lastWebtech.filter((post) => post.data.type === "schedule");
 ---
 
-<BaseLayoutSnow>
-  <div class="prose lg:prose-lg mx-auto">
-    <h1>Основы веб-разработки на стороне клиента</h1>
-    <p>
-      <a
-        href="https://drive.google.com/drive/folders/1Ifv2U1KM9Xu-n8btd0lYwXjttPSIfc1j?usp=drive_link"
-        target="_blank">Ведомость и доп. материалы</a
-      >
-    </p>
-    {
-      lastWebtech
-        .filter((post) => post.data.type === "schedule")
-        .map((post) => (
-          <a href={`/web-course-site/labs/web-client-dev/${post.slug}`}>
-            {post.data.title}
-          </a>
-        ))
-    }
-    <h2>Лабораторные работы</h2>
-    <ol class="columns">
-      {
-        lastWebtech
-          .filter((post) => post.data.type === "labs")
-          .sort((a, b) => a.data.number - b.data.number)
-          .map((post) => (
-            <li>
-              <a href={`/web-course-site/labs/web-client-dev/${post.slug}`}>
-                {post.data.title}
-              </a>
-            </li>
-          ))
-      }
-    </ol>
-    <h3>Рубежные контроли</h3>
-    <ol class="columns">
-      {
-        lastWebtech
-          .filter((post) => post.data.type === "rk")
-          .map((post) => (
-            <li>
-              <a href={`/web-course-site/labs/web-client-dev/${post.slug}`}>
-                {post.data.title}
-              </a>
-            </li>
-          )) || <li>Будут опубликованы к дате контроля</li>
-      }
-    </ol>
-  </div>
-</BaseLayoutSnow>
+<CourseLayout
+    title="Основы веб-разработки"
+    labs={labs}
+    rk={rk}
+    schedule={schedule}
+    statementHref={statementHref}
+    name="web-client-dev"
+/>
 
 <style>
-  @media screen and (min-width: 500px) {
-    .columns {
-      columns: 2 1em;
+    @media screen and (min-width: 500px) {
+        .columns {
+            columns: 2 1em;
+        }
+        .columns > li {
+            margin-top: 0;
+        }
     }
-    .columns > li {
-      margin-top: 0;
-    }
-  }
 </style>

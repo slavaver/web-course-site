@@ -1,0 +1,110 @@
+---
+import Heading from "../components/Heading.astro";
+import LectureCard from "../components/LectureCard.astro";
+import LinkCard from "../components/LinkCard.astro";
+import BaseLayoutSnow from "./BaseLayoutSnow.astro";
+
+const {
+    title,
+    description,
+    name,
+    schedule,
+    statementHref,
+    labs,
+    lectures,
+    rk,
+} = Astro.props;
+---
+
+<BaseLayoutSnow>
+    <Heading title={title} description={description} />
+    <section>
+        <div
+            class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30"
+        >
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+                {
+                    (
+                        <LinkCard
+                            title="Ведомость и доп. материалы"
+                            href={statementHref}
+                        />
+                    )
+                }
+                {
+                    schedule.map((post) => (
+                        <LinkCard
+                            title={post.data.title}
+                            href={`/web-course-site/labs/${name}/${post.slug}`}
+                        />
+                    ))
+                }
+            </ul>
+        </div>
+        <div
+            class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30"
+        >
+            <h2 class="text-center mb-10">Лабораторные работы</h2>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+                {
+                    labs &&
+                        labs
+                            .filter((post) => post.data.type === "labs")
+                            .sort((a, b) => a.data.number - b.data.number)
+                            .map((post, index) => (
+                                <LinkCard
+                                    title={post.data.title}
+                                    number={(index / 10)
+                                        .toFixed(1)
+                                        .toString()
+                                        .split(".")
+                                        .join("")}
+                                    href={`/web-course-site/labs/${name}/${post.slug}`}
+                                />
+                            ))
+                }
+            </ul>
+        </div>
+        {
+            lectures && (
+                <div class="bg-bg-primary py-20 rounded-[30px] sm:rounded-[60px] mb-30">
+                    <div class="px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto">
+                        <h2 class="text-center mb-10">Лекции</h2>
+                        <ul class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 w-full">
+                            {lectures.map((lecture) => (
+                                <LectureCard
+                                    title={lecture.title}
+                                    href={lecture.href}
+                                    description={lecture.description}
+                                />
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            )
+        }
+        <div
+            class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30"
+        >
+            <h2 class="text-center">Рубежный контроль</h2>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+                {
+                    rk && rk.length !== 0 ? (
+                        rk.map((post) => (
+                            <LinkCard
+                                title={post.data.title}
+                                href={`/web-course-site/labs/${name}/${post.slug}`}
+                            />
+                        ))
+                    ) : (
+                        <li class="col-span-2">
+                            <p class="font-texts text-center">
+                                Задания появятся ближе к дате рк
+                            </p>
+                        </li>
+                    )
+                }
+            </ul>
+        </div>
+    </section>
+</BaseLayoutSnow>

@@ -1,62 +1,28 @@
 ---
 import { getCollection } from "astro:content";
 
-import BaseLayoutSnow from "../../../layouts/BaseLayoutSnow.astro";
+import CourseLayout from "../../../layouts/CourseLayout.astro";
 
 const yearOnMain = "2023";
 
 const allWebTech = await getCollection("web-tech");
 
 const lastWebtech = allWebTech
-  .filter((material) => material.id.startsWith(yearOnMain))
-  .sort((a, b) => a.data.number - b.data.number);
+    .filter((material) => material.id.startsWith(yearOnMain))
+    .sort((a, b) => a.data.number - b.data.number);
+
+const schedule = lastWebtech.filter((post) => post.data.type === "schedule");
+const rk = lastWebtech.filter((post) => post.data.type === "rk");
+const statementHref =
+    "https://docs.google.com/spreadsheets/d/1ex4WJz5JM003zWcFaSMEy-rjsCUg_umqwixbh-9DJAo/edit?gid=0#gid=0";
 ---
 
-<BaseLayoutSnow>
-  <div class="prose lg:prose-lg mx-auto">
-    <h1>Основы веб-технологий</h1>
-    <p>
-      <a
-        href="https://docs.google.com/spreadsheets/d/1ex4WJz5JM003zWcFaSMEy-rjsCUg_umqwixbh-9DJAo/edit?gid=0#gid=0"
-        target="_blank">Ведомость</a
-      >
-    </p>
-    {
-      lastWebtech
-        .filter((post) => post.data.type === "schedule")
-        .map((post) => (
-          <a href={`/web-course-site/labs/web-tech/${post.slug}`}>
-            {post.data.title}
-          </a>
-        ))
-    }
-    <h2>Лабораторные работы</h2>
-    <ol class="columns" start="0">
-      {
-        lastWebtech
-          .filter((post) => post.data.type === "labs")
-          .sort((a, b) => a.data.number - b.data.number)
-          .map((post) => (
-            <li>
-              <a href={`/web-course-site/labs/web-tech/${post.slug}`}>
-                {post.data.title}
-              </a>
-            </li>
-          ))
-      }
-    </ol>
-    <h3>Рубежный контроль</h3>
-    <p>Будет опубликован к дате контроля</p>
-  </div>
-</BaseLayoutSnow>
-
-<style>
-  @media screen and (min-width: 500px) {
-    .columns {
-      columns: 2 1em;
-    }
-    .columns > li {
-      margin-top: 0;
-    }
-  }
-</style>
+<CourseLayout
+    title="Основы веб-технологий"
+    description="Изучаем, как работает браузер, рассматриваем адаптивную верстку и принципы доступности"
+    name="web-tech"
+    labs={lastWebtech}
+    rk={rk}
+    schedule={schedule}
+    statementHref={statementHref}
+/>

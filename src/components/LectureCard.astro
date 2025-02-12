@@ -1,0 +1,33 @@
+---
+const { title, href, description } = Astro.props;
+---
+
+<li>
+    <a href={href}>
+        <div
+            class="aspect-ratio-square link-card w-full bg-bg-secondary rounded-[30px] p-7.5 flex flex-col justify-between"
+        >
+            <div class="flex flex-col gap-5">
+                <h3 class="font-titles font-500">{title}</h3>
+                <ul class="flex flex-col gap-2">
+                    {description && description.map((d) => <li>{d}</li>)}
+                </ul>
+            </div>
+            <div class="w-full flex justify-end">
+                <button
+                    onclick={`window.location.href=${href}`}
+                    class="link-card-item-btn"></button>
+            </div>
+        </div>
+    </a>
+</li>
+<style>
+    .link-card-item-btn {
+        background: url("/src/assets/img/goto.svg") no-repeat center;
+        width: 50px;
+        height: 50px;
+        border: 1.5px solid var(--color-border);
+        border-radius: 100%;
+        color: var(--color-border);
+    }
+</style>

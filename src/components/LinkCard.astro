@@ -1,0 +1,31 @@
+---
+const { title, href, number } = Astro.props;
+---
+
+<li>
+    <a href={href}>
+        <div
+            class="link-card w-full bg-bg-secondary rounded-[30px] h-[220px] ] p-7.5 flex flex-col justify-between"
+        >
+            <div class="flex gap-5">
+                {number && <p class="text-text-tertiary">{number}</p>}
+                <h3 class="font-titles font-500">{title}</h3>
+            </div>
+            <div class="w-full flex justify-end">
+                <button
+                    onclick={`window.location.href=${href}`}
+                    class="link-card-item-btn"></button>
+            </div>
+        </div>
+    </a>
+</li>
+<style>
+    .link-card-item-btn {
+        background: url("/src/assets/img/goto.svg") no-repeat center;
+        width: 50px;
+        height: 50px;
+        border: 1.5px solid var(--color-border);
+        border-radius: 100%;
+        color: var(--color-border);
+    }
+</style>

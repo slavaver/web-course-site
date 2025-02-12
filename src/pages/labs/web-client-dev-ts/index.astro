@@ -1,99 +1,106 @@
 ---
 import { getCollection } from "astro:content";
 
-import BaseLayoutSnow from "../../../layouts/BaseLayoutSnow.astro";
+import CourseLayout from "../../../layouts/CourseLayout.astro";
 
 const yearOnMain = "2023";
 
 const allWebTech = await getCollection("web-client-dev-ts");
 
 const lastWebtech = allWebTech
-  .filter((material) => material.id.startsWith(yearOnMain))
-  .sort((a, b) => a.data.number - b.data.number);
+    .filter((material) => material.id.startsWith(yearOnMain))
+    .sort((a, b) => a.data.number - b.data.number);
+
+const schedule = lastWebtech.filter((post) => post.data.type === "schedule");
+const rk = lastWebtech.filter((post) => post.data.type === "rk");
+const statementHref =
+    "https://drive.google.com/drive/folders/1Ifv2U1KM9Xu-n8btd0lYwXjttPSIfc1j?usp=drive_link";
+
+const lectures = [
+    {
+        title: "Лекция 1",
+        description: ["Основы Typescript", "Vue.js"],
+        href: "http://labcolor.space/lecture1/index.html",
+    },
+    {
+        title: "Лекция 2",
+        description: [
+            "Псевдонимы типов",
+            "Объекты",
+            "Объединения и пересечения",
+        ],
+        href: "http://labcolor.space/lecture2/index.html",
+    },
+    {
+        title: "Лекция 3",
+        description: ["Package.json", "Классы", "Наследование", "Interface"],
+        href: "http://labcolor.space/lecture3/index.html",
+    },
+    {
+        title: "Лекция 4",
+        description: [
+            "Интерфейсы и типы",
+            "Контрактная разработка",
+            "Обобщения работа с ошибками",
+            "Предикаты",
+        ],
+        href: "http://labcolor.space/lecture4/index.html",
+    },
+    {
+        title: "Лекция 5",
+        description: [
+            "Отношения между типами",
+            "Утверждение типа",
+            "Работа с DOM",
+            "Асинхронные функции",
+        ],
+        href: "http://labcolor.space/lecture5/index.html",
+    },
+    {
+        title: "Лекция 6",
+        description: ["Модули", "Манипуляции с типами", "Utility types"],
+        href: "http://labcolor.space/lecture6/index.html",
+    },
+    {
+        title: "Лекция 7",
+        description: ["Petitue Vue", "WeakMap", "Proxy", "Vue"],
+        href: "http://labcolor.space/lecture7/index.html",
+    },
+    {
+        title: "Лекция 8",
+        description: [
+            "Введение во Vue",
+            "Vue Composition API",
+            "Основные директивы Vue",
+        ],
+        href: "http://labcolor.space/lecture8/index.html",
+    },
+    {
+        title: "Лекция 9",
+        description: ["Реактивность", "Unit Tests", "Vue Test"],
+        href: "http://labcolor.space/lecture9/index.html",
+    },
+];
 ---
 
-<BaseLayoutSnow>
-  <div class="prose lg:prose-lg mx-auto">
-    <h1>Веб-разработка на стороне клиента</h1>
-    <p>
-      <a
-        href="https://drive.google.com/drive/folders/1Ifv2U1KM9Xu-n8btd0lYwXjttPSIfc1j?usp=drive_link"
-        target="_blank">Ведомость и доп. материалы</a
-      >
-    </p>
-
-    {
-      lastWebtech
-        .filter((post) => post.data.type === "schedule")
-        .map((post) => (
-          <a href={`/web-course-site/labs/web-client-dev-ts/${post.slug}`}>
-            {post.data.title}
-          </a>
-        ))
-    }
-
-    <h2>Лекции</h2>
-
-    <p>
-      <a href="http://labcolor.space/lecture1/index.html" target="_blank"
-        >Лекция 1</a
-      >, <a href="http://labcolor.space/lecture2/index.html" target="_blank"
-        >Лекция 2</a
-      >, <a href="http://labcolor.space/lecture3/index.html" target="_blank"
-        >Лекция 3</a
-      >, <a href="http://labcolor.space/lecture4/index.html" target="_blank"
-        >Лекция 4</a
-      >, <a href="http://labcolor.space/lecture5/index.html" target="_blank"
-        >Лекция 5</a
-      >, <a href="http://labcolor.space/lecture6/index.html" target="_blank"
-        >Лекция 6</a
-      >, <a href="http://labcolor.space/lecture7/index.html" target="_blank"
-        >Лекция 7</a
-      >, <a href="http://labcolor.space/lecture8/index.html" target="_blank"
-        >Лекция 8</a
-      >, <a href="http://labcolor.space/lecture9/index.html" target="_blank"
-        >Лекция 9</a
-      >
-    </p>
-    <h2>Лабораторные работы</h2>
-    <ol class="columns">
-      {
-        lastWebtech
-          .filter((post) => post.data.type === "labs")
-          .sort((a, b) => a.data.number - b.data.number)
-          .map((post) => (
-            <li>
-              <a href={`/web-course-site/labs/web-client-dev-ts/${post.slug}`}>
-                {post.data.title}
-              </a>
-            </li>
-          ))
-      }
-    </ol>
-    <h3>Рубежный контроль</h3>
-    <ol class="columns">
-      {
-        lastWebtech
-          .filter((post) => post.data.type === "rk")
-          .map((post) => (
-            <li>
-              <a href={`/web-course-site/labs/web-client-dev-ts/${post.slug}`}>
-                {post.data.title}
-              </a>
-            </li>
-          )) || <li>Будут опубликованы к дате контроля</li>
-      }
-    </ol>
-  </div>
-</BaseLayoutSnow>
+<CourseLayout
+    title="Основы веб-разработки на стороне клиента"
+    description=""
+    labs={lastWebtech}
+    name="web-client-dev-ts"
+    rk={rk}
+    schedule={schedule}
+    statementHref={statementHref}
+    lectures={lectures}
+/>
 
 <style>
-  @media screen and (min-width: 500px) {
-    .columns {
-      columns: 2 1em;
+    @media screen and (min-width: 500px) {
+        .columns {
+            columns: 2 1em;
+        }
+        .columns > li {
+            margin-top: 0;
+        }
     }
-    .columns > li {
-      margin-top: 0;
-    }
-  }
 </style>
