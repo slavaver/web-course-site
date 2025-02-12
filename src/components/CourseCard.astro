@@ -1,0 +1,23 @@
+---
+const { course } = Astro.props;
+---
+
+<a href={course.href}>
+    <li
+        class="courses-item rounded-[30px] bg-bg-secondary p-5 md:p-7.5 lg:p-10 userActions"
+    >
+        <div class="flex flex-col md:flex-row justify-between">
+            <h3 class="courses-item-title no-break-hyphen">
+                {course.title}
+            </h3>
+            <div
+                class="max-w-auto md:max-w-[360px] gap-14 flex flex-col items-end"
+            >
+                <p class="courses-item-descr w-full">
+                    {course.descr}
+                </p>
+                <button class="courses-item-btn"></button>
+            </div>
+        </div>
+    </li>
+</a>

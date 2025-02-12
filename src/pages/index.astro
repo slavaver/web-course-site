@@ -1,4 +1,5 @@
 ---
+import CourseCard from "../components/CourseCard.astro";
 import PeopleCard from "../components/PeopleCard.astro";
 import UsefulCard from "../components/UsefulCard.astro";
 import BaseLayoutSnow from "../layouts/BaseLayoutSnow.astro";
@@ -18,6 +19,11 @@ const courses = [
         title: "Веб-разработка на клиенте",
         href: `/web-course-site/labs/web-client-dev-ts`,
         descr: "Изучаем основы работы с типами и язык TypeScript, а также осваиваем применение фреймворка Vue",
+    },
+    {
+        title: "Тестовый курс, который не влез",
+        href: `/web-course-site/labs/web-test`,
+        descr: "Ну тест и тест, че бубнить то",
     },
 ];
 
@@ -111,32 +117,26 @@ const useful = [...usefulStatic, ...usefulDynamic];
             class="courses-container max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto"
         >
             <h2 class="courses-title light:text-text-secondary title">Курсы</h2>
-            <ul class="courses-list flex flex-col gap-5">
-                {
-                    courses.map((course) => (
-                        <a href={course.href}>
-                            <li class="courses-item rounded-[30px] bg-bg-secondary p-5 md:p-7.5 lg:p-10 userActions">
-                                <div class="flex flex-col md:flex-row justify-between ">
-                                    <h3 class="courses-item-title no-break-hyphen">
-                                        {course.title}
-                                    </h3>
-                                    <div class="max-w-auto md:max-w-[360px] gap-14 flex flex-col items-end">
-                                        <p class="courses-item-descr">
-                                            {course.descr}
-                                        </p>
-                                        <button class="courses-item-btn" />
-                                    </div>
-                                </div>
-                            </li>
-                        </a>
-                    ))
-                }
-                <button
-                    class="font-titles font-600 bg-bg-accent_second px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
-                    onclick={`window.location.href='/web-course-site/courses/'`}
-                    >Показать все</button
-                >
+            <ul class="courses-list flex flex-col">
+                <div id="staticCourses" class="flex flex-col gap-5 mb-5">
+                    {
+                        courses
+                            .slice(0, 3)
+                            .map((course) => <CourseCard course={course} />)
+                    }
+                </div>
+                <div id="hiddenCourses" class="flex flex-col gap-5">
+                    {
+                        courses
+                            .slice(3)
+                            .map((course) => <CourseCard course={course} />)
+                    }
+                </div>
             </ul>
+            <button
+                class="font-titles w-full font-600 bg-bg-accent_second px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
+                id="showMoreCoursesBtn">Показать все</button
+            >
         </div>
     </section>
     <section class="section-teachers mb-30">
@@ -232,46 +232,70 @@ const useful = [...usefulStatic, ...usefulDynamic];
             </ul>
         </div>
     </section>
-
-    <style>
-        .section-hero,
-        .section-useful {
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .section-hero::before,
-        .section-useful::before {
-            content: "";
-            position: absolute;
-            z-index: -1;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--color-bg-accent-first);
-            -webkit-mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 728" fill="none"%3E%3Cpath d="M-384.828 550.33C-279.518 431.882 -29.173 211.72 129.724 278.664C328.344 362.345 -156.414 623.403 -2.48331 780.746C176.815 964.017 967.034 -77.2714 1180.55 48.249C1394.07 173.769 1062.62 452.507 1180.55 550.33C1274.9 628.589 1460.28 401.827 1541.17 278.664" stroke="black" stroke-width="150"/%3E%3C/svg%3E');
-            mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 728" fill="none"%3E%3Cpath d="M-384.828 550.33C-279.518 431.882 -29.173 211.72 129.724 278.664C328.344 362.345 -156.414 623.403 -2.48331 780.746C176.815 964.017 967.034 -77.2714 1180.55 48.249C1394.07 173.769 1062.62 452.507 1180.55 550.33C1274.9 628.589 1460.28 401.827 1541.17 278.664" stroke="black" stroke-width="150"/%3E%3C/svg%3E');
-            -webkit-mask-repeat: no-repeat;
-            mask-repeat: no-repeat;
-            -webkit-mask-size: cover;
-            mask-size: cover;
-        }
-
-        .courses-item-btn {
-            background: url("./src/assets/img/goto.svg") no-repeat center;
-            width: 50px;
-            height: 50px;
-            border: 1.5px solid var(--color-border);
-            border-radius: 100%;
-            color: var(--color-border);
-        }
-    </style>
 </BaseLayoutSnow>
+
+<style>
+    .section-hero,
+    .section-useful {
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    .section-hero::before,
+    .section-useful::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--color-bg-accent-first);
+        -webkit-mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 728" fill="none"%3E%3Cpath d="M-384.828 550.33C-279.518 431.882 -29.173 211.72 129.724 278.664C328.344 362.345 -156.414 623.403 -2.48331 780.746C176.815 964.017 967.034 -77.2714 1180.55 48.249C1394.07 173.769 1062.62 452.507 1180.55 550.33C1274.9 628.589 1460.28 401.827 1541.17 278.664" stroke="black" stroke-width="150"/%3E%3C/svg%3E');
+        mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 728" fill="none"%3E%3Cpath d="M-384.828 550.33C-279.518 431.882 -29.173 211.72 129.724 278.664C328.344 362.345 -156.414 623.403 -2.48331 780.746C176.815 964.017 967.034 -77.2714 1180.55 48.249C1394.07 173.769 1062.62 452.507 1180.55 550.33C1274.9 628.589 1460.28 401.827 1541.17 278.664" stroke="black" stroke-width="150"/%3E%3C/svg%3E');
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-size: cover;
+        mask-size: cover;
+    }
+
+    .courses-item-btn {
+        background: url("./src/assets/img/goto.svg") no-repeat center;
+        width: 50px;
+        height: 50px;
+        border: 1.5px solid var(--color-border);
+        border-radius: 100%;
+        color: var(--color-border);
+    }
+
+    #hiddenCourses {
+        max-height: 0vh;
+        overflow: hidden;
+        transition: 0.3s;
+    }
+    #hiddenCourses.open {
+        max-height: 100vh;
+        margin-bottom: 1.25rem;
+    }
+</style>
 
 <script>
     document.querySelectorAll(".no-break-hyphen").forEach((el) => {
         el.innerHTML = el.innerHTML.replace(/-/g, "&#8209;");
+    });
+
+    const showMoreCoursesBtn = document.getElementById("showMoreCoursesBtn");
+    const hiddenCourses = document.getElementById("hiddenCourses");
+    const showMoreTexts = ["Показать все", "Спрятать"];
+    showMoreCoursesBtn?.addEventListener("click", () => {
+        hiddenCourses?.classList.toggle("open");
+        showMoreCoursesBtn.textContent = showMoreCoursesBtn.textContent =
+            showMoreTexts[
+                showMoreTexts.indexOf(showMoreCoursesBtn.textContent ?? "") ===
+                0
+                    ? 1
+                    : 0
+            ];
     });
 </script>
