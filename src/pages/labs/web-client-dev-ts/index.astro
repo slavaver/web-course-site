@@ -1,15 +1,13 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection } from 'astro:content';
 
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 
-const yearOnMain = "2023";
+const filterCourses = ['client-side/', 'full-time/', '2023']
 
-const allWebTech = await getCollection("web-client-dev-ts");
+let allCoursess = await getCollection('courses', ({id}) => filterCourses.map(crit => id.includes(crit)).every(item => item));
 
-const lastWebtech = allWebTech
-  .filter((material) => material.id.startsWith(yearOnMain))
-  .sort((a, b) => a.data.number - b.data.number);
+allCoursess.sort((a, b) => a.data.number - b.data.number);
 ---
 
 <BaseLayout>
@@ -23,10 +21,10 @@ const lastWebtech = allWebTech
     </p>
 
     {
-      lastWebtech
+      allCoursess
         .filter((post) => post.data.type === "schedule")
         .map((post) => (
-          <a href={`/web-course-site/labs/web-client-dev-ts/${post.slug}`}>
+          <a href={`/web-course-site/labs/${post.id}`}>
             {post.data.title}
           </a>
         ))
@@ -58,12 +56,12 @@ const lastWebtech = allWebTech
     <h2>Лабораторные работы</h2>
     <ol class="columns">
       {
-        lastWebtech
+        allCoursess
           .filter((post) => post.data.type === "labs")
           .sort((a, b) => a.data.number - b.data.number)
           .map((post) => (
             <li>
-              <a href={`/web-course-site/labs/web-client-dev-ts/${post.slug}`}>
+              <a href={`/web-course-site/labs/${post.id}`}>
                 {post.data.title}
               </a>
             </li>
@@ -73,11 +71,11 @@ const lastWebtech = allWebTech
     <h3>Рубежный контроль</h3>
     <ol class="columns">
       {
-        lastWebtech
+        allCoursess
           .filter((post) => post.data.type === "rk")
           .map((post) => (
             <li>
-              <a href={`/web-course-site/labs/web-client-dev-ts/${post.slug}`}>
+              <a href={`/web-course-site/labs/${post.id}`}>
                 {post.data.title}
               </a>
             </li>

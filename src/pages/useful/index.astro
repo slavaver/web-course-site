@@ -1,8 +1,8 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-
 import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import ListOfPosts from "../../components/ListOfPosts.astro";
+
 const allUsefull = await getCollection("useful");
 ---
 

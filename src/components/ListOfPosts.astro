@@ -12,7 +12,7 @@ const baseUrl = import.meta.env.BASE_URL;
           <h3 class="card-title">{post.data.title}</h3>
           <p>{post.data.description}</p>
           <div class="card-actions justify-end">
-            <a class="btn btn-primary" href={baseUrl+'/useful/'+post.slug}>
+            <a class="btn btn-primary" href={baseUrl+'/useful/'+post.id}>
               <span class="sr-only">Материал о {post.data.title}</span>
               <svg
                 aria-hidden="true"

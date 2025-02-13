@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 
-const filterCourses = ['web-basics/', 'full-time/', '2024']
+const filterCourses = ['client-side-basics/', 'distance/', '2024']
 
 let allCoursess = await getCollection('courses', ({id}) => filterCourses.map(crit => id.includes(crit)).every(item => item));
 
@@ -12,13 +12,7 @@ allCoursess.sort((a, b) => a.data.number - b.data.number);
 
 <BaseLayout>
   <div class="prose lg:prose-lg mx-auto">
-    <h1>Основы веб-технологий</h1>
-    <p>
-      <a
-        href="https://docs.google.com/spreadsheets/d/1ex4WJz5JM003zWcFaSMEy-rjsCUg_umqwixbh-9DJAo/edit?gid=0#gid=0"
-        target="_blank">Ведомость</a
-      >
-    </p>
+    <h1>Основы веб-разработки на стороне клиента (заочное)</h1>
     {
       allCoursess
         .filter((post) => post.data.type === "schedule")
@@ -29,7 +23,7 @@ allCoursess.sort((a, b) => a.data.number - b.data.number);
         ))
     }
     <h2>Лабораторные работы</h2>
-    <ol class="columns" start="0">
+    <ol class="columns">
       {
         allCoursess
           .filter((post) => post.data.type === "labs")

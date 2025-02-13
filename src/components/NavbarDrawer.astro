@@ -1,27 +1,5 @@
 ---
 import ThemeToggler from "./navigation/ThemeToggler.astro";
-
-import { getCollection } from "astro:content";
-
-const yearOnMain = "2023";
-
-const allWebTech = await getCollection("web-tech");
-
-const lastWebtech = allWebTech
-  .filter((material) => material.id.startsWith(yearOnMain))
-  .sort((a, b) => a.data.number - b.data.number);
-
-const clinetMaterials = await getCollection("web-client-dev");
-
-const lastClinetMaterials = clinetMaterials
-  .filter((material) => material.id.startsWith(yearOnMain))
-  .sort((a, b) => a.data.number - b.data.number);
-
-const clinetMaterialsTs = await getCollection("web-client-dev-ts");
-
-const lastClinetMaterialsTs = clinetMaterialsTs
-  .filter((material) => material.id.startsWith(yearOnMain))
-  .sort((a, b) => a.data.number - b.data.number);
 ---
 
 <div class="drawer">
@@ -29,8 +7,12 @@ const lastClinetMaterialsTs = clinetMaterialsTs
   <div class="drawer-content flex flex-col">
     <!-- Navbar -->
     <div class="navbar max-w-4xl mx-auto text-neutral">
-      <div class="flex-none lg:hidden">
-        <label for="my-drawer-3" class="btn btn-square btn-ghost">
+      <div class="flex-1 md:hidden">
+        <label
+          for="my-drawer-3"
+          aria-label="открыть меню"
+          class="btn btn-square btn-ghost"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -44,7 +26,7 @@ const lastClinetMaterialsTs = clinetMaterialsTs
           >
         </label>
       </div>
-      <div class="flex-1 px-2 mx-2">
+      <div class="px-2 mx-2">
         <a
           class="normal-case text-xl"
           href="/web-course-site/"
@@ -55,7 +37,8 @@ const lastClinetMaterialsTs = clinetMaterialsTs
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="w-6 h-6">
+            class="w-6 h-6"
+          >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -64,22 +47,36 @@ const lastClinetMaterialsTs = clinetMaterialsTs
           </svg>
         </a>
       </div>
-      <div class="flex-none hidden lg:block">
-        <ul class="menu menu-horizontal">
-          <!-- Navbar menu content here -->
+      <div class="flex-1 justify-center hidden md:flex">
+        <ul class="menu menu-horizontal px-1">
           <li>
-            <a href="/web-course-site/labs/web-tech">Основы веб-технологий</a>
+            <details>
+              <summary>Курсы</summary>
+              <ul class="p-2">
+                <li class="w-max">
+                  <a href="/web-course-site/labs/web-tech"
+                    >Основы веб-технологий</a
+                  >
+                </li>
+                <li class="w-max">
+                  <a href="/web-course-site/labs/web-client-dev"
+                    >Основы веб-разработки на клиенте</a
+                  >
+                </li>
+                <li class="w-max">
+                  <a href="/web-course-site/labs/web-client-dev-distance"
+                    >Основы веб-разработки на клиенте (заочное)</a
+                  >
+                </li>
+                <li class="w-max">
+                  <a href="/web-course-site/labs/web-client-dev-ts"
+                    >Веб-разработка на клиенте</a
+                  >
+                </li>
+              </ul>
+            </details>
           </li>
-          <li>
-            <a href="/web-course-site/labs/web-client-dev"
-              >Основы веб-разработки</a
-            >
-          </li>
-          <li>
-            <a href="/web-course-site/labs/web-client-dev-ts"
-              >Веб-разработка на клиенте</a
-            >
-          </li>
+
           <li><a href="/web-course-site/useful">Полезное</a></li>
           <li><a href="/web-course-site/labs/archive">Архив</a></li>
         </ul>
@@ -89,67 +86,32 @@ const lastClinetMaterialsTs = clinetMaterialsTs
     <slot />
   </div>
   <div class="drawer-side">
-    <label for="my-drawer-3" class="drawer-overlay"></label>
+    <label for="my-drawer-3" class="drawer-overlay" aria-label="закрыть меню"
+    ></label>
     <ul class="menu p-4 w-80 h-full bg-base-200 flex-nowrap overflow-x-auto">
       <!-- Sidebar content here -->
       <li>
-        <details>
-          <summary>Основы веб-технологий</summary>
-          <ul>
-            {
-              lastWebtech
-                .sort((a, b) => a.data.number - b.data.number)
-                .map((post) => (
-                  <li>
-                    <a href={`/web-course-site/labs/web-tech/${post.slug}`}>
-                      {post.data.title}
-                    </a>
-                  </li>
-                ))
-            }
-          </ul>
-        </details>
+        <li>
+          <a href="/web-course-site/labs/web-tech">Основы веб-технологий</a>
+        </li>
+        <li>
+          <a href="/web-course-site/labs/web-client-dev"
+            >Основы веб-разработки</a
+          >
+        </li>
+        <li>
+          <a href="/web-course-site/labs/web-client-dev-distance"
+            >Основы веб-разработки (заочное)</a
+          >
+        </li>
+        <li>
+          <a href="/web-course-site/labs/web-client-dev-ts"
+            >Веб-разработка на клиенте</a
+          >
+        </li>
+        <li><a href="/web-course-site/useful">Полезное</a></li>
+        <li><a href="/web-course-site/labs/archive">Архив</a></li>
       </li>
-      <li>
-        <details>
-          <summary>Основы веб-разработки на стороне клиента</summary>
-          <ul>
-            {
-              lastClinetMaterials
-                .sort((a, b) => a.data.number - b.data.number)
-                .map((post) => (
-                  <li>
-                    <a
-                      href={`/web-course-site/labs/web-client-dev/${post.slug}`}>
-                      {post.data.title}
-                    </a>
-                  </li>
-                ))
-            }
-          </ul>
-        </details>
-      </li>
-      <li>
-        <details>
-          <summary>Веб-разработка на стороне клиента</summary>
-          <ul>
-            {
-              lastClinetMaterialsTs
-                .sort((a, b) => a.data.number - b.data.number)
-                .map((post) => (
-                  <li>
-                    <a
-                      href={`/web-course-site/labs/web-client-dev-ts/${post.slug}`}>
-                      {post.data.title}
-                    </a>
-                  </li>
-                ))
-            }
-          </ul>
-        </details>
-      </li>
-      <li><a href="/web-course-site/useful">Полезное</a></li>
-      <li><a href="/web-course-site/labs/archive">Архив</a></li>
     </ul>
   </div>
 </div>

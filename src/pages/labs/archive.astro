@@ -1,26 +1,65 @@
 ---
 import { getCollection } from "astro:content";
+import BaseLayout from "/src/layouts/BaseLayout.astro";
 
-import BaseLayout from "../../layouts/BaseLayout.astro";
+const allCourses = await getCollection("courses");
 
-const yearOnMain = "2022";
+function groupBySlug(array, position) {
+  return Object.entries(
+    Object.groupBy(array, (item) => item.id.split("/")[position])
+  );
+}
 
-const allWebTech = await getCollection("web-tech");
-const allWebClient = await getCollection("web-client-dev");
+const coursesNames = new Map([
+  ["client-side", "Веб-разработка на стороне клиента"],
+  ["client-side-basics", "Основы веб-разработки на стороне клиента"],
+  ["web-basics", "Основы веб-технологий"],
+]);
 
-const lastWebtech = allWebTech
-  .filter((material) => material.id.startsWith(yearOnMain))
-  .sort((a, b) => a.data.number - b.data.number);
+const form = new Map([
+  ["distance", "Заочная форма"],
+  ["full-time", "Очная форма"],
+]);
 
-const lastWebClient = allWebClient
-  .filter((material) => material.id.startsWith(yearOnMain))
-  .sort((a, b) => a.data.number - b.data.number);
+// console.dir(groupBySlug(allCourses, 2)[0][1], {depth: 0});
+
+// (post) => (
+//           <li>
+//             <a href={`/web-course-site/labs/${post.id}`}>{post.data.title}</a>
+//           </li>
+//         )
 ---
 
 <BaseLayout>
   <div class="prose lg:prose-lg mx-auto">
-    <h1>Архив {yearOnMain} год</h1>
-    <details>
+    <h1>Все курсы</h1>
+    {
+      groupBySlug(allCourses, 2).map(([year, courses]) => (
+        <h2>{year} год поступления</h2>
+        <>{groupBySlug(courses, 1).map(([type, courses]) => (
+          <h3>{form.get(type)}</h3>
+          <>
+            {groupBySlug(courses, 0).map(([name, courses]) => (
+              <details>
+              <summary>
+                {coursesNames.get(name)}
+              </summary>
+                <ol>
+                  {courses
+                  .filter((courses) => courses.data.type === "labs")
+                  .map(item => (
+                    <li><a href={`/web-course-site/labs/${item.id}`}>{item.data.title}</a></li>
+                  ))}
+                </ol>
+
+              </details>
+            ))}
+          </>
+        ))}</>
+      ))
+    }
+
+    <!-- <details>
       <summary>Основы веб-технологий</summary>
       <ol class="columns">
         {
@@ -47,6 +86,6 @@ const lastWebClient = allWebClient
           ))
         }
       </ol>
-    </details>
+    </details> -->
   </div>
 </BaseLayout>
