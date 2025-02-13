@@ -11,6 +11,7 @@ export default defineConfig({
                 secondary: "var(--color-text-secondary)",
                 tertiary: "var(--color-text-tertiary)",
                 inverted: "var(--color-text-inverted)",
+                number: "var(--color-number)",
             },
             bg: {
                 screen: "var(--color-bg-screen)",
@@ -38,6 +39,7 @@ export default defineConfig({
                 hover: "var(--color-bg-hover-input)",
             },
             border: "var(--color-border)",
+            code: "var(--color-code)",
         },
         fontFamily: {
             texts: ["Gilroy", "sans-serif"],
@@ -66,6 +68,8 @@ export default defineConfig({
                 "--color-text-input": "#0B163B",
                 "--color-border-input": "#4969DC",
                 "--color-bg-hover-input": "#D4DDFF",
+                "--color-code": "#D4DDFF",
+                "--color-number": "#FFFFFF",
             },
         ],
         [
@@ -87,6 +91,8 @@ export default defineConfig({
                 "--color-text-input": "#FFFFFF",
                 "--color-border-input": "#3A4F96",
                 "--color-bg-hover-input": "#3A4F96",
+                "--color-code": "#0B163B",
+                "--color-number": "#C5D6FF",
             },
         ],
     ],

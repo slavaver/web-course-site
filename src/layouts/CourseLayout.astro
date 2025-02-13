@@ -44,7 +44,9 @@ const {
         <div
             class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30"
         >
-            <h2 class="text-center mb-10">Лабораторные работы</h2>
+            <h2 class="text-center mb-10 text-text-inverted">
+                Лабораторные работы
+            </h2>
             <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
                 {
                     labs &&
@@ -123,7 +125,7 @@ const {
         <div
             class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30"
         >
-            <h2 class="text-center">Рубежный контроль</h2>
+            <h2 class="text-center text-text-inverted">Рубежный контроль</h2>
             <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
                 {
                     rk && rk.length !== 0 ? (
@@ -135,7 +137,7 @@ const {
                         ))
                     ) : (
                         <li class="col-span-2">
-                            <p class="font-texts text-center">
+                            <p class="font-texts text-center text-text-inverted">
                                 Задания появятся ближе к дате рк
                             </p>
                         </li>
@@ -146,7 +148,7 @@ const {
     </section>
 </BaseLayoutSnow>
 
-<style>
+<style scoped>
     .section-lectures {
         position: relative;
         overflow: hidden;
