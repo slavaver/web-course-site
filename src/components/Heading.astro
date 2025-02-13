@@ -1,12 +1,12 @@
 ---
-const { title, description } = Astro.props;
+const { title, description, number } = Astro.props;
 ---
 
 <section
-    class="section-hero bg-bg-primary rounded-b-[30px] md:rounded-b-[60px] h-[440px] md:h-[518px] pb-20 mb-20 relative"
+    class="section-hero bg-bg-primary rounded-b-[30px] md:rounded-b-[60px] pt-42.5 pb-25 mb-20 relative flex justify-center items-end"
 >
     <div
-        class="hero-container flex flex-col justify-end h-full text-center items-center"
+        class="hero-container flex flex-col justify-end h-full text-center items-center md:w-2/3"
     >
         <button
             onclick="history.back()"
@@ -17,10 +17,9 @@ const { title, description } = Astro.props;
                 class="mb-1"
             /><span>Назад</span></button
         >
+        {number && <h2>{number}</h2>}
         <h1 class="line-height-[1] test">{title}</h1>
-        <p class="mb-7.5 w-2/3 md:max-w-1/3">
-            {description}
-        </p>
+        {description && <p class="mb-7.5 w-full  md:w-2/3">{description}</p>}
     </div>
 </section>
 <style>

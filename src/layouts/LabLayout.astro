@@ -1,47 +1,115 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 // import Breadcrumbs from "../components/navigation/Breadcrumbs.astro";
+import Heading from "../components/Heading.astro";
 import ButtonTop from "../components/navigation/ButtonTop.astro";
-import FancyHeading from "../components/FancyHeading.astro";
-import TOC from "../components/navigation/TOC.astro";
 import Pagination from "../components/navigation/Pagination.astro";
+import TOC from "../components/navigation/TOC.astro";
 
 const { slug, frontmatter, headinglist, collection } = Astro.props;
 
 let number;
 
 if (frontmatter.number && frontmatter.number?.length == 1) {
-  number = "0" + frontmatter.number;
+    number = "0" + frontmatter.number;
 }
 ---
 
 <BaseLayout title={frontmatter.title}>
-  <ButtonTop />
-  <article class="max-w-prose xl:max-w-full mx-auto">
-    <FancyHeading heading={frontmatter.title} number={number} />
-    <div class="xl:grid grid-cols-[1fr_600px_1fr] gap-4 items-start">
-      <aside
-        class="prose self-start xl:justify-self-end top-16 pt-6 xl:pr-6 xl:pt-0 mb-14 xl:mb-0 xl:sticky">
-        {frontmatter.type !== "schedule" && <TOC headings={headinglist} />}
-      </aside>
-      <div class="md prose lg:prose-lg">
-        <slot />
-      </div>
+    <ButtonTop />
+    <Heading title={frontmatter.title} number={number} />
+    <article class="max-w-prose xl:max-w-full mx-auto">
+        <div class="xl:grid grid-cols-[1fr_700px_1fr] gap-4 items-start">
+            <aside
+                class="side mx-auto top-25 pt-6 xl:px-6 xl:pt-0 mb-14 xl:mb-0 xl:sticky"
+            >
+                {
+                    frontmatter.type !== "schedule" && (
+                        <TOC headings={headinglist} />
+                    )
+                }
+            </aside>
+            <div class="md prose lg:prose-lg">
+                <slot />
+            </div>
+        </div>
+    </article>
+    <div class="mb-20">
+        {
+            frontmatter.type === "labs" && (
+                <Pagination collection={collection} slug={slug} />
+            )
+        }
     </div>
-  </article>
-  {
-    frontmatter.type === "labs" && (
-      <Pagination collection={collection} slug={slug} />
-    )
-  }
 </BaseLayout>
 
 <style>
-  .md > :global(h1) {
-    display: none;
-  }
+    .side > :global(h2) {
+        font-size: 28px;
+        font-weight: 600;
+    }
+    .side > :global(ul > li > a) {
+        word-wrap: break-word;
+        text-decoration: underline;
+    }
 
-  .md :global(a) {
-    word-wrap: break-word;
-  }
+    .md > :global(h1) {
+        display: none;
+    }
+
+    .md :global(a) {
+        word-wrap: break-word;
+        color: var(--color-text-tertiary);
+        text-decoration: underline;
+    }
+
+    .md > :global(p) {
+        margin-bottom: 20px;
+    }
+
+    .md > :global(h2) {
+        font-size: 38px;
+        line-height: 1;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    .md > :global(h3) {
+        font-size: 28px;
+        line-height: 1;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    .md > :global(ul, ol) {
+        list-style-type: disc;
+        font-size: 20px;
+        padding-left: 25px;
+        margin-bottom: 20px;
+    }
+
+    .md > :global(pre) {
+        margin-bottom: 20px;
+        padding: 20px;
+        border-radius: 15px;
+        background-color: var(--color-bg-menu) !important;
+    }
+    .md > :global(pre > code) {
+        font-family: "JetBrainsMono" !important;
+        border-radius: 15px;
+    }
+
+    .md > :global(ol > li > code) {
+        padding: 2px 5px;
+        border-radius: 5px;
+        background-color: var(--color-bg-menu) !important;
+    }
+
+    .md > :global(pre > code > span > span) {
+        font-size: clamp(14px, 2vw, 16px);
+    }
+
+    .md > :global(ol) {
+        list-style-type: decimal;
+    }
 </style>

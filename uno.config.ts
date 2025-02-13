@@ -42,6 +42,7 @@ export default defineConfig({
         fontFamily: {
             texts: ["Gilroy", "sans-serif"],
             titles: ["NextArt", "sans-serif"],
+            mono: ["JetBrainsMono", "monospace"],
         },
     },
 
@@ -130,6 +131,12 @@ export default defineConfig({
                 font-family: "NextArt";
                 src: url("/src/assets/fonts/nextart/NEXTART_Bold.otf");
                 font-weight: 700;
+            }
+
+            @font-face {
+                font-family: "JetBrainsMono";
+                src: url(/src/assets/fonts/jetbrains/JetBrainsMono.ttf);
+                font-weight:1-999
             }
 
             h1,h2,h3 {

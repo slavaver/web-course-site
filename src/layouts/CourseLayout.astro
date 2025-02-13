@@ -51,10 +51,10 @@ const {
                         labs
                             .filter((post) => post.data.type === "labs")
                             .sort((a, b) => a.data.number - b.data.number)
-                            .map((post, index) => (
+                            .map((post) => (
                                 <LinkCard
                                     title={post.data.title}
-                                    number={(index / 10)
+                                    number={(post.data.number / 10)
                                         .toFixed(1)
                                         .toString()
                                         .split(".")

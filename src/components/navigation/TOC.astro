@@ -1,28 +1,31 @@
 ---
-
 const { headings } = Astro.props;
 
-headings.shift()
+// headings.shift();
 
 const marginVariants = {
-  0: "ml-0",
-  1: "ml-2",
-  2: "ml-4",
-  3: "ml-6",
-  4: "ml-8",
-  5: "ml-10",
-}
-
+    0: "ml-0",
+    1: "ml-2",
+    2: "ml-4",
+    3: "ml-6",
+    4: "ml-8",
+    5: "ml-10",
+};
 ---
+
 <h2 class="mt-6">Содержание</h2>
 <ul class="list-none !p-0 leading-tight">
-  {headings.map((heading) => (
-    <li class:list={["mb-2.5", marginVariants[heading.depth-1]]}><a class="font-thin" href={"#"+heading.slug}>{heading.text}</a></li>
-  ))}
+    {
+        headings.map((heading) => (
+            <li class:list={["mb-2.5", marginVariants[heading.depth - 1]]}>
+                <a class="font-thin" href={"#" + heading.slug}>
+                    {heading.text}
+                </a>
+            </li>
+        ))
+    }
 </ul>
-
 
 <!-- <script>
   import "/src/scripts/scrollspy.js"
 </script> -->
-

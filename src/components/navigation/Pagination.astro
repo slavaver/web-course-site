@@ -5,71 +5,78 @@ const { collection, slug } = Astro.props;
 
 const allMaterials = await getCollection(collection);
 const materialsOfYear = allMaterials
-  .filter((material) => material.data.type === "labs")
-  .sort((a, b) => (a.id < b.id ? -1 : 1));
+    .filter((material) => material.data.type === "labs")
+    .sort((a, b) => (a.id < b.id ? -1 : 1));
 
 const currentIdx = materialsOfYear.findIndex((a) => a.slug === slug);
 
 function isSameYear(a, b) {
-  return b?.split("/")[0] === a?.split("/")[0];
+    return b?.split("/")[0] === a?.split("/")[0];
 }
 ---
 
 <div class="join max-w-xs sm:max-w-prose grid grid-cols-2 mx-auto gap-1 mt-10">
-  {
-    currentIdx - 1 >= 0 &&
-    isSameYear(slug, materialsOfYear[currentIdx - 1].slug) ? (
-      <a
-        href={`/web-course-site/labs/${collection}/${
-          materialsOfYear[currentIdx - 1].slug
-        }`}
-        class="btn btn-outline join-item sm:col-start-1 px-2">
-        <svg
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-6 h-6">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M15.75 19.5L8.25 12l7.5-7.5"
-          />
-        </svg>
-        {`К работе №${materialsOfYear[currentIdx - 1].data.number}`}
-      </a>
-    ) : (
-      <div />
-    )
-  }
-  {
-    currentIdx + 1 < materialsOfYear.length &&
-    isSameYear(slug, materialsOfYear[currentIdx + 1].slug) ? (
-      <a
-        href={`/web-course-site/labs/${collection}/${
-          materialsOfYear[currentIdx + 1].slug
-        }`}
-        class="btn btn-outline join-item sm:col-start-2 px-2">
-        {`К работе №${materialsOfYear[currentIdx + 1].data.number}`}
-        <svg
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-6 h-6">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M8.25 4.5l7.5 7.5-7.5 7.5"
-          />
-        </svg>
-      </a>
-    ) : (
-      <div />
-    )
-  }
+    {
+        currentIdx - 1 >= 0 &&
+        isSameYear(slug, materialsOfYear[currentIdx - 1].slug) ? (
+            <a
+                href={`/web-course-site/labs/${collection}/${
+                    materialsOfYear[currentIdx - 1].slug
+                }`}
+                class="flex py-4 border-1 border-bg-accent_second rounded-[15px] justify-center items-center text-bg-accent_second font-titles"
+            >
+                <svg
+                    width="25"
+                    height="24"
+                    viewBox="0 0 25 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="mb-1"
+                >
+                    <path
+                        d="M8 6L1 13L8 20"
+                        stroke="#FF5391"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+
+                {`Предыдущая`}
+            </a>
+        ) : (
+            <div />
+        )
+    }
+    {
+        currentIdx + 1 < materialsOfYear.length &&
+        isSameYear(slug, materialsOfYear[currentIdx + 1].slug) ? (
+            <a
+                href={`/web-course-site/labs/${collection}/${
+                    materialsOfYear[currentIdx + 1].slug
+                }`}
+                class="flex border-1 py-4 border-bg-accent_second rounded-[15px] justify-center items-center text-bg-accent_second font-titles"
+            >
+                {`Следующая`}
+                <svg
+                    width="26"
+                    height="24"
+                    viewBox="0 0 26 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="mb-1"
+                >
+                    <path
+                        d="M17.5 6L24.5 13L17.5 20"
+                        stroke="#FF5391"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+            </a>
+        ) : (
+            <div />
+        )
+    }
 </div>

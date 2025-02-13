@@ -11,6 +11,7 @@ const lastWebtech = allWebTech
     .filter((material) => material.id.startsWith(yearOnMain))
     .sort((a, b) => a.data.number - b.data.number);
 
+const labs = lastWebtech.filter((post) => post.data.type === "labs");
 const schedule = lastWebtech.filter((post) => post.data.type === "schedule");
 const rk = lastWebtech.filter((post) => post.data.type === "rk");
 const statementHref =
