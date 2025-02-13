@@ -10,8 +10,12 @@ const { slug, frontmatter, headinglist, collection } = Astro.props;
 
 let number;
 
-if (frontmatter.number && frontmatter.number?.length == 1) {
-    number = "0" + frontmatter.number;
+if (frontmatter.number) {
+    number = (parseInt(frontmatter.number) / 10)
+        .toFixed(1)
+        .toString()
+        .split(".")
+        .join("");
 }
 ---
 
@@ -99,25 +103,26 @@ if (frontmatter.number && frontmatter.number?.length == 1) {
         padding: 20px;
         border-radius: 15px;
         background-color: var(--color-code) !important;
-        color: var(--color-text-inverted) !important;
+        color: var(--color-text-primary) !important;
     }
+
     .md > :global(pre > code) {
         font-family: "JetBrainsMono" !important;
         border-radius: 15px;
     }
 
-    .md > :global(ol > li code) {
+    .md > :global(ol > li code, ul > li code) {
         padding: 2px 10px;
         border-radius: 5px;
-        background-color: var(--color-code) !important;
-    }
-
-    .md > :global(pre > code > span > span) {
-        font-size: clamp(14px, 2vw, 16px);
+        background-color: var(--color-code-snaps) !important;
     }
 
     .md > :global(ol) {
         list-style-type: decimal;
+    }
+
+    .md > :global(pre > code > span > span) {
+        font-size: clamp(14px, 2vw, 16px);
     }
 
     .md > :global(table) {
@@ -145,6 +150,22 @@ if (frontmatter.number && frontmatter.number?.length == 1) {
     }
 
     .md > :global(table > tbody > tr:nth-child(even)) {
-        background-color: var(--color-code);
+        background-color: var(--color-code-snaps);
+    }
+
+    .md > :global(div.warning) {
+        border: 1px solid #ff5050;
+        color: #ff5050;
+        background-color: rgba(255, 130, 130, 0.1);
+        font-size: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    .md > :global(p > img),
+    .md > :global(svg) {
+        border-radius: 10px;
+        margin-bottom: 20px;
     }
 </style>

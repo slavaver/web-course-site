@@ -3,11 +3,11 @@ import { getCollection } from "astro:content";
 import LabLayout from "/src/layouts/LabLayout.astro";
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection("web-tech");
-  return blogEntries.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }));
+    const blogEntries = await getCollection("web-tech");
+    return blogEntries.map((entry) => ({
+        params: { slug: entry.slug },
+        props: { entry },
+    }));
 }
 
 const { entry } = Astro.props;
@@ -15,27 +15,10 @@ const { Content, headings } = await entry.render();
 ---
 
 <LabLayout
-  slug={entry.slug}
-  frontmatter={entry.data}
-  headinglist={headings}
-  collection={"web-tech"}
+    slug={entry.slug}
+    frontmatter={entry.data}
+    headinglist={headings}
+    collection={"web-tech"}
 >
-  <Content />
-  <a
-    href="http://mentor-bot.online/"
-    class="link text-neutral alert alert-warning mx-auto"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      class="h-6 w-6 shrink-0 stroke-current"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-    </svg>Задать вопрос наставнику</a
-  >
+    <Content />
 </LabLayout>

@@ -1,6 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 
+import Heading from "../../components/Heading.astro";
+import LinkCard from "../../components/LinkCard.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const yearOnMain = "2022";
@@ -9,44 +11,188 @@ const allWebTech = await getCollection("web-tech");
 const allWebClient = await getCollection("web-client-dev");
 
 const lastWebtech = allWebTech
-  .filter((material) => material.id.startsWith(yearOnMain))
-  .sort((a, b) => a.data.number - b.data.number);
+    .filter((material) => material.id.startsWith(yearOnMain))
+    .sort((a, b) => a.data.number - b.data.number);
 
 const lastWebClient = allWebClient
-  .filter((material) => material.id.startsWith(yearOnMain))
-  .sort((a, b) => a.data.number - b.data.number);
+    .filter((material) => material.id.startsWith(yearOnMain))
+    .sort((a, b) => a.data.number - b.data.number);
 ---
 
 <BaseLayout>
-  <div class="prose lg:prose-lg mx-auto">
-    <h1>Архив {yearOnMain} год</h1>
-    <details>
-      <summary>Основы веб-технологий</summary>
-      <ol class="columns">
-        {
-          lastWebtech.map((post) => (
-            <li>
-              <a href={`/web-course-site/labs/web-tech/${post.slug}`}>
-                {post.data.title}
-              </a>
-            </li>
-          ))
-        }
-      </ol>
-    </details>
-    <details>
-      <summary>Основы веб-разработки на стороне клиента</summary>
-      <ol class="columns">
-        {
-          lastWebClient.map((post) => (
-            <li>
-              <a href={`/web-course-site/labs/web-client-dev/${post.slug}`}>
-                {post.data.title}
-              </a>
-            </li>
-          ))
-        }
-      </ol>
-    </details>
-  </div>
+    <div class="prose lg:prose-lg mx-auto">
+        <Heading title={`Архив ${yearOnMain} год`} />
+        <section>
+            <div
+                class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30"
+            >
+                <h2 class="text-center text-text-inverted mb-5">
+                    Основы веб-технологий
+                </h2>
+                <ol
+                    class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mb-5"
+                    start="1"
+                >
+                    {
+                        lastWebtech
+                            .slice(0, 4)
+                            .map((post, index) => (
+                                <LinkCard
+                                    title={post.data.title}
+                                    href={`/web-course-site/labs/web-tech/${post.slug}`}
+                                    number={((index + 1) / 10)
+                                        .toFixed(1)
+                                        .toString()
+                                        .split(".")
+                                        .join("")}
+                                />
+                            ))
+                    }
+                </ol>
+                <div
+                    id="moreWebTechContainer"
+                    class="overflow-hidden transition-all duration-500"
+                    style="max-height: 0;"
+                >
+                    <ol
+                        class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mb-5"
+                        start="5"
+                    >
+                        {
+                            lastWebtech
+                                .slice(4)
+                                .map((post, index) => (
+                                    <LinkCard
+                                        title={post.data.title}
+                                        href={`/web-course-site/labs/web-tech/${post.slug}`}
+                                        number={((index + 5) / 10)
+                                            .toFixed(1)
+                                            .toString()
+                                            .split(".")
+                                            .join("")}
+                                    />
+                                ))
+                        }
+                    </ol>
+                </div>
+                <button
+                    class="font-titles w-full font-600 bg-bg-accent_second px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
+                    id="toggleMoreWebTechBtn"
+                >
+                    Показать все
+                </button>
+            </div>
+
+            <div
+                class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30"
+            >
+                <h2 class="text-center text-text-inverted mb-5">
+                    Основы веб-разработки на стороне клиента
+                </h2>
+                <ol
+                    class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mb-5"
+                    start="1"
+                >
+                    {
+                        lastWebClient
+                            .slice(0, 4)
+                            .map((post) => (
+                                <LinkCard
+                                    title={post.data.title}
+                                    href={`/web-course-site/labs/web-client-dev/${post.slug}`}
+                                    number={(post.data.number / 10)
+                                        .toFixed(1)
+                                        .toString()
+                                        .split(".")
+                                        .join("")}
+                                />
+                            ))
+                    }
+                </ol>
+                <div
+                    id="moreWebTechClientContainer"
+                    class="overflow-hidden transition-all duration-500"
+                    style="max-height: 0;"
+                >
+                    <ol
+                        class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mb-5"
+                        start="5"
+                    >
+                        {
+                            lastWebClient
+                                .slice(4)
+                                .map((post) => (
+                                    <LinkCard
+                                        title={post.data.title}
+                                        href={`/web-course-site/labs/web-client-dev/${post.slug}`}
+                                        number={(post.data.number / 10)
+                                            .toFixed(1)
+                                            .toString()
+                                            .split(".")
+                                            .join("")}
+                                    />
+                                ))
+                        }
+                    </ol>
+                </div>
+                <button
+                    class="font-titles w-full font-600 bg-bg-accent_second px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
+                    id="toggleMoreWebTechClientBtn"
+                >
+                    Показать все
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            function setupToggle(
+                buttonId,
+                containerId,
+                initialText,
+                toggleText
+            ) {
+                const btn = document.getElementById(buttonId);
+                const container = document.getElementById(containerId);
+                let isOpen = false;
+                if (btn && container) {
+                    btn.addEventListener("click", () => {
+                        if (isOpen) {
+                            container.style.maxHeight =
+                                container.scrollHeight + "px";
+                            container.offsetHeight;
+                            container.style.maxHeight = "0";
+                            btn.textContent = initialText;
+                        } else {
+                            container.style.maxHeight =
+                                container.scrollHeight + "px";
+                            btn.textContent = toggleText;
+                        }
+                        isOpen = !isOpen;
+                    });
+
+                    window.addEventListener("resize", () => {
+                        if (isOpen) {
+                            container.style.maxHeight =
+                                container.scrollHeight + "px";
+                        }
+                    });
+                }
+            }
+
+            setupToggle(
+                "toggleMoreWebTechBtn",
+                "moreWebTechContainer",
+                "Показать все",
+                "Спрятать"
+            );
+            setupToggle(
+                "toggleMoreWebTechClientBtn",
+                "moreWebTechClientContainer",
+                "Показать все",
+                "Спрятать"
+            );
+        });
+    </script>
 </BaseLayout>
