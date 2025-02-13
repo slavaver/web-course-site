@@ -17,7 +17,11 @@ if (frontmatter.number && frontmatter.number?.length == 1) {
 
 <BaseLayout title={frontmatter.title}>
     <ButtonTop />
-    <Heading title={frontmatter.title} number={number} />
+    <Heading
+        title={frontmatter.title}
+        number={number}
+        backLink={`labs/${collection}`}
+    />
     <article class="max-w-prose xl:max-w-full mx-auto">
         <div class="xl:grid grid-cols-[1fr_700px_1fr] gap-4 items-start">
             <aside

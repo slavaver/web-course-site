@@ -1,5 +1,7 @@
 ---
-const { title, description, number } = Astro.props;
+const { title, description, number, backLink } = Astro.props;
+
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <section
@@ -9,7 +11,7 @@ const { title, description, number } = Astro.props;
         class="hero-container flex flex-col justify-end h-full text-center items-center md:w-2/3"
     >
         <button
-            onclick="history.back()"
+            onclick={`window.location.href='${baseUrl}/${backLink || "/"}'`}
             class="flex gap-2 font-bold font-titles text-[20px] items-center mb-5"
             ><img
                 src="/src/assets/img/chevron-right.svg"
