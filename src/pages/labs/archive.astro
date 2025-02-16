@@ -20,14 +20,6 @@ const form = new Map([
   ["distance", "Заочная форма"],
   ["full-time", "Очная форма"],
 ]);
-
-// console.dir(groupBySlug(allCourses, 2)[0][1], {depth: 0});
-
-// (post) => (
-//           <li>
-//             <a href={`/web-course-site/labs/${post.id}`}>{post.data.title}</a>
-//           </li>
-//         )
 ---
 
 <BaseLayout>
@@ -47,6 +39,7 @@ const form = new Map([
                 <ol>
                   {courses
                   .filter((courses) => courses.data.type === "labs")
+                  .sort((a, b) => a.data.number - b.data.number)
                   .map(item => (
                     <li><a href={`/web-course-site/labs/${item.id}`}>{item.data.title}</a></li>
                   ))}
@@ -58,34 +51,5 @@ const form = new Map([
         ))}</>
       ))
     }
-
-    <!-- <details>
-      <summary>Основы веб-технологий</summary>
-      <ol class="columns">
-        {
-          lastWebtech.map((post) => (
-            <li>
-              <a href={`/web-course-site/labs/web-tech/${post.slug}`}>
-                {post.data.title}
-              </a>
-            </li>
-          ))
-        }
-      </ol>
-    </details>
-    <details>
-      <summary>Основы веб-разработки на стороне клиента</summary>
-      <ol class="columns">
-        {
-          lastWebClient.map((post) => (
-            <li>
-              <a href={`/web-course-site/labs/web-client-dev/${post.slug}`}>
-                {post.data.title}
-              </a>
-            </li>
-          ))
-        }
-      </ol>
-    </details> -->
   </div>
 </BaseLayout>
