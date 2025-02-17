@@ -33,15 +33,14 @@ _Автор: Бухарцев Матвей_
 
 Представим, что у нас есть изображение котика (куда же без него):
 
-```HTML
-<img src="cat.png" alt="Милый котик">
+```html
+<img src="cat.png" alt="Милый котик" />
 ```
 
 Если мы хотим, чтобы на ретина-дисплеях отображалось более чёткое изображение, добавим srcset:
 
-```HTML
-<img src="cat.png" srcset="cat.png 1x, cat@2x.png 2x" alt="Милый котик">
-
+```html
+<img src="cat.png" srcset="cat.png 1x, cat@2x.png 2x" alt="Милый котик" />
 ```
 
 ![Картинка кота](/web-course-site/rwd/img2.png)
@@ -56,9 +55,12 @@ _Автор: Бухарцев Матвей_
 
 Мы можем использовать srcset и для разных размеров экранов. Например:
 
-```HTML
-<img src="cat-small.png" srcset="cat-small.png 600w, cat-medium.png 1200w, cat-large.png 1800w" sizes="(max-width: 600px) 280px, (max-width: 1200px) 600px,  1200px"
-alt="Милый котик">
+```html
+<img
+  src="cat-small.png"
+  srcset="cat-small.png 600w, cat-medium.png 1200w, cat-large.png 1800w"
+  sizes="(max-width: 600px) 280px, (max-width: 1200px) 600px,  1200px"
+  alt="Милый котик" />
 ```
 
 - **600w, 1200w, 1800w** — ширина изображения в пикселях.
@@ -80,11 +82,11 @@ alt="Милый котик">
 
 ### Пример использования:
 
-```HTML
+```html
 <picture>
-  <source media="(min-width: 800px)" srcset="image-large.jpg">
-  <source media="(min-width: 400px)" srcset="image-medium.jpg">
-  <img src="image-small.jpg" alt="Удивительное изображение">
+  <source media="(min-width: 800px)" srcset="image-large.jpg" />
+  <source media="(min-width: 400px)" srcset="image-medium.jpg" />
+  <img src="image-small.jpg" alt="Удивительное изображение" />
 </picture>
 ```
 
@@ -99,10 +101,10 @@ alt="Милый котик">
 
 **Пример с форматами:**
 
-```HTML
+```html
 <picture>
-  <source type="image/webp" srcset="image.webp">
-  <img src="image.jpg" alt="Великолепная картина">
+  <source type="image/webp" srcset="image.webp" />
+  <img src="image.jpg" alt="Великолепная картина" />
 </picture>
 ```
 
@@ -112,17 +114,34 @@ alt="Милый котик">
 
 Они точно должны быть в разных размерах. Тут дело не только в разрешении экрана, но и в самих устройствах. Иконки могут по-разному отображаться в разных браузерах, поисковиках и операционных системах.
 
-```HTML
+```html
 <head>
-	<!-- ... самая важная инфа ... -->
-	<link rel="icon" href="https://bouhartsev.top/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="180x180" href="/source/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/source/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/source/icons/favicon-16x16.png">
-    <link rel="manifest" href="/source/icons/site.webmanifest">
-    <link rel="mask-icon" href="/source/icons/safari-pinned-tab.svg" color="#f5f5f5">
-    <link rel="shortcut icon" href="/source/icons/favicon.ico">
-	<!-- ... другая красота ... -->
+  <!-- ... самая важная инфа ... -->
+  <link
+    rel="icon"
+    href="https://bouhartsev.top/favicon.ico"
+    type="image/x-icon" />
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="/source/icons/apple-touch-icon.png" />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="/source/icons/favicon-32x32.png" />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="/source/icons/favicon-16x16.png" />
+  <link rel="manifest" href="/source/icons/site.webmanifest" />
+  <link
+    rel="mask-icon"
+    href="/source/icons/safari-pinned-tab.svg"
+    color="#f5f5f5" />
+  <link rel="shortcut icon" href="/source/icons/favicon.ico" />
+  <!-- ... другая красота ... -->
 </head>
 ```
 

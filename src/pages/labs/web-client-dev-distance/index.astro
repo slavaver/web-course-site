@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+const filterCourses = ['client-side-basics/', 'distance/', '2024']
+
+let allCoursess = await getCollection('courses', ({id}) => filterCourses.map(crit => id.includes(crit)).every(item => item));
+
+allCoursess.sort((a, b) => a.data.number - b.data.number);
+---
+
+<BaseLayout>
+  <div class="prose lg:prose-lg mx-auto">
+    <h1>Основы веб-разработки на стороне клиента (заочное)</h1>
+    {
+      allCoursess
+        .filter((post) => post.data.type === "schedule")
+        .map((post) => (
+          <a href={`/web-course-site/labs/${post.id}`}>
+            {post.data.title}
+          </a>
+        ))
+    }
+    <h2>Лабораторные работы</h2>
+    <ol class="columns">
+      {
+        allCoursess
+          .filter((post) => post.data.type === "labs")
+          .sort((a, b) => a.data.number - b.data.number)
+          .map((post) => (
+            <li>
+              <a href={`/web-course-site/labs/${post.id}`}>
+                {post.data.title}
+              </a>
+            </li>
+          ))
+      }
+    </ol>
+  </div>
+</BaseLayout>
+
+<style>
+  @media screen and (min-width: 500px) {
+    .columns {
+      columns: 2 1em;
+    }
+    .columns > li {
+      margin-top: 0;
+    }
+  }
+</style>
