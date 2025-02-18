@@ -25,17 +25,18 @@ const links = [
     {
         title: "Главная",
         href: `/web-course-site`,
-        icon: "./src/assets/img/house.svg",
     },
     {
         title: "Курсы",
         href: `#courses`,
-        icon: "./src/assets/img/book.svg",
     },
     {
         title: "База знаний",
         href: `#useful`,
-        icon: "./src/assets/img/database.svg",
+    },
+    {
+        title: "Пересдачи",
+        href: `#retake`,
     },
 ];
 ---
@@ -112,6 +113,7 @@ const links = [
     const coursesLink = document.querySelector("#courses-link");
     const mainLink = document.querySelector("#web-course-site-link");
     const usefulLink = document.querySelector("#useful-link");
+    const retakeLink = document.querySelector("#retake-link");
 
     const dropdownSm = document.querySelector(".dropdown__list-sm");
 
@@ -143,10 +145,11 @@ const links = [
         toggleDropdown(coursesLink, dropdown);
     };
 
-    mainLink?.addEventListener("click", () => goToLink(mainLink));
     coursesLink?.addEventListener("click", handleToggleDropDown);
 
+    mainLink?.addEventListener("click", () => goToLink(mainLink));
     usefulLink?.addEventListener("click", () => goToLink(usefulLink));
+    retakeLink?.addEventListener("click", () => goToLink(retakeLink));
 </script>
 
 <style>
