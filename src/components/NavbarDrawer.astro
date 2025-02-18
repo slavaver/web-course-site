@@ -2,43 +2,22 @@
 import BurgerMenu from "./BurgerMenu.astro";
 import ThemeToggler from "./navigation/ThemeToggler.astro";
 
-import { getCollection } from "astro:content";
-
-const yearOnMain = "2023";
-
-const allWebTech = await getCollection("web-tech");
-
-const lastWebtech = allWebTech
-    .filter((material) => material.id.startsWith(yearOnMain))
-    .sort((a, b) => a.data.number - b.data.number);
-
-const clinetMaterials = await getCollection("web-client-dev");
-
-const lastClinetMaterials = clinetMaterials
-    .filter((material) => material.id.startsWith(yearOnMain))
-    .sort((a, b) => a.data.number - b.data.number);
-
-const clinetMaterialsTs = await getCollection("web-client-dev-ts");
-
-const lastClinetMaterialsTs = clinetMaterialsTs
-    .filter((material) => material.id.startsWith(yearOnMain))
-    .sort((a, b) => a.data.number - b.data.number);
-
 const courses = [
     {
         title: "Основы веб-технологий",
-        href: `/web-course-site/labs/web-tech`,
-        materials: lastWebtech,
+        href: `/web-course-site/labs/web-basics`,
     },
     {
-        title: "Основы веб-разработки",
-        href: `/web-course-site/labs/web-client-dev`,
-        materials: lastClinetMaterials,
+        title: "Основы веб-разработки на клиенте",
+        href: `/web-course-site/labs/client-side-basics`,
+    },
+    {
+        title: "Основы веб-разработки на клиенте (заочное)",
+        href: `/web-course-site/labs/client-side-basics-distance`,
     },
     {
         title: "Веб-разработка на клиенте",
-        href: `/web-course-site/labs/web-client-dev-ts`,
-        materials: lastClinetMaterialsTs,
+        href: `/web-course-site/labs/client-side`,
     },
 ];
 
@@ -59,8 +38,6 @@ const links = [
         icon: "./src/assets/img/database.svg",
     },
 ];
-
-// isDropdownOpen.onToggled(() => {});
 ---
 
 <header class="drawer-container w-full fixed z-50">
@@ -109,23 +86,23 @@ const links = [
             <BurgerMenu links={links} />
             <ThemeToggler />
         </div>
-        {
-            (
-                <ul class="dropdown__list hidden md:flex justify-center gap-0 lg:gap-3">
-                    {courses.map((course) => (
-                        <li class="dropdown__item">
-                            <a
-                                class="dropdown__link text-sm md:text-base lg:text-xl p-3 lg:p-5 userActionsLink"
-                                href={course.href}
-                            >
-                                {course.title}
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-            )
-        }
     </div>
+    {
+        (
+            <ul class="dropdown__list hidden md:flex flex-col justify-center gap-0 lg:gap-3 bg-bg-menu backdrop-blur-2xl">
+                {courses.map((course) => (
+                    <li class="dropdown__item">
+                        <a
+                            class="dropdown__link flex w-full md:text-base lg:text-xl p-3 lg:p-5 userActionsLink"
+                            href={course.href}
+                        >
+                            {course.title}
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        )
+    }
 </header>
 
 <script>
@@ -173,6 +150,10 @@ const links = [
 </script>
 
 <style>
+    .drawer {
+        margin-bottom: 10px;
+    }
+
     .drawer-container {
         transition: 0.3s ease-in-out;
         padding-top: 0.625rem;
@@ -188,18 +169,31 @@ const links = [
     .dropdown__list {
         transition: 0.3s ease-in-out;
         max-height: 0px;
-        width: 100%;
-        padding: 0;
+        width: 50%;
+        padding: 15px;
+        margin: 0 auto;
         pointer-events: none;
         opacity: 0;
+        border-radius: 1rem;
+    }
+
+    .dropdown__list > li > a {
+        transition: 0.3s ease-in-out;
+        scale: 0.8;
+        line-height: 0;
+        padding: 0px;
     }
 
     .dropdown__list.open {
         pointer-events: all;
-        max-height: 100px;
-        width: 100%;
+        max-height: 350px;
         opacity: 1;
-        padding: 15px 0;
+    }
+
+    .dropdown__list.open > li > a {
+        scale: 1;
+        line-height: 1;
+        padding: 20px;
     }
 
     #courses-link {

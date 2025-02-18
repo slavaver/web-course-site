@@ -24,7 +24,7 @@ const {
         >
             <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
                 {
-                    (
+                    statementHref && (
                         <LinkCard
                             title="Ведомость и доп. материалы"
                             href={statementHref}
@@ -32,12 +32,13 @@ const {
                     )
                 }
                 {
-                    schedule.map((post) => (
-                        <LinkCard
-                            title={post.data.title}
-                            href={`/web-course-site/labs/${name}/${post.slug}`}
-                        />
-                    ))
+                    schedule &&
+                        schedule.map((post) => (
+                            <LinkCard
+                                title={post.data.title}
+                                href={`/web-course-site/labs/${post.id}`}
+                            />
+                        ))
                 }
             </ul>
         </div>
@@ -51,7 +52,6 @@ const {
                 {
                     labs &&
                         labs
-                            .filter((post) => post.data.type === "labs")
                             .sort((a, b) => a.data.number - b.data.number)
                             .map((post) => (
                                 <LinkCard
@@ -61,7 +61,7 @@ const {
                                         .toString()
                                         .split(".")
                                         .join("")}
-                                    href={`/web-course-site/labs/${name}/${post.slug}`}
+                                    href={`/web-course-site/labs/${post.id}`}
                                 />
                             ))
                 }
@@ -122,29 +122,31 @@ const {
                 </div>
             )
         }
-        <div
-            class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30"
-        >
-            <h2 class="text-center text-text-inverted">Рубежный контроль</h2>
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
-                {
-                    rk && rk.length !== 0 ? (
-                        rk.map((post) => (
-                            <LinkCard
-                                title={post.data.title}
-                                href={`/web-course-site/labs/${name}/${post.slug}`}
-                            />
-                        ))
-                    ) : (
-                        <li class="col-span-2">
-                            <p class="font-texts text-center text-text-inverted">
-                                Задания появятся ближе к дате рк
-                            </p>
-                        </li>
-                    )
-                }
-            </ul>
-        </div>
+        {
+            rk && (
+                <div class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30">
+                    <h2 class="text-center text-text-inverted">
+                        Рубежный контроль
+                    </h2>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+                        {rk.length !== 0 ? (
+                            rk.map((post) => (
+                                <LinkCard
+                                    title={post.data.title}
+                                    href={`/web-course-site/labs/${name}/${post.id}`}
+                                />
+                            ))
+                        ) : (
+                            <li class="col-span-2">
+                                <p class="font-texts text-center text-text-inverted">
+                                    Задания появятся ближе к дате рк
+                                </p>
+                            </li>
+                        )}
+                    </ul>
+                </div>
+            )
+        }
     </section>
 </BaseLayoutSnow>
 

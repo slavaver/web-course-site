@@ -5,16 +5,19 @@ import CourseLayout from "../../../layouts/CourseLayout.astro";
 
 const yearOnMain = "2023";
 
-const allWebTech = await getCollection("web-client-dev-ts");
+const allCourses = await getCollection("courses");
 
-const lastWebtech = allWebTech
-    .filter((material) => material.id.startsWith(yearOnMain))
-    .sort((a, b) => a.data.number - b.data.number);
+const clientSideBasics = allCourses.filter((post) =>
+    post.id.includes(`client-side/full-time/${yearOnMain}`)
+);
 
-const schedule = lastWebtech.filter((post) => post.data.type === "schedule");
-const rk = lastWebtech.filter((post) => post.data.type === "rk");
 const statementHref =
     "https://drive.google.com/drive/folders/1Ifv2U1KM9Xu-n8btd0lYwXjttPSIfc1j?usp=drive_link";
+const labs = clientSideBasics.filter((post) => post.data.type === "labs");
+const rk = clientSideBasics.filter((post) => post.data.type === "rk");
+const schedule = clientSideBasics.filter(
+    (post) => post.data.type === "schedule"
+);
 
 const lectures = [
     {
@@ -84,23 +87,12 @@ const lectures = [
 ---
 
 <CourseLayout
-    title="Основы веб-разработки на стороне клиента"
+    title="Основы веб-разработки на клиенте"
     description="Изучаем основы работы с типами и язык TypeScript, а также осваиваем применение фреймворка Vue"
-    labs={lastWebtech}
-    name="web-client-dev-ts"
+    labs={labs}
+    name="client-side"
     rk={rk}
     schedule={schedule}
     statementHref={statementHref}
     lectures={lectures}
 />
-
-<style>
-    @media screen and (min-width: 500px) {
-        .columns {
-            columns: 2 1em;
-        }
-        .columns > li {
-            margin-top: 0;
-        }
-    }
-</style>

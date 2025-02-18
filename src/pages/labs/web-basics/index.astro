@@ -1,19 +1,18 @@
 ---
 import { getCollection } from "astro:content";
-
 import CourseLayout from "../../../layouts/CourseLayout.astro";
 
-const yearOnMain = "2023";
+const yearOnMain = "2024";
 
-const allWebTech = await getCollection("web-tech");
+const allCourses = await getCollection("courses");
 
-const lastWebtech = allWebTech
-    .filter((material) => material.id.startsWith(yearOnMain))
-    .sort((a, b) => a.data.number - b.data.number);
+const webBasics = allCourses.filter((post) =>
+    post.id.includes(`web-basics/full-time/${yearOnMain}`)
+);
 
-const labs = lastWebtech.filter((post) => post.data.type === "labs");
-const schedule = lastWebtech.filter((post) => post.data.type === "schedule");
-const rk = lastWebtech.filter((post) => post.data.type === "rk");
+const labs = webBasics.filter((post) => post.data.type === "labs");
+const schedule = webBasics.filter((post) => post.data.type === "schedule");
+const rk = webBasics.filter((post) => post.data.type === "rk");
 const statementHref =
     "https://docs.google.com/spreadsheets/d/1ex4WJz5JM003zWcFaSMEy-rjsCUg_umqwixbh-9DJAo/edit?gid=0#gid=0";
 ---
@@ -21,8 +20,7 @@ const statementHref =
 <CourseLayout
     title="Основы веб-технологий"
     description="Изучаем, как работает браузер, рассматриваем адаптивную верстку и принципы доступности"
-    name="web-tech"
-    labs={lastWebtech}
+    labs={labs}
     rk={rk}
     schedule={schedule}
     statementHref={statementHref}

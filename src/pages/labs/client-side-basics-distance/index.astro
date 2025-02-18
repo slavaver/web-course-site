@@ -1,0 +1,22 @@
+---
+import { getCollection } from "astro:content";
+
+import CourseLayout from "../../../layouts/CourseLayout.astro";
+
+const yearOnMain = "2024";
+
+const allCourses = await getCollection("courses");
+
+const clientSideBasics = allCourses.filter((post) =>
+    post.id.includes(`client-side-basics/distance/${yearOnMain}`)
+);
+
+const labs = clientSideBasics.filter((post) => post.data.type === "labs");
+---
+
+<CourseLayout
+    title="Основы веб-разработки на стороне клиента (заочное)"
+    description="Изучаем основы JavaScript и знакомимся с различными API, предоставляемыми браузером"
+    labs={labs}
+    name="client-side-basics"
+/>

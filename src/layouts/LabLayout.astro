@@ -19,12 +19,12 @@ if (frontmatter.number) {
 }
 ---
 
-<BaseLayout title={frontmatter.title}>
+<BaseLayout title={frontmatter.collection}>
     <ButtonTop />
     <Heading
         title={frontmatter.title}
         number={number}
-        backLink={`labs/${collection}`}
+        backLink={`labs/${frontmatter.type}`}
     />
     <article class="max-w-prose xl:max-w-full mx-auto">
         <div

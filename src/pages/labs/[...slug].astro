@@ -1,13 +1,13 @@
 ---
 import { getCollection, render } from "astro:content";
-import LabLayout from "/src/layouts/LabLayout.astro";
+import LabLayout from "../../layouts/LabLayout.astro";
 
 export async function getStaticPaths() {
-  const allCoursess = await getCollection("courses");
-  return allCoursess.map((entry) => ({
-    params: { slug: entry.id },
-    props: { entry },
-  }));
+    const allCoursess = await getCollection("courses");
+    return allCoursess.map((entry) => ({
+        params: { slug: entry.id },
+        props: { entry },
+    }));
 }
 
 const { entry } = Astro.props;
@@ -15,10 +15,10 @@ const { Content, headings } = await render(entry);
 ---
 
 <LabLayout frontmatter={entry.data} headinglist={headings}>
-  <Content />
-  <a
-    href="/web-course-site/useful/contact"
-    class="link text-neutral alert alert-warning mx-auto"
-    >Задать вопрос наставнику</a
-  >
+    <Content />
+    <a
+        href="/web-course-site/useful/contact"
+        class="link text-neutral alert alert-warning mx-auto"
+        >Задать вопрос наставнику</a
+    >
 </LabLayout>

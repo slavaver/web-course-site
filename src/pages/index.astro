@@ -77,8 +77,8 @@ const usefulItems = allUseful.map((item, index) => ({
 }));
 
 const usefulStatic = [
-    usefulItems.find((post) => post.slug === "rules")!,
-    usefulItems.find((post) => post.slug === "links")!,
+    usefulItems.find((post) => post.id === "rules")!,
+    usefulItems.find((post) => post.id === "links")!,
 ];
 
 const usefulDynamic = usefulItems
@@ -173,6 +173,7 @@ const useful = [...usefulStatic, ...usefulDynamic];
                         .slice(0, 2)
                         .map((useful) => <UsefulCard useful={useful} />)
                 }
+
                 <p class="order-0">
                     Здесь вы найдете подборки полезных ресурсов, конспекты, а
                     также статьи с теорией, раскрывающие ключевые темы курсов
