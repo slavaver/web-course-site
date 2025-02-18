@@ -1,10 +1,83 @@
 ---
+import Heading from "../components/Heading.astro";
+import LinkCard from "../components/LinkCard.astro";
 import YandexSchedule from "../components/YandexSchedule.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const slavaverRetakes = [
+    "Веб-разработка на стороне клиента",
+    "Веб-технологии  (САПР)",
+];
+
+const gnibedaRetakes = [
+    "Веб-разработка на стороне клиента",
+    "Веб-технологии  (САПР)",
+];
 ---
 
 <BaseLayout>
+    <Heading title="Пересдача" />
     <section>
+        <div
+            class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30"
+        >
+            <div class="text-center mb-10 text-text-inverted">
+                <h2>Верещагин Владислав Юрьевич</h2>
+                <p>Можно сдать задолженности по дисциплинам</p>
+            </div>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+                {
+                    slavaverRetakes.map((discipline) => (
+                        <LinkCard title={discipline} />
+                    ))
+                }
+            </ul>
+        </div>
+        <div
+            class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30"
+        >
+            <div class="text-center mb-10">
+                <h2>Ближайшие консультации</h2>
+                <p>
+                    Возможны изменения в графиках консультаций, поэтому
+                    проверяйте их перед посещением консультации
+                </p>
+            </div>
+            <div class="mb-30">
+                <YandexSchedule
+                    token="55ac0157c84d9d0a2e56435599669603b1aefe18"
+                />
+            </div>
+            <div
+                class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30"
+            >
+                <div class="text-center mb-10 text-text-inverted">
+                    <h2>Гнибеда Артем Юрьевич</h2>
+                    <p>Можно сдать задолженности по дисциплинам</p>
+                </div>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+                    {
+                        gnibedaRetakes.map((discipline) => (
+                            <LinkCard title={discipline} />
+                        ))
+                    }
+                </ul>
+            </div>
+            <div class="text-center mb-10">
+                <h2>Ближайшие консультации</h2>
+                <p>
+                    Возможны изменения в графиках консультаций, поэтому
+                    проверяйте их перед посещением консультации
+                </p>
+            </div>
+            <div class="mb-30">
+                <YandexSchedule
+                    token="f29a08d044cd1f95949548408ba99da9a9d7daae"
+                />
+            </div>
+        </div>
+    </section>
+    <!-- <section>
         <h2>Верещагин Владислав Юрьевич</h2>
         <p>Можно сдать задолженности по:</p>
         <ul>
@@ -68,26 +141,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </p>
     </details>
 
-    <!-- <details class="mb-4">
-      <summary class="font-semibold text-lg"
-        >Основы веб-разработки на стороне клиента</summary
-      >
-      <p>
-        До даты пересдачи необходимо на консультациях защитить лабораторные
-        работы по курсу "Основы веб-разработки на стороне клиента". Ваша задача
-        набрать 50 баллов или выше, чтобы получить положительную оценку на
-        пересдаче.
-      </p>
-      <p>
-        На самой пересдаче только проставляются оценки про результатам вашей
-        работы.
-      </p>
-      <p>
-        Лабораторные работы вы можете найти <a
-          href="/web-course-site/labs/web-client-dev">на странице курса</a
-        >.
-      </p>
-    </details> -->
+
     <details class="mb-4">
         <summary class="font-semibold text-lg"
             >Веб-разработка на стороне клиента</summary
@@ -149,5 +203,26 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             > на проверку. Для получения положительной оценки трубуется набрать средний
             балл за 5 лабораторных работ более 50.
         </p>
-    </details>
+    </details> -->
+
+    <!-- <details class="mb-4">
+      <summary class="font-semibold text-lg"
+        >Основы веб-разработки на стороне клиента</summary
+      >
+      <p>
+        До даты пересдачи необходимо на консультациях защитить лабораторные
+        работы по курсу "Основы веб-разработки на стороне клиента". Ваша задача
+        набрать 50 баллов или выше, чтобы получить положительную оценку на
+        пересдаче.
+      </p>
+      <p>
+        На самой пересдаче только проставляются оценки про результатам вашей
+        работы.
+      </p>
+      <p>
+        Лабораторные работы вы можете найти <a
+          href="/web-course-site/labs/web-client-dev">на странице курса</a
+        >.
+      </p>
+    </details> -->
 </BaseLayout>
