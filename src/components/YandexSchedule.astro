@@ -53,7 +53,7 @@ const { token } = Astro.props;
         const consultationsList = document.querySelectorAll(".consultations");
 
         consultationsList.forEach(async (consultationElement) => {
-            const token = consultationElement.dataset.token;
+            const token = (consultationElement as HTMLElement).dataset.token;
 
             const URL = `https://slavaver.space/api/consultation?private_token=${token}`;
 
@@ -76,39 +76,61 @@ const { token } = Astro.props;
             eventList.classList.add("w-full");
 
             const dom = parser.parseFromString(eventsHTML, "text/html");
-            const template = document.querySelector("#event-template");
+            const template: HTMLTemplateElement | null =
+                document.querySelector("#event-template");
 
             const listOfEvents = [
                 ...dom.querySelectorAll("div.b-content-event"),
             ].slice(0, 5);
 
             listOfEvents.forEach((eventElement) => {
-                const clone = template.content.cloneNode(true);
+                const clone = template?.content.cloneNode(true);
 
                 const place = document.createElement("span");
                 const eventTitle = eventElement.querySelector("h1")?.innerText;
                 if (eventTitle?.split(" ")[1].startsWith("Пр")) {
                     place.innerText = "Аудитория: " + eventTitle?.split(" ")[1];
-                    clone.firstElementChild.appendChild(place);
+                    (clone as HTMLElement)?.firstElementChild?.appendChild(
+                        place
+                    );
                 }
 
-                const startTimeValue = eventElement.querySelector(
-                    ".e-time span:nth-child(1)"
-                ).innerText;
+                const eventStartTimeValue: HTMLElement | null =
+                    eventElement.querySelector(".e-time span:nth-child(1)");
+
+                const startTimeValue = eventStartTimeValue?.innerText;
                 const { date, time: startTime } =
                     getDateAndTimeYaCalendar(startTimeValue);
-                clone.querySelector(".date").innerText = date;
-                clone.querySelector(".start-time").innerText = startTime;
+                const cloneDate: HTMLElement | null = (
+                    clone as HTMLElement
+                )?.querySelector(".date");
 
-                const endTimeValue = eventElement.querySelector(
-                    ".e-time span:nth-child(2)"
-                ).innerText;
+                if (cloneDate) cloneDate.innerText = date;
+
+                const startTimeElement: HTMLElement | null = (
+                    clone as HTMLElement
+                )?.querySelector(".start-time");
+
+                if (startTimeElement) startTimeElement.innerText = startTime;
+
+                const eventEndTimeValue: HTMLElement | null =
+                    eventElement.querySelector(".e-time span:nth-child(2)");
+
+                const endTimeValue = eventEndTimeValue?.innerText;
                 const { time: endTime } =
                     getDateAndTimeYaCalendar(endTimeValue);
-                clone.querySelector(".end-time").innerText = endTime;
 
-                const linkTelemost =
-                    eventElement.querySelector(".e-description a")?.innerText;
+                const endTimeElement: HTMLElement | null = (
+                    clone as HTMLElement
+                )?.querySelector(".end-time");
+
+                if (endTimeElement) endTimeElement.innerText = endTime;
+
+                const eventLink: HTMLElement | null = (
+                    clone as HTMLElement
+                )?.querySelector(".e-description a");
+
+                const linkTelemost = eventLink?.innerText;
 
                 if (linkTelemost) {
                     const linkLabel = document.createElement("span");
@@ -119,7 +141,9 @@ const { token } = Astro.props;
                     link.href = linkTelemost;
                     linkLabel.innerText = "Онлайн: ";
                     link.innerText = "Ссылка на защиту";
-                    clone.firstElementChild.appendChild(linkLabel);
+                    (clone as Element)?.firstElementChild?.appendChild(
+                        linkLabel
+                    );
                     linkLabel.appendChild(link);
                 }
 

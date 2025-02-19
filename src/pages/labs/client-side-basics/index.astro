@@ -1,6 +1,5 @@
 ---
 import { getCollection } from "astro:content";
-
 import CourseLayout from "../../../layouts/CourseLayout.astro";
 
 const yearOnMain = "2023";
@@ -11,13 +10,13 @@ const clientSideBasics = allCourses.filter((post) =>
     post.id.includes(`client-side-basics/full-time/${yearOnMain}`)
 );
 
-const statementHref =
-    "https://drive.google.com/drive/folders/1Ifv2U1KM9Xu-n8btd0lYwXjttPSIfc1j?usp=drive_link";
 const labs = clientSideBasics.filter((post) => post.data.type === "labs");
-const rk = clientSideBasics.filter((post) => post.data.type === "rk");
 const schedule = clientSideBasics.filter(
     (post) => post.data.type === "schedule"
 );
+const rk = clientSideBasics.filter((post) => post.data.type === "rk");
+const statementHref =
+    "https://drive.google.com/drive/folders/1Ifv2U1KM9Xu-n8btd0lYwXjttPSIfc1j?usp=drive_link";
 ---
 
 <CourseLayout
