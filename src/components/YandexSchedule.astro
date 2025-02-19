@@ -6,151 +6,160 @@ const { token } = Astro.props;
 
 <template id="event-template">
     <li
-        class="link-card w-full bg-bg-secondary rounded-[30px] h-[220px] ] p-7.5 flex gap-2.5 flex-col userActions"
+        class="link-card w-full bg-bg-secondary rounded-[30px] p-7.5 flex gap-2.5 flex-col"
     >
         <h3 class="date mb-2.5"></h3>
-
         <div>
             <span>Время:</span>
-            <span class="start-time"></span>-<span class="end-time"></span>
+            <span class="start-time"></span>-
+            <span class="end-time"></span>
         </div>
     </li>
 </template>
 
 <script>
-    function getDateAndTimeYaCalendar(text) {
-        const arr = text.split(" ");
-        const time = arr.pop();
-        const date = arr.join(" ");
-        return {
-            date,
-            time,
-        };
+    interface DateTime {
+        date: string;
+        time: string;
     }
 
-    async function getData(url) {
+    function getDateAndTimeYaCalendar(text: string): DateTime {
+        const parts = text.trim().split(" ");
+        const time = parts.pop() ?? "";
+        const date = parts.join(" ");
+        return { date, time };
+    }
+
+    async function fetchData(url: string): Promise<string | null> {
         try {
             const res = await fetch(url);
-            if (!res.ok) {
-                return null;
-            }
-            const data = await res.text();
-            return data;
+            if (!res.ok) return null;
+            return await res.text();
         } catch {
             return null;
         }
     }
 
-    function appendError(parrent, errorMessage) {
-        const message = document.createElement("p");
-        message.innerText = errorMessage;
-        parrent.appendChild(message);
+    function appendErrorMessage(parent: HTMLElement, message: string): void {
+        const p = document.createElement("p");
+        p.textContent = message;
+        parent.appendChild(p);
     }
 
-    const parser = new DOMParser();
+    function renderEvent(
+        eventElement: Element,
+        template: HTMLTemplateElement
+    ): HTMLElement {
+        const clone = template.content.cloneNode(true) as HTMLElement;
 
-    document.addEventListener("DOMContentLoaded", async () => {
-        const consultationsList = document.querySelectorAll(".consultations");
+        const eventTitle = eventElement.querySelector("h1")?.textContent || "";
+        const titleParts = eventTitle.split(" ");
+        if (titleParts.length > 1 && titleParts[1].startsWith("Пр")) {
+            const roomInfo = document.createElement("span");
+            roomInfo.textContent = "Аудитория: " + titleParts[1];
+            clone.firstElementChild?.appendChild(roomInfo);
+        }
 
-        consultationsList.forEach(async (consultationElement) => {
-            const token = (consultationElement as HTMLElement).dataset.token;
+        const startSpan = eventElement.querySelector(
+            ".e-time span:nth-child(1)"
+        ) as HTMLElement | null;
+        if (startSpan) {
+            const { date, time: startTime } = getDateAndTimeYaCalendar(
+                startSpan.textContent || ""
+            );
+            const dateEl = clone.querySelector(".date") as HTMLElement | null;
+            if (dateEl) dateEl.textContent = date;
+            const startTimeEl = clone.querySelector(
+                ".start-time"
+            ) as HTMLElement | null;
+            if (startTimeEl) startTimeEl.textContent = startTime;
+        }
 
-            const URL = `https://slavaver.space/api/consultation?private_token=${token}`;
+        const endSpan = eventElement.querySelector(
+            ".e-time span:nth-child(2)"
+        ) as HTMLElement | null;
+        if (endSpan) {
+            const { time: endTime } = getDateAndTimeYaCalendar(
+                endSpan.textContent || ""
+            );
+            const endTimeEl = clone.querySelector(
+                ".end-time"
+            ) as HTMLElement | null;
+            if (endTimeEl) endTimeEl.textContent = endTime;
+        }
 
-            const eventsHTML = await getData(URL);
+        const linkAnchor = eventElement.querySelector(
+            ".e-description a"
+        ) as HTMLAnchorElement | null;
+        if (linkAnchor && linkAnchor.textContent) {
+            const linkLabel = document.createElement("span");
+            linkLabel.textContent = "Онлайн: ";
+            const link = document.createElement("a");
+            link.classList.add("underline", "text-text-number");
+            link.href = linkAnchor.textContent;
+            link.textContent = "Ссылка на защиту";
+            linkLabel.appendChild(link);
+            clone.firstElementChild?.appendChild(linkLabel);
+        }
 
-            if (!eventsHTML) {
-                appendError(
-                    consultationElement,
-                    "Ошибка загрузки расписания. Попробуйте перезагрузить страницу."
-                );
-                return;
-            }
+        return clone;
+    }
 
-            const eventList = document.createElement("ul");
+    async function processConsultation(element: HTMLElement): Promise<void> {
+        const token = element.dataset.token;
+        const loadingMessage = document.createElement("p");
+        if (!token) {
+            appendErrorMessage(element, "Ошибка: отсутствует токен.");
+            return;
+        }
 
-            eventList.classList.add("grid");
-            eventList.classList.add("grid-cols-1");
-            eventList.classList.add("md:grid-cols-2");
-            eventList.classList.add("gap-5");
-            eventList.classList.add("w-full");
+        const URL = `https://slavaver.space/api/consultation?private_token=${token}`;
+        const eventsHTML = await fetchData(URL);
+        if (!eventsHTML) {
+            appendErrorMessage(
+                element,
+                "Ошибка загрузки расписания. Попробуйте перезагрузить страницу."
+            );
+            return;
+        }
 
-            const dom = parser.parseFromString(eventsHTML, "text/html");
-            const template: HTMLTemplateElement | null =
-                document.querySelector("#event-template");
+        const eventList = document.createElement("ul");
+        eventList.classList.add(
+            "grid",
+            "grid-cols-1",
+            "sm:grid-cols-2",
+            "lg:grid-cols-3",
+            "gap-5",
+            "w-full"
+        );
 
-            const listOfEvents = [
-                ...dom.querySelectorAll("div.b-content-event"),
-            ].slice(0, 5);
+        const parser = new DOMParser();
+        const dom = parser.parseFromString(eventsHTML, "text/html");
+        const template = document.querySelector(
+            "#event-template"
+        ) as HTMLTemplateElement | null;
+        if (!template) {
+            console.error("Event template not found in the document.");
+            return;
+        }
 
-            listOfEvents.forEach((eventElement) => {
-                const clone = template?.content.cloneNode(true);
+        const events = Array.from(
+            dom.querySelectorAll("div.b-content-event")
+        ).slice(0, 5);
+        events.forEach((eventElement) => {
+            const eventItem = renderEvent(eventElement, template);
+            eventList.appendChild(eventItem);
+        });
 
-                const place = document.createElement("span");
-                const eventTitle = eventElement.querySelector("h1")?.innerText;
-                if (eventTitle?.split(" ")[1].startsWith("Пр")) {
-                    place.innerText = "Аудитория: " + eventTitle?.split(" ")[1];
-                    (clone as HTMLElement)?.firstElementChild?.appendChild(
-                        place
-                    );
-                }
+        element.appendChild(eventList);
+    }
 
-                const eventStartTimeValue: HTMLElement | null =
-                    eventElement.querySelector(".e-time span:nth-child(1)");
-
-                const startTimeValue = eventStartTimeValue?.innerText;
-                const { date, time: startTime } =
-                    getDateAndTimeYaCalendar(startTimeValue);
-                const cloneDate: HTMLElement | null = (
-                    clone as HTMLElement
-                )?.querySelector(".date");
-
-                if (cloneDate) cloneDate.innerText = date;
-
-                const startTimeElement: HTMLElement | null = (
-                    clone as HTMLElement
-                )?.querySelector(".start-time");
-
-                if (startTimeElement) startTimeElement.innerText = startTime;
-
-                const eventEndTimeValue: HTMLElement | null =
-                    eventElement.querySelector(".e-time span:nth-child(2)");
-
-                const endTimeValue = eventEndTimeValue?.innerText;
-                const { time: endTime } =
-                    getDateAndTimeYaCalendar(endTimeValue);
-
-                const endTimeElement: HTMLElement | null = (
-                    clone as HTMLElement
-                )?.querySelector(".end-time");
-
-                if (endTimeElement) endTimeElement.innerText = endTime;
-
-                const eventLink: HTMLElement | null = (
-                    clone as HTMLElement
-                )?.querySelector(".e-description a");
-
-                const linkTelemost = eventLink?.innerText;
-
-                if (linkTelemost) {
-                    const linkLabel = document.createElement("span");
-                    const link = document.createElement("a");
-
-                    link.classList.add("underline");
-                    link.classList.add("text-text-tertiary");
-                    link.href = linkTelemost;
-                    linkLabel.innerText = "Онлайн: ";
-                    link.innerText = "Ссылка на защиту";
-                    (clone as Element)?.firstElementChild?.appendChild(
-                        linkLabel
-                    );
-                    linkLabel.appendChild(link);
-                }
-
-                eventList.appendChild(clone);
-            });
-
-            consultationElement.append(eventList);
+    document.addEventListener("DOMContentLoaded", () => {
+        const consultations = document.querySelectorAll(
+            ".consultations"
+        ) as NodeListOf<HTMLElement>;
+        consultations.forEach((consultation) => {
+            processConsultation(consultation);
         });
     });
 </script>
