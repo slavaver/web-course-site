@@ -1,14 +1,13 @@
 ---
-import BaseLayout from "./BaseLayout.astro";
-// import Breadcrumbs from "../components/navigation/Breadcrumbs.astro";
 import Heading from "../components/Heading.astro";
 import ButtonTop from "../components/navigation/ButtonTop.astro";
 import Pagination from "../components/navigation/Pagination.astro";
 import TOC from "../components/navigation/TOC.astro";
+import BaseLayout from "./BaseLayout.astro";
 
-const { slug, frontmatter, headinglist, collection } = Astro.props;
+const { frontmatter, headinglist, labUrl } = Astro.props;
 
-let number;
+let number: string = "";
 
 if (frontmatter.number) {
     number = (parseInt(frontmatter.number) / 10)
@@ -17,6 +16,10 @@ if (frontmatter.number) {
         .split(".")
         .join("");
 }
+const labId = labUrl.split("/").slice(-1)[0];
+const courseId = labUrl.split("/")[0];
+const isFulltime = labUrl.includes("full-time");
+const labYear = labUrl.split("/")[2];
 ---
 
 <BaseLayout title={frontmatter.collection}>
@@ -26,6 +29,8 @@ if (frontmatter.number) {
         number={number}
         backLink={`labs/${frontmatter.type}`}
     />
+    {`${courseId}/${isFulltime ? "full-time" : "distance"}/${labYear}/${labId}`}
+    {Object.entries(frontmatter)}
     <article class="max-w-prose xl:max-w-full mx-auto">
         <div
             class="xl:grid grid-cols-[1fr_700px_1fr] gap-4 items-start text-text-inverted"
@@ -39,7 +44,7 @@ if (frontmatter.number) {
                     )
                 }
             </aside>
-            <div class="md prose lg:prose-lg">
+            <div class="md">
                 <slot />
             </div>
         </div>
@@ -47,26 +52,29 @@ if (frontmatter.number) {
     <div class="mb-20">
         {
             frontmatter.type === "labs" && (
-                <Pagination collection={collection} slug={slug} />
+                <Pagination
+                    slug={frontmatter.number}
+                    collection={courseId}
+                    isFulltime={isFulltime}
+                    yearOnMain={labYear}
+                />
             )
         }
     </div>
 </BaseLayout>
-
-<style>
+<style scoped>
     .side > :global(h2) {
         font-size: 28px;
         font-weight: 600;
     }
+
     .side > :global(ul > li > a) {
         word-wrap: break-word;
         text-decoration: underline;
     }
-
     .md > :global(h1) {
         display: none;
     }
-
     .md :global(a) {
         word-wrap: break-word;
         color: var(--color-text-tertiary);

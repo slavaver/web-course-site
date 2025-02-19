@@ -14,11 +14,16 @@ const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
 ---
 
-<LabLayout frontmatter={entry.data} headinglist={headings}>
+<LabLayout frontmatter={entry.data} headinglist={headings} labUrl={entry.id}>
     <Content />
-    <a
-        href="/web-course-site/useful/contact"
-        class="link text-neutral alert alert-warning mx-auto"
-        >Задать вопрос наставнику</a
-    >
+    {
+        entry.id.includes("web-basics") && (
+            <a
+                href="/web-course-site/mentors"
+                class="link text-neutral alert alert-warning mx-auto"
+            >
+                Задать вопрос наставнику
+            </a>
+        )
+    }
 </LabLayout>

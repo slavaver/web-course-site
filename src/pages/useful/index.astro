@@ -7,7 +7,7 @@ import SearchInput from "../../components/SearchInput.astro";
 import ListOfPosts from "../../components/ListOfPosts.astro";
 
 const allUseful = await getCollection("useful");
-const lengths = allUseful.map((post) => post.body.length);
+const lengths = allUseful.map((post) => post.body && post.body.length);
 
 const values = ["all", "first-sem", "second-sem", "third-sem", "unbound"];
 const labels = [

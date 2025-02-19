@@ -1,28 +1,32 @@
 ---
 import { getCollection } from "astro:content";
 
-const { collection, slug } = Astro.props;
+const { collection, slug, yearOnMain, isFulltime } = Astro.props;
 
-const allMaterials = await getCollection(collection);
+const fullLink = `${collection}/${isFulltime ? "full-time" : "distance"}/${yearOnMain}`;
+
+const allCourses = await getCollection("courses");
+const allMaterials = allCourses.filter((post) => post.id.includes(fullLink));
 const materialsOfYear = allMaterials
     .filter((material) => material.data.type === "labs")
     .sort((a, b) => (a.id < b.id ? -1 : 1));
 
-const currentIdx = materialsOfYear.findIndex((a) => a.slug === slug);
+const currentIdx = materialsOfYear.findIndex((a) => a.data.number === slug);
 
-function isSameYear(a, b) {
-    return b?.split("/")[0] === a?.split("/")[0];
-}
+const getLabPrevNextId = (indxDiff: 1 | -1) => {
+    const idx = currentIdx + indxDiff;
+    const materialId = materialsOfYear[idx].id;
+    const materialIdArray = materialId.split("/");
+    return materialIdArray[materialIdArray.length - 1];
+};
 ---
 
 <div class="join max-w-xs sm:max-w-prose grid grid-cols-2 mx-auto gap-1 mt-10">
+    {}
     {
-        currentIdx - 1 >= 0 &&
-        isSameYear(slug, materialsOfYear[currentIdx - 1].slug) ? (
+        currentIdx - 1 >= 0 ? (
             <a
-                href={`/web-course-site/labs/${collection}/${
-                    materialsOfYear[currentIdx - 1].slug
-                }`}
+                href={`/web-course-site/labs/${fullLink}/${getLabPrevNextId(-1)}`}
                 class="flex py-4 border-1 border-bg-accent_second rounded-[15px] justify-center items-center text-bg-accent_second font-titles"
             >
                 <svg
@@ -49,12 +53,9 @@ function isSameYear(a, b) {
         )
     }
     {
-        currentIdx + 1 < materialsOfYear.length &&
-        isSameYear(slug, materialsOfYear[currentIdx + 1].slug) ? (
+        currentIdx + 1 < materialsOfYear.length ? (
             <a
-                href={`/web-course-site/labs/${collection}/${
-                    materialsOfYear[currentIdx + 1].slug
-                }`}
+                href={`/web-course-site/labs/${fullLink}/${getLabPrevNextId(1)}`}
                 class="flex border-1 py-4 border-bg-accent_second rounded-[15px] justify-center items-center text-bg-accent_second font-titles"
             >
                 {`Следующая`}

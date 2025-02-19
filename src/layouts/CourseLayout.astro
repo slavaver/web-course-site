@@ -2,18 +2,21 @@
 import Heading from "../components/Heading.astro";
 import LectureCard from "../components/LectureCard.astro";
 import LinkCard from "../components/LinkCard.astro";
+import { CourseLayoutProps } from "../types/CourseLayout";
 import BaseLayoutSnow from "./BaseLayoutSnow.astro";
+
+interface Props extends CourseLayoutProps {}
 
 const {
     title,
     description,
     name,
-    schedule,
     statementHref,
-    labs,
     lectures,
+    schedule,
+    labs,
     rk,
-} = Astro.props;
+}: Props = Astro.props;
 ---
 
 <BaseLayoutSnow>
@@ -52,124 +55,134 @@ const {
                 {
                     labs &&
                         labs
-                            .sort((a, b) => a.data.number - b.data.number)
-                            .map((post) => (
-                                <LinkCard
-                                    title={post.data.title}
-                                    number={(post.data.number / 10)
-                                        .toFixed(1)
-                                        .toString()
-                                        .split(".")
-                                        .join("")}
-                                    href={`/web-course-site/labs/${post.id}`}
-                                />
-                            ))
+                            .sort((prev, next) => {
+                                const prevNumber = prev.data?.number;
+                                const nextNumber = next.data?.number;
+                                if (!prev.data || !prevNumber) return 1;
+                                if (!next.data || !nextNumber) return -1;
+                                return prevNumber.localeCompare(nextNumber);
+                            })
+                            .map((post) => {
+                                const number = post.data?.number ?? "";
+
+                                return (
+                                    <LinkCard
+                                        title={post.data.title}
+                                        number={(parseInt(number) / 10)
+                                            .toFixed(1)
+                                            .toString()
+                                            .split(".")
+                                            .join("")}
+                                        href={`/web-course-site/labs/${post.id}`}
+                                    />
+                                );
+                            })
                 }
             </ul>
-        </div>
-        {
-            lectures && (
-                <div class="section-lectures bg-bg-primary py-20 rounded-[30px] sm:rounded-[60px] mb-30">
-                    <div class="px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto">
-                        <h2 class="text-center mb-10">Лекции</h2>
-                        <ul class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 w-full">
-                            {lectures.map((lecture, index) => (
-                                <>
-                                    {(() => {
-                                        switch (index % 9) {
-                                            case 0:
-                                                return (
-                                                    <div class="flex aspect-ratio-square rounded-[30px] overflow-hidden">
-                                                        <img
-                                                            src="/src/assets/img/cat-chill-table.svg"
-                                                            alt="лапка котика с сердечками"
-                                                            class="mx-auto"
-                                                        />
-                                                    </div>
-                                                );
-                                            case 4:
-                                                return (
-                                                    <div class="flex aspect-ratio-square rounded-[30px] overflow-hidden">
-                                                        <img
-                                                            src="/src/assets/img/cat-table-vue.svg"
-                                                            alt="лапка котика с сердечками"
-                                                            class="mx-auto"
-                                                        />
-                                                    </div>
-                                                );
-                                            case 8:
-                                                return (
-                                                    <div class="flex aspect-ratio-square rounded-[30px] overflow-hidden">
-                                                        <img
-                                                            src="/src/assets/img/cat-cute.svg"
-                                                            alt="лапка котика с сердечками"
-                                                            class="mx-auto"
-                                                        />
-                                                    </div>
-                                                );
-                                        }
-                                    })()}
-                                    <LectureCard
-                                        index={index}
-                                        title={lecture.title}
-                                        href={lecture.href}
-                                        description={lecture.description}
+            {
+                lectures && (
+                    <div class="section-lectures bg-bg-primary py-20 rounded-[30px] sm:rounded-[60px] mb-30">
+                        <div class="px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto">
+                            <h2 class="text-center mb-10">Лекции</h2>
+                            <ul class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 w-full">
+                                {lectures.map((lecture, index) => (
+                                    <>
+                                        {(() => {
+                                            switch (index % 9) {
+                                                case 0:
+                                                    return (
+                                                        <div class="flex aspect-ratio-square rounded-[30px] overflow-hidden">
+                                                            <img
+                                                                src="/src/assets/img/cat-chill-table.svg"
+                                                                alt="лапка котика с сердечками"
+                                                                class="mx-auto"
+                                                            />
+                                                        </div>
+                                                    );
+                                                case 4:
+                                                    return (
+                                                        <div class="flex aspect-ratio-square rounded-[30px] overflow-hidden">
+                                                            <img
+                                                                src="/src/assets/img/cat-table-vue.svg"
+                                                                alt="лапка котика с сердечками"
+                                                                class="mx-auto"
+                                                            />
+                                                        </div>
+                                                    );
+                                                case 8:
+                                                    return (
+                                                        <div class="flex aspect-ratio-square rounded-[30px] overflow-hidden">
+                                                            <img
+                                                                src="/src/assets/img/cat-cute.svg"
+                                                                alt="лапка котика с сердечками"
+                                                                class="mx-auto"
+                                                            />
+                                                        </div>
+                                                    );
+                                            }
+                                        })()}
+                                        <LectureCard
+                                            index={index}
+                                            title={lecture.title}
+                                            href={lecture.href}
+                                            description={lecture.description}
+                                        />
+                                    </>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                )
+            }
+            {
+                rk && (
+                    <div class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30">
+                        <h2 class="text-center text-text-inverted">
+                            Рубежный контроль
+                        </h2>
+                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+                            {rk.length !== 0 ? (
+                                rk.map((post) => (
+                                    <LinkCard
+                                        title={post.data.title}
+                                        href={`/web-course-site/labs/${name}/${post.id}`}
                                     />
-                                </>
-                            ))}
+                                ))
+                            ) : (
+                                <li class="col-span-2">
+                                    <p class="font-texts text-center text-text-inverted">
+                                        Задания появятся ближе к дате рк
+                                    </p>
+                                </li>
+                            )}
                         </ul>
                     </div>
-                </div>
-            )
-        }
-        {
-            rk && (
-                <div class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30">
-                    <h2 class="text-center text-text-inverted">
-                        Рубежный контроль
-                    </h2>
-                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
-                        {rk.length !== 0 ? (
-                            rk.map((post) => (
-                                <LinkCard
-                                    title={post.data.title}
-                                    href={`/web-course-site/labs/${name}/${post.id}`}
-                                />
-                            ))
-                        ) : (
-                            <li class="col-span-2">
-                                <p class="font-texts text-center text-text-inverted">
-                                    Задания появятся ближе к дате рк
-                                </p>
-                            </li>
-                        )}
-                    </ul>
-                </div>
-            )
-        }
+                )
+            }
+        </div>
     </section>
-</BaseLayoutSnow>
 
-<style scoped>
-    .section-lectures {
-        position: relative;
-        overflow: hidden;
-        z-index: 1;
-    }
-    .section-lectures::before {
-        content: "";
-        position: absolute;
-        z-index: -1;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: var(--color-bg-accent-first);
-        -webkit-mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 728" fill="none"%3E%3Cpath d="M-384.828 550.33C-279.518 431.882 -29.173 211.72 129.724 278.664C328.344 362.345 -156.414 623.403 -2.48331 780.746C176.815 964.017 967.034 -77.2714 1180.55 48.249C1394.07 173.769 1062.62 452.507 1180.55 550.33C1274.9 628.589 1460.28 401.827 1541.17 278.664" stroke="black" stroke-width="150"/%3E%3C/svg%3E');
-        mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 728" fill="none"%3E%3Cpath d="M-384.828 550.33C-279.518 431.882 -29.173 211.72 129.724 278.664C328.344 362.345 -156.414 623.403 -2.48331 780.746C176.815 964.017 967.034 -77.2714 1180.55 48.249C1394.07 173.769 1062.62 452.507 1180.55 550.33C1274.9 628.589 1460.28 401.827 1541.17 278.664" stroke="black" stroke-width="150"/%3E%3C/svg%3E');
-        -webkit-mask-repeat: no-repeat;
-        mask-repeat: no-repeat;
-        -webkit-mask-size: cover;
-        mask-size: cover;
-    }
-</style>
+    <style scoped>
+        .section-lectures {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .section-lectures::before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-bg-accent-first);
+            -webkit-mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 728" fill="none"%3E%3Cpath d="M-384.828 550.33C-279.518 431.882 -29.173 211.72 129.724 278.664C328.344 362.345 -156.414 623.403 -2.48331 780.746C176.815 964.017 967.034 -77.2714 1180.55 48.249C1394.07 173.769 1062.62 452.507 1180.55 550.33C1274.9 628.589 1460.28 401.827 1541.17 278.664" stroke="black" stroke-width="150"/%3E%3C/svg%3E');
+            mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 728" fill="none"%3E%3Cpath d="M-384.828 550.33C-279.518 431.882 -29.173 211.72 129.724 278.664C328.344 362.345 -156.414 623.403 -2.48331 780.746C176.815 964.017 967.034 -77.2714 1180.55 48.249C1394.07 173.769 1062.62 452.507 1180.55 550.33C1274.9 628.589 1460.28 401.827 1541.17 278.664" stroke="black" stroke-width="150"/%3E%3C/svg%3E');
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-size: cover;
+            mask-size: cover;
+        }
+    </style>
+</BaseLayoutSnow>
