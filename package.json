@@ -11,11 +11,12 @@
         "astro": "astro"
     },
     "dependencies": {
+        "@unocss/reset": "^66.0.0",
         "astro": "^5.3.0",
-        "unocss": "^65.5.0",
-        "@unocss/reset": "^65.5.0"
+        "unocss": "^66.0.0"
     },
     "devDependencies": {
-        "prettier": "^3.5.1"
+        "prettier": "^3.5.1",
+        "typescript": "^5.7.3"
     }
 }
