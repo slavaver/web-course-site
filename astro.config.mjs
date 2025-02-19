@@ -7,4 +7,10 @@ export default defineConfig({
     base: "/web-course-site",
     output: "static",
     integrations: [UnoCSS({ injectReset: true })],
+    markdown: {
+        syntaxHighlight: "shiki",
+        shikiConfig: {
+            theme: "catppuccin-mocha",
+        },
+    },
 });
