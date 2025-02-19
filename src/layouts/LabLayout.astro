@@ -3,6 +3,7 @@ import Heading from "../components/Heading.astro";
 import ButtonTop from "../components/navigation/ButtonTop.astro";
 import Pagination from "../components/navigation/Pagination.astro";
 import TOC from "../components/navigation/TOC.astro";
+import { archiveYear } from "../pages/labs/archive.astro";
 import BaseLayout from "./BaseLayout.astro";
 
 const { frontmatter, headinglist, labUrl } = Astro.props;
@@ -16,7 +17,6 @@ if (frontmatter.number) {
         .split(".")
         .join("");
 }
-const labId = labUrl.split("/").slice(-1)[0];
 const courseId = labUrl.split("/")[0];
 const isFulltime = labUrl.includes("full-time");
 const labYear = labUrl.split("/")[2];
@@ -27,7 +27,9 @@ const labYear = labUrl.split("/")[2];
     <Heading
         title={frontmatter.title}
         number={number}
-        backLink={`labs/${frontmatter.type}`}
+        backLink={archiveYear === labYear
+            ? "labs/archive"
+            : `labs/${courseId}${isFulltime ? "" : "-distance"}`}
     />
     <article class="max-w-prose xl:max-w-full mx-auto">
         <div
@@ -73,7 +75,7 @@ const labYear = labUrl.split("/")[2];
     .md > :global(h1) {
         display: none;
     }
-    .md :global(a) {
+    .md :global(a:not(.mentors)) {
         word-wrap: break-word;
         color: var(--color-text-tertiary);
         text-decoration: underline;

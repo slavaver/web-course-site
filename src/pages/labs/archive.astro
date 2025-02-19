@@ -5,23 +5,22 @@ import Heading from "../../components/Heading.astro";
 import LinkCard from "../../components/LinkCard.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const yearOnMain = "2022";
+export const archiveYear = "2022";
 
-const allWebTech = await getCollection("web-tech");
-const allWebClient = await getCollection("web-client-dev");
+const allCourses = await getCollection("courses");
 
-const lastWebtech = allWebTech
-    .filter((material) => material.id.startsWith(yearOnMain))
-    .sort((a, b) => a.data.number - b.data.number);
+const webBasics = allCourses.filter((post) =>
+    post.id.includes(`web-basics/full-time/${archiveYear}`)
+);
 
-const lastWebClient = allWebClient
-    .filter((material) => material.id.startsWith(yearOnMain))
-    .sort((a, b) => a.data.number - b.data.number);
+const clientSideBasics = allCourses.filter((post) =>
+    post.id.includes(`client-side-basics/full-time/${archiveYear}`)
+);
 ---
 
 <BaseLayout>
     <div class="prose lg:prose-lg mx-auto">
-        <Heading title={`Архив ${yearOnMain} год`} />
+        <Heading title={`Архив ${archiveYear} год`} />
         <section>
             <div
                 class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30"
@@ -34,12 +33,12 @@ const lastWebClient = allWebClient
                     start="1"
                 >
                     {
-                        lastWebtech
+                        webBasics
                             .slice(0, 4)
                             .map((post, index) => (
                                 <LinkCard
                                     title={post.data.title}
-                                    href={`/web-course-site/labs/web-tech/${post.slug}`}
+                                    href={`/web-course-site/labs/${post.id}`}
                                     number={((index + 1) / 10)
                                         .toFixed(1)
                                         .toString()
@@ -59,12 +58,12 @@ const lastWebClient = allWebClient
                         start="5"
                     >
                         {
-                            lastWebtech
+                            webBasics
                                 .slice(4)
                                 .map((post, index) => (
                                     <LinkCard
                                         title={post.data.title}
-                                        href={`/web-course-site/labs/web-tech/${post.slug}`}
+                                        href={`/web-course-site/labs/${post.id}`}
                                         number={((index + 5) / 10)
                                             .toFixed(1)
                                             .toString()
@@ -94,12 +93,12 @@ const lastWebClient = allWebClient
                     start="1"
                 >
                     {
-                        lastWebClient
+                        clientSideBasics
                             .slice(0, 4)
                             .map((post) => (
                                 <LinkCard
                                     title={post.data.title}
-                                    href={`/web-course-site/labs/web-client-dev/${post.slug}`}
+                                    href={`/web-course-site/labs/${post.id}`}
                                     number={(post.data.number / 10)
                                         .toFixed(1)
                                         .toString()
@@ -119,12 +118,12 @@ const lastWebClient = allWebClient
                         start="5"
                     >
                         {
-                            lastWebClient
+                            clientSideBasics
                                 .slice(4)
                                 .map((post) => (
                                     <LinkCard
                                         title={post.data.title}
-                                        href={`/web-course-site/labs/web-client-dev/${post.slug}`}
+                                        href={`/web-course-site/labs/${post.id}`}
                                         number={(post.data.number / 10)
                                             .toFixed(1)
                                             .toString()
@@ -148,10 +147,10 @@ const lastWebClient = allWebClient
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             function setupToggle(
-                buttonId,
-                containerId,
-                initialText,
-                toggleText
+                buttonId: string,
+                containerId: string,
+                initialText: string,
+                toggleText: string
             ) {
                 const btn = document.getElementById(buttonId);
                 const container = document.getElementById(containerId);

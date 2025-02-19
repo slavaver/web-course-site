@@ -19,8 +19,8 @@ const { Content, headings } = await render(entry);
     {
         entry.id.includes("web-basics") && (
             <a
-                href="/web-course-site/mentors"
-                class="link text-neutral alert alert-warning mx-auto"
+                href={`/web-course-site/mentors`}
+                class="mentors flex py-4 border-1 border-bg-accent_second rounded-[15px] justify-center items-center text-bg-accent_second font-titles"
             >
                 Задать вопрос наставнику
             </a>
