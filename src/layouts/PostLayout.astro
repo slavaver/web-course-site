@@ -9,6 +9,7 @@ const { frontmatter } = Astro.props;
 
 <BaseLayout title={frontmatter.title}>
     <Heading title={frontmatter.title} backLink={"useful/"} />
+
     <main class="mx-auto pb-14">
         <ButtonTop />
         <div class="box-content max-w-[700px] m-auto px-3.5">
@@ -21,36 +22,80 @@ const { frontmatter } = Astro.props;
                         class="aspect-square w-12 flex rounded-full overflow-hidden bg-bg-tertiary"
                     >
                         <img
-                            src={frontmatter.authorAvatar}
+                            src={frontmatter.authorAvatar ||
+                                "/src/assets/img/photos/slavaver.png"}
                             class="w-full h-full object-contain object-bottom"
-                            alt={frontmatter.author}
+                            alt={frontmatter.author || "Верещагин Владислав"}
                         />
                     </div>
                     <div class="flex flex-col gap-1">
                         <p
                             class="text-xs xl:text-base text-text-inverted !leading-[1.2] not-italic"
                         >
-                            {frontmatter.author}
+                            {frontmatter.author || "Верещагин Владислав"}
                         </p>
                         <time
                             class="text-xs xl:text-base text-text-tertiary leading-[1.2] xl:leading-[1.2] not-italic"
                         >
-                            Последнее обновление: {frontmatter.updatedAt}
+                            Последнее обновление: {
+                                frontmatter.updatedAt || "01.01.1970"
+                            }
                         </time>
                     </div>
                 </div>
-                <a
-                    class="aspect-square w-12 flex items-center justify-center border rounded-full border-bg-accent_second text-bg-accent_second hover:border-bg-hover active:border-bg-active focus:border-bg-active hover:text-bg-hover active:text-bg-active focus:text-bg-active"
-                    href="#"
+                <div
+                    class="aspect-square w-12 flex items-center justify-center border rounded-full border-bg-accent_second text-bg-accent_second hover:border-bg-hover active:border-bg-active focus:border-bg-active hover:text-bg-hover active:text-bg-active focus:text-bg-active cursor-pointer share-button"
                 >
                     <ShareIcon class="w-6 h-6 text-inherit" />
-                </a>
+                </div>
             </address>
         </div>
     </main>
 </BaseLayout>
 
+<script>
+    const shareButton = document.querySelector(".share-button");
+
+    shareButton?.addEventListener("click", () => {
+        const url = window.location.href;
+        const text = document.title;
+        const shareData = {
+            title: text,
+            url: url,
+        };
+        navigator.share(shareData);
+    });
+</script>
+
 <style>
+    html.dark :global(.astro-code),
+    html.dark :global(.astro-code span) {
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+        color: var(--shiki-dark) !important;
+        background-color: var(--color-bg-code) !important;
+    }
+
+    html.light :global(.astro-code),
+    html.light :global(.astro-code span) {
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+        color: var(--shiki-light) !important;
+        background-color: var(--color-bg-code) !important;
+    }
+
+    .md > :global(pre) {
+        margin-bottom: 20px;
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .md :global(code) {
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+        font-family: "JetBrainsMono" !important;
+    }
+
     .md {
         color: var(--color-text-inverted);
     }

@@ -2,7 +2,7 @@
 import Heading from "../components/Heading.astro";
 import LectureCard from "../components/LectureCard.astro";
 import LinkCard from "../components/LinkCard.astro";
-import { CourseLayoutProps } from "../types/CourseLayout";
+import { CourseLayoutProps } from "../types/Courses";
 import BaseLayoutSnow from "./BaseLayoutSnow.astro";
 
 interface Props extends CourseLayoutProps {}
@@ -143,7 +143,7 @@ const {
                             rk.map((post) => (
                                 <LinkCard
                                     title={post.data.title}
-                                    href={`/web-course-site/labs/${name}/${post.id}`}
+                                    href={`/web-course-site/labs/${post.id}`}
                                 />
                             ))
                         ) : (
@@ -157,6 +157,13 @@ const {
                 </div>
             )
         }
+    </section>
+    <section>
+        <div
+            class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-20 text-text-inverted"
+        >
+            <slot />
+        </div>
     </section>
 </BaseLayoutSnow>
 

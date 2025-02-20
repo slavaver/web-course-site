@@ -6,13 +6,25 @@ import YandexSchedule from "../components/YandexSchedule.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const slavaverRetakes = [
-    "Веб-разработка на стороне клиента",
-    "Веб-технологии  (САПР)",
+    {
+        title: "Веб-разработка на стороне клиента",
+        href: "/web-course-site/labs/client-side",
+    },
+    {
+        title: "Веб-технологии  (САПР)",
+        href: "https://rad-capybara-bd0e52.netlify.app/",
+    },
 ];
 
 const gnibedaRetakes = [
-    "Веб-разработка на стороне клиента",
-    "Веб-технологии  (САПР)",
+    {
+        title: "Веб-разработка на стороне клиента",
+        href: "/web-course-site/labs/client-side",
+    },
+    {
+        title: "Веб-технологии  (САПР)",
+        href: "https://rad-capybara-bd0e52.netlify.app/",
+    },
 ];
 ---
 
@@ -29,7 +41,10 @@ const gnibedaRetakes = [
             <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
                 {
                     slavaverRetakes.map((discipline) => (
-                        <LinkCard title={discipline} />
+                        <LinkCard
+                            title={discipline.title}
+                            href={discipline.href}
+                        />
                     ))
                 }
             </ul>
@@ -62,7 +77,10 @@ const gnibedaRetakes = [
             <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
                 {
                     gnibedaRetakes.map((discipline) => (
-                        <LinkCard title={discipline} />
+                        <LinkCard
+                            title={discipline.title}
+                            href={discipline.href}
+                        />
                     ))
                 }
             </ul>
