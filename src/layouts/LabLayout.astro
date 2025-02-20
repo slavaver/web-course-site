@@ -66,6 +66,48 @@ const labYear = labUrl.split("/")[2];
     </div>
 </BaseLayout>
 <style scoped>
+    html.dark :global(.astro-code),
+    html.dark :global(.astro-code span) {
+        transition: 0.3s ease;
+        color: var(--shiki-dark) !important;
+        background-color: var(--color-code) !important;
+    }
+
+    html.light :global(.astro-code),
+    html.light :global(.astro-code span) {
+        transition: 0.3s ease;
+        color: var(--shiki-light) !important;
+        background-color: var(--shiki-light-bg) !important;
+    }
+
+    .md > :global(pre) {
+        margin-bottom: 20px;
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .md :global(code) {
+        transition: 0.3s ease;
+        font-family: "JetBrainsMono" !important;
+        border-radius: 5px;
+        padding: 2px 10px;
+    }
+
+    html.dark .md :global(code) {
+        background-color: var(--color-code) !important;
+    }
+
+    html.light .md :global(code) {
+        background-color: #eff1f5 !important;
+    }
+
+    .md > :global(pre) > :global(code) {
+        font-family: inherit !important;
+        border-radius: initial;
+        background-color: transparent !important;
+        padding: initial;
+    }
+
     .side > :global(h2) {
         font-size: 28px;
         font-weight: 600;
@@ -107,29 +149,6 @@ const labYear = labUrl.split("/")[2];
         font-size: 20px;
         padding-left: 25px;
         margin-bottom: 20px;
-    }
-
-    .md > :global(pre) {
-        margin-bottom: 20px;
-        padding: 20px;
-        border-radius: 15px;
-        background-color: var(--color-code) !important;
-        color: var(--color-text-primary) !important;
-    }
-
-    .md > :global(pre > code) {
-        font-family: "JetBrainsMono" !important;
-        border-radius: 15px;
-    }
-
-    .md > :global(ol > li code, ul > li code) {
-        padding: 2px 10px;
-        border-radius: 5px;
-        background-color: var(--color-code-snaps) !important;
-    }
-
-    .md > :global(pre > code > span > span) {
-        font-size: clamp(14px, 2vw, 16px);
     }
 
     .md > :global(ol) {

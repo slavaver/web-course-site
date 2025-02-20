@@ -20,7 +20,7 @@ type: "labs"
 
 Пригодится условный тип.
 
-```
+```ts
 If<true, 'a', 'b'> ---> 'a'
 If<false, 'a', 'b'> ---> 'b'
 ```
@@ -31,7 +31,7 @@ If<false, 'a', 'b'> ---> 'b'
 
 Пригодятся условные типы, оператор индексированного доступа и то что у массивов есть свойство длины.
 
-```
+```ts
 First<[3, 2, 1]> ---> 3
 First<[() => 123, { a: string }]> ---> () => 123
 First<[]> ---> never
@@ -44,12 +44,11 @@ First<[undefined]> ---> undefined
 
 Пригодятся условные типы и infer.
 
-```
+```ts
 MyAwaited<Promise<string>> ---> string
 MyAwaited<Promise<{ field: number }>> ---> { field: number }
 MyAwaited<Promise<string | number>> ---> string | number
 ```
-
 
 #### Кортеж в объединение
 
@@ -57,11 +56,10 @@ MyAwaited<Promise<string | number>> ---> string | number
 
 Пригодятся условные типы и infer.
 
-```
+```ts
 TupleToUnion<['1', '2', '3']> ---> '1' | '2' | '3'
 TupleToUnion<[1, 2, 3]> ---> 1 | 2 | 3
 ```
-
 
 #### Кортеж в объект
 
@@ -69,13 +67,13 @@ TupleToUnion<[1, 2, 3]> ---> 1 | 2 | 3
 
 Пригодятся сопоставленные типы (in), оператор индексированного доступа.
 
-```
+```ts
 const tuple1 = [1, 2, 3] as const
 TupleToObject<typeof tuple1> ---> {1:1,2:2,3:3}
 
 const tuple2 = ['a', 'b', 'c'] as const
 TupleToObject<typeof tuple> ---> {'a': 'a', 'b': 'b', 'c': 'c'}
-``` 
+```
 
 ## Github
 
