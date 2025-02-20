@@ -15,7 +15,7 @@ const baseUrl = import.meta.env.BASE_URL;
     class="section-heading bg-bg-primary rounded-b-[30px] md:rounded-b-[60px] pt-42.5 pb-25 mb-20 relative flex justify-center items-end px-5"
 >
     <div
-        class="hero-container flex flex-col justify-end h-full text-center items-center md:w-2/3"
+        class="hero-container flex flex-col justify-end h-full text-center items-center"
     >
         <button
             onclick={`window.location.href='${baseUrl}/${backLink || "/"}'`}
@@ -27,7 +27,9 @@ const baseUrl = import.meta.env.BASE_URL;
             /><span>Назад</span></button
         >
         {number && <h2>{number}</h2>}
-        <h1 class="line-height-[1.1]">{title}</h1>
+        <h1 class="line-height-[1.1] max-w-[760px]">
+            {title}
+        </h1>
         {
             description && (
                 <p class="mb-7.5 max-w-[500px] w-full  md:w-2/3">

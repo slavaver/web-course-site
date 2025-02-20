@@ -3,7 +3,7 @@ import Accordion from "@components/Accordion.astro";
 import Heading from "@components/Heading.astro";
 import LinkCard from "@components/LinkCard.astro";
 import YandexSchedule from "@components/YandexSchedule.astro";
-import BaseLayout from "@layouts/BaseLayout.astro";
+import BaseLayoutSnow from "@layouts/BaseLayoutSnow.astro";
 
 const slavaverRetakes = [
     {
@@ -28,7 +28,7 @@ const gnibedaRetakes = [
 ];
 ---
 
-<BaseLayout>
+<BaseLayoutSnow>
     <Heading title="Пересдача" />
     <section>
         <div
@@ -284,4 +284,4 @@ const gnibedaRetakes = [
             text-decoration: underline;
         }
     </style>
-</BaseLayout>
+</BaseLayoutSnow>
