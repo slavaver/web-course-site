@@ -1,9 +1,16 @@
 ---
-const { links } = Astro.props;
-import BookSvg from "../assets/img/bookSvg.astro";
-import HouseSvg from "../assets/img/houseSvg.astro";
-import DataBaseSvg from "../assets/img/databaseSvg.astro";
+
 ---
+
+<div class="inline-block md:hidden order--1 z-99">
+    <div class="burger-menu userActions p-2.75 rounded-[10px]">
+        <div class="burger-icon">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
 
 <style>
     .burger-menu {
@@ -40,17 +47,8 @@ import DataBaseSvg from "../assets/img/databaseSvg.astro";
         transform: translateY(-10px) rotate(-45deg);
     }
 </style>
-<div class="inline-block md:hidden order--1 z-99">
-    <div class="burger-menu userActions p-2.75 rounded-[10px]">
-        <div class="burger-icon">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>
-</div>
 
-<script defer>
+<script>
     let isOpen = false;
 
     const menu = document.querySelector(".menu");
@@ -59,8 +57,8 @@ import DataBaseSvg from "../assets/img/databaseSvg.astro";
 
     const toggleMenu = () => {
         isOpen = !isOpen;
-        menu.classList.toggle("open", isOpen);
-        burgerIcon.classList.toggle("open", isOpen);
+        menu?.classList.toggle("open", isOpen);
+        burgerIcon?.classList.toggle("open", isOpen);
     };
 
     burgerMenu ? burgerMenu.addEventListener("click", toggleMenu) : null;

@@ -1,7 +1,8 @@
 ---
-const { options } = Astro.props as {
+interface Props {
     options: { label: string; value: string }[];
-};
+}
+const { options } = Astro.props;
 ---
 
 <script>
@@ -11,7 +12,7 @@ const { options } = Astro.props as {
 
     let isOpen = false;
     if (select && selectedDiv && optionsList) {
-        function toggleDropdown(select, list) {
+        function toggleDropdown(select: HTMLElement, list: HTMLElement) {
             isOpen = !isOpen;
             if (isOpen) {
                 list.classList.add("open");

@@ -1,9 +1,12 @@
 ---
+import { MarkdownHeading } from "astro";
+
+interface Props {
+    headings: MarkdownHeading[];
+}
 const { headings } = Astro.props;
 
-// headings.shift();
-
-const marginVariants = {
+const marginVariants: Record<number, string> = {
     0: "ml-0",
     1: "ml-2",
     2: "ml-4",

@@ -7,23 +7,32 @@ import BaseLayoutSnow from "../layouts/BaseLayoutSnow.astro";
 const courses = [
     {
         title: "Основы веб-технологий",
-        href: `/web-course-site/labs/web-tech`,
-        descr: "Изучаем, как работает браузер, рассматриваем адаптивную верстку и ключевые принципы доступности",
+        href: `/web-course-site/labs/web-basics`,
+        description:
+            "Изучаем, как работает браузер, рассматриваем адаптивную верстку и ключевые принципы доступности",
     },
     {
-        title: "Основы веб-разработки",
-        href: `/web-course-site/labs/web-client-dev`,
-        descr: "Изучаем основы JavaScript и знакомимся с различными API, предоставляемыми браузером",
+        title: "Основы веб-разработки на клиенте",
+        href: `/web-course-site/labs/client-side-basics`,
+        description:
+            "Изучаем основы JavaScript и знакомимся с различными API, предоставляемыми браузером",
+    },
+    {
+        title: "Основы веб-разработки на клиенте (заочное)",
+        href: `/web-course-site/labs/client-side-basics-distance`,
+        description:
+            "Изучаем основы JavaScript и знакомимся с различными API, предоставляемыми браузером",
     },
     {
         title: "Веб-разработка на клиенте",
-        href: `/web-course-site/labs/web-client-dev-ts`,
-        descr: "Изучаем основы работы с типами и язык TypeScript, а также осваиваем применение фреймворка Vue",
+        href: `/web-course-site/labs/client-side`,
+        description:
+            "Изучаем основы работы с типами и язык TypeScript, а также осваиваем применение фреймворка Vue",
     },
     {
         title: "Архив",
         href: `/web-course-site/labs/archive`,
-        descr: "Здесь вы можете найти старые лабораторные работы",
+        description: "Здесь вы можете найти старые лабораторные работы",
     },
 ];
 
@@ -69,7 +78,7 @@ const mentors = [
 
 import { getCollection } from "astro:content";
 const allUseful = await getCollection("useful");
-const lengths = allUseful.map((post) => post.body.length);
+const lengths = allUseful.map((post) => post.body?.length);
 
 const usefulItems = allUseful.map((item, index) => ({
     ...item,
@@ -82,7 +91,7 @@ const usefulStatic = [
 ];
 
 const usefulDynamic = usefulItems
-    .filter((post) => post.slug !== "rules" && post.slug !== "links")
+    .filter((post) => post.id !== "rules" && post.id !== "links")
     .sort(() => Math.random() - 0.5)
     .slice(0, 2);
 
@@ -126,14 +135,14 @@ const useful = [...usefulStatic, ...usefulDynamic];
                     {
                         courses
                             .slice(0, 3)
-                            .map((course) => <CourseCard course={course} />)
+                            .map((course) => <CourseCard {...course} />)
                     }
                 </div>
                 <div id="hiddenCourses" class="flex flex-col gap-5">
                     {
                         courses
                             .slice(3)
-                            .map((course) => <CourseCard course={course} />)
+                            .map((course) => <CourseCard {...course} />)
                     }
                 </div>
             </ul>
@@ -153,7 +162,7 @@ const useful = [...usefulStatic, ...usefulDynamic];
             <ul
                 class="teachers-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
             >
-                {teachers.map((teacher) => <PeopleCard person={teacher} />)}
+                {teachers.map((teacher) => <PeopleCard {...teacher} />)}
             </ul>
         </div>
     </section>
@@ -208,13 +217,13 @@ const useful = [...usefulStatic, ...usefulDynamic];
             <ul
                 class="mentors-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-5"
             >
-                <PeopleCard person={mentors[0]} />
+                <PeopleCard {...mentors[0]} />
                 <p class="order--1 xl:order-0 px-1">
                     Мы поддерживаем вас на пути освоения первых двух курсов,
                     помогаем разобраться в сложных моментах и направляем на
                     верное решение задач
                 </p>
-                <PeopleCard person={mentors[1]} />
+                <PeopleCard {...mentors[1]} />
                 <div
                     class="other-mentors flex flex-col gap-5 order-1 2xl:order-0"
                 >
@@ -229,11 +238,7 @@ const useful = [...usefulStatic, ...usefulDynamic];
                         >Смотреть всех</button
                     >
                 </div>
-                {
-                    mentors
-                        .slice(2)
-                        .map((mentor) => <PeopleCard person={mentor} />)
-                }
+                {mentors.slice(2).map((mentor) => <PeopleCard {...mentor} />)}
             </ul>
         </div>
     </section>

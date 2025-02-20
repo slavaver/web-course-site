@@ -1,6 +1,13 @@
 ---
 import { getCollection } from "astro:content";
 
+interface Props {
+    collection: string;
+    slug: string;
+    yearOnMain: string;
+    isFulltime: boolean;
+}
+
 const { collection, slug, yearOnMain, isFulltime } = Astro.props;
 
 const fullLink = `${collection}/${isFulltime ? "full-time" : "distance"}/${yearOnMain}`;

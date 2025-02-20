@@ -4,9 +4,12 @@ import ButtonTop from "../components/navigation/ButtonTop.astro";
 import Pagination from "../components/navigation/Pagination.astro";
 import TOC from "../components/navigation/TOC.astro";
 import { archiveYear } from "../pages/labs/archive.astro";
+import { LabLayoutProps } from "../types/Labs";
 import BaseLayout from "./BaseLayout.astro";
 
-const { frontmatter, headinglist, labUrl } = Astro.props;
+interface Props extends LabLayoutProps {}
+
+const { frontmatter, headinglist, labUrl }: Props = Astro.props;
 
 let number: string = "";
 
@@ -22,7 +25,7 @@ const isFulltime = labUrl.includes("full-time");
 const labYear = labUrl.split("/")[2];
 ---
 
-<BaseLayout title={frontmatter.collection}>
+<BaseLayout title={frontmatter.title}>
     <ButtonTop />
     <Heading
         title={frontmatter.title}

@@ -117,13 +117,16 @@ const links = [
 
     const dropdownSm = document.querySelector(".dropdown__list-sm");
 
-    const toggleDropdown = (activeBtn, list) => {
+    const toggleDropdown = (
+        activeBtn: Element | null,
+        list: Element | null
+    ) => {
         isDropdownOpen = !isDropdownOpen;
         list?.classList.toggle("open", isDropdownOpen);
         activeBtn?.classList.toggle("open", isDropdownOpen);
     };
 
-    const goToLink = (link) => {
+    const goToLink = (link: Element) => {
         const slicedLink =
             link.id === "web-course-site-link"
                 ? link.id.slice(0, -5)
@@ -311,7 +314,7 @@ const links = [
 
         .menu.open .dropdown__list-sm.open {
             pointer-events: all;
-            max-height: 200px;
+            max-height: 250px;
             width: 100%;
             opacity: 1;
             background-color: var(--color-bg-secondary);

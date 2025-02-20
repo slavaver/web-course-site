@@ -5,9 +5,9 @@ const { placeholder } = Astro.props;
 <script>
     const search = document.getElementById("custom-search");
 
-    function debounce(fn, delay) {
-        let timeoutId;
-        return function (...args) {
+    function debounce(fn: Function, delay: number) {
+        let timeoutId: number;
+        return function (this: void, ...args: unknown[]) {
             const context = this;
             clearTimeout(timeoutId);
             timeoutId = setTimeout(() => {
@@ -15,8 +15,7 @@ const { placeholder } = Astro.props;
             }, delay);
         };
     }
-
-    const handleInput = (value) => {
+    const handleInput = (value: string) => {
         const customEvent = new CustomEvent("searchInput", {
             detail: { value },
             bubbles: true,
