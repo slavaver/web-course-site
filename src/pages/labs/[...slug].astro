@@ -18,7 +18,6 @@ const { Content, headings } = await render(entry);
 
 <LabLayout frontmatter={entry.data} headinglist={headings} labUrl={entry.id}>
     <Content />
-    {JSON.stringify(entry.data)}
     {
         entry.id.includes("web-basics") && (
             <a
