@@ -181,6 +181,7 @@ const links = [
         transition: 0.3s ease-in-out;
         max-height: 0px;
         width: 50%;
+        max-width: 650px;
         padding: 15px;
         margin: 0 auto;
         pointer-events: none;
@@ -282,6 +283,10 @@ const links = [
             transform: scale(0.95);
         }
 
+        .menu > a {
+            margin: 0 1.25rem;
+        }
+
         .menu.open {
             opacity: 1;
             display: flex;
@@ -327,6 +332,10 @@ const links = [
 
         #useful-link {
             order: 1;
+        }
+
+        #retake-link {
+            order: 2;
         }
     }
 </style>

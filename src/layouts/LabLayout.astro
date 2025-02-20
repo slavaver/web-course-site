@@ -34,9 +34,9 @@ const labYear = labUrl.split("/")[2];
             ? "labs/archive"
             : `labs/${courseId}${isFulltime ? "" : "-distance"}`}
     />
-    <article class="max-w-prose xl:max-w-full mx-auto">
+    <article class="box-content m-auto px-3.5">
         <div
-            class="xl:grid grid-cols-[1fr_700px_1fr] gap-4 items-start text-text-inverted"
+            class="xl:grid grid-cols-[1fr_700px_1fr] gap-4 items-start text-text-inverted mb-5"
         >
             <aside
                 class="side mx-auto top-25 pt-6 xl:px-6 xl:pt-0 mb-14 xl:mb-0 xl:sticky"
@@ -51,31 +51,33 @@ const labYear = labUrl.split("/")[2];
                 <slot />
             </div>
         </div>
+        <div class="mb-20">
+            {
+                frontmatter.type === "labs" && (
+                    <Pagination
+                        slug={frontmatter.number}
+                        collection={courseId}
+                        isFulltime={isFulltime}
+                        yearOnMain={labYear}
+                    />
+                )
+            }
+        </div>
     </article>
-    <div class="mb-20">
-        {
-            frontmatter.type === "labs" && (
-                <Pagination
-                    slug={frontmatter.number}
-                    collection={courseId}
-                    isFulltime={isFulltime}
-                    yearOnMain={labYear}
-                />
-            )
-        }
-    </div>
 </BaseLayout>
 <style scoped>
     html.dark :global(.astro-code),
     html.dark :global(.astro-code span) {
-        transition: 0.3s ease;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
         color: var(--shiki-dark) !important;
         background-color: var(--color-code) !important;
     }
 
     html.light :global(.astro-code),
     html.light :global(.astro-code span) {
-        transition: 0.3s ease;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
         color: var(--shiki-light) !important;
         background-color: var(--shiki-light-bg) !important;
     }
@@ -87,72 +89,13 @@ const labYear = labUrl.split("/")[2];
     }
 
     .md :global(code) {
-        transition: 0.3s ease;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
         font-family: "JetBrainsMono" !important;
-        border-radius: 5px;
-        padding: 2px 10px;
     }
 
-    html.dark .md :global(code) {
-        background-color: var(--color-code) !important;
-    }
-
-    html.light .md :global(code) {
-        background-color: #eff1f5 !important;
-    }
-
-    .md > :global(pre) > :global(code) {
-        font-family: inherit !important;
-        border-radius: initial;
-        background-color: transparent !important;
-        padding: initial;
-    }
-
-    .side > :global(h2) {
-        font-size: 28px;
-        font-weight: 600;
-    }
-
-    .side > :global(ul > li > a) {
-        word-wrap: break-word;
-        text-decoration: underline;
-    }
-    .md > :global(h1) {
-        display: none;
-    }
-    .md :global(a:not(.mentors)) {
-        word-wrap: break-word;
-        color: var(--color-text-tertiary);
-        text-decoration: underline;
-    }
-
-    .md > :global(p) {
-        margin-bottom: 20px;
-    }
-
-    .md > :global(h2) {
-        font-size: 38px;
-        line-height: 1;
-        font-weight: 600;
-        margin-bottom: 20px;
-    }
-
-    .md > :global(h3) {
-        font-size: 28px;
-        line-height: 1;
-        font-weight: 600;
-        margin-bottom: 20px;
-    }
-
-    .md > :global(ul, ol) {
-        list-style-type: disc;
-        font-size: 20px;
-        padding-left: 25px;
-        margin-bottom: 20px;
-    }
-
-    .md > :global(ol) {
-        list-style-type: decimal;
+    .md :global(code:not(pre code)) {
+        color: var(--color-bg-accent-second);
     }
 
     .md > :global(table) {
@@ -162,10 +105,8 @@ const labYear = labUrl.split("/")[2];
         margin-bottom: 20px;
     }
 
-    .md > :global(table > thead) {
-        text-align: left;
-
-        background-color: var(--color-bg-secondary);
+    .md > :global(h1) {
+        display: none;
     }
 
     .md > :global(table > thead > tr > th) {
@@ -193,9 +134,101 @@ const labYear = labUrl.split("/")[2];
         padding: 20px;
     }
 
-    .md > :global(p > img),
-    .md > :global(svg) {
-        border-radius: 10px;
+    .side > :global(h2) {
+        font-size: 28px;
+        font-weight: 600;
+    }
+
+    .md :global(p) {
         margin-bottom: 20px;
+        line-height: 1.2;
+    }
+
+    .md :global(ul, ol) {
+        margin-bottom: 20px;
+        padding-left: 40px;
+    }
+
+    .md :global(ul) {
+        list-style-type: disc;
+    }
+
+    .md :global(ol) {
+        list-style-type: decimal-leading-zero;
+    }
+
+    .md :global(li) {
+        margin-bottom: 10px;
+        font-size: 20px;
+        line-height: 1.2;
+    }
+
+    .side :global(a) {
+        word-wrap: break-word;
+        text-decoration: underline;
+    }
+
+    .md :global(a:not(.mentors)) {
+        color: var(--color-text-tertiary);
+        text-decoration: underline;
+    }
+
+    .md :global(img),
+    .md :global(svg) {
+        margin: 20px 0;
+        border-radius: 10px;
+    }
+
+    .md :global(hr) {
+        margin: 20px 0;
+    }
+
+    .md > :global(*:last-child) {
+        margin-bottom: 0;
+    }
+
+    .md :global(h2, h3) {
+        margin-bottom: 20px;
+        text-wrap: balance;
+        line-height: 1.1;
+    }
+
+    .md :global(h2, h3) {
+        margin-top: 40px;
+    }
+
+    .md :global(:is(h2, h3):first-child) {
+        margin-top: 0;
+    }
+
+    .md :global(h2) {
+        font-size: 40px;
+    }
+
+    .md :global(h3) {
+        font-size: 28px;
+    }
+
+    @media (max-width: 1200px) {
+        .md :global(h3) {
+            font-size: 24px;
+        }
+        .md :global(li) {
+            font-size: 18px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .md :global(h2) {
+            font-size: 28px;
+        }
+
+        .md :global(h3) {
+            font-size: 24px;
+        }
+
+        .md :global(li) {
+            font-size: 16px;
+        }
     }
 </style>

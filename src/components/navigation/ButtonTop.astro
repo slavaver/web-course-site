@@ -7,7 +7,7 @@
         type="button"
         id="back-to-top-btn"
         aria-label="Кнопка наверх"
-        class="fixed bottom-5 right-5 hidden"
+        class="fixed bottom-5 right-5 hidden z-999 animate-fade-in animate-duration-300"
         tabindex="1"
         ><svg
             xmlns="http://www.w3.org/2000/svg"
@@ -26,22 +26,23 @@
 <script>
     if (document.contains(document.getElementById("back-to-top-btn"))) {
         const button = document.getElementById("back-to-top-btn");
-        if (!button) return;
-        window.addEventListener("scroll", () => {
-            if (window.scrollY > 200) {
-                button.classList.add("block");
-                button.classList.remove("hidden");
-            } else {
-                button.classList.add("hidden");
-                button.classList.remove("block");
-            }
-        });
-
-        button.addEventListener("click", () => {
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth",
+        if (button) {
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 200) {
+                    button.classList.add("block");
+                    button.classList.remove("hidden");
+                } else {
+                    button.classList.add("hidden");
+                    button.classList.remove("block");
+                }
             });
-        });
+
+            button.addEventListener("click", () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                });
+            });
+        }
     }
 </script>

@@ -69,7 +69,7 @@ export default defineConfig({
                 "--color-border-input": "#4969DC",
                 "--color-bg-hover-input": "#D4DDFF",
                 "--color-code": "#0B163B",
-                "--color-code-snaps": "#D4DDFF",
+                "--color-code-snaps": "#EFF1F5",
                 "--color-number": "#FFFFFF",
             },
         ],

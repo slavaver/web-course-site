@@ -28,12 +28,12 @@ const getLabPrevNextId = (indxDiff: 1 | -1) => {
 };
 ---
 
-<div class="join max-w-[700px] grid grid-cols-2 mx-auto gap-1 mt-10">
+<div class="join max-w-[700px] grid grid-cols-2 mx-auto gap-1 sm:gap-5">
     {
         currentIdx - 1 >= 0 ? (
             <a
                 href={`/web-course-site/labs/${fullLink}/${getLabPrevNextId(-1)}`}
-                class="flex py-4 border-1 border-bg-accent_second rounded-[15px] justify-center items-center text-bg-accent_second font-titles"
+                class="flex py-4 border-1 border-bg-accent_second rounded-[15px] justify-center items-center text-bg-accent_second font-titles  md:hover:bg-hover-secondary md:hover:text-text-primary md:hover:border-transparent pagination-btn"
             >
                 <svg
                     width="25"
@@ -51,8 +51,7 @@ const getLabPrevNextId = (indxDiff: 1 | -1) => {
                         stroke-linejoin="round"
                     />
                 </svg>
-
-                {`Предыдущая`}
+                Предыдущая
             </a>
         ) : (
             <div />
@@ -62,7 +61,7 @@ const getLabPrevNextId = (indxDiff: 1 | -1) => {
         currentIdx + 1 < materialsOfYear.length ? (
             <a
                 href={`/web-course-site/labs/${fullLink}/${getLabPrevNextId(1)}`}
-                class="flex border-1 py-4 border-bg-accent_second rounded-[15px] justify-center items-center text-bg-accent_second font-titles"
+                class="flex border-1 py-4 border-bg-accent_second rounded-[15px] justify-center items-center text-bg-accent_second font-titles md:hover:bg-hover-secondary md:hover:text-text-primary md:hover:border-transparent pagination-btn"
             >
                 {`Следующая`}
                 <svg
@@ -87,3 +86,13 @@ const getLabPrevNextId = (indxDiff: 1 | -1) => {
         )
     }
 </div>
+
+<style>
+    .pagination-btn > svg > path {
+        transition: 0.2s ease-in-out;
+    }
+
+    .pagination-btn:hover > svg > path {
+        stroke: var(--color-text-primary);
+    }
+</style>
