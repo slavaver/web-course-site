@@ -1,7 +1,7 @@
 ---
-import Heading from "../components/Heading.astro";
-import LectureCard from "../components/LectureCard.astro";
-import LinkCard from "../components/LinkCard.astro";
+import Heading from "@components/Heading.astro";
+import LectureCard from "@components/LectureCard.astro";
+import LinkCard from "@components/LinkCard.astro";
 import { CourseLayoutProps } from "../types/Courses";
 import BaseLayoutSnow from "./BaseLayoutSnow.astro";
 
@@ -17,6 +17,8 @@ const {
     labs,
     rk,
 }: Props = Astro.props;
+
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <BaseLayoutSnow>
@@ -24,7 +26,7 @@ const {
     <section>
         {
             (statementHref || schedule) && (
-                <div class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30">
+                <div class="max-w-screen px-5 lg:max-w-screen-lg xl:max-w-screen-xl mx-auto mb-30">
                     <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
                         {statementHref && (
                             <LinkCard
@@ -36,7 +38,7 @@ const {
                             schedule.map((post) => (
                                 <LinkCard
                                     title={post.data.title}
-                                    href={`/web-course-site/labs/${post.id}`}
+                                    href={`${baseUrl}/labs/${post.id}`}
                                 />
                             ))}
                     </ul>
@@ -44,7 +46,7 @@ const {
             )
         }
         <div
-            class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30"
+            class="max-w-screen px-5 lg:max-w-screen-lg xl:max-w-screen-xl mx-auto mb-30"
         >
             <h2 class="text-center mb-10 text-text-inverted">
                 Лабораторные работы
@@ -71,7 +73,7 @@ const {
                                             .toString()
                                             .split(".")
                                             .join("")}
-                                        href={`/web-course-site/labs/${post.id}`}
+                                        href={`${baseUrl}/labs/${post.id}`}
                                     />
                                 );
                             })
@@ -81,7 +83,7 @@ const {
         {
             lectures && (
                 <div class="section-lectures bg-bg-primary py-20 rounded-[30px] sm:rounded-[60px] mb-30">
-                    <div class="px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto">
+                    <div class="px-5 lg:max-w-screen-lg xl:max-w-screen-xl mx-auto">
                         <h2 class="text-center mb-10">Лекции</h2>
                         <ul class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 w-full">
                             {lectures.map((lecture, index) => (
@@ -92,7 +94,7 @@ const {
                                                 return (
                                                     <div class="flex aspect-ratio-square rounded-[30px] overflow-hidden">
                                                         <img
-                                                            src="/src/assets/img/cat-chill-table.svg"
+                                                            src={`${baseUrl}/assets/img/cat-chill-table.svg`}
                                                             alt="лапка котика с сердечками"
                                                             class="mx-auto"
                                                         />
@@ -102,7 +104,7 @@ const {
                                                 return (
                                                     <div class="flex aspect-ratio-square rounded-[30px] overflow-hidden">
                                                         <img
-                                                            src="/src/assets/img/cat-table-vue.svg"
+                                                            src={`${baseUrl}/assets/img/cat-table-vue.svg`}
                                                             alt="лапка котика с сердечками"
                                                             class="mx-auto"
                                                         />
@@ -112,7 +114,7 @@ const {
                                                 return (
                                                     <div class="flex aspect-ratio-square rounded-[30px] overflow-hidden">
                                                         <img
-                                                            src="/src/assets/img/cat-cute.svg"
+                                                            src={`${baseUrl}/assets/img/cat-cute.svg`}
                                                             alt="лапка котика с сердечками"
                                                             class="mx-auto"
                                                         />
@@ -134,7 +136,7 @@ const {
         }
         {
             rk && (
-                <div class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30">
+                <div class="max-w-screen px-5 md:px-15 xl:px-0 lg:max-w-screen-lg xl:max-w-screen-xl mx-auto mb-30">
                     <h2 class="text-center text-text-inverted">
                         Рубежный контроль
                     </h2>
@@ -143,7 +145,7 @@ const {
                             rk.map((post) => (
                                 <LinkCard
                                     title={post.data.title}
-                                    href={`/web-course-site/labs/${post.id}`}
+                                    href={`${baseUrl}/labs/${post.id}`}
                                 />
                             ))
                         ) : (

@@ -1,11 +1,18 @@
 {
     "compilerOptions": {
         "target": "ESNext",
-        "module": "ESNext",
-        "moduleResolution": "Node",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
         "strict": true,
         "jsx": "preserve",
-        "jsxImportSource": "astro"
+        "jsxImportSource": "astro",
+        "baseUrl": "./",
+        "paths": {
+            "@/*": ["src/*"],
+            "@components/*": ["src/components/*"],
+            "@layouts/*": ["src/layouts/*"],
+            "@pages/*": ["src/pages/*"]
+        }
     },
     "include": ["src"]
 }

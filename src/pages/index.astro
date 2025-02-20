@@ -1,80 +1,8 @@
 ---
-import CourseCard from "../components/CourseCard.astro";
-import PeopleCard from "../components/PeopleCard.astro";
-import UsefulCard from "../components/UsefulCard.astro";
-import BaseLayoutSnow from "../layouts/BaseLayoutSnow.astro";
-
-const courses = [
-    {
-        title: "Основы веб-технологий",
-        href: `/web-course-site/labs/web-basics`,
-        description:
-            "Изучаем, как работает браузер, рассматриваем адаптивную верстку и ключевые принципы доступности",
-    },
-    {
-        title: "Основы веб-разработки на клиенте",
-        href: `/web-course-site/labs/client-side-basics`,
-        description:
-            "Изучаем основы JavaScript и знакомимся с различными API, предоставляемыми браузером",
-    },
-    {
-        title: "Основы веб-разработки на клиенте (заочное)",
-        href: `/web-course-site/labs/client-side-basics-distance`,
-        description:
-            "Изучаем основы JavaScript и знакомимся с различными API, предоставляемыми браузером",
-    },
-    {
-        title: "Веб-разработка на клиенте",
-        href: `/web-course-site/labs/client-side`,
-        description:
-            "Изучаем основы работы с типами и язык TypeScript, а также осваиваем применение фреймворка Vue",
-    },
-    {
-        title: "Архив",
-        href: `/web-course-site/labs/archive`,
-        description: "Здесь вы можете найти старые лабораторные работы",
-    },
-];
-
-const teachers = [
-    {
-        name: "Верещагин Владислав Юрьевич",
-        imgUrl: "./src/assets/img/photos/slavaver.png",
-        role: "Кандидат технических наук",
-    },
-    {
-        name: "Гнибеда Артем Юрьевич",
-        imgUrl: "./src/assets/img/photos/gnibedaArtem.png",
-        role: "",
-    },
-];
-
-const mentors = [
-    {
-        name: "Мелихова Ева",
-        imgUrl: "./src/assets/img/photos/sshultse.png",
-        role: "Ассистент преподавателя",
-        contact: "sshultse",
-    },
-    {
-        name: "Хаметов Артем",
-        imgUrl: "./src/assets/img/photos/hametov.png",
-        role: "Ассистент преподавателя",
-        contact: "MacalllanS",
-    },
-    {
-        name: "Бастун Андрей",
-        imgUrl: "",
-        role: "Наставник",
-        contact: "qalqaa",
-    },
-    {
-        name: "Старцев Виталий",
-        imgUrl: "./src/assets/img/photos/vitaliy.png",
-        role: "Наставник",
-        contact: "snitch_viy",
-    },
-];
+import CourseCard from "@components/CourseCard.astro";
+import PeopleCard from "@components/PeopleCard.astro";
+import UsefulCard from "@components/UsefulCard.astro";
+import BaseLayoutSnow from "@layouts/BaseLayoutSnow.astro";
 
 import { getCollection } from "astro:content";
 const allUseful = await getCollection("useful");
@@ -96,6 +24,80 @@ const usefulDynamic = usefulItems
     .slice(0, 2);
 
 const useful = [...usefulStatic, ...usefulDynamic];
+
+const baseUrl = import.meta.env.BASE_URL;
+
+const courses = [
+    {
+        title: "Основы веб-технологий",
+        href: `${baseUrl}/labs/web-basics`,
+        description:
+            "Изучаем, как работает браузер, рассматриваем адаптивную верстку и ключевые принципы доступности",
+    },
+    {
+        title: "Основы веб-разработки на клиенте",
+        href: `${baseUrl}/labs/client-side-basics`,
+        description:
+            "Изучаем основы JavaScript и знакомимся с различными API, предоставляемыми браузером",
+    },
+    {
+        title: "Основы веб-разработки на клиенте (заочное)",
+        href: `${baseUrl}/labs/client-side-basics-distance`,
+        description:
+            "Изучаем основы JavaScript и знакомимся с различными API, предоставляемыми браузером",
+    },
+    {
+        title: "Веб-разработка на клиенте",
+        href: `${baseUrl}/labs/client-side`,
+        description:
+            "Изучаем основы работы с типами и язык TypeScript, а также осваиваем применение фреймворка Vue",
+    },
+    {
+        title: "Архив",
+        href: `${baseUrl}/labs/archive`,
+        description: "Здесь вы можете найти старые лабораторные работы",
+    },
+];
+
+const teachers = [
+    {
+        name: "Верещагин Владислав Юрьевич",
+        imgUrl: `${baseUrl}/assets/img/photos/slavaver.png`,
+        role: "Кандидат технических наук",
+    },
+    {
+        name: "Гнибеда Артем Юрьевич",
+        imgUrl: `${baseUrl}/assets/img/photos/gnibedaArtem.png`,
+        role: "",
+    },
+];
+
+const mentors = [
+    {
+        name: "Мелихова Ева",
+        imgUrl: `${baseUrl}/assets/img/photos/sshultse.png`,
+        role: "Ассистент преподавателя",
+        contact: "sshultse",
+    },
+    {
+        name: "Хаметов Артем",
+        imgUrl: `${baseUrl}/assets/img/photos/hametov.png`,
+        role: "Ассистент преподавателя",
+        contact: "MacalllanS",
+    },
+    {
+        name: "Бастун Андрей",
+        imgUrl: "",
+        role: "Наставник",
+        contact: "qalqaa",
+    },
+    {
+        name: "Старцев Виталий",
+        imgUrl: `${baseUrl}/assets/img/photos/vitaliy.png`,
+        role: "Наставник",
+        contact: "snitch_viy",
+    },
+];
 ---
 
 <BaseLayoutSnow>
@@ -120,7 +122,7 @@ const useful = [...usefulStatic, ...usefulDynamic];
                 на&nbsp;стороне клиента
             </p>
             <img
-                src="./src/assets/img/cat-code.svg"
+                src=`${baseUrl}/assets/img/cat-code.svg`
                 alt="смешной котик программирует"
             />
         </div>
@@ -194,7 +196,7 @@ const useful = [...usefulStatic, ...usefulDynamic];
                     class="other-useful flex flex-col justify-between order-1 lg:order-0"
                 >
                     <img
-                        src="./src/assets/img/cat-chill.svg"
+                        src=`${baseUrl}/assets/img/cat-chill.svg`
                         alt="чилл кот лежит за ноутбуком"
                     />
                     <button
@@ -229,7 +231,7 @@ const useful = [...usefulStatic, ...usefulDynamic];
                 >
                     <img
                         class="h-[100vw] sm:h-[45vw] lg:h-[30vw] xl:h-380px 2xl:h-430px"
-                        src="./src/assets/img/paw-heart.svg"
+                        src=`${baseUrl}/assets/img/paw-heart.svg`
                         alt="Лапка котика с сердечками"
                     />
                     <button
@@ -268,15 +270,6 @@ const useful = [...usefulStatic, ...usefulDynamic];
         mask-repeat: no-repeat;
         -webkit-mask-size: cover;
         mask-size: cover;
-    }
-
-    .courses-item-btn {
-        background: url("./src/assets/img/goto.svg") no-repeat center;
-        width: 50px;
-        height: 50px;
-        border: 1.5px solid var(--color-border);
-        border-radius: 100%;
-        color: var(--color-border);
     }
 
     #hiddenCourses {

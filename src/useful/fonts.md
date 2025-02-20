@@ -2,9 +2,6 @@
 title: "Специфика подключения шрифтов"
 description: "Рецепт, который упростит вам процесс верстки по макету."
 course: "first-sem"
-author: "Верещагин Владислав"
-authorAvatar: "/src/assets/img/photos/slavaver.png"
-updatedAt: "01.09.2024"
 ---
 
 # Специфика подключения шрифтов

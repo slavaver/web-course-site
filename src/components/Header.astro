@@ -1,6 +1,7 @@
 ---
 import BurgerMenu from "./BurgerMenu.astro";
 import ThemeToggler from "./navigation/ThemeToggler.astro";
+const baseUrl = import.meta.env.BASE_URL;
 
 const courses = [
     {
@@ -41,21 +42,21 @@ const links = [
 ];
 ---
 
-<header class="drawer-container w-full fixed z-50">
+<header class="header-container w-full fixed z-50">
     <div
-        class="drawer md:bg-bg-menu text-text-primary flex-col gap-2 py-2.5 px-2.5 md:px-10 rounded-2xl box-border md:backdrop-blur-xl"
+        class="header md:bg-bg-menu text-text-primary flex-col gap-2 py-2.5 px-2.5 md:px-10 rounded-2xl box-border md:backdrop-blur-xl"
     >
         <div
-            class="drawer-content-vertical w-full justify-between items-center mx-auto max-w-screen-xl flex"
+            class="header-content-vertical w-full justify-between items-center mx-auto max-w-screen-xl flex"
         >
             <a class="userActionsLink hidden md:block" href="/web-course-site/">
                 <img
                     class="w-10 h-10"
-                    src="/src/assets/img/logo.svg"
+                    src=`${baseUrl}/assets/img/logo.svg`
                     alt="logo"
                 />
             </a>
-            <nav class="drawer-nav menu">
+            <nav class="header-nav menu">
                 {
                     links.map((link) => (
                         <a
@@ -156,11 +157,11 @@ const links = [
 </script>
 
 <style>
-    .drawer {
+    .header {
         margin-bottom: 10px;
     }
 
-    .drawer-container {
+    .header-container {
         transition: 0.3s ease-in-out;
         padding-top: 0.625rem;
         padding-bottom: 0.625rem;
@@ -168,11 +169,11 @@ const links = [
         padding-right: 1.25rem;
     }
 
-    .drawer-content-vertical {
+    .header-content-vertical {
         transition: 0.3s ease-in-out;
     }
 
-    .drawer-nav > a {
+    .header-nav > a {
         border-radius: 10px;
         padding: 1.25rem clamp(0rem, 1vw, 1.25rem);
     }
@@ -217,11 +218,11 @@ const links = [
         transition: 0.3s ease-in-out;
         content: "";
         position: absolute;
-        top: 23px;
+        top: 25px;
         right: 15px;
         width: 21px;
         height: 20px;
-        background: url("/src/assets/img/cheveron-down.svg") center no-repeat;
+        background: url("/public/assets/img/cheveron-down.svg") center no-repeat;
         transform: rotate(-90deg);
     }
 
@@ -235,24 +236,24 @@ const links = [
     }
 
     @media (max-width: 768px) {
-        .drawer-container:has(.menu.open) {
+        .header-container:has(.menu.open) {
             padding: 0;
             z-index: 999;
             background-color: transparent;
         }
 
-        .drawer {
+        .header {
             transition: background-color 0.3s ease-in-out;
             background-color: var(--color-bg-menu);
             backdrop-filter: blur(40px);
         }
 
-        .drawer:has(.menu.open) {
+        .header:has(.menu.open) {
             background-color: transparent;
             backdrop-filter: none;
         }
 
-        .drawer-content-vertical:has(.menu.open) {
+        .header-content-vertical:has(.menu.open) {
             padding-top: 0.625rem;
             padding-bottom: 0.625rem;
             padding-left: 1.25rem;

@@ -1,10 +1,12 @@
 ---
-import ShareIcon from "../assets/img/ShareIcon.astro";
-import Heading from "../components/Heading.astro";
-import ButtonTop from "../components/navigation/ButtonTop.astro";
+import ShareIcon from "public/assets/img/ShareIcon.astro";
+import Heading from "@components/Heading.astro";
+import ButtonTop from "@components/navigation/ButtonTop.astro";
 import BaseLayout from "./BaseLayout.astro";
 
 const { frontmatter } = Astro.props;
+
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title={frontmatter.title}>
@@ -23,7 +25,7 @@ const { frontmatter } = Astro.props;
                     >
                         <img
                             src={frontmatter.authorAvatar ||
-                                "/src/assets/img/photos/slavaver.png"}
+                                `${baseUrl}/assets/img/photos/slavaver.png`}
                             class="w-full h-full object-contain object-bottom"
                             alt={frontmatter.author || "Верещагин Владислав"}
                         />

@@ -1,4 +1,4 @@
-import { Post, POST_DATA_TYPE } from "./Posts";
+import { Post, POST_DATA_TYPE } from "./Posts.js";
 
 export type CourseLayoutProps = {
     title: string;

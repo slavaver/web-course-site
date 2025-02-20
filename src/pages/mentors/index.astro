@@ -1,18 +1,20 @@
 ---
-import Heading from "../../components/Heading.astro";
-import PeopleCard from "../../components/PeopleCard.astro";
-import BaseLayoutSnow from "../../layouts/BaseLayoutSnow.astro";
+import Heading from "@components/Heading.astro";
+import PeopleCard from "@components/PeopleCard.astro";
+import BaseLayoutSnow from "@layouts/BaseLayoutSnow.astro";
+
+const baseUrl = import.meta.env.BASE_URL;
 
 const mentors = [
     {
         name: "Мелихова Ева",
-        imgUrl: "./src/assets/img/photos/sshultse.png",
+        imgUrl: `${baseUrl}/assets/img/photos/sshultse.png`,
         role: "Ассистент преподавателя",
         contact: "sshultse",
     },
     {
         name: "Хаметов Артем",
-        imgUrl: "./src/assets/img/photos/hametov.png",
+        imgUrl: `${baseUrl}/assets/img/photos/hametov.png`,
         role: "Ассистент преподавателя",
         contact: "MacalllanS",
     },
@@ -24,7 +26,7 @@ const mentors = [
     },
     {
         name: "Старцев Виталий",
-        imgUrl: "./src/assets/img/photos/vitaliy.png",
+        imgUrl: `${baseUrl}/assets/img/photos/vitaliy.png`,
         role: "Наставник",
         contact: "snitch_viy",
     },
@@ -36,7 +38,7 @@ const mentors = [
     },
     {
         name: "Кудинов Данила",
-        imgUrl: "./src/assets/img/photos/kudinov.png",
+        imgUrl: `${baseUrl}/assets/img/photos/kudinov.png`,
         role: "Наставник",
         contact: "tvoykudinov",
     },
@@ -59,7 +61,7 @@ const mentors = [
                 <div class="px-1 flex">
                     <img
                         class="h-[100vw] sm:h-[45vw] lg:h-[30vw] xl:h-380px 2xl:h-430px"
-                        src="/src/assets/img/cat-code.svg"
+                        src=`${baseUrl}/assets/img/cat-code.svg`
                         alt="котик кодит"
                     />
                 </div>
@@ -73,7 +75,7 @@ const mentors = [
                 <div class="other-mentors flex flex-col gap-5">
                     <img
                         class="h-[100vw] sm:h-[45vw] lg:h-[30vw] xl:h-380px 2xl:h-430px"
-                        src="./src/assets/img/paw-heart.svg"
+                        src=`${baseUrl}/assets/img/paw-heart.svg`
                         alt="Лапка котика с сердечками"
                     />
                 </div>

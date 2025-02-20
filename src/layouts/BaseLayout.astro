@@ -1,8 +1,6 @@
 ---
-import Footer from "../components/Footer.astro";
-// import NavBar from "../components/NavBar.astro";
-import NavbarDrawer from "../components/NavbarDrawer.astro";
-// import { ViewTransitions } from "astro:transitions";
+import Footer from "@components/Footer.astro";
+import Header from "@components/Header.astro";
 const { title } = Astro.props;
 const isProd = import.meta.env.PROD;
 ---
@@ -18,7 +16,6 @@ const isProd = import.meta.env.PROD;
             type="image/svg+xml"
             href="/web-course-site/favicon.svg"
         />
-        <!-- <ViewTransitions /> -->
         {
             isProd && (
                 <script
@@ -33,7 +30,7 @@ const isProd = import.meta.env.PROD;
     <body
         class="flex flex-col min-h-screen transition bg-bg-screen text-text-primary font-texts"
     >
-        <NavbarDrawer />
+        <Header />
         <main class="flex-grow">
             <slot />
         </main>

@@ -1,6 +1,7 @@
 ---
 const today = new Date();
 
+const baseUrl = import.meta.env.BASE_URL;
 const contacts = [
     {
         name: "Верещагин Владислав Юрьевич",
@@ -29,7 +30,7 @@ const contacts = [
         <img
             class="mb-auto"
             width="200px"
-            src="/src/assets/img/logo-full.svg"
+            src={`${baseUrl}/assets/img/logo-full.svg`}
             alt="Логотип Московского Политеха"
         />
         <div class="text-center sm:text-start">
@@ -44,7 +45,7 @@ const contacts = [
                             <p class="text-sm mb-1">{contact.role}</p>
                             <div class="flex justify-center sm:justify-start gap-1">
                                 <img
-                                    src="/src/assets/img/tg-logo.svg"
+                                    src={`${baseUrl}/assets/img/tg-logo.svg`}
                                     alt="telegram-logo"
                                 />
                                 <a
@@ -91,21 +92,6 @@ const contacts = [
     </div>
 </footer>
 
-<!-- <style>
-    footer::before {
-        content: "";
-        display: block;
-        position: absolute;
-        height: 150px;
-        aspect-ratio: 3/4;
-        background-image: url("/web-course-site/tree.webp");
-        background-size: contain;
-        translate: 0 -155px;
-        right: calc(50% - 17ch);
-        z-index: -1;
-        rotate: 4deg;
-    }
-</style> -->
 <style>
     footer {
         position: relative;
