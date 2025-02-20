@@ -65,6 +65,9 @@ const { token } = Astro.props;
 </template>
 
 <style scoped>
+    .error-message {
+        color: red;
+    }
     .skeleton-title {
         height: 32px;
         border-radius: 5px;
@@ -146,9 +149,40 @@ const { token } = Astro.props;
     }
 
     function appendErrorMessage(parent: HTMLElement, message: string): void {
+        const element = document.createElement("div");
         const p = document.createElement("p");
+        const reloadButton = document.createElement("button");
+        reloadButton.textContent = "Перезагрузить";
+        reloadButton.addEventListener("click", () => {
+            window.location.reload();
+        });
+        element.appendChild(p);
+        element.appendChild(reloadButton);
+
+        element.style.fontFamily = "NextArt";
+        element.style.textAlign = "center";
+        element.style.fontWeight = "500";
+        element.style.width = "50%";
+        element.style.margin = "0 auto";
+        element.style.color = "#ff5050";
+        element.style.backgroundColor = "rgba(255, 130, 130, 0.1)";
+        element.style.fontSize = "20px";
+        element.style.marginBottom = "20px";
+        element.style.borderRadius = "10px";
+        element.style.padding = "20px";
+        element.style.backdropFilter = "blur(30px)";
+
+        p.style.marginBottom = "10px";
+
+        reloadButton.style.border = "1px solid #ff5050";
+        reloadButton.style.color = "#ff5050";
+        reloadButton.style.backgroundColor = "transparent";
+        reloadButton.style.borderRadius = "10px";
+        reloadButton.style.padding = "10px 20px";
+        reloadButton.style.width = "100%";
+
         p.textContent = message;
-        parent.appendChild(p);
+        parent.appendChild(element);
     }
 
     function renderEvent(
@@ -206,8 +240,10 @@ const { token } = Astro.props;
     }
 
     async function processConsultation(element: HTMLElement): Promise<void> {
+        const skeleton = element.querySelector(".skeleton-container");
         const token = element.dataset.token;
         if (!token) {
+            skeleton?.remove();
             appendErrorMessage(element, "Ошибка: отсутствует токен.");
             return;
         }
@@ -215,6 +251,7 @@ const { token } = Astro.props;
         const URL = `https://slavaver.space/api/consultation?private_token=${token}`;
         const eventsHTML = await fetchData(URL);
         if (!eventsHTML) {
+            skeleton?.remove();
             appendErrorMessage(
                 element,
                 "Ошибка загрузки расписания. Попробуйте перезагрузить страницу."
@@ -250,7 +287,6 @@ const { token } = Astro.props;
             eventList.appendChild(eventItem);
         });
 
-        const skeleton = element.querySelector(".skeleton-container");
         if (skeleton) skeleton.remove();
 
         element.appendChild(eventList);
