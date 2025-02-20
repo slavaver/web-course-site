@@ -1,9 +1,15 @@
 ---
-const { useful } = Astro.props;
+import { UsefulPost } from "../types/Useful";
+
+interface Props {
+    useful: UsefulPost;
+}
+
+const { useful }: Props = Astro.props;
 const baseUrl = import.meta.env.BASE_URL;
 const href = `${baseUrl}/useful/${useful.id}`;
 
-const date = new Date(useful.data.date);
+const date = new Date(useful.data.date || Date.now());
 const formattedDate = date.toLocaleDateString("ru-RU", {
     day: "2-digit",
     month: "2-digit",
@@ -13,7 +19,7 @@ const formattedDate = date.toLocaleDateString("ru-RU", {
 const length = useful.length;
 const avgReadingSpeed = 160;
 const avgWordLength = 5;
-const getTimeToRead = (length) => {
+const getTimeToRead = (length: number) => {
     return Math.ceil(length / (avgWordLength * avgReadingSpeed));
 };
 ---
@@ -44,7 +50,8 @@ const getTimeToRead = (length) => {
                         alt="time-icon"
                     />
 
-                    <span class="text-[16px]">~{getTimeToRead(length)} мин</span
+                    <span class="text-[16px]"
+                        >~{length && getTimeToRead(length)} мин</span
                     >
                 </div>
                 {

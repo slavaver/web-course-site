@@ -55,16 +55,20 @@ const mentors = [
             <ul
                 class="mentors-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-5"
             >
-                <PeopleCard person={mentors[0]} />
-                <div class="order--1 xl:order-0 px-1 flex">
-                    <img src="/src/assets/img/cat-code.svg" alt="" />
+                <PeopleCard {...mentors[0]} />
+                <div class="px-1 flex">
+                    <img
+                        class="h-[100vw] sm:h-[45vw] lg:h-[30vw] xl:h-380px 2xl:h-430px"
+                        src="/src/assets/img/cat-code.svg"
+                        alt="котик кодит"
+                    />
                 </div>
-                <PeopleCard person={mentors[1]} />
+                <PeopleCard {...mentors[1]} />
 
                 {
                     mentors
                         .slice(2, -1)
-                        .map((mentor) => <PeopleCard person={mentor} />)
+                        .map((mentor) => <PeopleCard {...mentor} />)
                 }
                 <div class="other-mentors flex flex-col gap-5">
                     <img
@@ -73,11 +77,7 @@ const mentors = [
                         alt="Лапка котика с сердечками"
                     />
                 </div>
-                {
-                    mentors
-                        .slice(-1)
-                        .map((mentor) => <PeopleCard person={mentor} />)
-                }
+                {mentors.slice(-1).map((mentor) => <PeopleCard {...mentor} />)}
             </ul>
         </div>
     </section>

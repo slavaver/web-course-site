@@ -1,27 +1,34 @@
 ---
-const { person } = Astro.props;
+interface Props {
+    name: string;
+    imgUrl?: string;
+    contact?: string;
+    role?: string;
+}
+
+const { name, imgUrl, contact, role } = Astro.props;
 ---
 
 <li class="persons-item">
     {
-        person.contact ? (
+        contact ? (
             <a
-                href={`https://t.me/${person.contact}`}
+                href={`https://t.me/${contact}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="block"
             >
                 <div class="relative group">
-                    {person.imgUrl ? (
+                    {imgUrl ? (
                         <div class="bg-bg-tertiary h-[90vw] sm:h-[45vw] lg:h-[30vw] xl:h-380px 2xl:h-430px rounded-[30px] mb-5 overflow-hidden flex items-end relative">
                             <img
                                 class="w-full transition duration-300 group-hover:blur-sm"
-                                src={person.imgUrl}
-                                alt={`фото ${person.name}`}
+                                src={imgUrl}
+                                alt={`фото ${name}`}
                             />
                             <div class="absolute inset-0 flex items-center justify-center bg-bg-menu bg-opacity-50 opacity-0 transition duration-300 group-hover:opacity-100">
                                 <div class="flex items-center space-x-2">
-                                    <span class="text-white">{`@${person.contact}`}</span>
+                                    <span class="text-white">{`@${contact}`}</span>
                                     <img
                                         class="w-6 h-6"
                                         src="./src/assets/img/tg-logo.svg"
@@ -42,7 +49,7 @@ const { person } = Astro.props;
                             />
                             <div class="absolute inset-0 flex items-center justify-center bg-bg-menu bg-opacity-50 opacity-0 transition duration-300 group-hover:opacity-100">
                                 <div class="flex items-center space-x-2">
-                                    <span class="text-white">{`@${person.contact}`}</span>
+                                    <span class="text-white">{`@${contact}`}</span>
                                     <img
                                         class="w-6 h-6"
                                         src="./src/assets/img/tg-logo.svg"
@@ -54,23 +61,23 @@ const { person } = Astro.props;
                     )}
                 </div>
                 <h3 class="persons-item-name light:text-text-secondary mb-2 line-height-[1]">
-                    {person.name}
+                    {name}
                 </h3>
-                {person.role ? (
+                {role ? (
                     <p class="persons-item-role line-height-[1] text-text-tertiary">
-                        {person.role}
+                        {role}
                     </p>
                 ) : null}
             </a>
         ) : (
             <div class="block">
                 <div class="relative">
-                    {person.imgUrl ? (
+                    {imgUrl ? (
                         <div class="bg-bg-tertiary h-[90vw] sm:h-[45vw] lg:h-[30vw] xl:h-380px 2xl:h-430px rounded-[30px] mb-5 overflow-hidden flex items-end">
                             <img
                                 class="w-full"
-                                src={person.imgUrl}
-                                alt={`фото ${person.name}`}
+                                src={imgUrl}
+                                alt={`фото ${name}`}
                             />
                         </div>
                     ) : (
@@ -87,11 +94,11 @@ const { person } = Astro.props;
                     )}
                 </div>
                 <h3 class="persons-item-name light:text-text-secondary mb-2 line-height-[1]">
-                    {person.name}
+                    {name}
                 </h3>
-                {person.role ? (
+                {role ? (
                     <p class="persons-item-role line-height-[1] text-text-tertiary">
-                        {person.role}
+                        {role}
                     </p>
                 ) : null}
             </div>

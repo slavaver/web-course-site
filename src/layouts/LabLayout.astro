@@ -1,14 +1,17 @@
 ---
-import BaseLayout from "./BaseLayout.astro";
-// import Breadcrumbs from "../components/navigation/Breadcrumbs.astro";
 import Heading from "../components/Heading.astro";
 import ButtonTop from "../components/navigation/ButtonTop.astro";
 import Pagination from "../components/navigation/Pagination.astro";
 import TOC from "../components/navigation/TOC.astro";
+import { archiveYear } from "../pages/labs/archive.astro";
+import { LabLayoutProps } from "../types/Labs";
+import BaseLayout from "./BaseLayout.astro";
 
-const { slug, frontmatter, headinglist, collection } = Astro.props;
+interface Props extends LabLayoutProps {}
 
-let number;
+const { frontmatter, headinglist, labUrl }: Props = Astro.props;
+
+let number: string = "";
 
 if (frontmatter.number) {
     number = (parseInt(frontmatter.number) / 10)
@@ -17,14 +20,19 @@ if (frontmatter.number) {
         .split(".")
         .join("");
 }
+const courseId = labUrl.split("/")[0];
+const isFulltime = labUrl.includes("full-time");
+const labYear = labUrl.split("/")[2];
 ---
 
-<BaseLayout title={frontmatter.collection}>
+<BaseLayout title={frontmatter.title}>
     <ButtonTop />
     <Heading
         title={frontmatter.title}
         number={number}
-        backLink={`labs/${frontmatter.type}`}
+        backLink={archiveYear === labYear
+            ? "labs/archive"
+            : `labs/${courseId}${isFulltime ? "" : "-distance"}`}
     />
     <article class="max-w-prose xl:max-w-full mx-auto">
         <div
@@ -39,7 +47,7 @@ if (frontmatter.number) {
                     )
                 }
             </aside>
-            <div class="md prose lg:prose-lg">
+            <div class="md">
                 <slot />
             </div>
         </div>
@@ -47,27 +55,30 @@ if (frontmatter.number) {
     <div class="mb-20">
         {
             frontmatter.type === "labs" && (
-                <Pagination collection={collection} slug={slug} />
+                <Pagination
+                    slug={frontmatter.number}
+                    collection={courseId}
+                    isFulltime={isFulltime}
+                    yearOnMain={labYear}
+                />
             )
         }
     </div>
 </BaseLayout>
-
-<style>
+<style scoped>
     .side > :global(h2) {
         font-size: 28px;
         font-weight: 600;
     }
+
     .side > :global(ul > li > a) {
         word-wrap: break-word;
         text-decoration: underline;
     }
-
     .md > :global(h1) {
         display: none;
     }
-
-    .md :global(a) {
+    .md :global(a:not(.mentors)) {
         word-wrap: break-word;
         color: var(--color-text-tertiary);
         text-decoration: underline;

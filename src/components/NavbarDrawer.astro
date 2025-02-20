@@ -59,7 +59,7 @@ const links = [
                 {
                     links.map((link) => (
                         <a
-                            class="header__link cursor-pointer userActionsLink font-titles md:font-texts "
+                            class="header__link cursor-pointer userActions font-titles md:font-texts "
                             id={link.href.slice(1) + "-link"}
                         >
                             {link.title}
@@ -117,13 +117,16 @@ const links = [
 
     const dropdownSm = document.querySelector(".dropdown__list-sm");
 
-    const toggleDropdown = (activeBtn, list) => {
+    const toggleDropdown = (
+        activeBtn: Element | null,
+        list: Element | null
+    ) => {
         isDropdownOpen = !isDropdownOpen;
         list?.classList.toggle("open", isDropdownOpen);
         activeBtn?.classList.toggle("open", isDropdownOpen);
     };
 
-    const goToLink = (link) => {
+    const goToLink = (link: Element) => {
         const slicedLink =
             link.id === "web-course-site-link"
                 ? link.id.slice(0, -5)
@@ -169,11 +172,15 @@ const links = [
         transition: 0.3s ease-in-out;
     }
 
+    .drawer-nav > a {
+        border-radius: 10px;
+        padding: 1.25rem clamp(0rem, 1vw, 1.25rem);
+    }
+
     .dropdown__list {
         transition: 0.3s ease-in-out;
         max-height: 0px;
         width: 50%;
-        transform: translateX(-25%);
         padding: 15px;
         margin: 0 auto;
         pointer-events: none;
@@ -223,7 +230,7 @@ const links = [
 
     .menu {
         display: flex;
-        gap: 40px;
+        gap: clamp(0px, 2vw, 40px);
     }
 
     @media (max-width: 768px) {
@@ -312,7 +319,7 @@ const links = [
 
         .menu.open .dropdown__list-sm.open {
             pointer-events: all;
-            max-height: 200px;
+            max-height: 250px;
             width: 100%;
             opacity: 1;
             background-color: var(--color-bg-secondary);

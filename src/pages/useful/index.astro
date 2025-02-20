@@ -7,7 +7,7 @@ import SearchInput from "../../components/SearchInput.astro";
 import ListOfPosts from "../../components/ListOfPosts.astro";
 
 const allUseful = await getCollection("useful");
-const lengths = allUseful.map((post) => post.body.length);
+const lengths = allUseful.map((post) => post.body && post.body.length);
 
 const values = ["all", "first-sem", "second-sem", "third-sem", "unbound"];
 const labels = [
@@ -121,12 +121,12 @@ const options = labels.map((label, index) => ({
         class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-lg 2xl:max-w-screen-xl mx-auto pb-30"
     >
         <ul
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5 mb-10"
         >
-            <div class="grid-col-span-1 2xl:col-span-1 mb-5">
+            <div class="grid-col-span-1 2xl:col-span-1">
                 <CustomSelect options={options} />
             </div>
-            <div class="grid-col-span-1 2xl:col-span-2 mt-auto mb-5">
+            <div class="grid-col-span-1 2xl:col-span-2 mt-auto">
                 <SearchInput placeholder="Введите название статьи" />
             </div>
         </ul>

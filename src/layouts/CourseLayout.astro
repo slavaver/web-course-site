@@ -2,46 +2,47 @@
 import Heading from "../components/Heading.astro";
 import LectureCard from "../components/LectureCard.astro";
 import LinkCard from "../components/LinkCard.astro";
+import { CourseLayoutProps } from "../types/CourseLayout";
 import BaseLayoutSnow from "./BaseLayoutSnow.astro";
+
+interface Props extends CourseLayoutProps {}
 
 const {
     title,
     description,
     name,
-    schedule,
     statementHref,
-    labs,
     lectures,
+    schedule,
+    labs,
     rk,
-} = Astro.props;
+}: Props = Astro.props;
 ---
 
 <BaseLayoutSnow>
     <Heading title={title} description={description} />
     <section>
-        <div
-            class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30"
-        >
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
-                {
-                    statementHref && (
-                        <LinkCard
-                            title="Ведомость и доп. материалы"
-                            href={statementHref}
-                        />
-                    )
-                }
-                {
-                    schedule &&
-                        schedule.map((post) => (
+        {
+            (statementHref || schedule) && (
+                <div class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30">
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+                        {statementHref && (
                             <LinkCard
-                                title={post.data.title}
-                                href={`/web-course-site/labs/${post.id}`}
+                                title="Ведомость и доп. материалы"
+                                href={statementHref}
                             />
-                        ))
-                }
-            </ul>
-        </div>
+                        )}
+                        {schedule &&
+                            schedule.map((post) => (
+                                <LinkCard
+                                    title={post.data.title}
+                                    href={`/web-course-site/labs/${post.id}`}
+                                />
+                            ))}
+                    </ul>
+                </div>
+            )
+        }
         <div
             class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30"
         >
@@ -52,18 +53,28 @@ const {
                 {
                     labs &&
                         labs
-                            .sort((a, b) => a.data.number - b.data.number)
-                            .map((post) => (
-                                <LinkCard
-                                    title={post.data.title}
-                                    number={(post.data.number / 10)
-                                        .toFixed(1)
-                                        .toString()
-                                        .split(".")
-                                        .join("")}
-                                    href={`/web-course-site/labs/${post.id}`}
-                                />
-                            ))
+                            .sort((prev, next) => {
+                                const prevNumber = prev.data?.number;
+                                const nextNumber = next.data?.number;
+                                if (!prev.data || !prevNumber) return 1;
+                                if (!next.data || !nextNumber) return -1;
+                                return prevNumber.localeCompare(nextNumber);
+                            })
+                            .map((post) => {
+                                const number = post.data?.number ?? "";
+
+                                return (
+                                    <LinkCard
+                                        title={post.data.title}
+                                        number={(parseInt(number) / 10)
+                                            .toFixed(1)
+                                            .toString()
+                                            .split(".")
+                                            .join("")}
+                                        href={`/web-course-site/labs/${post.id}`}
+                                    />
+                                );
+                            })
                 }
             </ul>
         </div>
@@ -110,7 +121,6 @@ const {
                                         }
                                     })()}
                                     <LectureCard
-                                        index={index}
                                         title={lecture.title}
                                         href={lecture.href}
                                         description={lecture.description}

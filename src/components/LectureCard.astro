@@ -1,4 +1,10 @@
 ---
+interface Props {
+    title: string;
+    href: string;
+    description?: string[];
+}
+
 const { title, href, description } = Astro.props;
 ---
 
@@ -10,7 +16,10 @@ const { title, href, description } = Astro.props;
             <div class="flex flex-col gap-5">
                 <h3 class="font-titles font-500">{title}</h3>
                 <ul class="flex flex-col gap-2">
-                    {description && description.map((d) => <li>{d}</li>)}
+                    {
+                        description &&
+                            description.map((d: string) => <li>{d}</li>)
+                    }
                 </ul>
             </div>
             <div class="w-full flex justify-end">

@@ -1,17 +1,22 @@
 ---
+import type { ListOfPosts } from "../types/Useful";
 import UsefulCard from "./UsefulCard.astro";
+
+interface Props extends ListOfPosts {}
 
 const { allUseful, lengths } = Astro.props;
 const items = allUseful.map((item, index) => ({
     ...item,
-    length: lengths[index],
+    length: lengths && lengths[index],
 }));
 ---
 
 {
-    items.map((post) => (
-        <div class="post-wrapper">
-            <UsefulCard useful={post} />
-        </div>
-    ))
+    items
+        .sort((a, b) => a.data.title.localeCompare(b.data.title))
+        .map((post) => (
+            <div class="post-wrapper">
+                <UsefulCard useful={post} />
+            </div>
+        ))
 }

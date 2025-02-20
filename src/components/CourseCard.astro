@@ -1,20 +1,26 @@
 ---
-const { course } = Astro.props;
+interface Props {
+    href: string;
+    title: string;
+    description: string;
+}
+
+const { href, title, description } = Astro.props;
 ---
 
-<a href={course.href}>
+<a href={href}>
     <li
         class="courses-item rounded-[30px] bg-bg-secondary p-5 md:p-7.5 lg:p-10 userActions"
     >
         <div class="flex flex-col md:flex-row justify-between">
             <h3 class="courses-item-title no-break-hyphen">
-                {course.title}
+                {title}
             </h3>
             <div
-                class="max-w-auto md:max-w-[360px] gap-14 flex flex-col items-end"
+                class="max-w-auto md:max-w-[365px] gap-14 flex flex-col items-end"
             >
                 <p class="courses-item-descr w-full">
-                    {course.descr}
+                    {description}
                 </p>
                 <button class="courses-item-btn"></button>
             </div>
