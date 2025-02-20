@@ -12,7 +12,7 @@ const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <section
-    class="section-hero bg-bg-primary rounded-b-[30px] md:rounded-b-[60px] pt-42.5 pb-25 mb-20 relative flex justify-center items-end"
+    class="section-heading bg-bg-primary rounded-b-[30px] md:rounded-b-[60px] pt-42.5 pb-25 mb-20 relative flex justify-center items-end px-5"
 >
     <div
         class="hero-container flex flex-col justify-end h-full text-center items-center md:w-2/3"
@@ -28,19 +28,23 @@ const baseUrl = import.meta.env.BASE_URL;
         >
         {number && <h2>{number}</h2>}
         <h1 class="line-height-[1] test">{title}</h1>
-        {description && <p class="mb-7.5 w-full  md:w-2/3">{description}</p>}
+        {
+            description && (
+                <p class="mb-7.5 max-w-[500px] w-full  md:w-2/3">
+                    {description}
+                </p>
+            )
+        }
     </div>
 </section>
 <style>
-    .section-hero,
-    .section-useful {
+    .section-heading {
         position: relative;
         overflow: hidden;
         z-index: 1;
     }
 
-    .section-hero::before,
-    .section-useful::before {
+    .section-heading::before {
         content: "";
         position: absolute;
         z-index: -1;
@@ -55,14 +59,5 @@ const baseUrl = import.meta.env.BASE_URL;
         mask-repeat: no-repeat;
         -webkit-mask-size: cover;
         mask-size: cover;
-    }
-
-    .courses-item-btn {
-        background: url("./src/assets/img/goto.svg") no-repeat center;
-        width: 50px;
-        height: 50px;
-        border: 1.5px solid var(--color-border);
-        border-radius: 100%;
-        color: var(--color-border);
     }
 </style>

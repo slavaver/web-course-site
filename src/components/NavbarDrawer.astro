@@ -59,7 +59,7 @@ const links = [
                 {
                     links.map((link) => (
                         <a
-                            class="header__link cursor-pointer userActionsLink font-titles md:font-texts "
+                            class="header__link cursor-pointer userActions font-titles md:font-texts "
                             id={link.href.slice(1) + "-link"}
                         >
                             {link.title}
@@ -172,6 +172,11 @@ const links = [
         transition: 0.3s ease-in-out;
     }
 
+    .drawer-nav > a {
+        border-radius: 10px;
+        padding: 1.25rem clamp(0rem, 1vw, 1.25rem);
+    }
+
     .dropdown__list {
         transition: 0.3s ease-in-out;
         max-height: 0px;
@@ -225,7 +230,7 @@ const links = [
 
     .menu {
         display: flex;
-        gap: 40px;
+        gap: clamp(0px, 2vw, 40px);
     }
 
     @media (max-width: 768px) {

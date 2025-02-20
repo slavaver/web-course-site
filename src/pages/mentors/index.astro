@@ -56,10 +56,14 @@ const mentors = [
                 class="mentors-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-5"
             >
                 <PeopleCard {...mentors[0]} />
-                <div class="order--1 xl:order-0 px-1 flex">
-                    <img src="/src/assets/img/cat-code.svg" alt="" />
+                <div class="px-1 flex">
+                    <img
+                        class="h-[100vw] sm:h-[45vw] lg:h-[30vw] xl:h-380px 2xl:h-430px"
+                        src="/src/assets/img/cat-code.svg"
+                        alt="котик кодит"
+                    />
                 </div>
-                <PeopleCard{...mentors[1]} />
+                <PeopleCard {...mentors[1]} />
 
                 {
                     mentors
