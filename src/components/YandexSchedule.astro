@@ -2,20 +2,125 @@
 const { token } = Astro.props;
 ---
 
-<div class="consultations" data-token={token}></div>
+<div class="consultations" data-token={token}>
+    <ul
+        class="skeleton-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+    >
+        <li
+            class="w-full bg-bg-secondary rounded-[30px] p-7.5 flex gap-2.5 flex-col"
+        >
+            <div class="skeleton-title"></div>
+            <div class="skeleton-subtitle"></div>
+            <div class="skeleton-subtitle"></div>
+        </li>
+        <li
+            class="w-full bg-bg-secondary rounded-[30px] p-7.5 flex gap-2.5 flex-col"
+        >
+            <div class="skeleton-title"></div>
+            <div class="skeleton-subtitle"></div>
+            <div class="skeleton-subtitle"></div>
+        </li>
+        <li
+            class="w-full bg-bg-secondary rounded-[30px] p-7.5 flex gap-2.5 flex-col"
+        >
+            <div class="skeleton-title"></div>
+            <div class="skeleton-subtitle"></div>
+            <div class="skeleton-subtitle"></div>
+        </li>
+        <li
+            class="w-full bg-bg-secondary rounded-[30px] p-7.5 flex gap-2.5 flex-col"
+        >
+            <div class="skeleton-title"></div>
+            <div class="skeleton-subtitle"></div>
+            <div class="skeleton-subtitle"></div>
+        </li>
+        <li
+            class="w-full bg-bg-secondary rounded-[30px] p-7.5 flex gap-2.5 flex-col"
+        >
+            <div class="skeleton-title"></div>
+            <div class="skeleton-subtitle"></div>
+            <div class="skeleton-subtitle"></div>
+        </li>
+        <li
+            class="w-full bg-bg-secondary rounded-[30px] p-7.5 flex gap-2.5 flex-col"
+        >
+            <div class="skeleton-title"></div>
+            <div class="skeleton-subtitle"></div>
+            <div class="skeleton-subtitle"></div>
+        </li>
+    </ul>
+</div>
 
 <template id="event-template">
     <li
         class="link-card w-full bg-bg-secondary rounded-[30px] p-7.5 flex gap-2.5 flex-col"
     >
         <h3 class="date mb-2.5"></h3>
-        <div>
+        <div class="">
             <span>Время:</span>
             <span class="start-time"></span>-
             <span class="end-time"></span>
         </div>
     </li>
 </template>
+
+<style scoped>
+    .skeleton-title {
+        height: 32px;
+        border-radius: 5px;
+        opacity: 0.5;
+        background: linear-gradient(
+            90deg,
+            var(--color-bg-primary) 35%,
+            var(--color-bg-accent-first) 50%,
+            var(--color-bg-primary) 65%
+        );
+        background-size: 200% 100%;
+        margin-bottom: 10px;
+        animation: skeleton-loading 1s ease-in-out infinite;
+    }
+
+    .skeleton-subtitle {
+        height: 30px;
+        width: 50%;
+        border-radius: 5px;
+        opacity: 0.5;
+        background-color: var(--color-bg-accent-first);
+        background: linear-gradient(
+            90deg,
+            var(--color-bg-primary) 35%,
+            var(--color-bg-accent-first) 50%,
+            var(--color-bg-primary) 65%
+        );
+        background-size: 200% 100%;
+        animation: skeleton-loading 1s ease-in-out infinite;
+    }
+
+    .skeleton-subtitle:nth-of-type(3) {
+        width: 70%;
+    }
+
+    @keyframes skeleton-loading {
+        0% {
+            background-position-x: 150%;
+        }
+        100% {
+            background-position-x: -50%;
+        }
+    }
+
+    @media (max-width: 1200px) {
+        .skeleton-subtitle {
+            height: 27px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .skeleton-subtitle {
+            height: 24px;
+        }
+    }
+</style>
 
 <script>
     interface DateTime {
@@ -51,7 +156,6 @@ const { token } = Astro.props;
         template: HTMLTemplateElement
     ): HTMLElement {
         const clone = template.content.cloneNode(true) as HTMLElement;
-
         const eventTitle = eventElement.querySelector("h1")?.textContent || "";
         const titleParts = eventTitle.split(" ");
         if (titleParts.length > 1 && titleParts[1].startsWith("Пр")) {
@@ -59,7 +163,6 @@ const { token } = Astro.props;
             roomInfo.textContent = "Аудитория: " + titleParts[1];
             clone.firstElementChild?.appendChild(roomInfo);
         }
-
         const startSpan = eventElement.querySelector(
             ".e-time span:nth-child(1)"
         ) as HTMLElement | null;
@@ -74,7 +177,6 @@ const { token } = Astro.props;
             ) as HTMLElement | null;
             if (startTimeEl) startTimeEl.textContent = startTime;
         }
-
         const endSpan = eventElement.querySelector(
             ".e-time span:nth-child(2)"
         ) as HTMLElement | null;
@@ -87,7 +189,6 @@ const { token } = Astro.props;
             ) as HTMLElement | null;
             if (endTimeEl) endTimeEl.textContent = endTime;
         }
-
         const linkAnchor = eventElement.querySelector(
             ".e-description a"
         ) as HTMLAnchorElement | null;
@@ -101,13 +202,11 @@ const { token } = Astro.props;
             linkLabel.appendChild(link);
             clone.firstElementChild?.appendChild(linkLabel);
         }
-
         return clone;
     }
 
     async function processConsultation(element: HTMLElement): Promise<void> {
         const token = element.dataset.token;
-        const loadingMessage = document.createElement("p");
         if (!token) {
             appendErrorMessage(element, "Ошибка: отсутствует токен.");
             return;
@@ -151,15 +250,16 @@ const { token } = Astro.props;
             eventList.appendChild(eventItem);
         });
 
+        const skeleton = element.querySelector(".skeleton-container");
+        if (skeleton) skeleton.remove();
+
         element.appendChild(eventList);
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-        const consultations = document.querySelectorAll(
-            ".consultations"
-        ) as NodeListOf<HTMLElement>;
+        const consultations = document.querySelectorAll(".consultations");
         consultations.forEach((consultation) => {
-            processConsultation(consultation);
+            processConsultation(consultation as HTMLElement);
         });
     });
 </script>
