@@ -109,14 +109,13 @@ const labYear = labUrl.split("/")[2];
 
     .md > :global(table > thead) {
         background-color: var(--color-bg-tertiary);
-        /* border-bottom: 2px solid var(--color-code-snaps); */
     }
 
     .md > :global(table > thead > tr > th) {
         padding: 10px clamp(0px, 0.5vw, 20px);
         color: var(--color-text-inverted);
         font-family: "NextArt";
-        font-size: clamp(12px, 1vw, 16px);
+        font-size: 16px;
         font-weight: 600;
         text-align: left;
     }
@@ -127,7 +126,7 @@ const labYear = labUrl.split("/")[2];
 
     .md > :global(table > tbody > tr > td) {
         padding: 10px clamp(0px, 0.5vw, 20px);
-        font-size: clamp(12px, 1vw, 16px);
+        font-size: 16px;
         text-align: left;
     }
 
@@ -136,7 +135,7 @@ const labYear = labUrl.split("/")[2];
     }
 
     .md > :global(table > tbody > tr:nth-child(even)) {
-        background-color: var(--color-code-snaps);
+        background-color: var(--color-bg-code);
     }
 
     .md > :global(div.warning) {
@@ -244,6 +243,13 @@ const labYear = labUrl.split("/")[2];
 
         .md :global(li) {
             font-size: 16px;
+        }
+
+        .md > :global(table > thead > tr > th) {
+            font-size: clamp(10px, 2vw, 14px);
+        }
+        .md > :global(table > tbody > tr > td) {
+            font-size: clamp(10px, 2vw, 14px);
         }
     }
 </style>

@@ -273,7 +273,7 @@ const mentors = [
     }
 
     #hiddenCourses {
-        max-height: 0vh;
+        height: 0px;
         overflow: hidden;
         transition: 0.3s ease-in-out;
     }
@@ -291,8 +291,17 @@ const mentors = [
     const showMoreCoursesBtn = document.getElementById("showMoreCoursesBtn");
     const hiddenCourses = document.getElementById("hiddenCourses");
     const showMoreTexts = ["Показать все", "Спрятать"];
+    let isOpen: boolean = false;
     showMoreCoursesBtn?.addEventListener("click", () => {
-        hiddenCourses?.classList.toggle("open");
+        if (hiddenCourses) {
+            if (isOpen) {
+                hiddenCourses.style.height = "0px";
+            } else {
+                hiddenCourses.style.height =
+                    hiddenCourses.scrollHeight + 20 + "px";
+            }
+        }
+        isOpen = !isOpen;
         showMoreCoursesBtn.textContent = showMoreCoursesBtn.textContent =
             showMoreTexts[
                 showMoreTexts.indexOf(showMoreCoursesBtn.textContent ?? "") ===
