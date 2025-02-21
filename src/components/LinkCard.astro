@@ -23,6 +23,7 @@ const { title, href, number, info } = Astro.props;
                 href && (
                     <div class="w-full flex justify-end">
                         <button
+                            aria-label="Перейти к работе"
                             onclick={`window.location.href=${href}`}
                             class="link-card-item-btn"
                         />

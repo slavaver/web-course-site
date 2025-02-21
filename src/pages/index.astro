@@ -62,12 +62,12 @@ const courses = [
 const teachers = [
     {
         name: "Верещагин Владислав Юрьевич",
-        imgUrl: `${baseUrl}/assets/img/photos/slavaver.png`,
+        imgUrl: `${baseUrl}/assets/img/photos/slavaver.webp`,
         role: "Кандидат технических наук",
     },
     {
         name: "Гнибеда Артем Юрьевич",
-        imgUrl: `${baseUrl}/assets/img/photos/gnibedaArtem.png`,
+        imgUrl: `${baseUrl}/assets/img/photos/gnibedaArtem.webp`,
         role: "",
     },
 ];
@@ -75,13 +75,13 @@ const teachers = [
 const mentors = [
     {
         name: "Мелихова Ева",
-        imgUrl: `${baseUrl}/assets/img/photos/sshultse.png`,
+        imgUrl: `${baseUrl}/assets/img/photos/sshultse.webp`,
         role: "Ассистент преподавателя",
         contact: "sshultse",
     },
     {
         name: "Хаметов Артем",
-        imgUrl: `${baseUrl}/assets/img/photos/hametov.png`,
+        imgUrl: `${baseUrl}/assets/img/photos/hametov.webp`,
         role: "Ассистент преподавателя",
         contact: "MacalllanS",
     },
@@ -93,7 +93,7 @@ const mentors = [
     },
     {
         name: "Старцев Виталий",
-        imgUrl: `${baseUrl}/assets/img/photos/vitaliy.png`,
+        imgUrl: `${baseUrl}/assets/img/photos/vitaliy.webp`,
         role: "Наставник",
         contact: "snitch_viy",
     },
@@ -122,8 +122,11 @@ const mentors = [
                 на&nbsp;стороне клиента
             </p>
             <img
-                src=`${baseUrl}/assets/img/cat-code.svg`
+                width="400"
+                height="400"
+                src=`${baseUrl}/assets/img/cat-code.webp`
                 alt="смешной котик программирует"
+                loading="lazy"
             />
         </div>
     </section>
@@ -132,25 +135,27 @@ const mentors = [
             class="courses-container max-w-screen px-5 md:px-10 xl:px-5 xl:max-w-screen-xl mx-auto"
         >
             <h2 class="courses-title light:text-text-secondary title">Курсы</h2>
-            <ul class="courses-list flex flex-col">
-                <div id="staticCourses" class="flex flex-col gap-5 mb-5">
+            <div class="courses-list flex flex-col">
+                <ul id="staticCourses" class="flex flex-col gap-5 mb-5">
                     {
                         courses
                             .slice(0, 3)
                             .map((course) => <CourseCard {...course} />)
                     }
-                </div>
-                <div id="hiddenCourses" class="flex flex-col gap-5">
+                </ul>
+                <ul id="hiddenCourses" class="flex flex-col gap-5">
                     {
                         courses
                             .slice(3)
                             .map((course) => <CourseCard {...course} />)
                     }
-                </div>
-            </ul>
+                </ul>
+            </div>
             <button
                 class="font-titles w-full font-600 bg-bg-accent_second px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
-                id="showMoreCoursesBtn">Показать все</button
+                id="showMoreCoursesBtn"
+                aria-expanded="false"
+                aria-controls="hiddenCourses">Показать все</button
             >
         </div>
     </section>
@@ -184,27 +189,30 @@ const mentors = [
                         .slice(0, 2)
                         .map((useful) => <UsefulCard useful={useful} />)
                 }
-
-                <p class="order-0">
-                    Здесь вы найдете подборки полезных ресурсов, конспекты, а
-                    также статьи с теорией, раскрывающие ключевые темы курсов
-                </p>
+                <li>
+                    <p class="order-0">
+                        Здесь вы найдете подборки полезных ресурсов, конспекты,
+                        а также статьи с теорией, раскрывающие ключевые темы
+                        курсов
+                    </p>
+                </li>
                 <div class="hidden sm:block">
                     <UsefulCard useful={useful[2]} />
                 </div>
-                <div
+                <li
                     class="other-useful flex flex-col justify-between order-1 lg:order-0"
                 >
                     <img
                         src=`${baseUrl}/assets/img/cat-chill.svg`
                         alt="чилл кот лежит за ноутбуком"
+                        aria-hidden="true"
                     />
                     <button
                         class="font-titles font-600 bg-bg-accent_second sm:px-5 px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
                         onclick={`window.location.href='/web-course-site/useful/'`}
                         >Еще больше полезностей</button
                     >
-                </div>
+                </li>
                 <div class="hidden sm:block">
                     <UsefulCard useful={useful[3]} />
                 </div>
@@ -220,26 +228,29 @@ const mentors = [
                 class="mentors-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-5"
             >
                 <PeopleCard {...mentors[0]} />
-                <p class="order--1 lg:order-0 px-1">
-                    Мы поддерживаем вас на пути освоения первых двух курсов,
-                    помогаем разобраться в сложных моментах и направляем на
-                    верное решение задач
-                </p>
+                <li>
+                    <p class="order--1 lg:order-0 px-1">
+                        Мы поддерживаем вас на пути освоения первых двух курсов,
+                        помогаем разобраться в сложных моментах и направляем на
+                        верное решение задач
+                    </p>
+                </li>
                 <PeopleCard {...mentors[1]} />
-                <div
+                <li
                     class="other-mentors flex flex-col gap-5 order-1 2xl:order-0 aspect-ratio-square w-full"
                 >
                     <img
                         class="aspect-ratio-1"
                         src=`${baseUrl}/assets/img/paw-heart.svg`
                         alt="Лапка котика с сердечками"
+                        aria-hidden="true"
                     />
                     <button
                         class="font-titles text-text-primary font-600 bg-bg-accent_second px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
                         onclick={`window.location.href='/web-course-site/mentors'`}
                         >Смотреть всех</button
                     >
-                </div>
+                </li>
                 {mentors.slice(2).map((mentor) => <PeopleCard {...mentor} />)}
             </ul>
         </div>

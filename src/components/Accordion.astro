@@ -3,7 +3,7 @@ const { group } = Astro.props;
 ---
 
 <div class="accordion" data-group={group || "default"}>
-    <button class="accordion-summary">
+    <button class="accordion-summary" aria-label="Раскрыть аккордион">
         <slot name="summary" />
         <div class="accordion-icon">
             <div class="line horizontal"></div>

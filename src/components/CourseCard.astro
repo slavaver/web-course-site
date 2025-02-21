@@ -8,11 +8,11 @@ interface Props {
 const { href, title, description } = Astro.props;
 ---
 
-<a href={href}>
-    <li
-        class="courses-item rounded-[30px] bg-bg-secondary p-5 md:p-7.5 lg:p-10 userActions"
-    >
-        <div class="flex flex-col md:flex-row justify-between">
+<li>
+    <a href={href}>
+        <div
+            class="flex flex-col md:flex-row justify-between p-5 md:p-7.5 lg:p-10 courses-item rounded-[30px] bg-bg-secondary userActions"
+        >
             <h3 class="courses-item-title no-break-hyphen">
                 {title}
             </h3>
@@ -22,11 +22,12 @@ const { href, title, description } = Astro.props;
                 <p class="courses-item-descr w-full">
                     {description}
                 </p>
-                <button class="courses-item-btn"></button>
+                <button aria-label="Перейти к курсу" class="courses-item-btn"
+                ></button>
             </div>
         </div>
-    </li>
-</a>
+    </a>
+</li>
 
 <style>
     .courses-item-btn {
