@@ -2,116 +2,300 @@
 const { token } = Astro.props;
 ---
 
-<div class="consultations" data-token={token}></div>
+<div class="consultations" data-token={token}>
+    <ul
+        class="skeleton-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+    >
+        <li
+            class="w-full bg-bg-secondary rounded-[30px] p-7.5 flex gap-2.5 flex-col"
+        >
+            <div class="skeleton-title"></div>
+            <div class="skeleton-subtitle"></div>
+            <div class="skeleton-subtitle"></div>
+        </li>
+        <li
+            class="w-full bg-bg-secondary rounded-[30px] p-7.5 flex gap-2.5 flex-col"
+        >
+            <div class="skeleton-title"></div>
+            <div class="skeleton-subtitle"></div>
+            <div class="skeleton-subtitle"></div>
+        </li>
+        <li
+            class="w-full bg-bg-secondary rounded-[30px] p-7.5 flex gap-2.5 flex-col"
+        >
+            <div class="skeleton-title"></div>
+            <div class="skeleton-subtitle"></div>
+            <div class="skeleton-subtitle"></div>
+        </li>
+        <li
+            class="w-full bg-bg-secondary rounded-[30px] p-7.5 flex gap-2.5 flex-col"
+        >
+            <div class="skeleton-title"></div>
+            <div class="skeleton-subtitle"></div>
+            <div class="skeleton-subtitle"></div>
+        </li>
+        <li
+            class="w-full bg-bg-secondary rounded-[30px] p-7.5 flex gap-2.5 flex-col"
+        >
+            <div class="skeleton-title"></div>
+            <div class="skeleton-subtitle"></div>
+            <div class="skeleton-subtitle"></div>
+        </li>
+        <li
+            class="w-full bg-bg-secondary rounded-[30px] p-7.5 flex gap-2.5 flex-col"
+        >
+            <div class="skeleton-title"></div>
+            <div class="skeleton-subtitle"></div>
+            <div class="skeleton-subtitle"></div>
+        </li>
+    </ul>
+</div>
 
 <template id="event-template">
-  <li>
-    <div>
-      <span class="font-medium title"></span>
-    </div>
-    <div>
-      <span class="date"></span>
-      <span class="start-time"></span>-<span class="end-time"></span>
-    </div>
-  </li>
+    <li
+        class="link-card w-full bg-bg-secondary rounded-[30px] p-7.5 flex gap-2.5 flex-col"
+    >
+        <h3 class="date mb-2.5"></h3>
+        <div class="">
+            <span>Время:</span>
+            <span class="start-time"></span>-
+            <span class="end-time"></span>
+        </div>
+    </li>
 </template>
 
-<script>
-  function getDateAndTimeYaCalendar(text) {
-    const arr = text.split(" ");
-    const time = arr.pop();
-    const date = arr.join(" ");
-    return {
-      date,
-      time,
-    };
-  }
-
-  async function getData(url) {
-    try {
-      const res = await fetch(url);
-      if (!res.ok) {
-        return null;
-      }
-      const data = await res.text();
-      return data;
-    } catch {
-      return null;
+<style scoped>
+    .error-message {
+        color: red;
     }
-  }
-
-  function appendError(parrent, errorMessage) {
-    const message = document.createElement("p");
-    message.innerText = errorMessage;
-    parrent.appendChild(message);
-  }
-
-  const parser = new DOMParser();
-
-  document.addEventListener("DOMContentLoaded", async () => {
-    const consultationsList = document.querySelectorAll(".consultations");
-
-    consultationsList.forEach(async (consultationElement) => {
-      const token = consultationElement.dataset.token;
-
-      const URL = `https://slavaver.space/api/consultation?private_token=${token}`;
-
-      const eventsHTML = await getData(URL);
-
-      if (!eventsHTML) {
-        appendError(
-          consultationElement,
-          "Ошибка загрузки расписания. Попробуйте перезагрузить страницу."
+    .skeleton-title {
+        height: 32px;
+        border-radius: 5px;
+        opacity: 0.5;
+        background: linear-gradient(
+            90deg,
+            var(--color-bg-primary) 35%,
+            var(--color-bg-accent-first) 50%,
+            var(--color-bg-primary) 65%
         );
-        return;
-      }
+        background-size: 200% 100%;
+        margin-bottom: 10px;
+        animation: skeleton-loading 1s ease-in-out infinite;
+    }
 
-      const eventList = document.createElement("ol");
+    .skeleton-subtitle {
+        height: 30px;
+        width: 50%;
+        border-radius: 5px;
+        opacity: 0.5;
+        background-color: var(--color-bg-accent-first);
+        background: linear-gradient(
+            90deg,
+            var(--color-bg-primary) 35%,
+            var(--color-bg-accent-first) 50%,
+            var(--color-bg-primary) 65%
+        );
+        background-size: 200% 100%;
+        animation: skeleton-loading 1s ease-in-out infinite;
+    }
 
-      const dom = parser.parseFromString(eventsHTML, "text/html");
-      const template = document.querySelector("#event-template");
+    .skeleton-subtitle:nth-of-type(3) {
+        width: 70%;
+    }
 
-      const listOfEvents = [
-        ...dom.querySelectorAll("div.b-content-event"),
-      ].slice(0, 5);
+    @keyframes skeleton-loading {
+        0% {
+            background-position-x: 150%;
+        }
+        100% {
+            background-position-x: -50%;
+        }
+    }
 
-      listOfEvents.forEach((eventElement) => {
-        const clone = template.content.cloneNode(true);
+    @media (max-width: 1200px) {
+        .skeleton-subtitle {
+            height: 27px;
+        }
+    }
 
-        clone.querySelector(".title").innerText =
-          eventElement.querySelector("h1").innerText;
+    @media (max-width: 768px) {
+        .skeleton-subtitle {
+            height: 24px;
+        }
+    }
+</style>
 
-        const startTimeValue = eventElement.querySelector(
-          ".e-time span:nth-child(1)"
-        ).innerText;
-        const { date, time: startTime } =
-          getDateAndTimeYaCalendar(startTimeValue);
-        clone.querySelector(".date").innerText = date;
-        clone.querySelector(".start-time").innerText = startTime;
+<script>
+    interface DateTime {
+        date: string;
+        time: string;
+    }
 
-        const endTimeValue = eventElement.querySelector(
-          ".e-time span:nth-child(2)"
-        ).innerText;
-        const { time: endTime } = getDateAndTimeYaCalendar(endTimeValue);
-        clone.querySelector(".end-time").innerText = endTime;
+    function getDateAndTimeYaCalendar(text: string): DateTime {
+        const parts = text.trim().split(" ");
+        const time = parts.pop() ?? "";
+        const date = parts.join(" ");
+        return { date, time };
+    }
 
-        const linkTelemost =
-          eventElement.querySelector(".e-description a")?.innerText;
+    async function fetchData(url: string): Promise<string | null> {
+        try {
+            const res = await fetch(url);
+            if (!res.ok) return null;
+            return await res.text();
+        } catch {
+            return null;
+        }
+    }
 
-        if (linkTelemost) {
-          const link = document.createElement("a");
+    function appendErrorMessage(parent: HTMLElement, message: string): void {
+        const element = document.createElement("div");
+        const p = document.createElement("p");
+        const reloadButton = document.createElement("button");
+        reloadButton.textContent = "Перезагрузить";
+        reloadButton.addEventListener("click", () => {
+            window.location.reload();
+        });
+        element.appendChild(p);
+        element.appendChild(reloadButton);
 
-          link.classList.add("break-all");
-          link.classList.add("font-normal");
-          link.href = linkTelemost;
-          link.innerText = linkTelemost;
-          clone.firstElementChild.appendChild(link);
+        element.style.fontFamily = "NextArt";
+        element.style.textAlign = "center";
+        element.style.fontWeight = "500";
+        element.style.width = "50%";
+        element.style.margin = "0 auto";
+        element.style.color = "#ff5050";
+        element.style.backgroundColor = "rgba(255, 130, 130, 0.1)";
+        element.style.fontSize = "20px";
+        element.style.marginBottom = "20px";
+        element.style.borderRadius = "10px";
+        element.style.padding = "20px";
+        element.style.backdropFilter = "blur(30px)";
+
+        p.style.marginBottom = "10px";
+
+        reloadButton.style.border = "1px solid #ff5050";
+        reloadButton.style.color = "#ff5050";
+        reloadButton.style.backgroundColor = "transparent";
+        reloadButton.style.borderRadius = "10px";
+        reloadButton.style.padding = "10px 20px";
+        reloadButton.style.width = "100%";
+
+        p.textContent = message;
+        parent.appendChild(element);
+    }
+
+    function renderEvent(
+        eventElement: Element,
+        template: HTMLTemplateElement
+    ): HTMLElement {
+        const clone = template.content.cloneNode(true) as HTMLElement;
+        const eventTitle = eventElement.querySelector("h1")?.textContent || "";
+        const titleParts = eventTitle.split(" ");
+        if (titleParts.length > 1 && titleParts[1].startsWith("Пр")) {
+            const roomInfo = document.createElement("span");
+            roomInfo.textContent = "Аудитория: " + titleParts[1];
+            clone.firstElementChild?.appendChild(roomInfo);
+        }
+        const startSpan = eventElement.querySelector(
+            ".e-time span:nth-child(1)"
+        ) as HTMLElement | null;
+        if (startSpan) {
+            const { date, time: startTime } = getDateAndTimeYaCalendar(
+                startSpan.textContent || ""
+            );
+            const dateEl = clone.querySelector(".date") as HTMLElement | null;
+            if (dateEl) dateEl.textContent = date;
+            const startTimeEl = clone.querySelector(
+                ".start-time"
+            ) as HTMLElement | null;
+            if (startTimeEl) startTimeEl.textContent = startTime;
+        }
+        const endSpan = eventElement.querySelector(
+            ".e-time span:nth-child(2)"
+        ) as HTMLElement | null;
+        if (endSpan) {
+            const { time: endTime } = getDateAndTimeYaCalendar(
+                endSpan.textContent || ""
+            );
+            const endTimeEl = clone.querySelector(
+                ".end-time"
+            ) as HTMLElement | null;
+            if (endTimeEl) endTimeEl.textContent = endTime;
+        }
+        const linkAnchor = eventElement.querySelector(
+            ".e-description a"
+        ) as HTMLAnchorElement | null;
+        if (linkAnchor && linkAnchor.textContent) {
+            const linkLabel = document.createElement("span");
+            linkLabel.textContent = "Онлайн: ";
+            const link = document.createElement("a");
+            link.classList.add("underline", "text-text-number");
+            link.href = linkAnchor.textContent;
+            link.textContent = "Ссылка на защиту";
+            linkLabel.appendChild(link);
+            clone.firstElementChild?.appendChild(linkLabel);
+        }
+        return clone;
+    }
+
+    async function processConsultation(element: HTMLElement): Promise<void> {
+        const skeleton = element.querySelector(".skeleton-container");
+        const token = element.dataset.token;
+        if (!token) {
+            skeleton?.remove();
+            appendErrorMessage(element, "Ошибка: отсутствует токен.");
+            return;
         }
 
-        eventList.appendChild(clone);
-      });
+        const URL = `https://slavaver.space/api/consultation?private_token=${token}`;
+        const eventsHTML = await fetchData(URL);
+        if (!eventsHTML) {
+            skeleton?.remove();
+            appendErrorMessage(
+                element,
+                "Ошибка загрузки расписания. Попробуйте перезагрузить страницу."
+            );
+            return;
+        }
 
-      consultationElement.append(eventList);
+        const eventList = document.createElement("ul");
+        eventList.classList.add(
+            "grid",
+            "grid-cols-1",
+            "sm:grid-cols-2",
+            "lg:grid-cols-3",
+            "gap-5",
+            "w-full"
+        );
+
+        const parser = new DOMParser();
+        const dom = parser.parseFromString(eventsHTML, "text/html");
+        const template = document.querySelector(
+            "#event-template"
+        ) as HTMLTemplateElement | null;
+        if (!template) {
+            console.error("Event template not found in the document.");
+            return;
+        }
+
+        const events = Array.from(
+            dom.querySelectorAll("div.b-content-event")
+        ).slice(0, 5);
+        events.forEach((eventElement) => {
+            const eventItem = renderEvent(eventElement, template);
+            eventList.appendChild(eventItem);
+        });
+
+        if (skeleton) skeleton.remove();
+
+        element.appendChild(eventList);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const consultations = document.querySelectorAll(".consultations");
+        consultations.forEach((consultation) => {
+            processConsultation(consultation as HTMLElement);
+        });
     });
-  });
 </script>

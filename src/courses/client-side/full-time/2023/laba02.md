@@ -69,7 +69,7 @@ type: "labs"
 
 **Пример работы:**
 
-```
+```js
 convertTemp(32, 'toC') -> '0 C'
 convertTemp(10, 'toF') -> '50 F'
 ```

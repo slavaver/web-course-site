@@ -1,0 +1,223 @@
+---
+import Heading from "@components/Heading.astro";
+import LectureCard from "@components/LectureCard.astro";
+import LinkCard from "@components/LinkCard.astro";
+import { CourseLayoutProps } from "../types/Courses";
+import BaseLayoutSnow from "./BaseLayoutSnow.astro";
+
+interface Props extends CourseLayoutProps {}
+
+const {
+    title,
+    description,
+    name, // Пускай пока будет, возможно понадобится
+    statementHref,
+    lectures,
+    schedule,
+    labs,
+    rk,
+}: Props = Astro.props;
+
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<BaseLayoutSnow>
+    <Heading title={title} description={description} />
+    <section>
+        {
+            (statementHref || schedule) && (
+                <div class="max-w-screen px-5 lg:max-w-screen-lg xl:max-w-screen-xl mx-auto mb-30">
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+                        {statementHref && (
+                            <LinkCard
+                                title="Ведомость и доп. материалы"
+                                href={statementHref}
+                            />
+                        )}
+                        {schedule &&
+                            schedule.map((post) => (
+                                <LinkCard
+                                    title={post.data.title}
+                                    href={`${baseUrl}/labs/${post.id}`}
+                                />
+                            ))}
+                    </ul>
+                </div>
+            )
+        }
+        {
+            labs && labs.length !== 0 && (
+                <div class="max-w-screen px-5 lg:max-w-screen-lg xl:max-w-screen-xl mx-auto mb-30">
+                    <h2 class="text-center mb-10 text-text-inverted">
+                        Лабораторные работы
+                    </h2>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+                        {labs
+                            .sort((prev, next) => {
+                                const prevNumber = prev.data?.number;
+                                const nextNumber = next.data?.number;
+                                if (!prev.data || !prevNumber) return 1;
+                                if (!next.data || !nextNumber) return -1;
+                                return prevNumber.localeCompare(nextNumber);
+                            })
+                            .map((post) => {
+                                const number = post.data?.number ?? "";
+
+                                return (
+                                    <LinkCard
+                                        title={post.data.title}
+                                        number={(parseInt(number) / 10)
+                                            .toFixed(1)
+                                            .toString()
+                                            .split(".")
+                                            .join("")}
+                                        href={`${baseUrl}/labs/${post.id}`}
+                                    />
+                                );
+                            })}
+                    </ul>
+                </div>
+            )
+        }
+        {
+            lectures && (
+                <div class="section-lectures bg-bg-primary py-20 rounded-[30px] sm:rounded-[60px] mb-30">
+                    <div class="px-5 lg:max-w-screen-lg xl:max-w-screen-xl mx-auto">
+                        <h2 class="text-center mb-10">Лекции</h2>
+                        <ul class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 w-full">
+                            {lectures.map((lecture, index) => (
+                                <>
+                                    {(() => {
+                                        switch (index % 9) {
+                                            case 0:
+                                                return (
+                                                    <div class="flex aspect-ratio-square rounded-[30px] overflow-hidden">
+                                                        <img
+                                                            src={`${baseUrl}/assets/img/cat-chill-table.svg`}
+                                                            alt="лапка котика с сердечками"
+                                                            class="mx-auto"
+                                                        />
+                                                    </div>
+                                                );
+                                            case 4:
+                                                return (
+                                                    <div class="flex aspect-ratio-square rounded-[30px] overflow-hidden">
+                                                        <img
+                                                            src={`${baseUrl}/assets/img/cat-table-vue.svg`}
+                                                            alt="лапка котика с сердечками"
+                                                            class="mx-auto"
+                                                        />
+                                                    </div>
+                                                );
+                                            case 8:
+                                                return (
+                                                    <div class="flex aspect-ratio-square rounded-[30px] overflow-hidden">
+                                                        <img
+                                                            src={`${baseUrl}/assets/img/cat-cute.svg`}
+                                                            alt="лапка котика с сердечками"
+                                                            class="mx-auto"
+                                                        />
+                                                    </div>
+                                                );
+                                        }
+                                    })()}
+                                    <LectureCard
+                                        title={lecture.title}
+                                        href={lecture.href}
+                                        description={lecture.description}
+                                    />
+                                </>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            )
+        }
+        {
+            rk && (
+                <div class="max-w-screen px-5 md:px-15 xl:px-0 lg:max-w-screen-lg xl:max-w-screen-xl mx-auto mb-30">
+                    <h2 class="text-center text-text-inverted">
+                        Рубежный контроль
+                    </h2>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+                        {rk.length !== 0 ? (
+                            rk.map((post) => (
+                                <LinkCard
+                                    title={post.data.title}
+                                    href={`${baseUrl}/labs/${post.id}`}
+                                />
+                            ))
+                        ) : (
+                            <li class="col-span-2">
+                                <p class="font-texts text-center text-text-inverted">
+                                    Задания появятся ближе к дате рк
+                                </p>
+                            </li>
+                        )}
+                    </ul>
+                </div>
+            )
+        }
+    </section>
+    {
+        (!labs || labs.length === 0) &&
+            (!lectures || lectures.length === 0) &&
+            (!rk || rk.length === 0) &&
+            !statementHref &&
+            !schedule && (
+                <div
+                    id="no-results"
+                    class="col-span-full text-center mt-10 text-text-inverted"
+                >
+                    <h2 class="font-400">Ой, что-то лапка дрогнула!</h2>
+                    <p class="mb-3 mx-auto w-full md:w-2/3">
+                        Котик пытался найти курс, но ничего не нашёл. Наверное,
+                        это что-то слишком сложное для его пушистых лапок.
+                        Попробуйте поискать в другом месте.
+                    </p>
+                    <img
+                        src={`${baseUrl}/assets/img/paw-heart.svg`}
+                        alt="лапка котика с сердечками"
+                        class="mx-auto mb-3"
+                    />
+                    <button
+                        class="border-1 rounded-[20px] border-text-tertiary p-[20px] w-full md:w-2/3 color-text-tertiary font-titles hover:bg-bg-tertiary hover:text-text-inverted transition duration-300"
+                        onclick={`window.location.href='${baseUrl}'`}
+                    >
+                        Вернуться на главную
+                    </button>
+                </div>
+            )
+    }
+    <section>
+        <div
+            class="max-w-screen px-5 lg:max-w-screen-lg xl:max-w-screen-xl mx-auto mb-20 text-text-inverted"
+        >
+            <slot />
+        </div>
+    </section>
+</BaseLayoutSnow>
+
+<style scoped>
+    .section-lectures {
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+    .section-lectures::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--color-bg-accent-first);
+        -webkit-mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 728" fill="none"%3E%3Cpath d="M-384.828 550.33C-279.518 431.882 -29.173 211.72 129.724 278.664C328.344 362.345 -156.414 623.403 -2.48331 780.746C176.815 964.017 967.034 -77.2714 1180.55 48.249C1394.07 173.769 1062.62 452.507 1180.55 550.33C1274.9 628.589 1460.28 401.827 1541.17 278.664" stroke="black" stroke-width="150"/%3E%3C/svg%3E');
+        mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 728" fill="none"%3E%3Cpath d="M-384.828 550.33C-279.518 431.882 -29.173 211.72 129.724 278.664C328.344 362.345 -156.414 623.403 -2.48331 780.746C176.815 964.017 967.034 -77.2714 1180.55 48.249C1394.07 173.769 1062.62 452.507 1180.55 550.33C1274.9 628.589 1460.28 401.827 1541.17 278.664" stroke="black" stroke-width="150"/%3E%3C/svg%3E');
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-size: cover;
+        mask-size: cover;
+    }
+</style>

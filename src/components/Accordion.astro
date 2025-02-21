@@ -1,0 +1,160 @@
+---
+const { group } = Astro.props;
+---
+
+<div class="accordion" data-group={group || "default"}>
+    <button class="accordion-summary" aria-label="Раскрыть аккордион">
+        <slot name="summary" />
+        <div class="accordion-icon">
+            <div class="line horizontal"></div>
+            <div class="line vertical"></div>
+        </div>
+    </button>
+    <div class="accordion-panel">
+        <slot name="content" />
+    </div>
+</div>
+
+<script>
+    const currentlyOpenAccordions: { [group: string]: HTMLElement | null } = {};
+
+    function closeAccordion(
+        accordion: HTMLElement,
+        panel: HTMLDivElement,
+        icon: HTMLDivElement
+    ): void {
+        panel.style.height = "0px";
+        panel.style.paddingBottom = "0rem";
+        panel.style.paddingTop = "0rem";
+        icon.classList.remove("open");
+        accordion.classList.remove("open");
+    }
+
+    function openAccordionFunction(
+        accordion: HTMLElement,
+        panel: HTMLDivElement,
+        icon: HTMLDivElement
+    ): void {
+        panel.style.height = panel.scrollHeight + 40 + "px";
+        panel.style.paddingBottom = "1rem";
+        panel.style.paddingTop = "1rem";
+        icon.classList.add("open");
+        accordion.classList.add("open");
+    }
+
+    document
+        .querySelectorAll<HTMLElement>(".accordion")
+        .forEach((accordion) => {
+            const summary =
+                accordion.querySelector<HTMLButtonElement>(
+                    ".accordion-summary"
+                );
+            const panel =
+                accordion.querySelector<HTMLDivElement>(".accordion-panel");
+            const icon =
+                accordion.querySelector<HTMLDivElement>(".accordion-icon");
+            if (!summary || !panel || !icon) return;
+
+            const group = accordion.getAttribute("data-group") || "default";
+
+            summary.addEventListener("click", () => {
+                const isOpen = accordion.classList.contains("open");
+
+                if (isOpen) {
+                    closeAccordion(accordion, panel, icon);
+                    if (currentlyOpenAccordions[group] === accordion) {
+                        currentlyOpenAccordions[group] = null;
+                    }
+                } else {
+                    if (
+                        currentlyOpenAccordions[group] &&
+                        currentlyOpenAccordions[group] !== accordion
+                    ) {
+                        const openAccordion = currentlyOpenAccordions[group]!;
+                        const openPanel =
+                            openAccordion.querySelector<HTMLDivElement>(
+                                ".accordion-panel"
+                            );
+                        const openIcon =
+                            openAccordion.querySelector<HTMLDivElement>(
+                                ".accordion-icon"
+                            );
+                        if (openPanel && openIcon) {
+                            closeAccordion(openAccordion, openPanel, openIcon);
+                        }
+                    }
+                    openAccordionFunction(accordion, panel, icon);
+                    currentlyOpenAccordions[group] = accordion;
+                }
+            });
+
+            window.addEventListener("resize", () => {
+                if (accordion.classList.contains("open")) {
+                    panel.style.height = panel.scrollHeight + 40 + "px";
+                }
+            });
+        });
+</script>
+
+<style>
+    .accordion {
+        border-radius: 10px;
+        overflow: hidden;
+        background: var(--color-bg-tertiary);
+        color: var(--color-text-inverted);
+    }
+    .accordion-summary {
+        width: 100%;
+        padding: 1rem;
+        background: var(--bg-accent-first);
+        border: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        font-size: clamp(10px, 3.2vw, 20px);
+        font-family: "NextArt";
+        font-weight: 600;
+    }
+    .accordion-panel {
+        overflow: hidden;
+        height: 0;
+        padding: 0rem 1rem;
+        transition:
+            height 0.3s ease,
+            padding 0.3s ease;
+    }
+    .accordion-icon {
+        width: 20px;
+        height: 20px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .line {
+        position: absolute;
+        background-color: var(--color-text-inverted);
+        transition: transform 0.3s ease;
+    }
+    .line.horizontal {
+        width: 100%;
+        height: 1px;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+    }
+    .line.vertical {
+        height: 100%;
+        width: 1px;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+    }
+    .accordion-icon.open .line.horizontal {
+        transform: translateY(-50%) rotate(45deg);
+    }
+    .accordion-icon.open .line.vertical {
+        transform: translateX(-50%) rotate(45deg);
+    }
+</style>

@@ -1,38 +1,22 @@
 ---
-const { allusefull } = Astro.props
-const baseUrl = import.meta.env.BASE_URL;
+import type { ListOfPosts } from "../types/Useful";
+import UsefulCard from "./UsefulCard.astro";
+
+interface Props extends ListOfPosts {}
+
+const { allUseful, lengths } = Astro.props;
+const items = allUseful.map((item, index) => ({
+    ...item,
+    length: lengths && lengths[index],
+}));
 ---
 
-<h2>Полезное</h2>
-<div class="grid sm:grid-cols-2 gap-3 text-sm">
-  {
-    allusefull.map((post) => (
-      <div class="card w-auto bg-base-100 shadow-xl">
-        <div class="card-body">
-          <h3 class="card-title">{post.data.title}</h3>
-          <p>{post.data.description}</p>
-          <div class="card-actions justify-end">
-            <a class="btn btn-primary" href={baseUrl+'/useful/'+post.id}>
-              <span class="sr-only">Материал о {post.data.title}</span>
-              <svg
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-5 h-5"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"
-                />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    ))
-  }
-</div>
+{
+    items
+        .sort((a, b) => a.data.title.localeCompare(b.data.title))
+        .map((post) => (
+            <div class="post-wrapper">
+                <UsefulCard useful={post} />
+            </div>
+        ))
+}
