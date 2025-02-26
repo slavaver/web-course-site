@@ -3,6 +3,8 @@ import CourseCard from "@components/CourseCard.astro";
 import PeopleCard from "@components/PeopleCard.astro";
 import UsefulCard from "@components/UsefulCard.astro";
 import BaseLayoutSnow from "@layouts/BaseLayoutSnow.astro";
+import { teachers, mentors } from "@/data/people";
+import courses from "@/data/courses";
 
 import { getCollection } from "astro:content";
 const allUseful = await getCollection("useful");
@@ -26,78 +28,6 @@ const usefulDynamic = usefulItems
 const useful = [...usefulStatic, ...usefulDynamic];
 
 const baseUrl = import.meta.env.BASE_URL;
-
-const courses = [
-    {
-        title: "Основы веб-технологий",
-        href: `${baseUrl}/labs/web-basics`,
-        description:
-            "Изучаем, как работает браузер, рассматриваем адаптивную верстку и ключевые принципы доступности",
-    },
-    {
-        title: "Основы веб-разработки на клиенте",
-        href: `${baseUrl}/labs/client-side-basics`,
-        description:
-            "Изучаем основы JavaScript и знакомимся с различными API, предоставляемыми браузером",
-    },
-    {
-        title: "Основы веб-разработки на клиенте (заочное)",
-        href: `${baseUrl}/labs/client-side-basics-distance`,
-        description:
-            "Изучаем основы JavaScript и знакомимся с различными API, предоставляемыми браузером",
-    },
-    {
-        title: "Веб-разработка на клиенте",
-        href: `${baseUrl}/labs/client-side`,
-        description:
-            "Изучаем основы работы с типами и язык TypeScript, а также осваиваем применение фреймворка Vue",
-    },
-    {
-        title: "Архив",
-        href: `${baseUrl}/labs/archive`,
-        description: "Здесь вы можете найти старые лабораторные работы",
-    },
-];
-
-const teachers = [
-    {
-        name: "Верещагин Владислав Юрьевич",
-        imgUrl: `${baseUrl}/assets/img/photos/slavaver.webp`,
-        role: "Кандидат технических наук",
-    },
-    {
-        name: "Гнибеда Артем Юрьевич",
-        imgUrl: `${baseUrl}/assets/img/photos/gnibedaArtem.webp`,
-        role: "",
-    },
-];
-
-const mentors = [
-    {
-        name: "Мелихова Ева",
-        imgUrl: `${baseUrl}/assets/img/photos/sshultse.webp`,
-        role: "Ассистент преподавателя",
-        contact: "sshultse",
-    },
-    {
-        name: "Хаметов Артем",
-        imgUrl: `${baseUrl}/assets/img/photos/hametov.webp`,
-        role: "Ассистент преподавателя",
-        contact: "MacalllanS",
-    },
-    {
-        name: "Бастун Андрей",
-        imgUrl: "",
-        role: "Наставник",
-        contact: "qalqaa",
-    },
-    {
-        name: "Старцев Виталий",
-        imgUrl: `${baseUrl}/assets/img/photos/vitaliy.webp`,
-        role: "Наставник",
-        contact: "snitch_viy",
-    },
-];
 ---
 
 <BaseLayoutSnow>
@@ -140,14 +70,24 @@ const mentors = [
                     {
                         courses
                             .slice(0, 3)
-                            .map((course) => <CourseCard {...course} />)
+                            .map((course) => (
+                                <CourseCard
+                                    {...course}
+                                    href={`${baseUrl}/labs/${course.id}`}
+                                />
+                            ))
                     }
                 </ul>
                 <ul id="hiddenCourses" class="flex flex-col gap-5">
                     {
                         courses
                             .slice(3)
-                            .map((course) => <CourseCard {...course} />)
+                            .map((course) => (
+                                <CourseCard
+                                    {...course}
+                                    href={`${baseUrl}/labs/${course.id}`}
+                                />
+                            ))
                     }
                 </ul>
             </div>
@@ -169,7 +109,15 @@ const mentors = [
             <ul
                 class="teachers-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
             >
-                {teachers.map((teacher) => <PeopleCard {...teacher} />)}
+                {
+                    teachers.map((teacher) => (
+                        <PeopleCard
+                            {...teacher}
+                            name={teacher.fullName}
+                            disableContact
+                        />
+                    ))
+                }
             </ul>
         </div>
     </section>
@@ -251,7 +199,11 @@ const mentors = [
                         >Смотреть всех</button
                     >
                 </li>
-                {mentors.slice(2).map((mentor) => <PeopleCard {...mentor} />)}
+                {
+                    mentors
+                        .slice(2, 4)
+                        .map((mentor) => <PeopleCard {...mentor} />)
+                }
             </ul>
         </div>
     </section>

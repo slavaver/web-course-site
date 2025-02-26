@@ -3,17 +3,43 @@ import ShareIcon from "public/assets/img/ShareIcon.astro";
 import Heading from "@components/Heading.astro";
 import ButtonTop from "@components/navigation/ButtonTop.astro";
 import BaseLayout from "./BaseLayout.astro";
+import { teachers, mentors } from "@/data/people";
 
-const { frontmatter } = Astro.props;
+const { entry } = Astro.props;
 
 const baseUrl = import.meta.env.BASE_URL;
+const author: string = entry.body.split("_")[1].split("Автор:")[1].trim();
+
+const people = [...mentors, ...teachers];
+
+const activeAuthor = people.find((person) => person.fullName.includes(author));
 ---
 
-<BaseLayout title={frontmatter.title}>
-    <Heading title={frontmatter.title} backLink={"useful/"} />
+<script>
+    const id = window.location.href.split("/").pop();
+    const getLastEditDate = (filleName: string) => {
+        const res = fetch(
+            `https://api.github.com/repos/slavaver/web-course-site/commits?path=/src/useful/${filleName}.md&per_page=1`
+        );
+        return res.then((res) => res.json());
+    };
 
+    const date = getLastEditDate(id!).then((res) =>
+        new Date(res[0].commit.author.date).toLocaleDateString("ru-RU", {
+            day: "numeric",
+            month: "numeric",
+            year: "numeric",
+        })
+    );
+
+    const lastEdit = document.getElementById("last-edit-date");
+    lastEdit!.innerText = `Последнее обновление: ${await date}`;
+</script>
+<BaseLayout title={entry.data.title}>
+    <Heading title={entry.data.title} backLink={"useful/"} />
     <main class="mx-auto pb-14">
         <ButtonTop />
+        <p id="test"></p>
         <div class="box-content max-w-[700px] m-auto px-3.5">
             <article class="md">
                 <slot />
@@ -24,23 +50,28 @@ const baseUrl = import.meta.env.BASE_URL;
                         class="aspect-square w-12 flex rounded-full overflow-hidden bg-bg-tertiary"
                     >
                         <img
-                            src={frontmatter.authorAvatar ||
-                                `${baseUrl}/assets/img/photos/slavaver.png`}
+                            src={activeAuthor?.imgUrl ||
+                                `${baseUrl}/assets/img/cat-glasses.svg`}
                             class="w-full h-full object-contain object-bottom"
-                            alt={frontmatter.author || "Верещагин Владислав"}
+                            alt={author}
                         />
                     </div>
                     <div class="flex flex-col gap-1">
                         <p
                             class="text-xs xl:text-base text-text-inverted !leading-[1.2] not-italic"
                         >
-                            {frontmatter.author || "Верещагин Владислав"}
+                            {
+                                activeAuthor?.name ||
+                                    author ||
+                                    "Неизвестный автор"
+                            }
                         </p>
                         <time
                             class="text-xs xl:text-base text-text-tertiary leading-[1.2] xl:leading-[1.2] not-italic"
+                            id="last-edit-date"
                         >
                             Последнее обновление: {
-                                frontmatter.updatedAt || "01.01.1970"
+                                entry.data.updatedAt || "01.01.1970"
                             }
                         </time>
                     </div>
@@ -103,6 +134,10 @@ const baseUrl = import.meta.env.BASE_URL;
     }
 
     .md :global(h1) {
+        display: none;
+    }
+
+    .md :global(em:first-of-type) {
         display: none;
     }
 

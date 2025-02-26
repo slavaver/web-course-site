@@ -1,26 +1,9 @@
 ---
 import BurgerMenu from "./BurgerMenu.astro";
 import ThemeToggler from "./navigation/ThemeToggler.astro";
-const baseUrl = import.meta.env.BASE_URL;
+import courses from "@/data/courses";
 
-const courses = [
-    {
-        title: "Основы веб-технологий",
-        href: `/web-course-site/labs/web-basics`,
-    },
-    {
-        title: "Основы веб-разработки на клиенте",
-        href: `/web-course-site/labs/client-side-basics`,
-    },
-    {
-        title: "Основы веб-разработки на клиенте (заочное)",
-        href: `/web-course-site/labs/client-side-basics-distance`,
-    },
-    {
-        title: "Веб-разработка на клиенте",
-        href: `/web-course-site/labs/client-side`,
-    },
-];
+const baseUrl = import.meta.env.BASE_URL;
 
 const links = [
     {
@@ -74,7 +57,7 @@ const links = [
                                 <li class="dropdown__item">
                                     <a
                                         class="dropdown__link text-[16px] px-7 py-5  userActionsLink"
-                                        href={course.href}
+                                        href={`${baseUrl}/labs/${course.id}`}
                                     >
                                         {course.title}
                                     </a>
@@ -92,16 +75,18 @@ const links = [
     {
         (
             <ul class="dropdown__list hidden md:flex flex-col justify-center gap-0 lg:gap-3 bg-bg-menu backdrop-blur-2xl">
-                {courses.map((course) => (
-                    <li class="dropdown__item">
-                        <a
-                            class="dropdown__link flex w-full md:text-base lg:text-xl p-3 lg:p-5 userActionsLink"
-                            href={course.href}
-                        >
-                            {course.title}
-                        </a>
-                    </li>
-                ))}
+                {courses
+                    .filter((course) => course.id !== "archive")
+                    .map((course) => (
+                        <li class="dropdown__item">
+                            <a
+                                class="dropdown__link flex w-full md:text-base lg:text-xl p-3 lg:p-5 userActionsLink"
+                                href={`${baseUrl}/labs/${course.id}`}
+                            >
+                                {course.title}
+                            </a>
+                        </li>
+                    ))}
             </ul>
         )
     }

@@ -4,63 +4,62 @@ interface Props {
     imgUrl?: string;
     contact?: string;
     role?: string;
+    disableContact?: boolean;
 }
 
-const { name, imgUrl, contact, role } = Astro.props;
+const { name, imgUrl, contact, role, disableContact } = Astro.props;
 const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <li class="persons-item">
     {
-        contact ? (
+        contact && !disableContact ? (
             <a
                 href={`https://t.me/${contact}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="block"
+                class="relative group outline-none"
             >
-                <div class="relative group">
-                    {imgUrl ? (
-                        <div class="bg-bg-tertiary aspect-ratio-square rounded-[30px] mb-5 overflow-hidden flex items-end relative">
-                            <img
-                                class="w-full transition duration-300 group-hover:blur-sm"
-                                src={imgUrl}
-                                alt={`фото ${name}`}
-                            />
-                            <div class="absolute inset-0 flex items-center justify-center bg-bg-menu bg-opacity-50 opacity-0 transition duration-300 group-hover:opacity-100">
-                                <div class="flex items-center space-x-2">
-                                    <span class="text-white">{`@${contact}`}</span>
-                                    <img
-                                        class="w-6 h-6"
-                                        src={`${baseUrl}/assets/img/tg-logo.svg`}
-                                        alt="Telegram"
-                                    />
-                                </div>
+                {imgUrl ? (
+                    <div class="bg-bg-tertiary aspect-ratio-square rounded-[30px] mb-5 overflow-hidden flex items-end relative">
+                        <img
+                            class="w-full transition duration-300 group-hover:blur-sm group-focus:blur-sm"
+                            src={imgUrl}
+                            alt={`фото ${name}`}
+                        />
+                        <div class="absolute inset-0 flex items-center justify-center bg-bg-menu bg-opacity-50 opacity-0 transition duration-300 group-focus:opacity-100 group-hover:opacity-100">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-white">{`@${contact}`}</span>
+                                <img
+                                    class="w-6 h-6"
+                                    src={`${baseUrl}/assets/img/tg-logo.svg`}
+                                    alt="Telegram"
+                                />
                             </div>
                         </div>
-                    ) : (
-                        <div class="bg-bg-tertiary aspect-ratio-square rounded-[30px] mb-5 overflow-hidden px-6.5 flex flex-col justify-end relative group">
-                            <p class="font-titles text-xl sm:text-base text-center mb-5">
-                                Мастер знаний, временно в облике кота
-                            </p>
-                            <img
-                                class="w-3/4 ml-auto mr-10 transition duration-300 group-hover:blur-sm"
-                                src={`${baseUrl}/assets/img/cat-glasses.svg`}
-                                alt="Cat Glasses"
-                            />
-                            <div class="absolute inset-0 flex items-center justify-center bg-bg-menu bg-opacity-50 opacity-0 transition duration-300 group-hover:opacity-100">
-                                <div class="flex items-center space-x-2">
-                                    <span class="text-white">{`@${contact}`}</span>
-                                    <img
-                                        class="w-6 h-6"
-                                        src={`${baseUrl}/assets/img/tg-logo.svg`}
-                                        alt="Telegram"
-                                    />
-                                </div>
+                    </div>
+                ) : (
+                    <div class="bg-bg-tertiary aspect-ratio-square rounded-[30px] mb-5 overflow-hidden px-6.5 flex flex-col justify-end relative group">
+                        <p class="font-titles text-xl sm:text-base text-center mb-5">
+                            Мастер знаний, временно в облике кота
+                        </p>
+                        <img
+                            class="w-3/4 ml-auto mr-10 transition duration-300 group-hover:blur-sm group-focus:blur-sm"
+                            src={`${baseUrl}/assets/img/cat-glasses.svg`}
+                            alt="Cat Glasses"
+                        />
+                        <div class="absolute inset-0 flex items-center justify-center bg-bg-menu bg-opacity-50 opacity-0 transition duration-300 group-focus:opacity-100 group-hover:opacity-100">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-white">{`@${contact}`}</span>
+                                <img
+                                    class="w-6 h-6"
+                                    src={`${baseUrl}/assets/img/tg-logo.svg`}
+                                    alt="Telegram"
+                                />
                             </div>
                         </div>
-                    )}
-                </div>
+                    </div>
+                )}
                 <h3 class="persons-item-name light:text-text-secondary mb-2 line-height-[1]">
                     {name}
                 </h3>

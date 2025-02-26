@@ -32,6 +32,7 @@ const getTimeToRead = (length: number) => {
 >
     <a
         class="card rounded-[30px] aspect-ratio-square flex flex-col bg-bg-secondary p-5 lg:p-7.5 lg:p-10 justify-between w-full userActions"
+        aria-label="Перейти к статье"
         href={href}
     >
         <div class="card__top-content">
@@ -61,15 +62,12 @@ const getTimeToRead = (length: number) => {
                     )
                 }
             </div>
-            <button
-                onclick={`window.location.href=${href}`}
-                class="useful-item-btn"
-                aria-label="Перейти к статье"></button>
+            <i class="useful-item-goto-icon"></i>
         </div>
     </a>
 </li>
 <style>
-    .useful-item-btn {
+    .useful-item-goto-icon {
         background: url("/web-course-site/assets/img/goto.svg") no-repeat center;
         width: 50px;
         height: 50px;
