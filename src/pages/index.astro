@@ -107,7 +107,7 @@ const baseUrl = import.meta.env.BASE_URL;
                 Преподаватели
             </h2>
             <ul
-                class="teachers-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+                class="teachers-list grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-5"
             >
                 {
                     teachers.map((teacher) => (
@@ -130,7 +130,7 @@ const baseUrl = import.meta.env.BASE_URL;
         >
             <h2 class="useful-title title">База знаний</h2>
             <ul
-                class="useful-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+                class="useful-list grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-5"
             >
                 {
                     useful
@@ -173,7 +173,7 @@ const baseUrl = import.meta.env.BASE_URL;
         >
             <h2 class="mentors-title title">Наставники</h2>
             <ul
-                class="mentors-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-5"
+                class="mentors-list grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-5"
             >
                 <PeopleCard {...mentors[0]} />
                 <li>
