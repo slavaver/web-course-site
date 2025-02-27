@@ -2,7 +2,7 @@
 title: "Flexbox"
 description: "Как начать использовать flexbox и примеры работы основных свойств."
 course: "first-sem"
-date: ["2025-09-01"]
+date: "2024-10-20"
 ---
 
 # Flexbox. Знакомство
