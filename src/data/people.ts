@@ -16,7 +16,7 @@ export const teachers: People[] = [
         fullName: "Верещагин Владислав Юрьевич",
         imgUrl: `${baseUrl}/assets/img/photos/slavaver.webp`,
         contact: "slavaver",
-        role: "Кандидат технических наук",
+        role: "Доцент, к.т.н.",
     },
     {
         id: "t2",
@@ -24,7 +24,7 @@ export const teachers: People[] = [
         fullName: "Гнибеда Артем Юрьевич",
         imgUrl: `${baseUrl}/assets/img/photos/gnibedaArtem.webp`,
         contact: "GnibedaArtemy",
-        role: "Преподаватель",
+        role: "Старший преподаватель",
     },
 ];
 
