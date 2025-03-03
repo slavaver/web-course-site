@@ -12,12 +12,6 @@ const courses = [
             "Изучаем основы JavaScript и знакомимся с различными API, предоставляемыми браузером",
     },
     {
-        id: "client-side-basics-distance",
-        title: "Основы веб-разработки на клиенте (заочное)",
-        description:
-            "Изучаем основы JavaScript и знакомимся с различными API, предоставляемыми браузером",
-    },
-    {
         id: "client-side",
         title: "Веб-разработка на клиенте",
         description:
