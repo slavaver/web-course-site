@@ -37,7 +37,7 @@ const archives = archiveYears.map((year) => ({
                                 class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mb-5"
                                 start="1"
                             >
-                                {webBasics.slice(0, 4).map((post, index) => (
+                                {webBasics.slice(0, 4).sort((postA, postB) => postA.data.number - postB.data.number).map((post, index) => (
                                     <LinkCard
                                         title={post.data.title}
                                         href={`/web-course-site/labs/${post.id}`}
@@ -49,7 +49,7 @@ const archives = archiveYears.map((year) => ({
                                     />
                                 ))}
                             </ol>
-                            <div
+                            {webBasics.length > 4 && <div
                                 id={`moreWebTechContainer-${year}`}
                                 class="overflow-hidden transition-all duration-500"
                                 style="max-height: 0;"
@@ -58,7 +58,7 @@ const archives = archiveYears.map((year) => ({
                                     class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mb-5"
                                     start="5"
                                 >
-                                    {webBasics.slice(4).map((post, index) => (
+                                    {webBasics.slice(4).sort((postA, postB) => postA.data.number - postB.data.number).map((post, index) => (
                                         <LinkCard
                                             title={post.data.title}
                                             href={`/web-course-site/labs/${post.id}`}
@@ -71,14 +71,13 @@ const archives = archiveYears.map((year) => ({
                                     ))}
                                 </ol>
                             </div>
-                            {webBasics.length > 4 && (
                                 <button
                                     class="font-titles w-full font-600 bg-bg-accent_second px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
                                     id={`toggleMoreWebTechBtn-${year}`}
                                 >
                                     Показать все
                                 </button>
-                            )}
+                            }
                         </div>
 
                         <div class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30">
@@ -89,7 +88,7 @@ const archives = archiveYears.map((year) => ({
                                 class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mb-5"
                                 start="1"
                             >
-                                {clientSideBasics.slice(0, 4).map((post) => (
+                                {clientSideBasics.slice(0, 4).sort((postA, postB) => postA.data.number - postB.data.number).map((post) => (
                                     <LinkCard
                                         title={post.data.title}
                                         href={`/web-course-site/labs/${post.id}`}
@@ -101,7 +100,7 @@ const archives = archiveYears.map((year) => ({
                                     />
                                 ))}
                             </ol>
-                            <div
+                            {clientSideBasics.length > 4 && ( <div
                                 id={`moreWebTechClientContainer-${year}`}
                                 class="overflow-hidden transition-all duration-500"
                                 style="max-height: 0;"
@@ -110,7 +109,7 @@ const archives = archiveYears.map((year) => ({
                                     class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mb-5"
                                     start="5"
                                 >
-                                    {clientSideBasics.slice(4).map((post) => (
+                                    {clientSideBasics.slice(4).sort((postA, postB) => postA.data.number - postB.data.number).map((post) => (
                                         <LinkCard
                                             title={post.data.title}
                                             href={`/web-course-site/labs/${post.id}`}
@@ -123,7 +122,6 @@ const archives = archiveYears.map((year) => ({
                                     ))}
                                 </ol>
                             </div>
-                            {clientSideBasics.length > 4 && (
                                 <button
                                     class="font-titles w-full font-600 bg-bg-accent_second px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
                                     id={`toggleMoreWebTechClientBtn-${year}`}
