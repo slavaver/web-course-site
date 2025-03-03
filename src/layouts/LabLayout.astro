@@ -1,41 +1,255 @@
 ---
+import Heading from "@components/Heading.astro";
+import ButtonTop from "@components/navigation/ButtonTop.astro";
+import Pagination from "@components/navigation/Pagination.astro";
+import TOC from "@components/navigation/TOC.astro";
+import { archiveYear } from "@pages/labs/archive.astro";
+import { LabLayoutProps } from "../types/Labs";
 import BaseLayout from "./BaseLayout.astro";
-import ButtonTop from "../components/navigation/ButtonTop.astro";
-import FancyHeading from "../components/FancyHeading.astro";
-import TOC from "../components/navigation/TOC.astro";
 
-const { frontmatter, headinglist } = Astro.props;
+interface Props extends LabLayoutProps {}
 
-let number;
+const { frontmatter, headinglist, labUrl }: Props = Astro.props;
 
-if (frontmatter.number && frontmatter.number?.length == 1) {
-  number = "0" + frontmatter.number;
+let number: string = "";
+
+if (frontmatter.number) {
+    number = (parseInt(frontmatter.number) / 10)
+        .toFixed(1)
+        .toString()
+        .split(".")
+        .join("");
 }
+const courseId = labUrl.split("/")[0];
+const isFulltime = labUrl.includes("full-time");
+const labYear = labUrl.split("/")[2];
 ---
 
 <BaseLayout title={frontmatter.title}>
-  <ButtonTop />
-  <article class="max-w-prose xl:max-w-full mx-auto">
-    <FancyHeading heading={frontmatter.title} number={number} />
-    <div class="xl:grid grid-cols-[1fr_600px_1fr] gap-4 items-start">
-      <aside
-        class="prose self-start xl:justify-self-end top-16 pt-6 xl:pr-6 xl:pt-0 mb-14 xl:mb-0 xl:sticky"
-      >
-        {frontmatter.type !== "schedule" && <TOC headings={headinglist} />}
-      </aside>
-      <div class="md prose lg:prose-lg">
-        <slot />
-      </div>
-    </div>
-  </article>
+    <ButtonTop />
+    <Heading
+        title={frontmatter.title}
+        number={number}
+        backLink={archiveYear === labYear
+            ? "labs/archive"
+            : `labs/${courseId}${isFulltime ? "" : "-distance"}`}
+    />
+    <article class="box-content max-w-[700px] xl:max-w-screen-xl m-auto px-3.5">
+        <div
+            class="xl:grid grid-cols-[1fr_700px_1fr] gap-4 items-start text-text-inverted mb-5"
+        >
+            <aside class="side mx-auto top-25 pt-6 xl:px-6 xl:pt-0 xl:sticky">
+                {
+                    frontmatter.type !== "schedule" && (
+                        <TOC headings={headinglist} />
+                    )
+                }
+            </aside>
+            <div class="md">
+                <slot />
+            </div>
+        </div>
+        <div class="mb-20">
+            {
+                frontmatter.type === "labs" && (
+                    <Pagination
+                        slug={frontmatter.number}
+                        collection={courseId}
+                        isFulltime={isFulltime}
+                        yearOnMain={labYear}
+                    />
+                )
+            }
+        </div>
+    </article>
 </BaseLayout>
+<style scoped>
+    html.dark :global(.astro-code),
+    html.dark :global(.astro-code span) {
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+        color: var(--shiki-dark) !important;
+        background-color: var(--color-bg-code) !important;
+    }
 
-<style>
-  .md > :global(h1) {
-    display: none;
-  }
+    html.light :global(.astro-code),
+    html.light :global(.astro-code span) {
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+        color: var(--shiki-light) !important;
+        background-color: var(--color-bg-code) !important;
+    }
 
-  .md :global(a) {
-    word-wrap: break-word;
-  }
+    .md > :global(pre) {
+        margin-bottom: 20px;
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .md :global(code) {
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+        font-family: "JetBrainsMono" !important;
+    }
+
+    .md :global(code:not(pre code)) {
+        color: var(--color-bg-accent-second);
+    }
+
+    .md > :global(table) {
+        width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    .md > :global(h1) {
+        display: none;
+    }
+
+    .md > :global(table > thead) {
+        background-color: var(--color-bg-tertiary);
+    }
+
+    .md > :global(table > thead > tr > th) {
+        padding: 10px clamp(0px, 0.5vw, 20px);
+        color: var(--color-text-inverted);
+        font-family: "NextArt";
+        font-size: 16px;
+        font-weight: 600;
+        text-align: left;
+    }
+
+    .md > :global(table > thead > tr > th:first-of-type) {
+        padding: 10px clamp(0px, 0.5vw, 20px) 10px clamp(10px, 0.5vw, 20px);
+    }
+
+    .md > :global(table > tbody > tr > td) {
+        padding: 10px clamp(0px, 0.5vw, 20px);
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .md > :global(table > tbody > tr > td:first-of-type) {
+        padding: 10px clamp(0px, 0.5vw, 20px) 10px clamp(10px, 0.5vw, 20px);
+    }
+
+    .md > :global(table > tbody > tr:nth-child(even)) {
+        background-color: var(--color-bg-code);
+    }
+
+    .md > :global(div.warning) {
+        border: 1px solid #ff5050;
+        color: #ff5050;
+        background-color: rgba(255, 130, 130, 0.1);
+        font-size: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    .side > :global(h2) {
+        font-size: 28px;
+        font-weight: 600;
+    }
+
+    .md :global(p) {
+        margin-bottom: 20px;
+        line-height: 1.2;
+    }
+
+    .md :global(ul, ol) {
+        margin-bottom: 20px;
+        padding-left: 40px;
+    }
+
+    .md :global(ul) {
+        list-style-type: disc;
+    }
+
+    .md :global(ol) {
+        list-style-type: decimal-leading-zero;
+    }
+
+    .md :global(li) {
+        margin-bottom: 10px;
+        font-size: 20px;
+        line-height: 1.2;
+    }
+
+    .side :global(a) {
+        word-wrap: break-word;
+        text-decoration: underline;
+    }
+
+    .md :global(a:not(.mentors)) {
+        color: var(--color-text-tertiary);
+        text-decoration: underline;
+    }
+
+    .md :global(img),
+    .md :global(svg) {
+        margin: 20px 0;
+        border-radius: 10px;
+    }
+
+    .md :global(hr) {
+        margin: 20px 0;
+    }
+
+    .md > :global(*:last-child) {
+        margin-bottom: 0;
+    }
+
+    .md :global(h2, h3) {
+        margin-bottom: 20px;
+        text-wrap: balance;
+        line-height: 1.1;
+    }
+
+    .md :global(h2, h3) {
+        margin-top: 40px;
+    }
+
+    .md :global(:is(h2, h3):first-child) {
+        margin-top: 0;
+    }
+
+    .md :global(h2) {
+        font-size: 40px;
+    }
+
+    .md :global(h3) {
+        font-size: 28px;
+    }
+
+    @media (max-width: 1200px) {
+        .md :global(h3) {
+            font-size: 24px;
+        }
+        .md :global(li) {
+            font-size: 18px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .md :global(h2) {
+            font-size: 28px;
+        }
+
+        .md :global(h3) {
+            font-size: 24px;
+        }
+
+        .md :global(li) {
+            font-size: 16px;
+        }
+
+        .md > :global(table > thead > tr > th) {
+            font-size: clamp(10px, 2vw, 14px);
+        }
+        .md > :global(table > tbody > tr > td) {
+            font-size: clamp(10px, 2vw, 14px);
+        }
+    }
 </style>

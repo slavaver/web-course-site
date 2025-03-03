@@ -89,6 +89,11 @@ class Snow extends HTMLElement {
 
   connectedCallback() {
     // https://caniuse.com/mdn-api_cssstylesheet_replacesync
+    const month = new Date().getMonth();
+    if (month !== 11 && month !== 0 && month !== 1) {
+      return;
+    }
+
     if (this.shadowRoot || !("replaceSync" in CSSStyleSheet.prototype)) {
       return;
     }

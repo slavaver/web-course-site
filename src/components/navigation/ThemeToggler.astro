@@ -1,46 +1,49 @@
 ---
+
 ---
 
 <button
-  transition:persist
-  type="button"
-  class="theme-toggle aspect-square rounded-full"
-  id="theme-toggle"
-  title="Переключение темы"
-  aria-label="авто"
-  aria-live="polite"
+    transition:persist
+    type="button"
+    class="theme-toggle userActions p-1.5 md:p-5 rounded-[10px] z-99"
+    id="theme-toggle"
+    title="Переключение темы"
+    aria-label="авто"
+    aria-live="polite"
 >
-  <svg
-    class="m-2"
-    viewBox="0 0 24 24"
-    height="26"
-    width="26"
-    aria-hidden="true"
-  >
-    <defs>
-      <path
-        id="dark-icon"
-        fill-rule="evenodd"
-        clip-rule="evenodd"
-        d="M12.0972 2.53039C12.2913 2.8649 12.2752 3.28136 12.0557 3.5998C11.3898 4.56594 11 5.73595 11 7.00002C11 10.3137 13.6863 13 17 13C18.2641 13 19.4341 12.6102 20.4002 11.9443C20.7187 11.7249 21.1351 11.7087 21.4696 11.9028C21.8041 12.0969 21.9967 12.4665 21.9642 12.8519C21.5313 17.9765 17.236 22 12 22C6.47715 22 2 17.5229 2 12C2 6.76398 6.02351 2.46874 11.1481 2.03585C11.5335 2.0033 11.9031 2.19588 12.0972 2.53039ZM9.42424 4.42352C6.26994 5.49553 4 8.48306 4 12C4 16.4183 7.58172 20 12 20C15.517 20 18.5045 17.7301 19.5765 14.5758C18.7676 14.8508 17.9008 15 17 15C12.5817 15 9 11.4183 9 7.00002C9 6.09922 9.1492 5.2324 9.42424 4.42352Z"
-        fill="currentColor"></path>
-      <path
-        id="light-icon"
-        d="M5 12H3M12 5V3M21 12H19M12 21V19M16.9496 16.9498L18.3638 18.364M5.63602 5.63608L7.05023 7.05029M16.9496 7.0502L18.3638 5.63599M5.63602 18.3639L7.05023 16.9497M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"></path>
-    </defs>
+    <svg class="w-10 h-10" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <defs>
+            <g id="dark-icon">
+                <path
+                    d="M20 26.5C23.5899 26.5 26.5 23.5899 26.5 20C26.5 16.4101 23.5899 13.5 20 13.5C16.4101 13.5 13.5 16.4101 13.5 20C13.5 23.5899 16.4101 26.5 20 26.5Z"
+                    stroke="currentColor"
+                    stroke-width="1.33333"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                <path
+                    d="M27.14 27.14L27.01 27.01M27.01 12.99L27.14 12.86L27.01 12.99ZM12.86 27.14L12.99 27.01L12.86 27.14ZM20 10.08V10V10.08ZM20 30V29.92V30ZM10.08 20H10H10.08ZM30 20H29.92H30ZM12.99 12.99L12.86 12.86L12.99 12.99Z"
+                    stroke="currentColor"
+                    stroke-width="1.33333"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+            </g>
+            <path
+                id="light-icon"
+                d="M10.028 20.4222C10.3998 25.5709 14.912 29.7598 20.3122 29.9897C24.1223 30.1497 27.5297 28.4301 29.5742 25.7208C30.4209 24.6111 29.9665 23.8713 28.552 24.1212C27.8601 24.2412 27.1477 24.2912 26.4043 24.2612C21.3551 24.0612 17.2249 19.9723 17.2043 15.1435C17.1939 13.8439 17.4727 12.6142 17.9787 11.4945C18.5362 10.2548 17.8651 9.66493 16.5744 10.1948C12.4855 11.8644 9.6873 15.8533 10.028 20.4222Z"
+                stroke="currentColor"
+                stroke-width="1.33333"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+        </defs>
 
-    <use id="slot"></use>
-  </svg>
+        <use id="slot"></use>
+    </svg>
 </button>
 
 <style>
-  .theme-toggle {
-    cursor: pointer;
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-  }
+    .theme-toggle {
+        cursor: pointer;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
 </style>

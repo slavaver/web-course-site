@@ -1,25 +1,250 @@
 ---
+import ShareIcon from "public/assets/img/ShareIcon.astro";
+import Heading from "@components/Heading.astro";
+import ButtonTop from "@components/navigation/ButtonTop.astro";
 import BaseLayout from "./BaseLayout.astro";
-import ButtonTop from "../components/navigation/ButtonTop.astro";
+import { teachers, mentors } from "@/data/people";
 
-const { frontmatter } = Astro.props;
+const { entry } = Astro.props;
 
+const baseUrl = import.meta.env.BASE_URL;
+const author: string = entry.body.split("_")[1].split("Автор:")[1].trim();
+
+const people = [...mentors, ...teachers];
+
+const activeAuthor = people.find((person) => person.fullName.includes(author));
 ---
 
-<BaseLayout title={frontmatter.title}>
-  <main class="prose lg:prose-lg mx-auto">
-    <ButtonTop />
-      <article class="md">
-        <slot />
-      </article>
-  </main>
+<script>
+    const id = window.location.href.split("/").pop();
+    const getLastEditDate = (filleName: string) => {
+        const res = fetch(
+            `https://api.github.com/repos/slavaver/web-course-site/commits?path=/src/useful/${filleName}.md&per_page=1`
+        );
+        return res.then((res) => res.json());
+    };
+
+    const date = getLastEditDate(id!).then((res) =>
+        new Date(res[0].commit.author.date).toLocaleDateString("ru-RU", {
+            day: "numeric",
+            month: "numeric",
+            year: "numeric",
+        })
+    );
+
+    const lastEdit = document.getElementById("last-edit-date");
+    lastEdit!.innerText = `Последнее обновление: ${await date}`;
+</script>
+<BaseLayout title={entry.data.title}>
+    <Heading title={entry.data.title} backLink={"useful/"} />
+    <main class="mx-auto pb-14">
+        <ButtonTop />
+        <p id="test"></p>
+        <div class="box-content max-w-[700px] m-auto px-3.5">
+            <article class="md">
+                <slot />
+            </article>
+            <address class="flex items-start justify-between gap-4 mt-10">
+                <div class="flex items-start gap-2.5">
+                    <div
+                        class="aspect-square w-12 flex rounded-full overflow-hidden bg-bg-tertiary"
+                    >
+                        <img
+                            src={activeAuthor?.imgUrl ||
+                                `${baseUrl}/assets/img/cat-glasses.svg`}
+                            class="w-full h-full object-contain object-bottom"
+                            alt={author}
+                        />
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <p
+                            class="text-xs xl:text-base text-text-inverted !leading-[1.2] not-italic"
+                        >
+                            {
+                                activeAuthor?.name ||
+                                    author ||
+                                    "Неизвестный автор"
+                            }
+                        </p>
+                        <time
+                            class="text-xs xl:text-base text-text-tertiary leading-[1.2] xl:leading-[1.2] not-italic"
+                            id="last-edit-date"
+                        >
+                            Последнее обновление: {
+                                entry.data.updatedAt || "01.01.1970"
+                            }
+                        </time>
+                    </div>
+                </div>
+                <div
+                    class="aspect-square w-12 flex items-center justify-center border rounded-full border-bg-accent_second text-bg-accent_second hover:border-bg-hover active:border-bg-active focus:border-bg-active hover:text-bg-hover active:text-bg-active focus:text-bg-active cursor-pointer share-button"
+                >
+                    <ShareIcon class="w-6 h-6 text-inherit" />
+                </div>
+            </address>
+        </div>
+    </main>
 </BaseLayout>
 
+<script>
+    const shareButton = document.querySelector(".share-button");
+
+    shareButton?.addEventListener("click", () => {
+        const url = window.location.href;
+        const text = document.title;
+        const shareData = {
+            title: text,
+            url: url,
+        };
+        navigator.share(shareData);
+    });
+</script>
+
 <style>
-  .md :global(h1), .md :global(h2) {
-    text-wrap: balance;
-  }
-  .md :global(a), .md :global(code) {
-    word-wrap: break-word;
-  }
+    html.dark :global(.astro-code),
+    html.dark :global(.astro-code span) {
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+        color: var(--shiki-dark) !important;
+        background-color: var(--color-bg-code) !important;
+    }
+
+    html.light :global(.astro-code),
+    html.light :global(.astro-code span) {
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+        color: var(--shiki-light) !important;
+        background-color: var(--color-bg-code) !important;
+    }
+
+    .md > :global(pre) {
+        margin-bottom: 20px;
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .md :global(code) {
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+        font-family: "JetBrainsMono" !important;
+    }
+
+    .md {
+        color: var(--color-text-inverted);
+    }
+
+    .md :global(h1) {
+        display: none;
+    }
+
+    .md :global(em:first-of-type) {
+        display: none;
+    }
+
+    .md :global(h2, h3) {
+        margin-bottom: 20px;
+        text-wrap: balance;
+        line-height: 1.1;
+    }
+
+    .md :global(h2, h3) {
+        margin-top: 40px;
+    }
+
+    .md :global(:is(h2, h3):first-child) {
+        margin-top: 0;
+    }
+
+    .md :global(h2) {
+        font-size: 40px;
+    }
+
+    .md :global(h3) {
+        font-size: 28px;
+    }
+
+    @media (max-width: 1200px) {
+        .md :global(h3) {
+            font-size: 24px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .md :global(h2) {
+            font-size: 28px;
+        }
+
+        .md :global(h3) {
+            font-size: 24px;
+        }
+    }
+
+    .md :global(p) {
+        margin-bottom: 20px;
+        line-height: 1.2;
+    }
+
+    .md :global(code:not(pre code)) {
+        color: var(--color-bg-accent-second);
+    }
+
+    .md :global(ul, ol) {
+        margin-bottom: 20px;
+        padding-left: 40px;
+    }
+
+    .md :global(ul) {
+        list-style-type: disc;
+    }
+
+    .md :global(ol) {
+        list-style-type: decimal-leading-zero;
+    }
+
+    .md :global(li) {
+        margin-bottom: 10px;
+        font-size: 20px;
+        line-height: 1.2;
+    }
+
+    @media (max-width: 1200px) {
+        .md :global(li) {
+            font-size: 18px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .md :global(li) {
+            font-size: 16px;
+        }
+    }
+
+    .md :global(a),
+    .md :global(code) {
+        word-wrap: break-word;
+    }
+
+    .md :global(a) {
+        color: var(--color-text-tertiary);
+        text-decoration: underline;
+    }
+
+    .md :global(img) {
+        margin: 20px 0;
+        border-radius: 10px;
+    }
+
+    .md :global(pre) {
+        margin: 20px 0;
+        padding: 12px 0 12px 12px;
+        border-radius: 10px;
+    }
+
+    .md :global(hr) {
+        margin: 20px 0;
+    }
+
+    .md > :global(*:last-child) {
+        margin-bottom: 0;
+    }
 </style>

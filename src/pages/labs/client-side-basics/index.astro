@@ -1,0 +1,50 @@
+---
+import Accordion from "@components/Accordion.astro";
+import CourseLayout from "@layouts/CourseLayout.astro";
+import { getCollection } from "astro:content";
+
+const yearOnMain = "2024";
+
+const allCourses = await getCollection("courses");
+
+const clientSideBasics = allCourses.filter((post) =>
+    post.id.includes(`client-side-basics/full-time/${yearOnMain}`)
+);
+
+const labs = clientSideBasics.filter((post) => post.data.type === "labs");
+const schedule = clientSideBasics.filter(
+    (post) => post.data.type === "schedule"
+);
+const rk = clientSideBasics.filter((post) => post.data.type === "rk");
+const statementHref =
+    "https://docs.google.com/spreadsheets/d/1ex4WJz5JM003zWcFaSMEy-rjsCUg_umqwixbh-9DJAo";
+---
+
+<CourseLayout
+    title=`Основы веб\‑разработки на клиенте`
+    description="Изучаем основы JavaScript и знакомимся с различными API, предоставляемыми браузером"
+    labs={labs}
+    rk={rk}
+    schedule={schedule}
+    statementHref={statementHref}
+    name="client-side-basics"
+>
+    <h2 class="title">Другая информация</h2>
+    <Accordion>
+        <h4 slot="summary">Оценка за курс</h4>
+        <div slot="content">
+            <p>
+                Практическая часть (макс. 30 баллов) + Ответы на 6 вопросов
+                (макс. 30 баллов) + бонус (макс. 40 баллов) за сдачу в срок в
+                соответствии с датами в плане. Теорию можно ответить один раз.
+            </p>
+            <p>Вычисляется среднее значение баллов за все работы.</p>
+            <ul class="pl-5 list-disc">
+                <li><p>0-49 - неудовлетворительно;</p></li>
+                <li><p>50-64 - удовлетворительно;</p></li>
+                <li><p>65-84 - хорошо;</p></li>
+                <li><p>85-100 - отлично.</p></li>
+            </ul>
+        </div>
+    </Accordion>
+</CourseLayout>

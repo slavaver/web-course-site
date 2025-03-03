@@ -1,0 +1,324 @@
+---
+import BurgerMenu from "./BurgerMenu.astro";
+import ThemeToggler from "./navigation/ThemeToggler.astro";
+import courses from "@/data/courses";
+
+const baseUrl = import.meta.env.BASE_URL;
+
+const links = [
+    {
+        title: "Главная",
+        href: `/web-course-site`,
+    },
+    {
+        title: "Курсы",
+        href: `#courses`,
+    },
+    {
+        title: "База знаний",
+        href: `#useful`,
+    },
+    {
+        title: "Пересдачи",
+        href: `#retake`,
+    },
+];
+---
+
+<header class="header-container w-full fixed z-50">
+    <div
+        class="header md:bg-bg-menu text-text-primary flex-col gap-2 py-2.5 px-2.5 md:px-10 rounded-2xl box-border md:backdrop-blur-xl"
+    >
+        <div
+            class="header-content-vertical w-full justify-between items-center mx-auto max-w-screen-xl flex"
+        >
+            <a class="userActionsLink hidden md:block" href="/web-course-site/">
+                <img
+                    class="w-10 h-10"
+                    src=`${baseUrl}/assets/img/logo.svg`
+                    alt="logo"
+                />
+            </a>
+            <nav class="header-nav menu">
+                {
+                    links.map((link) => (
+                        <a
+                            class="header__link cursor-pointer userActions font-titles md:font-texts "
+                            id={link.href.slice(1) + "-link"}
+                        >
+                            {link.title}
+                        </a>
+                    ))
+                }
+                {
+                    (
+                        <ul class="dropdown__list-sm flex flex-col md:hidden justify-center gap-0">
+                            {courses
+                                .filter((course) => course.id !== "archive")
+                                .map((course) => (
+                                    <li class="dropdown__item">
+                                        <a
+                                            class="dropdown__link text-[16px] px-7 py-5  userActionsLink"
+                                            href={`${baseUrl}/labs/${course.id}`}
+                                        >
+                                            {course.title}
+                                        </a>
+                                    </li>
+                                ))}
+                        </ul>
+                    )
+                }
+            </nav>
+
+            <BurgerMenu links={links} />
+            <ThemeToggler />
+        </div>
+    </div>
+    {
+        (
+            <ul class="dropdown__list hidden md:flex flex-col justify-center gap-0 lg:gap-3 bg-bg-menu backdrop-blur-2xl">
+                {courses
+                    .filter((course) => course.id !== "archive")
+                    .map((course) => (
+                        <li class="dropdown__item">
+                            <a
+                                class="dropdown__link flex w-full md:text-base lg:text-xl p-3 lg:p-5 userActionsLink"
+                                href={`${baseUrl}/labs/${course.id}`}
+                            >
+                                {course.title}
+                            </a>
+                        </li>
+                    ))}
+            </ul>
+        )
+    }
+</header>
+
+<script>
+    let isDropdownOpen = false;
+
+    const dropdown = document.querySelector(".dropdown__list");
+    const coursesLink = document.querySelector("#courses-link");
+    const mainLink = document.querySelector("#web-course-site-link");
+    const usefulLink = document.querySelector("#useful-link");
+    const retakeLink = document.querySelector("#retake-link");
+
+    const dropdownSm = document.querySelector(".dropdown__list-sm");
+
+    const toggleDropdown = (
+        activeBtn: Element | null,
+        list: Element | null
+    ) => {
+        isDropdownOpen = !isDropdownOpen;
+        list?.classList.toggle("open", isDropdownOpen);
+        activeBtn?.classList.toggle("open", isDropdownOpen);
+    };
+
+    const goToLink = (link: Element) => {
+        const slicedLink =
+            link.id === "web-course-site-link"
+                ? link.id.slice(0, -5)
+                : "web-course-site/" + link.id.slice(0, -5);
+        window.location.href = `/${slicedLink}/`;
+    };
+
+    let screenSize = window.screen.width;
+
+    window.addEventListener("resize", () => {
+        screenSize = window.screen.width;
+    });
+
+    const handleToggleDropDown = () => {
+        if (screenSize < 768) {
+            toggleDropdown(coursesLink, dropdownSm);
+            return;
+        }
+        toggleDropdown(coursesLink, dropdown);
+    };
+
+    coursesLink?.addEventListener("click", handleToggleDropDown);
+
+    mainLink?.addEventListener("click", () => goToLink(mainLink));
+    usefulLink?.addEventListener("click", () => goToLink(usefulLink));
+    retakeLink?.addEventListener("click", () => goToLink(retakeLink));
+</script>
+
+<style>
+    .header {
+        margin-bottom: 10px;
+    }
+
+    .header-container {
+        transition: 0.3s ease-in-out;
+        padding: 0.625rem;
+    }
+
+    .header-content-vertical {
+        transition: 0.3s ease-in-out;
+    }
+
+    .header-nav > a {
+        border-radius: 10px;
+        padding: 1.25rem clamp(0rem, 1vw, 1.25rem);
+    }
+
+    .dropdown__list {
+        transition: 0.3s ease-in-out;
+        max-height: 0px;
+        width: 50%;
+        max-width: 650px;
+        padding: 15px;
+        margin: 0 auto;
+        pointer-events: none;
+        opacity: 0;
+        border-radius: 1rem;
+    }
+
+    .dropdown__list > li > a {
+        transition: 0.3s ease-in-out;
+        scale: 0.8;
+        line-height: 0;
+        padding: 0px;
+    }
+
+    .dropdown__list.open {
+        pointer-events: all;
+        max-height: 350px;
+        opacity: 1;
+    }
+
+    .dropdown__list.open > li > a {
+        scale: 1;
+        line-height: 1;
+        padding: 20px;
+    }
+
+    #courses-link {
+        position: relative;
+        padding-right: 40px;
+    }
+
+    #courses-link::after {
+        transition: 0.3s ease-in-out;
+        content: "";
+        position: absolute;
+        top: 35%;
+        right: 15px;
+        width: 21px;
+        height: 20px;
+        background: url("/web-course-site/assets/img/cheveron-down.svg") center
+            no-repeat;
+        transform: rotate(-90deg);
+    }
+
+    #courses-link.open::after {
+        transform: rotate(0deg);
+    }
+
+    .menu {
+        display: flex;
+        gap: clamp(0px, 2vw, 40px);
+    }
+
+    @media (max-width: 768px) {
+        .header-container:has(.menu.open) {
+            padding: 0;
+            z-index: 999;
+            background-color: transparent;
+        }
+
+        .header {
+            transition: background-color 0.3s ease-in-out;
+            background-color: var(--color-bg-menu);
+            backdrop-filter: blur(40px);
+        }
+
+        .header:has(.menu.open) {
+            background-color: transparent;
+            backdrop-filter: none;
+        }
+
+        .header-content-vertical:has(.menu.open) {
+            padding: 0.625rem;
+        }
+
+        .header__link {
+            padding-left: calc(1.25rem + 0.6875rem);
+            padding-right: calc(1.25rem + 0.6875rem);
+        }
+
+        .menu {
+            gap: 0;
+            padding: 0px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            flex-direction: column;
+            z-index: 10;
+            height: 0vh;
+            transition: 0.3s ease-in-out;
+            overflow: hidden;
+            background-color: var(--color-bg-menu);
+            backdrop-filter: blur(40px);
+            opacity: 0;
+            padding-top: calc(72px + (0.625rem * 2));
+            transform: scale(0.95);
+        }
+
+        .menu > a {
+            margin: 0 1.25rem;
+        }
+
+        .menu.open {
+            opacity: 1;
+            display: flex;
+            height: 100vh;
+            transform: scale(1);
+        }
+
+        .menu a {
+            display: block;
+        }
+
+        .dropdown__list-sm {
+            transition: 0.3s ease-in-out;
+            max-height: 0px;
+            width: 100%;
+            padding: 0;
+            pointer-events: none;
+            opacity: 0;
+            background-color: transparent;
+        }
+
+        .dropdown__list-sm .dropdown__link {
+            transition:
+                max-height 0.3s ease-in-out,
+                padding 0.3s ease-in-out;
+            max-height: 0px;
+            padding: 0px 20px;
+            overflow: hidden;
+        }
+
+        .dropdown__list-sm.open .dropdown__link {
+            max-height: 60px;
+            padding: 20px 20px;
+        }
+
+        .menu.open .dropdown__list-sm.open {
+            pointer-events: all;
+            max-height: 250px;
+            width: 100%;
+            opacity: 1;
+            background-color: var(--color-bg-menu-highlighted);
+        }
+
+        #useful-link {
+            order: 1;
+        }
+
+        #retake-link {
+            order: 2;
+        }
+    }
+</style>

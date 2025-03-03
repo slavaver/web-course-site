@@ -1,72 +1,276 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import CourseCard from "@components/CourseCard.astro";
+import PeopleCard from "@components/PeopleCard.astro";
+import UsefulCard from "@components/UsefulCard.astro";
+import BaseLayoutSnow from "@layouts/BaseLayoutSnow.astro";
+import { teachers, mentors } from "@/data/people";
+import courses from "@/data/courses";
+
+import { getCollection } from "astro:content";
+const allUseful = await getCollection("useful");
+const lengths = allUseful.map((post) => post.body?.length);
+
+const usefulItems = allUseful.map((item, index) => ({
+    ...item,
+    length: lengths[index],
+}));
+
+const usefulStatic = [
+    usefulItems.find((post) => post.id === "rules")!,
+    usefulItems.find((post) => post.id === "links")!,
+];
+
+const usefulDynamic = usefulItems
+    .filter((post) => post.id !== "rules" && post.id !== "links")
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 2);
+
+const useful = [...usefulStatic, ...usefulDynamic];
+
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout>
-  <div class="prose lg:prose-lg mx-auto">
-    <h1 class="[text-wrap:balance]">Курсы по разработке на стороне клиента</h1>
-    <span
-      ><a
-        class="link text-neutral alert alert-warning max-w-max"
-        href="/web-course-site/retake"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="stroke-current shrink-0 h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          ><path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-          ></path></svg
-        > Информация о консультациях к пересдаче</a
-      ></span
+<BaseLayoutSnow>
+    <section
+        class="section-hero bg-bg-primary rounded-b-[30px] sm:rounded-b-[60px] h-[600px] sm:h-2xl md:h-3xl relative mb-15"
     >
-    <ol>
-      <li>
-        <a href="/web-course-site/labs/web-tech">Основы веб-технологий</a>
-      </li>
-      <li>
-        <a href="/web-course-site/labs/web-client-dev"
-          >Основы веб-разработки на стороне клиента</a
+        <div
+            class="hero-container px-3 flex flex-col justify-end h-full text-center items-center"
         >
-      </li>
-      <li>
-        <a href="/web-course-site/labs/web-client-dev-ts"
-          >Веб-разработка на стороне клиента</a
+            <h1
+                class="line-height-[1] font-size-32px md:font-size-72px lg:font-size-82px"
+            >
+                Веб-разработка
+            </h1>
+            <h2
+                class="line-height-[1] font-size-24px md:font-size-40px lg:font-size-48px font-400 mb-5"
+            >
+                от теории к практике
+            </h2>
+            <p class="mb-7.5 w-2/3 sm:max-w-1/3">
+                Три&nbsp;курса&nbsp;последовательно погружают в&nbsp;разработку
+                на&nbsp;стороне клиента
+            </p>
+            <img
+                width="400"
+                height="400"
+                src=`${baseUrl}/assets/img/cat-code.webp`
+                alt="смешной котик программирует"
+                loading="lazy"
+            />
+        </div>
+    </section>
+    <section class="section-courses pt-15 mb-30" id="courses">
+        <div
+            class="courses-container max-w-screen px-5 md:px-10 xl:px-5 xl:max-w-screen-xl mx-auto"
         >
-      </li>
-    </ol>
-    <p>
-      Три курса последовательно погружают в разработку на стороне клиента. В
-      рамках основ веб-технологий разбирается работа браузера и общие принципы
-      построения веб-платформы, также изучаются адаптивная верстка и принципы
-      доступности. В курсе основ веб-разработки на стороне клиента изучаются
-      основы Javascript и различные API, которые предоставляет браузер. И третий
-      курс дает основы работы с типами и TypeScript, затем рассматривается
-      применение фреймворка Vue.
-    </p>
-    <h2>Преподаватели</h2>
-    <ul>
-      <li>Верещагин Владислав Юрьевич, к.т.н.</li>
-      <li>Гнибеда Артем Юрьевич</li>
-    </ul>
-    <h2>Ассистенты преподавателя</h2>
-    <ul>
-      <li>Мелихова Ева-София Бориславовна</li>
-      <li>Хаметов Артём Максимович</li>
-    </ul>
-  </div>
-</BaseLayout>
+            <h2 class="courses-title light:text-text-secondary title">Курсы</h2>
+            <div class="courses-list flex flex-col">
+                <ul id="staticCourses" class="flex flex-col gap-5 mb-5">
+                    {
+                        courses
+                            .slice(0, 3)
+                            .map((course) => (
+                                <CourseCard
+                                    {...course}
+                                    href={`${baseUrl}/labs/${course.id}`}
+                                />
+                            ))
+                    }
+                </ul>
+                <ul id="hiddenCourses" class="flex flex-col gap-5">
+                    {
+                        courses
+                            .slice(3)
+                            .map((course) => (
+                                <CourseCard
+                                    {...course}
+                                    href={`${baseUrl}/labs/${course.id}`}
+                                />
+                            ))
+                    }
+                </ul>
+            </div>
+            <button
+                class="font-titles w-full font-600 bg-bg-accent_second px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
+                id="showMoreCoursesBtn"
+                aria-expanded="false"
+                aria-controls="hiddenCourses">Показать все</button
+            >
+        </div>
+    </section>
+    <section class="section-teachers mb-30">
+        <div
+            class="teachers-container max-w-screen px-5 md:px-10 xl:px-5 xl:max-w-screen-xl mx-auto"
+        >
+            <h2 class="teachers-title title light:text-text-secondary">
+                Преподаватели
+            </h2>
+            <ul
+                class="teachers-list grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-5"
+            >
+                {
+                    teachers.map((teacher) => (
+                        <PeopleCard
+                            {...teacher}
+                            name={teacher.fullName}
+                            disableContact
+                        />
+                    ))
+                }
+            </ul>
+        </div>
+    </section>
+    <section
+        id="useful"
+        class="section-useful bg-bg-primary py-15 rounded-[30px] sm:rounded-[60px] mb-30"
+    >
+        <div
+            class="useful-container max-w-screen px-5 md:px-10 xl:px-5 xl:max-w-screen-xl mx-auto"
+        >
+            <h2 class="useful-title title">База знаний</h2>
+            <ul
+                class="useful-list grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-5"
+            >
+                {
+                    useful
+                        .slice(0, 2)
+                        .map((useful) => <UsefulCard useful={useful} />)
+                }
+                <li>
+                    <p class="order-0">
+                        Здесь вы найдете подборки полезных ресурсов, конспекты,
+                        а также статьи с теорией, раскрывающие ключевые темы
+                        курсов
+                    </p>
+                </li>
+                <div class="hidden sm:block">
+                    <UsefulCard useful={useful[2]} />
+                </div>
+                <li
+                    class="other-useful flex flex-col justify-between order-1 lg:order-0"
+                >
+                    <img
+                        src=`${baseUrl}/assets/img/cat-chill.svg`
+                        alt="чилл кот лежит за ноутбуком"
+                        aria-hidden="true"
+                    />
+                    <button
+                        class="font-titles font-600 bg-bg-accent_second sm:px-5 px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
+                        onclick={`window.location.href='/web-course-site/useful/'`}
+                        >Еще больше полезностей</button
+                    >
+                </li>
+                <div class="hidden sm:block">
+                    <UsefulCard useful={useful[3]} />
+                </div>
+            </ul>
+        </div>
+    </section>
+    <section class="section-mentors mb-30 light:text-text-secondary">
+        <div
+            class="mentors-container max-w-screen px-5 md:px-10 xl:px-5 xl:max-w-screen-xl mx-auto"
+        >
+            <h2 class="mentors-title title">Наставники</h2>
+            <ul
+                class="mentors-list grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-5"
+            >
+                <PeopleCard {...mentors[0]} />
+                <li>
+                    <p class="order--1 lg:order-0 px-1">
+                        Мы поддерживаем вас на пути освоения первых двух курсов,
+                        помогаем разобраться в сложных моментах и направляем на
+                        верное решение задач
+                    </p>
+                </li>
+                <PeopleCard {...mentors[1]} />
+                <li
+                    class="other-mentors flex flex-col gap-5 order-1 2xl:order-0 aspect-ratio-square w-full"
+                >
+                    <img
+                        class="aspect-ratio-1"
+                        src=`${baseUrl}/assets/img/paw-heart.svg`
+                        alt="Лапка котика с сердечками"
+                        aria-hidden="true"
+                    />
+                    <button
+                        class="font-titles text-text-primary font-600 bg-bg-accent_second px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
+                        onclick={`window.location.href='/web-course-site/mentors'`}
+                        >Смотреть всех</button
+                    >
+                </li>
+                {
+                    mentors
+                        .slice(2, 4)
+                        .map((mentor) => <PeopleCard {...mentor} />)
+                }
+            </ul>
+        </div>
+    </section>
+</BaseLayoutSnow>
 
 <style>
-  @media screen and (min-width: 500px) {
-    .columns {
-      columns: 2 1em;
+    .section-hero,
+    .section-useful {
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
     }
-    .columns > li {
-      margin-top: 0;
+
+    .section-hero::before,
+    .section-useful::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--color-bg-accent-first);
+        -webkit-mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 728" fill="none"%3E%3Cpath d="M-384.828 550.33C-279.518 431.882 -29.173 211.72 129.724 278.664C328.344 362.345 -156.414 623.403 -2.48331 780.746C176.815 964.017 967.034 -77.2714 1180.55 48.249C1394.07 173.769 1062.62 452.507 1180.55 550.33C1274.9 628.589 1460.28 401.827 1541.17 278.664" stroke="black" stroke-width="150"/%3E%3C/svg%3E');
+        mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 728" fill="none"%3E%3Cpath d="M-384.828 550.33C-279.518 431.882 -29.173 211.72 129.724 278.664C328.344 362.345 -156.414 623.403 -2.48331 780.746C176.815 964.017 967.034 -77.2714 1180.55 48.249C1394.07 173.769 1062.62 452.507 1180.55 550.33C1274.9 628.589 1460.28 401.827 1541.17 278.664" stroke="black" stroke-width="150"/%3E%3C/svg%3E');
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-size: cover;
+        mask-size: cover;
     }
-  }
+
+    #hiddenCourses {
+        height: 0px;
+        overflow: hidden;
+        transition: 0.3s ease-in-out;
+    }
+    #hiddenCourses.open {
+        max-height: 50vh;
+        margin-bottom: 1.25rem;
+    }
 </style>
+
+<script>
+    document.querySelectorAll(".no-break-hyphen").forEach((el) => {
+        el.innerHTML = el.innerHTML.replace(/-/g, "&#8209;");
+    });
+
+    const showMoreCoursesBtn = document.getElementById("showMoreCoursesBtn");
+    const hiddenCourses = document.getElementById("hiddenCourses");
+    const showMoreTexts = ["Показать все", "Спрятать"];
+    let isOpen: boolean = false;
+    showMoreCoursesBtn?.addEventListener("click", () => {
+        if (hiddenCourses) {
+            if (isOpen) {
+                hiddenCourses.style.height = "0px";
+            } else {
+                hiddenCourses.style.height =
+                    hiddenCourses.scrollHeight + 20 + "px";
+            }
+        }
+        isOpen = !isOpen;
+        showMoreCoursesBtn.textContent = showMoreCoursesBtn.textContent =
+            showMoreTexts[
+                showMoreTexts.indexOf(showMoreCoursesBtn.textContent ?? "") ===
+                0
+                    ? 1
+                    : 0
+            ];
+    });
+</script>

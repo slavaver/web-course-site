@@ -1,6 +1,8 @@
 ---
-title: "Шаг 1. Ключевые блоки"
+title: "HTML. Часть 1"
 description: "Как создать шапку, подвал и основную часть страницы."
+course: "first-sem"
+date: "2024-09-23"
 ---
 
 # Шаг 1. Ключевые блоки
@@ -38,19 +40,20 @@ _Автор: Мелихова Ева-София_
 ```html
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="utf-8">
-    <title>Детективно-информационное агентство Adresteia</title>
-  </head>
-  <body>
-    <header>
-      <!-- Шапка сайта -->
-    </header>
-    <main>
-      <!-- Основное содержимое страницы -->
-    </main>
-    <footer>
-      <!-- Подвал сайта -->
-    </footer>
-  </body>
+    <head>
+        <meta charset="utf-8" />
+        <title>Детективно-информационное агентство Adresteia</title>
+    </head>
+    <body>
+        <header>
+            <!-- Шапка сайта -->
+        </header>
+        <main>
+            <!-- Основное содержимое страницы -->
+        </main>
+        <footer>
+            <!-- Подвал сайта -->
+        </footer>
+    </body>
 </html>
+```

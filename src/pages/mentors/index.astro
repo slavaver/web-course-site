@@ -1,0 +1,48 @@
+---
+import { mentors } from "@/data/people";
+import Heading from "@components/Heading.astro";
+import PeopleCard from "@components/PeopleCard.astro";
+import BaseLayoutSnow from "@layouts/BaseLayoutSnow.astro";
+
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<BaseLayoutSnow>
+    <Heading
+        title="Наставники"
+        description="Мы поддерживаем вас на пути освоения первых двух курсов, помогаем разобраться в сложных моментах и направляем на верное решение задач"
+    />
+    <section class="section-mentors mb-30 light:text-text-secondary">
+        <div
+            class="mentors-container max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto"
+        >
+            <ul
+                class="mentors-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-5"
+            >
+                <PeopleCard {...mentors[0]} />
+                <div class="px-1 flex">
+                    <img
+                        class="h-[100vw] sm:h-[45vw] lg:h-[30vw] xl:h-380px 2xl:h-430px"
+                        src=`${baseUrl}/assets/img/cat-code.svg`
+                        alt="котик кодит"
+                    />
+                </div>
+                <PeopleCard {...mentors[1]} />
+
+                {
+                    mentors
+                        .slice(2, -1)
+                        .map((mentor) => <PeopleCard {...mentor} />)
+                }
+                <div class="other-mentors flex flex-col gap-5">
+                    <img
+                        class="h-[100vw] sm:h-[45vw] lg:h-[30vw] xl:h-380px 2xl:h-430px"
+                        src=`${baseUrl}/assets/img/paw-heart.svg`
+                        alt="Лапка котика с сердечками"
+                    />
+                </div>
+                {mentors.slice(-1).map((mentor) => <PeopleCard {...mentor} />)}
+            </ul>
+        </div>
+    </section>
+</BaseLayoutSnow>

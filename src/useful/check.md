@@ -1,6 +1,8 @@
 ---
 title: "Сверка верстки"
 description: "Рецепт, который упростит вам процесс верстки по макету."
+course: "first-sem"
+date: "2022-10-31"
 ---
 
 # Как найти визуальные отличия
@@ -11,8 +13,8 @@ _Автор: Верещагин Владислав_
 
 ```html
 <body>
-  <!-- Контент страницы -->
-  <img class="pixel-perfect-image" src="pixel-perfect.png" alt="" />
+    <!-- Контент страницы -->
+    <img class="pixel-perfect-image" src="pixel-perfect.png" alt="" />
 </body>
 ```
 
@@ -20,11 +22,11 @@ _Автор: Верещагин Владислав_
 
 ```css
 .pixel-perfect-image {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0.5;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.5;
 }
 ```
 

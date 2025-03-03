@@ -1,6 +1,8 @@
 ---
 title: "Скрытие элементов"
 description: "Пример класса, который помогает визуально скрыть элемент, но оставить его для доступности."
+course: "first-sem"
+date: "2022-10-27"
 ---
 
 # Визуальное скрытие элементов
@@ -13,19 +15,19 @@ _Автор: Верещагин Владислав_
 
 ```css
 .visuallyhidden:not(:focus):not(:active) {
-  position: absolute;
+    position: absolute;
 
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  border: 0;
-  padding: 0;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
 
-  white-space: nowrap;
+    white-space: nowrap;
 
-  clip-path: inset(100%);
-  clip: rect(0 0 0 0);
-  overflow: hidden;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
 }
 ```
 

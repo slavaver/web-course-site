@@ -1,6 +1,8 @@
 ---
 title: "Поток и блоки"
 description: "Разбор расположения элементов на странице и их размеры."
+course: "first-sem"
+date: "2024-10-3"
 ---
 
 # Поток
@@ -25,8 +27,8 @@ _Автор: Якушева Елена_
 
 ```css
 .class {
-  width: 200px;
-  height: 200px;
+    width: 200px;
+    height: 200px;
 }
 ```
 
@@ -44,9 +46,9 @@ height: auto;
 
 ```css
 .class {
-  width: 200px;
-  height: 200px;
-  padding: 15px 20px;
+    width: 200px;
+    height: 200px;
+    padding: 15px 20px;
 }
 ```
 
@@ -129,10 +131,10 @@ margin: 0 auto;
 
 ```css
 .first {
-  margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 .second {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 ```
 
@@ -147,10 +149,10 @@ margin: 0 auto;
 
 ```css
 .class {
-  width: 200px;
-  height: 200px;
-  padding: 15px 20px;
-  border: 5px solid white;
+    width: 200px;
+    height: 200px;
+    padding: 15px 20px;
+    border: 5px solid white;
 }
 ```
 
@@ -187,11 +189,11 @@ margin: 0 auto;
 
 ```css
 .el {
-  display: inline-block;
-  width: 100px;
-  height: 100px;
-  padding: 25px;
-  border: 10px solid #ffffff;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    padding: 25px;
+    border: 10px solid #ffffff;
 }
 ```
 
@@ -199,12 +201,12 @@ margin: 0 auto;
 
 ```css
 .first {
-  box-sizing: content-box;
-  background-color: #2e9aff;
+    box-sizing: content-box;
+    background-color: #2e9aff;
 }
 .second {
-  box-sizing: border-box;
-  background-color: #f498ad;
+    box-sizing: border-box;
+    background-color: #f498ad;
 }
 ```
 

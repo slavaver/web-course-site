@@ -36,7 +36,7 @@ type: "labs"
 1. Зафиксировать результаты работы с помощью системы контроля версий git и отправить репозиторий на github classroom.
 1. Загрузить проект на Render.
 
-<div style="padding: 2em; border: 2px solid red; background-color: rgba(255, 0, 0, 0.1)">
+<div class="warning">
  Если шрифта из макета нет на Google font, тогда ищите похожий на него. Покупать и качать шрифты из сомнительных источников не надо.
 </div>
 

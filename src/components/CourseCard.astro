@@ -1,0 +1,38 @@
+---
+interface Props {
+    href: string;
+    title: string;
+    description: string;
+}
+
+const { href, title, description } = Astro.props;
+---
+
+<li>
+    <a
+        aria-label="Перейти к курсу"
+        href={href}
+        class="flex flex-col md:flex-row justify-between p-5 md:p-7.5 lg:p-10 courses-item rounded-[30px] bg-bg-secondary userActions"
+    >
+        <h3 class="courses-item-title no-break-hyphen">
+            {title}
+        </h3>
+        <div class="max-w-auto md:max-w-[365px] gap-14 flex flex-col items-end">
+            <p class="courses-item-descr w-full">
+                {description}
+            </p>
+            <i class="courses-item-goto-icon"></i>
+        </div>
+    </a>
+</li>
+
+<style>
+    .courses-item-goto-icon {
+        background: url("/web-course-site/assets/img/goto.svg") no-repeat center;
+        width: 50px;
+        height: 50px;
+        border: 1.5px solid var(--color-border);
+        border-radius: 100%;
+        color: var(--color-border);
+    }
+</style>

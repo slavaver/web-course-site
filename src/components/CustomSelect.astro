@@ -1,0 +1,160 @@
+---
+interface Props {
+    options: { label: string; value: string }[];
+}
+const { options } = Astro.props;
+---
+
+<script>
+    const select = document.getElementById("custom-select");
+    const selectedDiv = document.getElementById("selected-option");
+    const optionsList = document.getElementById("options-list");
+
+    let isOpen = false;
+    if (select && selectedDiv && optionsList) {
+        function toggleDropdown(select: HTMLElement, list: HTMLElement) {
+            isOpen = !isOpen;
+            if (isOpen) {
+                list.classList.add("open");
+                select.classList.add("open");
+            } else {
+                list.classList.remove("open");
+                select.classList.remove("open");
+            }
+        }
+
+        selectedDiv.addEventListener("click", (e) => {
+            e.stopPropagation();
+            toggleDropdown(select, optionsList);
+        });
+
+        const optionElements = optionsList.querySelectorAll(
+            ".option-item:not(.disabled)"
+        );
+        optionElements.forEach((optionElement) => {
+            optionElement.addEventListener("click", (event) => {
+                event.stopPropagation();
+
+                const value = optionElement.getAttribute("data-value");
+                const label = optionElement.textContent;
+
+                selectedDiv.textContent = label;
+
+                const customEvent = new CustomEvent("selectChanged", {
+                    detail: { value },
+                    bubbles: true,
+                });
+                select.dispatchEvent(customEvent);
+
+                isOpen = false;
+                optionsList?.classList.remove("open");
+                select.classList.remove("open");
+            });
+        });
+
+        document.addEventListener("click", (event) => {
+            if (!select.contains(event.target as Node | null)) {
+                isOpen = false;
+                optionsList?.classList.remove("open");
+                select.classList.remove("open");
+            }
+        });
+    }
+</script>
+
+<div id="custom-select" class="custom-select">
+    <div
+        class="selected-option text-input-placeholder bg-bg-screen border-1 border-input-border hover:bg-bg-tertiary hover:text-text-inverted transition duration-300"
+        id="selected-option"
+    >
+        Выберите курс
+    </div>
+    <div class="options-list bg-bg-menu backdrop-blur-2xl" id="options-list">
+        {
+            options && options.length ? (
+                options.map((option) => (
+                    <div class="option-item" data-value={option.value}>
+                        {option.label}
+                    </div>
+                ))
+            ) : (
+                <div class="option-item disabled">Нет доступных вариантов</div>
+            )
+        }
+    </div>
+</div>
+
+<style>
+    .custom-select {
+        position: relative;
+        appearance: none;
+        font-size: 20px;
+        width: 100%;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    .selected-option {
+        transition: 0.2s ease-in-out;
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    .selected-option::after {
+        transition: 0.3s ease-in-out;
+        content: "";
+        position: absolute;
+        top: 25px;
+        right: 15px;
+        width: 21px;
+        height: 20px;
+        background-color: var(--color-placeholder-input);
+        -webkit-mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none"%3E%3Cpath d="M16.3337 7.5L10.5003 13.3333L4.66699 7.5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/%3E%3C/svg%3E');
+        mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none"%3E%3Cpath d="M16.3337 7.5L10.5003 13.3333L4.66699 7.5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/%3E%3C/svg%3E');
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-size: cover;
+        mask-size: cover;
+    }
+
+    .custom-select.open .selected-option {
+        background-color: var(--color-bg-hover-input);
+    }
+
+    .custom-select.open .selected-option::after {
+        transform: rotate(180deg);
+    }
+
+    .options-list {
+        position: absolute;
+        top: calc(100% + 2px);
+        left: 0;
+        right: 0;
+        overflow-y: hidden;
+        z-index: 9;
+        transition: 0.3s ease-in-out;
+        max-height: 0px;
+        border-radius: 20px;
+        padding: 0 10px;
+        pointer-events: none;
+    }
+
+    .options-list.open {
+        display: block;
+        max-height: 300px;
+        padding: 10px 10px;
+        pointer-events: all;
+    }
+
+    .option-item {
+        color: var(--color-text-primary);
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 10px;
+        transition: 0.2s ease-in-out;
+    }
+
+    .option-item:hover {
+        background-color: var(--color-bg-secondary);
+    }
+</style>

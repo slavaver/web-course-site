@@ -1,13 +1,164 @@
 ---
+import BaseLayoutSnow from "@layouts/BaseLayoutSnow.astro";
 import { getCollection } from "astro:content";
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import ListOfPosts from "../../components/ListOfPosts.astro";
+import CustomSelect from "@components/CustomSelect.astro";
+import Heading from "@components/Heading.astro";
+import SearchInput from "@components/SearchInput.astro";
+import ListOfPosts from "@components/ListOfPosts.astro";
 
-const allUsefull = await getCollection("useful");
+const allUseful = await getCollection("useful");
+const lengths = allUseful.map((post) => post.body && post.body.length);
+
+const values = ["all", "first-sem", "second-sem", "third-sem", "unbound"];
+const labels = [
+    "Все",
+    "1 семестр",
+    "2 семестр",
+    "3 семестр",
+    "Без привязки к курсу",
+];
+const options = labels.map((label, index) => ({
+    label,
+    value: values[index],
+}));
+
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title="Полезное">
-  <div class="prose lg:prose-lg mx-auto">
-    <ListOfPosts allusefull={allUsefull} />
-  </div>
-</BaseLayout>
+<script>
+    let currentCourseFilter = "all";
+    let currentSearchQuery = "";
+
+    const postsContainer = document.getElementById("posts-container");
+    const allWrappers = Array.from(postsContainer!.children);
+
+    function applyFilters() {
+        const visibleWrappers = allWrappers.filter((wrapper) => {
+            const card = wrapper.querySelector(".useful-card");
+            const course = card?.getAttribute("data-course");
+            const title = (
+                card?.getAttribute("data-title") || ""
+            ).toLowerCase();
+
+            const matchesCourse =
+                currentCourseFilter === "all" ||
+                (currentCourseFilter === "unbound" && !course) ||
+                course === currentCourseFilter;
+
+            const matchesSearch =
+                currentSearchQuery === "" ||
+                title.includes(currentSearchQuery.toLowerCase());
+
+            return matchesCourse && matchesSearch;
+        });
+        if (postsContainer) postsContainer.innerHTML = "";
+
+        visibleWrappers.forEach((wrapper, index) => {
+            if (index % 7 === 0) {
+                const customBlock = document.createElement("div");
+                customBlock.className = "flex";
+                switch (Math.floor(index / 7) % 3) {
+                    case 0:
+                        customBlock.innerHTML = `
+                            <img
+                            src="/web-course-site/assets/img/paw-heart.svg"
+                            alt="лапка котика с сердечками"
+                            class="mx-auto"/>`;
+                        break;
+                    case 1:
+                        customBlock.innerHTML = `
+                            <img
+                            src="/web-course-site/assets/img/cat-table-css.svg"
+                            alt="котик сидит за столом"
+                            class="mx-auto rounded-[20px]"/>`;
+                        break;
+                    case 2:
+                        customBlock.innerHTML = `
+                            <img
+                            src="/web-course-site/assets/img/cat-cute.svg"
+                            alt="котик кайфует"
+                            class="mx-auto"/>`;
+                        break;
+                }
+
+                postsContainer?.appendChild(customBlock);
+            }
+            postsContainer?.appendChild(wrapper);
+        });
+
+        const noResultsElement = document.getElementById("no-results");
+        if (visibleWrappers.length === 0) {
+            noResultsElement?.classList.remove("hidden");
+        } else {
+            noResultsElement?.classList.add("hidden");
+        }
+    }
+
+    document.addEventListener("selectChanged", (event) => {
+        const { value: selectedValue } = (event as CustomEvent).detail;
+        currentCourseFilter = selectedValue;
+        applyFilters();
+    });
+
+    document.addEventListener("searchInput", (event) => {
+        const { value } = (event as CustomEvent).detail;
+        currentSearchQuery = value;
+        applyFilters();
+    });
+
+    const clearBtn = document.getElementById("clear-btn");
+    clearBtn?.addEventListener("click", () => {
+        window.location.reload();
+    });
+
+    applyFilters();
+</script>
+
+<BaseLayoutSnow title="Полезное">
+    <Heading
+        title="База знаний"
+        description="Здесь вы найдете подборки полезных ресурсов, статьи с теорией, раскрывающие темы курсов"
+    />
+    <div
+        class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-lg 2xl:max-w-screen-xl mx-auto pb-30"
+    >
+        <ul
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5 mb-10"
+        >
+            <div class="grid-col-span-1 2xl:col-span-1">
+                <CustomSelect options={options} />
+            </div>
+            <div class="grid-col-span-1 2xl:col-span-2 mt-auto">
+                <SearchInput placeholder="Введите название статьи" />
+            </div>
+        </ul>
+        <ul
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5"
+            id="posts-container"
+        >
+            <ListOfPosts allUseful={allUseful} lengths={lengths} />
+        </ul>
+        <div
+            id="no-results"
+            class="col-span-full text-center mt-10 hidden text-text-inverted"
+        >
+            <h2 class="font-400">Ой, что-то лапка дрогнула!</h2>
+            <p class="mb-3 mx-auto w-full md:w-2/3">
+                Котик проверил всю базу и даже заглянул под диван, но ничего не
+                нашёл. Наверное, это что-то слишком сложное для его пушистых
+                лапок. Попробуйте ещё раз
+            </p>
+            <img
+                src=`${baseUrl}/assets/img/paw-heart.svg`
+                alt="лапка котика с сердечками"
+                class="mx-auto mb-3"
+            />
+            <button
+                class="border-1 rounded-[20px] border-text-tertiary p-[20px] w-full md:w-2/3 color-text-tertiary font-titles hover:bg-bg-tertiary hover:text-text-inverted transition duration-300"
+                id="clear-btn"
+            >
+                Вернуться к статьям
+            </button>
+        </div>
+    </div>
+</BaseLayoutSnow>
