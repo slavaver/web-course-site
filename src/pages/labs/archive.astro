@@ -71,12 +71,14 @@ const archives = archiveYears.map((year) => ({
                                     ))}
                                 </ol>
                             </div>
-                            <button
-                                class="font-titles w-full font-600 bg-bg-accent_second px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
-                                id={`toggleMoreWebTechBtn-${year}`}
-                            >
-                                Показать все
-                            </button>
+                            {webBasics.length > 4 && (
+                                <button
+                                    class="font-titles w-full font-600 bg-bg-accent_second px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
+                                    id={`toggleMoreWebTechBtn-${year}`}
+                                >
+                                    Показать все
+                                </button>
+                            )}
                         </div>
 
                         <div class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30">
@@ -121,12 +123,14 @@ const archives = archiveYears.map((year) => ({
                                     ))}
                                 </ol>
                             </div>
-                            <button
-                                class="font-titles w-full font-600 bg-bg-accent_second px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
-                                id={`toggleMoreWebTechClientBtn-${year}`}
-                            >
-                                Показать все
-                            </button>
+                            {clientSideBasics.length > 4 && (
+                                <button
+                                    class="font-titles w-full font-600 bg-bg-accent_second px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
+                                    id={`toggleMoreWebTechClientBtn-${year}`}
+                                >
+                                    Показать все
+                                </button>
+                            )}
                         </div>
                     </section>
                 </div>
