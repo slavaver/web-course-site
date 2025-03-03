@@ -5,122 +5,89 @@ import Heading from "@components/Heading.astro";
 import LinkCard from "@components/LinkCard.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 
-export const archiveYear = "2022";
-
+const archiveYears = ["2022", "2023", "2024"];
 const allCourses = await getCollection("courses");
 
-const webBasics = allCourses.filter((post) =>
-    post.id.includes(`web-basics/full-time/${archiveYear}`)
-);
-
-const clientSideBasics = allCourses.filter((post) =>
-    post.id.includes(`client-side-basics/full-time/${archiveYear}`)
-);
+const archives = archiveYears.map((year) => ({
+    year,
+    webBasics: allCourses.filter((post) =>
+        post.id.includes(`web-basics/full-time/${year}`)
+    ),
+    clientSideBasics: allCourses.filter((post) =>
+        post.id.includes(`client-side-basics/full-time/${year}`)
+    ),
+}));
 ---
 
 <BaseLayout>
-    <div class="prose lg:prose-lg mx-auto">
-        <Heading title={`Архив ${archiveYear} год`} />
-        <section>
-            <div
-                class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30"
-            >
-                <h2 class="text-center text-text-inverted mb-5">
-                    Основы веб-технологий
-                </h2>
-                <ol
-                    class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mb-5"
-                    start="1"
-                >
-                    {
-                        webBasics
-                            .slice(0, 4)
-                            .map((post, index) => (
-                                <LinkCard
-                                    title={post.data.title}
-                                    href={`/web-course-site/labs/${post.id}`}
-                                    number={((index + 1) / 10)
-                                        .toFixed(1)
-                                        .toString()
-                                        .split(".")
-                                        .join("")}
-                                />
-                            ))
-                    }
-                </ol>
-                <div
-                    id="moreWebTechContainer"
-                    class="overflow-hidden transition-all duration-500"
-                    style="max-height: 0;"
-                >
-                    <ol
-                        class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mb-5"
-                        start="5"
-                    >
-                        {
-                            webBasics
-                                .slice(4)
-                                .map((post, index) => (
+    <Heading title={`Архив`} />
+    {
+        archives.map(({ year, webBasics, clientSideBasics }) => (
+            <>
+                <div class="prose lg:prose-lg mx-auto">
+                    <section>
+                        <div class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30">
+                            <h2 class="text-center text-text-inverted mb-5">
+                                {year} год поступления
+                            </h2>
+                            <h3 class="text-center text-text-inverted mb-5">
+                                Основы веб-технологий
+                            </h3>
+                            <ol
+                                class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mb-5"
+                                start="1"
+                            >
+                                {webBasics.slice(0, 4).map((post, index) => (
                                     <LinkCard
                                         title={post.data.title}
                                         href={`/web-course-site/labs/${post.id}`}
-                                        number={((index + 5) / 10)
+                                        number={((index + 1) / 10)
                                             .toFixed(1)
                                             .toString()
                                             .split(".")
                                             .join("")}
                                     />
-                                ))
-                        }
-                    </ol>
-                </div>
-                <button
-                    class="font-titles w-full font-600 bg-bg-accent_second px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
-                    id="toggleMoreWebTechBtn"
-                >
-                    Показать все
-                </button>
-            </div>
+                                ))}
+                            </ol>
+                            <div
+                                id={`moreWebTechContainer-${year}`}
+                                class="overflow-hidden transition-all duration-500"
+                                style="max-height: 0;"
+                            >
+                                <ol
+                                    class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mb-5"
+                                    start="5"
+                                >
+                                    {webBasics.slice(4).map((post, index) => (
+                                        <LinkCard
+                                            title={post.data.title}
+                                            href={`/web-course-site/labs/${post.id}`}
+                                            number={((index + 5) / 10)
+                                                .toFixed(1)
+                                                .toString()
+                                                .split(".")
+                                                .join("")}
+                                        />
+                                    ))}
+                                </ol>
+                            </div>
+                            <button
+                                class="font-titles w-full font-600 bg-bg-accent_second px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
+                                id={`toggleMoreWebTechBtn-${year}`}
+                            >
+                                Показать все
+                            </button>
+                        </div>
 
-            <div
-                class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30"
-            >
-                <h2 class="text-center text-text-inverted mb-5">
-                    Основы веб-разработки на стороне клиента
-                </h2>
-                <ol
-                    class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mb-5"
-                    start="1"
-                >
-                    {
-                        clientSideBasics
-                            .slice(0, 4)
-                            .map((post) => (
-                                <LinkCard
-                                    title={post.data.title}
-                                    href={`/web-course-site/labs/${post.id}`}
-                                    number={(post.data.number / 10)
-                                        .toFixed(1)
-                                        .toString()
-                                        .split(".")
-                                        .join("")}
-                                />
-                            ))
-                    }
-                </ol>
-                <div
-                    id="moreWebTechClientContainer"
-                    class="overflow-hidden transition-all duration-500"
-                    style="max-height: 0;"
-                >
-                    <ol
-                        class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mb-5"
-                        start="5"
-                    >
-                        {
-                            clientSideBasics
-                                .slice(4)
-                                .map((post) => (
+                        <div class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30">
+                            <h3 class="text-center text-text-inverted mb-5">
+                                Основы веб-разработки на стороне клиента
+                            </h3>
+                            <ol
+                                class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mb-5"
+                                start="1"
+                            >
+                                {clientSideBasics.slice(0, 4).map((post) => (
                                     <LinkCard
                                         title={post.data.title}
                                         href={`/web-course-site/labs/${post.id}`}
@@ -130,19 +97,42 @@ const clientSideBasics = allCourses.filter((post) =>
                                             .split(".")
                                             .join("")}
                                     />
-                                ))
-                        }
-                    </ol>
+                                ))}
+                            </ol>
+                            <div
+                                id={`moreWebTechClientContainer-${year}`}
+                                class="overflow-hidden transition-all duration-500"
+                                style="max-height: 0;"
+                            >
+                                <ol
+                                    class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mb-5"
+                                    start="5"
+                                >
+                                    {clientSideBasics.slice(4).map((post) => (
+                                        <LinkCard
+                                            title={post.data.title}
+                                            href={`/web-course-site/labs/${post.id}`}
+                                            number={(post.data.number / 10)
+                                                .toFixed(1)
+                                                .toString()
+                                                .split(".")
+                                                .join("")}
+                                        />
+                                    ))}
+                                </ol>
+                            </div>
+                            <button
+                                class="font-titles w-full font-600 bg-bg-accent_second px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
+                                id={`toggleMoreWebTechClientBtn-${year}`}
+                            >
+                                Показать все
+                            </button>
+                        </div>
+                    </section>
                 </div>
-                <button
-                    class="font-titles w-full font-600 bg-bg-accent_second px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
-                    id="toggleMoreWebTechClientBtn"
-                >
-                    Показать все
-                </button>
-            </div>
-        </section>
-    </div>
+            </>
+        ))
+    }
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -180,18 +170,21 @@ const clientSideBasics = allCourses.filter((post) =>
                 }
             }
 
-            setupToggle(
-                "toggleMoreWebTechBtn",
-                "moreWebTechContainer",
-                "Показать все",
-                "Спрятать"
-            );
-            setupToggle(
-                "toggleMoreWebTechClientBtn",
-                "moreWebTechClientContainer",
-                "Показать все",
-                "Спрятать"
-            );
+            const archiveYears = ["2022", "2023", "2024"];
+            archiveYears.forEach((year) => {
+                setupToggle(
+                    `toggleMoreWebTechBtn-${year}`,
+                    `moreWebTechContainer-${year}`,
+                    "Показать все",
+                    "Спрятать"
+                );
+                setupToggle(
+                    `toggleMoreWebTechClientBtn-${year}`,
+                    `moreWebTechClientContainer-${year}`,
+                    "Показать все",
+                    "Спрятать"
+                );
+            });
         });
     </script>
 </BaseLayout>
