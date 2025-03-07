@@ -16,24 +16,39 @@ const activeAuthor = people.find((person) => person.fullName.includes(author));
 ---
 
 <script>
-    const id = window.location.href.split("/").pop();
+    const getPostName = (): string | null => {
+        const match = window.location.href.match(/([^\/]+)\/?$/);
+        if (!match) return null;
+        return match[1];
+    };
+
     const getLastEditDate = (filleName: string) => {
         const res = fetch(
             `https://api.github.com/repos/slavaver/web-course-site/commits?path=/src/useful/${filleName}.md&per_page=1`
         );
-        return res.then((res) => res.json());
+        return res
+            .then((res) => res.json())
+            .then((res) => {
+                if (res.length === 0) return null;
+                return new Date(res[0].commit.author.date).toLocaleDateString(
+                    "ru-RU",
+                    {
+                        day: "numeric",
+                        month: "numeric",
+                        year: "numeric",
+                    }
+                );
+            })
+            .catch(() => null);
     };
 
-    const date = getLastEditDate(id!).then((res) =>
-        new Date(res[0].commit.author.date).toLocaleDateString("ru-RU", {
-            day: "numeric",
-            month: "numeric",
-            year: "numeric",
-        })
-    );
-
     const lastEdit = document.getElementById("last-edit-date");
-    lastEdit!.innerText = `Последнее обновление: ${await date}`;
+    const fileName = getPostName();
+    if (fileName) {
+        getLastEditDate(fileName).then((date) => {
+            if (date) lastEdit!.innerText = `Последнее обновление: ${date}`;
+        });
+    }
 </script>
 <BaseLayout title={entry.data.title}>
     <Heading title={entry.data.title} backLink={"useful/"} />
@@ -44,8 +59,8 @@ const activeAuthor = people.find((person) => person.fullName.includes(author));
             <article class="md">
                 <slot />
             </article>
-            <address class="flex items-start justify-between gap-4 mt-10">
-                <div class="flex items-start gap-2.5">
+            <address class="flex items-center justify-between gap-4 mt-10">
+                <div class="flex items-center gap-2.5">
                     <div
                         class="aspect-square w-12 flex rounded-full overflow-hidden bg-bg-tertiary"
                     >
@@ -70,9 +85,6 @@ const activeAuthor = people.find((person) => person.fullName.includes(author));
                             class="text-xs xl:text-base text-text-tertiary leading-[1.2] xl:leading-[1.2] not-italic"
                             id="last-edit-date"
                         >
-                            Последнее обновление: {
-                                entry.data.updatedAt || "01.01.1970"
-                            }
                         </time>
                     </div>
                 </div>
