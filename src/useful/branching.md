@@ -1,9 +1,9 @@
----  
-title: "Раздел 2. JS. Начало #2. Ветвление"  
-description: "2 раздел теории по JS"  
-course: "first-sem"  
-date: "2025-02-07"
----  
+---
+title: "JS. Начало #2. Ветвление"
+description: "Разбираем условия ветвления"
+course: "all"
+date: "2025-03-07"
+---
 
 _Автор: Команда статей_
 
@@ -14,6 +14,7 @@ _Автор: Команда статей_
 ### Зачем они нужны и где применяются
 
 Условные конструкции являются одной из фундаментальных концепций в программировании. Они позволяют программе принимать решения на основе определенных условий, что делает код более гибким и адаптивным. Например:
+
 - **Валидация данных** — проверка корректности введённой информации.
 - **Игры и анимации** — определение поведения объектов.
 - **Алгоритмы и логика** — принятие решений в алгоритмах.
@@ -34,10 +35,10 @@ _Автор: Команда статей_
 
 При сравнении строк используется лексикографический порядок. При сравнении разных типов значений JavaScript приводит их к числу. Например:
 
-```js  
-console.log('2' > 1); // true  
-console.log(true == 1); // true  
-```  
+```js
+console.log("2" > 1); // true
+console.log(true == 1); // true
+```
 
 Однако строгие операторы (`===` и `!==`) не выполняют приведение типов, что делает код более предсказуемым.
 
@@ -60,24 +61,24 @@ console.log(true == 1); // true
 
 Пример работы оператора `&&`:
 
-```js  
-console.log(true && false); // false  
-console.log(1 && 0); // 0  
-```  
+```js
+console.log(true && false); // false
+console.log(1 && 0); // 0
+```
 
 Пример работы `||`:
 
-```js  
-console.log(false || true); // true  
-console.log(0 || 'hello'); // 'hello'  
-```  
+```js
+console.log(false || true); // true
+console.log(0 || "hello"); // 'hello'
+```
 
 Оператор `!` инвертирует логическое значение:
 
-```js  
-console.log(!true); // false  
-console.log(!0); // true  
-```  
+```js
+console.log(!true); // false
+console.log(!0); // true
+```
 
 ## Условные конструкции
 
@@ -85,54 +86,54 @@ console.log(!0); // true
 
 Инструкция `if` выполняет блок кода, если условие истинно:
 
-```js  
-let age = 18;  
-if (age >= 18) {  
-  console.log("Доступ разрешён");  
-} else {  
-  console.log("Доступ запрещён");  
-}  
-```  
+```js
+let age = 18;
+if (age >= 18) {
+    console.log("Доступ разрешён");
+} else {
+    console.log("Доступ запрещён");
+}
+```
 
 ### Тернарный оператор `?`
 
-```js  
-let access = age >= 18 ? "Доступ разрешён" : "Доступ запрещён";  
-console.log(access);  
-```  
+```js
+let access = age >= 18 ? "Доступ разрешён" : "Доступ запрещён";
+console.log(access);
+```
 
 ### `switch`
 
 Альтернатива `if-else`, удобная при множественных проверках:
 
-```js  
-let fruit = "яблоко";  
-switch (fruit) {  
-  case "банан":  
-    console.log("Это банан");  
-    break;  
-  case "яблоко":  
-    console.log("Это яблоко");  
-    break;  
-  default:  
-    console.log("Неизвестный фрукт");  
-}  
-```  
+```js
+let fruit = "яблоко";
+switch (fruit) {
+    case "банан":
+        console.log("Это банан");
+        break;
+    case "яблоко":
+        console.log("Это яблоко");
+        break;
+    default:
+        console.log("Неизвестный фрукт");
+}
+```
 
 ## Группировка `case`
 
 Можно объединять несколько `case`, если их результат одинаков:
 
-```js  
-switch (fruit) {  
-  case "апельсин":  
-  case "мандарин":  
-    console.log("Это цитрусовый фрукт");  
-    break;  
-  default:  
-    console.log("Неизвестный фрукт");  
-}  
-```  
+```js
+switch (fruit) {
+    case "апельсин":
+    case "мандарин":
+        console.log("Это цитрусовый фрукт");
+        break;
+    default:
+        console.log("Неизвестный фрукт");
+}
+```
 
 ## Приоритет выполнения логических операторов
 
@@ -146,17 +147,17 @@ switch (fruit) {
 
 Оператор `&&` можно использовать для сокращения кода:
 
-```js  
-if (x > 0 && y > 0) {  
-  console.log("Обе переменные положительные");  
-}  
-```  
+```js
+if (x > 0 && y > 0) {
+    console.log("Обе переменные положительные");
+}
+```
 
 Оператор `||` используется для установки значений по умолчанию:
 
-```js  
-let name = userName || "Гость";  
-```  
+```js
+let name = userName || "Гость";
+```
 
 ## Итог
 
@@ -165,7 +166,6 @@ let name = userName || "Гость";
 - Условные конструкции (`if`, `switch`, тернарный оператор) управляют потоком выполнения программы.
 - Приоритет операторов важен для корректного порядка вычислений.
 - Группировка `case` позволяет сокращать код в `switch`.
-
 
 # Условные конструкции
 
@@ -177,21 +177,21 @@ let name = userName || "Гость";
 
 Пример:
 
-```js  
-let year = 2015;  
-if (year == 2015) {  
-  console.log("Верно!");  
-}  
-```  
+```js
+let year = 2015;
+if (year == 2015) {
+    console.log("Верно!");
+}
+```
 
 Если нужно выполнить несколько инструкций, используйте фигурные скобки:
 
-```js  
-if (year == 2015) {  
-  console.log("Верно!");  
-  console.log("Отличный год!");  
-}  
-```  
+```js
+if (year == 2015) {
+    console.log("Верно!");
+    console.log("Отличный год!");
+}
+```
 
 Использование фигурных скобок `{}` всегда улучшает читаемость кода.
 
@@ -202,83 +202,85 @@ if (year == 2015) {
 - `0`, `""`, `null`, `undefined`, `NaN` → `false`
 - Остальные значения → `true`
 
-```js  
-if (0) { // Не выполнится  
-  console.log("Это не выполнится");  
-}  
-  
-if ("hello") { // Выполнится  
-  console.log("Привет!");  
-}  
-```  
+```js
+if (0) {
+    // Не выполнится
+    console.log("Это не выполнится");
+}
+
+if ("hello") {
+    // Выполнится
+    console.log("Привет!");
+}
+```
 
 ### Блок `else`
 
 Блок `else` выполняется, если условие в `if` ложно:
 
-```js  
-if (year == 2015) {  
-  console.log("Верно!");  
-} else {  
-  console.log("Неверно!");  
-}  
-```  
+```js
+if (year == 2015) {
+    console.log("Верно!");
+} else {
+    console.log("Неверно!");
+}
+```
 
 ### Несколько условий: `else if`
 
 Если условий несколько, используйте `else if`:
 
-```js  
-if (year < 2015) {  
-  console.log("Слишком рано");  
-} else if (year > 2015) {  
-  console.log("Слишком поздно");  
-} else {  
-  console.log("Верно!");  
-}  
-```  
+```js
+if (year < 2015) {
+    console.log("Слишком рано");
+} else if (year > 2015) {
+    console.log("Слишком поздно");
+} else {
+    console.log("Верно!");
+}
+```
 
 ## Тернарный оператор `?`
 
 Упрощает условные выражения:
 
-```js  
-let access = (age >= 18) ? "Доступ разрешен" : "Доступ запрещен";  
-console.log(access);  
-```  
+```js
+let access = age >= 18 ? "Доступ разрешен" : "Доступ запрещен";
+console.log(access);
+```
 
 ## `switch` - альтернатива `if`
 
 Конструкция `switch` удобна для сравнения с разными значениями:
 
-```js  
-let fruit = "яблоко";  
-switch (fruit) {  
-  case "банан":  
-    console.log("Это банан");  
-    break;  
-  case "яблоко":  
-    console.log("Это яблоко");  
-    break;  
-  default:  
-    console.log("Неизвестный фрукт");  
-}  
-```  
+```js
+let fruit = "яблоко";
+switch (fruit) {
+    case "банан":
+        console.log("Это банан");
+        break;
+    case "яблоко":
+        console.log("Это яблоко");
+        break;
+    default:
+        console.log("Неизвестный фрукт");
+}
+```
 
 ### Группировка `case`
 
 Можно объединять несколько `case`:
 
-```js  
-switch (fruit) {  
-  case "апельсин":  
-  case "мандарин":  
-    console.log("Это цитрусовый фрукт");  
-    break;  
-  default:  
-    console.log("Неизвестный фрукт");  
-}  
-```  
+```js
+switch (fruit) {
+    case "апельсин":
+    case "мандарин":
+        console.log("Это цитрусовый фрукт");
+        break;
+    default:
+        console.log("Неизвестный фрукт");
+}
+```
 
 ### Важные особенности
 
@@ -287,26 +289,24 @@ switch (fruit) {
 
 Пример без `break`:
 
-```js  
-let num = 2;  
-switch (num) {  
-  case 1:  
-    console.log("Один");  
-  case 2:  
-    console.log("Два");  
-  case 3:  
-    console.log("Три");  
-}  
-// Выведет "Два" и "Три".  
-```  
+```js
+let num = 2;
+switch (num) {
+    case 1:
+        console.log("Один");
+    case 2:
+        console.log("Два");
+    case 3:
+        console.log("Три");
+}
+// Выведет "Два" и "Три".
+```
 
 ## Итог
 
 - `if-else` используется для условий.
 - Тернарный оператор `?` удобен для коротких выражений.
 - `switch` полезен при множественных значениях.
-
-
 
 # Операторы сравнения
 
@@ -317,39 +317,40 @@ switch (num) {
 
 Пример:
 
-```js  
-console.log(0 == false);  // true (приведение типов)  
-console.log(0 === false); // false (разные типы)  
-```  
+```js
+console.log(0 == false); // true (приведение типов)
+console.log(0 === false); // false (разные типы)
+```
 
 ## != и !== - строгие и нестрогие неравенства
 
 - `!=` — нестрогое неравенство, приводит операнды к числу.
 - `!==` — строгое неравенство, сравнивает без приведения типов.
 
-```js  
-console.log(1 != '1');  // false (приведение типов)  
-console.log(1 !== '1'); // true (разные типы)  
-```  
+```js
+console.log(1 != "1"); // false (приведение типов)
+console.log(1 !== "1"); // true (разные типы)
+```
 
 ## >, <, >=, <= - стандартные операторы сравнения
 
 Эти операторы работают аналогично математическим сравнениям.
 
-```js  
-console.log(5 > 3);  // true  
-console.log(5 <= 5); // true  
-```  
+```js
+console.log(5 > 3); // true
+console.log(5 <= 5); // true
+```
 
 ## Как работают сравнения строк
 
 Строки сравниваются посимвольно в лексикографическом порядке:
 
-```js  
-console.log('яблоко' > 'апельсин'); // true, потому что 'я' > 'а'  
-```  
+```js
+console.log("яблоко" > "апельсин"); // true, потому что 'я' > 'а'
+```
 
 Алгоритм:
+
 1. Сравниваются первые символы.
 2. Если они равны — сравниваются следующие.
 3. Более длинная строка считается большей, если её начало совпадает с другой.
@@ -358,20 +359,20 @@ console.log('яблоко' > 'апельсин'); // true, потому что '
 
 При сравнении разных типов JavaScript приводит их к числу:
 
-```js  
-console.log('2' > 1);  // true  
-console.log(true == 1); // true  
-```  
+```js
+console.log("2" > 1); // true
+console.log(true == 1); // true
+```
 
 ## Строгое сравнение (`===` и `!==`)
 
 - `===` не выполняет приведение типов.
 - `!==` тоже сравнивает без приведения типов.
 
-```js  
-console.log('0' === 0);  // false  
-console.log(null === undefined); // false  
-```  
+```js
+console.log("0" === 0); // false
+console.log(null === undefined); // false
+```
 
 ## Сравнение с `null` и `undefined`
 
@@ -379,28 +380,28 @@ console.log(null === undefined); // false
 
 Эти значения считаются разными:
 
-```js  
-console.log(null === undefined); // false  
-```  
+```js
+console.log(null === undefined); // false
+```
 
 ### При нестрогом равенстве `==`
 
 `null` и `undefined` равны друг другу, но не равны другим значениям:
 
-```js  
-console.log(null == undefined); // true  
-console.log(null == 0); // false  
-```  
+```js
+console.log(null == undefined); // true
+console.log(null == 0); // false
+```
 
 ### Сравнения `<`, `>`, `<=`, `>=`
 
 При использовании операторов сравнения `null` превращается в `0`, а `undefined` – в `NaN`:
 
-```js  
-console.log(null > 0);  // false  
-console.log(null == 0); // false  
-console.log(null >= 0); // true  
-```  
+```js
+console.log(null > 0); // false
+console.log(null == 0); // false
+console.log(null >= 0); // true
+```
 
 ## Как избежать ошибок при сравнении
 
@@ -415,7 +416,6 @@ console.log(null >= 0); // true
 - Значения разных типов приводятся к числу при `==`, но `===` сравнивает без приведения.
 - `null` и `undefined` равны только друг другу при `==`, но не при строгом сравнении.
 - Лучше избегать сравнения `null` и `undefined` с числами без явной проверки.
-
 
 # Логические операторы
 
@@ -434,10 +434,10 @@ console.log(null >= 0); // true
 
 Оператор `&&` пишется как два амперсанда `&&`. В традиционном программировании `И` возвращает `true`, если оба аргумента истинны, а иначе – `false`:
 
-```js  
-console.log(true && true); // true  
-console.log(true && false); // false  
-```  
+```js
+console.log(true && true); // true
+console.log(true && false); // false
+```
 
 При нескольких подряд операторах `&&`, выполняются следующие действия:
 
@@ -452,10 +452,10 @@ console.log(true && false); // false
 
 Оператор `||` возвращает `true`, если хотя бы один из аргументов истинный:
 
-```js  
-console.log(true || false); // true  
-console.log(false || false); // false  
-```  
+```js
+console.log(true || false); // true
+console.log(false || false); // false
+```
 
 Алгоритм работы `||`:
 
@@ -465,26 +465,26 @@ console.log(false || false); // false
 
 Пример с числами:
 
-```js  
-console.log(1 || 0); // 1  
-console.log(0 || "hello"); // "hello"  
-```  
+```js
+console.log(1 || 0); // 1
+console.log(0 || "hello"); // "hello"
+```
 
 ### ! (НЕ)
 
 Оператор `!` инвертирует логическое значение:
 
-```js  
-console.log(!true); // false  
-console.log(!0); // true  
-```  
+```js
+console.log(!true); // false
+console.log(!0); // true
+```
 
 Двойное `!!` используется для преобразования значений в логический тип:
 
-```js  
-console.log(!!"hello"); // true  
-console.log(!!0); // false  
-```  
+```js
+console.log(!!"hello"); // true
+console.log(!!0); // false
+```
 
 ## Приоритет выполнения операторов
 
@@ -498,33 +498,33 @@ console.log(!!0); // false
 
 **ВАЖНО!** Не заменяйте `if` на `&&`, если код должен выполняться явно:
 
-```js  
-let x = 5;  
-if (x > 0) console.log("Положительное число");  
-  
-// Эквивалент, но менее читаемый:  
-x > 0 && console.log("Положительное число");  
-```  
+```js
+let x = 5;
+if (x > 0) console.log("Положительное число");
+
+// Эквивалент, но менее читаемый:
+x > 0 && console.log("Положительное число");
+```
 
 ### || (ИЛИ)
 
 Часто используется для установки значений по умолчанию:
 
-```js  
-let userName = "";  
-let defaultName = userName || "Гость";  
-console.log(defaultName); // "Гость"  
-```  
+```js
+let userName = "";
+let defaultName = userName || "Гость";
+console.log(defaultName); // "Гость"
+```
 
 ### ! (НЕ)
 
 Используется для инверсии логики:
 
-```js  
-if (!isLoggedIn) {  
-  console.log("Вам нужно войти в систему");  
-}  
-```  
+```js
+if (!isLoggedIn) {
+    console.log("Вам нужно войти в систему");
+}
+```
 
 ## Итог
 
