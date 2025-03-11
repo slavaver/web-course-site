@@ -54,11 +54,11 @@ const baseUrl = import.meta.env.BASE_URL;
                     <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
                         {labs
                             .sort((prev, next) => {
-                                const prevNumber = prev.data?.number;
-                                const nextNumber = next.data?.number;
-                                if (!prev.data || !prevNumber) return 1;
-                                if (!next.data || !nextNumber) return -1;
-                                return prevNumber.localeCompare(nextNumber);
+                                const prevNumber = prev.data?.number ?? "";
+                                const nextNumber = next.data?.number ?? "";
+                                return (
+                                    parseInt(prevNumber) - parseInt(nextNumber)
+                                );
                             })
                             .map((post) => {
                                 const number = post.data?.number ?? "";
