@@ -11,16 +11,16 @@ type: "labs"
 ## Теория для изучения
 
 - изучение фаз жизненного цикла события:
-  - погружения (capturing phase),
-  - цели (target phase),
-  - всплытия (bubbling stage).
+    - погружения (capturing phase),
+    - цели (target phase),
+    - всплытия (bubbling stage).
 - прекращение всплытия stopPropagation(),
 - отмена действия браузера preventDefault().
 - атрибуты полей форм:
-  - required
-  - minlength и maxlength
-  - min и max
-  - pattern
+    - required
+    - minlength и maxlength
+    - min и max
+    - pattern
 - использование Constraint Validation API.
 
 ## Источники
@@ -59,7 +59,7 @@ type: "labs"
 1. Отформатируйте документы.
 1. Убедитесь, что нет замечаний от ESLint.
 1. Зафиксируйте результаты работы с помощью системы контроля версий git и отправьте ветку lab3 в репозиторий на github.
-1. Загрузите проект на Render через ручную загрузку (manual deploy).
+1. Загрузите проект на Render через смену ветки в настройках.
 
 **Способы обозначения ошибки:**
 

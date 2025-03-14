@@ -12,35 +12,35 @@ type: "labs"
 
 1. Изучить:
 
-   - объектную модель документа DOM;
-   - способы получения элементов или списков элементов из дерева;
-   - работу со свойствами и методами элементов дерева;
-   - создание, добавление, удаление элементов дерева;
-   - редактирование текстового содержимого объектов;
-   - управление стилями элементов и классами;
-   - события и объект `event`;
-   - добавление обработчиков событий и работа с объектом `event`;
+    - объектную модель документа DOM;
+    - способы получения элементов или списков элементов из дерева;
+    - работу со свойствами и методами элементов дерева;
+    - создание, добавление, удаление элементов дерева;
+    - редактирование текстового содержимого объектов;
+    - управление стилями элементов и классами;
+    - события и объект `event`;
+    - добавление обработчиков событий и работа с объектом `event`;
 
 1. Перед выполнением самой лабораторной работы:
 
-   - Установить node.js четной версии.
-   - Переключиться на ветку main.
-   - Инициализировать пакет с помощью команды `npm init -y`.
-   - Установить ESLint с помощью `npm init @eslint/config`. Подсказки как отвечать на вопросы при установке:
-     1. How would you like to use ESLint - **To check syntax and find problems**
-     1. What type of modules does your project use? - **JavaScript modules (import/export)**
-     1. Which framework does your project use? - **None of these**
-     1. Does your project use TypeScript? - **No**
-     1. Where does your code run? - **Browser**
-     1. How would you like to define a style for your project? - **Use a popular style guide**
-     1. Which style guide do you want to follow? - **Standard**
-     1. What format do you want your config file to be in? - **JSON**
-     1. Would you like to install them now? - **Yes**
-     1. Which package manager do you want to use? - **npm**
-   - В файл `eslint.config.mjs` добавить правила приведенные ниже. Пример организации конфигурационного файла смотрите в [документации ESLint](https://eslint.org/docs/latest/use/getting-started#configuration).
-   - Установить расширение ESLint в VS Code или аналогичное для вашего редактора.
-   - Добавить в проект файл `.gitignore`. В него добавить `node_modules/`.
-   - Создать коммит на ветке main со всеми новыми файлами. Убедитесь, что папка node_modules и ее содержимое не попадают в коммит.
+    - Установить node.js четной версии.
+    - Переключиться на ветку main.
+    - Инициализировать пакет с помощью команды `npm init -y`.
+    - Установить ESLint с помощью `npm init @eslint/config`. Подсказки как отвечать на вопросы при установке:
+        1. How would you like to use ESLint - **To check syntax and find problems**
+        1. What type of modules does your project use? - **JavaScript modules (import/export)**
+        1. Which framework does your project use? - **None of these**
+        1. Does your project use TypeScript? - **No**
+        1. Where does your code run? - **Browser**
+        1. How would you like to define a style for your project? - **Use a popular style guide**
+        1. Which style guide do you want to follow? - **Standard**
+        1. What format do you want your config file to be in? - **JSON**
+        1. Would you like to install them now? - **Yes**
+        1. Which package manager do you want to use? - **npm**
+    - В файл `eslint.config.mjs` добавить правила приведенные ниже. Пример организации конфигурационного файла смотрите в [документации ESLint](https://eslint.org/docs/latest/use/getting-started#configuration).
+    - Установить расширение ESLint в VS Code или аналогичное для вашего редактора.
+    - Добавить в проект файл `.gitignore`. В него добавить `node_modules/`.
+    - Создать коммит на ветке main со всеми новыми файлами. Убедитесь, что папка node_modules и ее содержимое не попадают в коммит.
 
 Правила для ESLint в конфигурацию eslint.config.mjs
 
@@ -77,17 +77,17 @@ type: "labs"
 
 1. Для выполнения работы необходимо:
 
-   - Создать ветку lab2.
-   - Создать документ html с H1 заголовком «ФИО - Лабораторная работа №2» в header.
-   - Решить предложенные задачи используя JS.
-   - Подключить решения к созданной странице.
-   - Элементы интерфейса для задач разместить в отдельных секциях с соответствующими подзаголовками.
+    - Создать ветку lab2.
+    - Создать документ html с H1 заголовком «ФИО - Лабораторная работа №2» в header.
+    - Решить предложенные задачи используя JS.
+    - Подключить решения к созданной странице.
+    - Элементы интерфейса для задач разместить в отдельных секциях с соответствующими подзаголовками.
 
 1. Провести ручное тестирование в браузере.
 1. Отформатировать документы.
 1. Убедиться, что нет замечаний от ESLint.
 1. Зафиксировать результаты работы с помощью системы контроля версий git и отправить ветку lab2 в репозиторий на github.
-1. Загрузить проект на Render через ручную загрузку (manual deploy).
+1. Загрузите проект на Render через смену ветки в настройках.
 
 ## Требования к JS:
 
