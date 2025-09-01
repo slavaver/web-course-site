@@ -34,7 +34,7 @@ export const mentors: People[] = [
         name: "Мелихова Ева",
         fullName: "Мелихова Ева-София Бориславовна",
         imgUrl: `${baseUrl}/assets/img/photos/sshultse.webp`,
-        contact: "sshultse",
+        contact: "shultsee",
         role: "Ассистент преподавателя",
     },
     {
