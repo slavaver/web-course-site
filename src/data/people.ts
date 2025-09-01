@@ -50,7 +50,7 @@ export const mentors: People[] = [
         name: "Бастун Андрей",
         fullName: "Бастун Андрей Артемович",
         imgUrl: "",
-        contact: "qalqaa",
+        contact: "qalqa_dev",
         role: "Наставник",
     },
     {
