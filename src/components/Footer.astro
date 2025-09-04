@@ -1,50 +1,19 @@
 ---
 const today = new Date();
-import { mentors, teachers } from "@/data/people";
 
 const baseUrl = import.meta.env.BASE_URL;
-const contacts = [...teachers, mentors[0]];
 ---
 
 <footer
-    class="bg-bg-primary z-99 rounded-t-[30px] sm:rounded-t-[60px] px-10 py-14"
->
+    class="bg-bg-primary z-99 rounded-t-[30px] sm:rounded-t-[60px] px-10 py-14">
     <div
-        class="top-content flex flex-col gap-5 lg:gap-0 lg:flex-row justify-between max-w-screen-xl mx-auto mb-20 items-center sm:items-start"
-    >
+        class="top-content flex flex-col gap-5 lg:gap-0 lg:flex-row justify-between max-w-screen-xl mx-auto mb-2 items-center sm:items-start">
         <img
             class="mb-auto"
             width="200px"
             src={`${baseUrl}/assets/img/logo-full.svg`}
             alt="Логотип Московского Политеха"
         />
-        <div class="text-center sm:text-start">
-            <h3 class="mb-2">Контакты</h3>
-            <ul
-                class="flex flex-col items-center sm:items-start sm:flex-row gap-10 sm:gap-19"
-            >
-                {
-                    contacts.map((contact) => (
-                        <li class="flex flex-col gap-1 sm:max-w-[205px]">
-                            <p class="line-height-none">{contact.fullName}</p>
-                            <p class="text-sm mb-1">{contact.role}</p>
-                            <div class="flex justify-center sm:justify-start gap-1">
-                                <img
-                                    src={`${baseUrl}/assets/img/tg-logo.svg`}
-                                    alt="telegram-logo"
-                                />
-                                <a
-                                    class="text-sm"
-                                    href={`https://t.me/${contact.contact}`}
-                                >
-                                    @{contact.contact}
-                                </a>
-                            </div>
-                        </li>
-                    ))
-                }
-            </ul>
-        </div>
     </div>
     <div class="bot-content max-w-prose mx-auto">
         <p class="mb-4 text-center">
@@ -56,8 +25,7 @@ const contacts = [...teachers, mentors[0]];
         </p>
     </div>
     <div
-        class="flex flex-col text-center sm:text-start sm:flex-row justify-between w-full align-bottom max-w-screen-xl mx-auto"
-    >
+        class="flex flex-col text-center sm:text-start sm:flex-row justify-between w-full align-bottom max-w-screen-xl mx-auto">
         <p class="text-center text-[16px] mt-auto">
             &copy; {today.getFullYear()} Московский Политех
         </p>
