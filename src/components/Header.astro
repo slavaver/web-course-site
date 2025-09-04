@@ -46,17 +46,15 @@ const links = [
                 {
                     (
                         <ul class="dropdown__list-sm flex flex-col md:hidden justify-center gap-0">
-                            {courses
-                                .filter((course) => course.id !== "archive")
-                                .map((course) => (
-                                    <li class="dropdown__item">
-                                        <a
-                                            class="dropdown__link text-[16px] px-7 py-5  userActionsLink"
-                                            href={`${baseUrl}/labs/${course.id}`}>
-                                            {course.title}
-                                        </a>
-                                    </li>
-                                ))}
+                            {courses.map((course) => (
+                                <li class="dropdown__item">
+                                    <a
+                                        class="dropdown__link text-[16px] px-7 py-5  userActionsLink"
+                                        href={`${baseUrl}/labs/${course.id}`}>
+                                        {course.title}
+                                    </a>
+                                </li>
+                            ))}
                         </ul>
                     )
                 }
@@ -69,17 +67,15 @@ const links = [
     {
         (
             <ul class="dropdown__list hidden md:flex flex-col justify-center gap-0 lg:gap-3 bg-bg-menu backdrop-blur-2xl">
-                {courses
-                    .filter((course) => course.id !== "archive")
-                    .map((course) => (
-                        <li class="dropdown__item">
-                            <a
-                                class="dropdown__link flex w-full md:text-base lg:text-xl p-3 lg:p-5 userActionsLink"
-                                href={`${baseUrl}/labs/${course.id}`}>
-                                {course.title}
-                            </a>
-                        </li>
-                    ))}
+                {courses.map((course) => (
+                    <li class="dropdown__item">
+                        <a
+                            class="dropdown__link flex w-full md:text-base lg:text-xl p-3 lg:p-5 userActionsLink"
+                            href={`${baseUrl}/labs/${course.id}`}>
+                            {course.title}
+                        </a>
+                    </li>
+                ))}
             </ul>
         )
     }
