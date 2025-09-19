@@ -16,17 +16,27 @@ const archives = archiveYears.map((year) => ({
     clientSideBasics: allCourses.filter((post) =>
         post.id.includes(`client-side-basics/full-time/${year}`)
     ),
+    clientSide: allCourses.filter((post) =>
+    post.id.includes(`client-side/full-time/${year}`)
+    ),
 }));
 ---
+
+<style>
+    .course:has(ol:empty) {
+        display: none;
+    }
+</style>
+
 
 <BaseLayout>
     <Heading title={`Архив`} />
     {
-        archives.map(({ year, webBasics, clientSideBasics }) => (
+        archives.map(({ year, webBasics, clientSideBasics, clientSide }) => (
             <>
                 <div class="prose lg:prose-lg mx-auto">
                     <section>
-                        <div class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30">
+                        <div class="course max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30">
                             <h2 class="text-center text-text-inverted mb-5">
                                 {year} год поступления
                             </h2>
@@ -80,7 +90,7 @@ const archives = archiveYears.map((year) => ({
                             }
                         </div>
 
-                        <div class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30">
+                        <div class="course max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30">
                             <h3 class="text-center text-text-inverted mb-5">
                                 Основы веб-разработки на стороне клиента
                             </h3>
@@ -101,7 +111,7 @@ const archives = archiveYears.map((year) => ({
                                 ))}
                             </ol>
                             {clientSideBasics.length > 4 && ( <div
-                                id={`moreWebTechClientContainer-${year}`}
+                                id={`moreWebClientBasicContainer-${year}`}
                                 class="overflow-hidden transition-all duration-500"
                                 style="max-height: 0;"
                             >
@@ -124,7 +134,57 @@ const archives = archiveYears.map((year) => ({
                             </div>
                                 <button
                                     class="font-titles w-full font-600 bg-bg-accent_second px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
-                                    id={`toggleMoreWebTechClientBtn-${year}`}
+                                    id={`toggleMoreWebClientBasicBtn-${year}`}
+                                >
+                                    Показать все
+                                </button>
+                            )}
+                        </div>
+                        <div class="course max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30">
+                            <h3 class="text-center text-text-inverted mb-5">
+                                Веб-разработка на стороне клиента
+                            </h3>
+                            <ol
+                                class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mb-5"
+                                start="1"
+                            >
+                                {clientSide.slice(0, 4).sort((postA, postB) => postA.data.number - postB.data.number).map((post) => (
+                                    <LinkCard
+                                        title={post.data.title}
+                                        href={`/web-course-site/labs/${post.id}`}
+                                        number={(post.data.number / 10)
+                                            .toFixed(1)
+                                            .toString()
+                                            .split(".")
+                                            .join("")}
+                                    />
+                                ))}
+                            </ol>
+                            {clientSide.length > 4 && ( <div
+                                id={`moreWebClientContainer-${year}`}
+                                class="overflow-hidden transition-all duration-500"
+                                style="max-height: 0;"
+                            >
+                                <ol
+                                    class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mb-5"
+                                    start="5"
+                                >
+                                    {clientSide.slice(4).sort((postA, postB) => postA.data.number - postB.data.number).map((post) => (
+                                        <LinkCard
+                                            title={post.data.title}
+                                            href={`/web-course-site/labs/${post.id}`}
+                                            number={(post.data.number / 10)
+                                                .toFixed(1)
+                                                .toString()
+                                                .split(".")
+                                                .join("")}
+                                        />
+                                    ))}
+                                </ol>
+                            </div>
+                                <button
+                                    class="font-titles w-full font-600 bg-bg-accent_second px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
+                                    id={`toggleMoreWebClientBtn-${year}`}
                                 >
                                     Показать все
                                 </button>
@@ -181,8 +241,14 @@ const archives = archiveYears.map((year) => ({
                     "Спрятать"
                 );
                 setupToggle(
-                    `toggleMoreWebTechClientBtn-${year}`,
-                    `moreWebTechClientContainer-${year}`,
+                    `toggleMoreWebClientBasicBtn-${year}`,
+                    `moreWebClientBasicContainer-${year}`,
+                    "Показать все",
+                    "Спрятать"
+                );
+                setupToggle(
+                    `toggleMoreWebClientBtn-${year}`,
+                    `moreWebClientContainer-${year}`,
                     "Показать все",
                     "Спрятать"
                 );
@@ -190,3 +256,4 @@ const archives = archiveYears.map((year) => ({
         });
     </script>
 </BaseLayout>
+
