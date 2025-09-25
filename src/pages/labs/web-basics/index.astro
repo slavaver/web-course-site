@@ -2,7 +2,7 @@
 import CourseLayout from "@layouts/CourseLayout.astro";
 import { getCollection } from "astro:content";
 
-export const yearOnMain = "2024";
+export const yearOnMain = "2025";
 
 const allCourses = await getCollection("courses");
 
@@ -14,7 +14,7 @@ const labs = webBasics.filter((post) => post.data.type === "labs");
 const schedule = webBasics.filter((post) => post.data.type === "schedule");
 const rk = webBasics.filter((post) => post.data.type === "rk");
 const statementHref =
-    "https://docs.google.com/spreadsheets/d/1ex4WJz5JM003zWcFaSMEy-rjsCUg_umqwixbh-9DJAo/edit?gid=0#gid=0";
+    "https://docs.google.com/spreadsheets/d/1QyDS0opVI57JyYPeb6ngfwMKjOKn_JChpNI5t_IhKcE/edit?gid=0#gid=0";
 ---
 
 <CourseLayout
