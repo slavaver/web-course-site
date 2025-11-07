@@ -1,17 +1,14 @@
 {
+    "extends": "astro/tsconfigs/strict",
     "compilerOptions": {
-        "target": "ESNext",
-        "module": "NodeNext",
-        "moduleResolution": "NodeNext",
-        "strict": true,
-        "jsx": "preserve",
         "jsxImportSource": "astro",
         "baseUrl": "./",
         "paths": {
             "@/*": ["src/*"],
             "@components/*": ["src/components/*"],
             "@layouts/*": ["src/layouts/*"],
-            "@pages/*": ["src/pages/*"]
+            "@pages/*": ["src/pages/*"],
+            "@utils/*": ["src/utils/*"]
         }
     },
     "include": ["src"]

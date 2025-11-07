@@ -1,5 +1,5 @@
-import { MarkdownHeading } from "astro";
-import { RenderedContent } from "astro:content";
+import type { MarkdownHeading } from "astro";
+import type { RenderedContent } from "astro:content";
 
 export interface LabsSlug {
     entry: {

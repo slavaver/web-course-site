@@ -1,4 +1,4 @@
-import { RenderedContent } from "astro:content";
+import type { RenderedContent } from "astro:content";
 
 export type ListOfPosts = {
     allUseful: UsefulPost[];

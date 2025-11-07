@@ -2,7 +2,7 @@
 import Heading from "@components/Heading.astro";
 import LectureCard from "@components/LectureCard.astro";
 import LinkCard from "@components/LinkCard.astro";
-import { CourseLayoutProps } from "../types/Courses";
+import type { CourseLayoutProps } from "../types/Courses";
 import BaseLayoutSnow from "./BaseLayoutSnow.astro";
 
 interface Props extends CourseLayoutProps {}
@@ -10,7 +10,6 @@ interface Props extends CourseLayoutProps {}
 const {
     title,
     description,
-    name, // Пускай пока будет, возможно понадобится
     statementHref,
     lectures,
     schedule,

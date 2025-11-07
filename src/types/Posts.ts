@@ -1,4 +1,4 @@
-import { RenderedContent } from "astro:content";
+import type { RenderedContent } from "astro:content";
 
 export type Post<T extends POST_DATA_TYPE> = {
     id: string;
