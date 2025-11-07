@@ -29,9 +29,7 @@ const labYear = labUrl.split("/")[2];
     <Heading
         title={frontmatter.title}
         number={number}
-        backLink={archiveYear === labYear
-            ? "labs/archive"
-            : `labs/${courseId}${isFulltime ? "" : "-distance"}`}
+        backLink={labYear === "2024" || labYear === "2025" ? `labs/${courseId}${isFulltime ? "" : "-distance"}` : "labs/archive"}
     />
     <article class="box-content max-w-[700px] xl:max-w-screen-xl m-auto px-3.5">
         <div

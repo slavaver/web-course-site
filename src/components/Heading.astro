@@ -1,4 +1,6 @@
 ---
+import BackLink from "@components/navigation/BackLink.astro";
+
 interface Props {
     title: string;
     description?: string;
@@ -7,7 +9,6 @@ interface Props {
 }
 
 const { title, description, number, backLink } = Astro.props;
-
 const baseUrl = import.meta.env.BASE_URL;
 ---
 
@@ -17,15 +18,7 @@ const baseUrl = import.meta.env.BASE_URL;
     <div
         class="hero-container flex flex-col justify-end h-full text-center items-center"
     >
-        <button
-            onclick={`window.location.href='${baseUrl}/${backLink || "/"}'`}
-            class="flex gap-2 font-bold font-titles text-[20px] items-center mb-5"
-            ><img
-                src=`${baseUrl}/assets/img/chevron-right.svg`
-                alt=""
-                class="mb-1"
-            /><span>Назад</span></button
-        >
+        {backLink && <BackLink path={`${baseUrl}/${backLink}`} />}
         {number && <h2>{number}</h2>}
         <h1 class="line-height-[1.1] max-w-[760px]">
             {title}

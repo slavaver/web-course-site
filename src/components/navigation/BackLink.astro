@@ -1,0 +1,14 @@
+---
+import { getAssetUrl } from "@utils/paths";
+const { path } = Astro.props;
+---
+
+<a
+    href={path}
+    class="flex gap-2 font-bold font-titles text-[20px] items-center mb-5"
+    ><img
+        src={getAssetUrl("/assets/img/chevron-right.svg")}
+        class="mb-1"
+        alt=""
+    /><span>Назад</span></a
+>
