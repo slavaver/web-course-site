@@ -1,28 +1,18 @@
 ---
 import CourseLayout from "@layouts/CourseLayout.astro";
 import { getCollection } from "astro:content";
+import { filterCourse } from "@utils/courses";
 
-export const yearOnMain = "2025";
-
-const allCourses = await getCollection("courses");
-
-const webBasics = allCourses.filter((post) =>
-    post.id.includes(`web-basics/full-time/${yearOnMain}`)
-);
-
-const labs = webBasics.filter((post) => post.data.type === "labs");
-const schedule = webBasics.filter((post) => post.data.type === "schedule");
-const rk = webBasics.filter((post) => post.data.type === "rk");
-const statementHref =
-    "https://docs.google.com/spreadsheets/d/1QyDS0opVI57JyYPeb6ngfwMKjOKn_JChpNI5t_IhKcE/edit?gid=0#gid=0";
+const filter = filterCourse("2025", "full-time");
+const course = await getCollection("webBasics", filter);
+course.forEach((item)=> {
+    item.id = "web-basics/" + item.id
+})
+const items = Object.groupBy(course, ({ data }) => data.type);
 ---
 
 <CourseLayout
-    title="Основы веб\‑технологий"
+    title="Основы веб-технологий"
     description="Изучаем, как работает браузер, рассматриваем адаптивную верстку и принципы доступности"
-    labs={labs}
-    rk={rk}
-    schedule={schedule}
-    statementHref={statementHref}
-    name="web-basics"
+    data={items}
 />

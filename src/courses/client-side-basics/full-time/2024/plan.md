@@ -1,7 +1,7 @@
 ---
-number: ""
+number: "1"
 title: "План курса"
-type: "schedule"
+type: "important"
 ---
 
 ## 241-321

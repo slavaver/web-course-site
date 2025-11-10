@@ -1,22 +1,9 @@
-import type { Post, POST_DATA_TYPE } from "./Posts.js";
+import { type CollectionEntry } from "astro:content";
 
-export type CourseLayoutProps = {
-    title: string;
-    description: string;
-    name: string;
-    statementHref?: string;
-    lectures?: Lecture[];
-    schedule?: Schedule;
-    labs: Labs;
-    rk?: RK;
-};
+export type Name = "client-side" | "client-side-basic" | "web-basics";
+export type Collections = "clientSide" | "webBasics" | "clientSideBasics";
+export type CourseType = "distance" | "full-time";
+export type FourDigitYear = `${number}${number}${number}${number}`;
 
-export type Labs = Post<POST_DATA_TYPE.LABS>[];
-export type Schedule = Post<POST_DATA_TYPE.SCHEDULE>[];
-export type RK = Post<POST_DATA_TYPE.RK>[];
-
-type Lecture = {
-    title: string;
-    description: string[];
-    href: string;
-};
+export type LectureItems = CollectionEntry<"clientSideLectures">[];
+export type CoursesItems = CollectionEntry<Collections>[];

@@ -1,0 +1,32 @@
+---
+import Heading from "@/components/Heading.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<BaseLayout>
+    <Heading title="Страница не найдена" />
+    <section
+        id="no-results"
+        class="col-span-full text-center text-text-inverted"
+    >
+        <a
+            class="block mx-auto mb-4 border-1 rounded-[20px] border-text-tertiary p-[20px] w-full md:w-2/3 color-text-tertiary font-titles hover:bg-bg-tertiary hover:text-text-inverted transition duration-300"
+            href={baseUrl}
+        >
+            На главную
+        </a>
+        <p class="mb-3 mx-auto w-full md:w-2/3">Ой, что-то лапка дрогнула!</p>
+        <p class="mb-3 mx-auto w-full md:w-2/3">
+            Котик пытался найти курс, но ничего не нашёл. Наверное, это что-то
+            слишком сложное для его пушистых лапок. Попробуйте поискать в другом
+            месте.
+        </p>
+        <img
+            src={`${baseUrl}/assets/img/paw-heart.svg`}
+            alt="лапка котика с сердечками"
+            class="mx-auto mb-3"
+        />
+    </section>
+</BaseLayout>

@@ -1,0 +1,92 @@
+[
+    {
+        "id": 1,
+        "number": "1",
+        "type": "lecture",
+        "title": "Лекция 1",
+        "description": ["Типизация", "Основы Typescript"],
+        "href": "http://labcolor.space/lecture1/index.html"
+    },
+    {
+        "id": 2,
+        "number": "2",
+        "type": "lecture",
+        "title": "Лекция 2",
+        "description": [
+            "Псевдонимы типов",
+            "Объекты",
+            "Объединения и пересечения"
+        ],
+        "href": "http://labcolor.space/lecture2/index.html"
+    },
+    {
+        "id": 3,
+        "number": "3",
+        "type": "lecture",
+        "title": "Лекция 3",
+        "description": ["Package.json", "Классы", "Наследование", "Interface"],
+        "href": "http://labcolor.space/lecture3/index.html"
+    },
+    {
+        "id": 4,
+        "number": "4",
+        "type": "lecture",
+        "title": "Лекция 4",
+        "description": [
+            "Интерфейсы и типы",
+            "Контрактная разработка",
+            "Обобщения работа с ошибками",
+            "Предикаты"
+        ],
+        "href": "http://labcolor.space/lecture4/index.html"
+    },
+    {
+        "id": 5,
+        "number": "5",
+        "type": "lecture",
+        "title": "Лекция 5",
+        "description": [
+            "Отношения между типами",
+            "Утверждение типа",
+            "Работа с DOM",
+            "Асинхронные функции"
+        ],
+        "href": "http://labcolor.space/lecture5/index.html"
+    },
+    {
+        "id": 6,
+        "number": "6",
+        "type": "lecture",
+        "title": "Лекция 6",
+        "description": ["Модули", "Манипуляции с типами", "Utility types"],
+        "href": "http://labcolor.space/lecture6/index.html"
+    },
+    {
+        "id": 7,
+        "number": "7",
+        "type": "lecture",
+        "title": "Лекция 7",
+        "description": ["Petitue Vue", "WeakMap", "Proxy", "Vue"],
+        "href": "http://labcolor.space/lecture7/index.html"
+    },
+    {
+        "id": 8,
+        "number": "8",
+        "type": "lecture",
+        "title": "Лекция 8",
+        "description": [
+            "Введение во Vue",
+            "Vue Composition API",
+            "Основные директивы Vue"
+        ],
+        "href": "http://labcolor.space/lecture8/index.html"
+    },
+    {
+        "id": 9,
+        "number": "9",
+        "type": "lecture",
+        "title": "Лекция 9",
+        "description": ["Реактивность", "Unit Tests", "Vue Test"],
+        "href": "http://labcolor.space/lecture9/index.html"
+    }
+]

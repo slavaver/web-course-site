@@ -1,7 +1,7 @@
 ---
 interface Props {
-    title?: string;
-    href?: string;
+    title: string;
+    href: string;
     number?: string;
     info?: string;
 }
@@ -9,29 +9,27 @@ interface Props {
 const { title, href, number, info } = Astro.props;
 ---
 
-<li>
-    <a
-        class="link-card w-full bg-bg-secondary rounded-[30px] h-[220px] ] p-7.5 flex flex-col justify-between userActions"
-        aria-label="Перейти к работе"
-        href={href ? href : null}
-    >
-        <div class="flex gap-5">
-            {number && <p class="text-text-number">{number}</p>}
-            <h3 class="font-titles font-500">{title}</h3>
-            {info && <p>{info}</p>}
-        </div>
-        {
-            href && (
-                <div class="w-full flex justify-end">
-                    <i
-                        aria-label="Перейти к работе"
-                        class="link-card-item-goto-icon"
-                    />
-                </div>
-            )
-        }
-    </a>
-</li>
+<a
+    class="link-card w-full bg-bg-secondary rounded-[30px] h-[220px] ] p-7.5 flex flex-col justify-between userActions"
+    aria-label="Перейти к работе"
+    href={href ? href : null}
+>
+    <div class="flex gap-5">
+        {number && <p class="text-text-number">{number.padStart(2, "0")}</p>}
+        <h3 class="font-titles font-500">{title}</h3>
+        {info && <p>{info}</p>}
+    </div>
+    {
+        href && (
+            <div class="w-full flex justify-end">
+                <i
+                    aria-label="Перейти к работе"
+                    class="link-card-item-goto-icon"
+                />
+            </div>
+        )
+    }
+</a>
 <style>
     .link-card-item-goto-icon {
         background: url("/web-course-site/assets/img/goto.svg") no-repeat center;

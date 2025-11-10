@@ -1,39 +1,24 @@
 ---
 import Heading from "@components/Heading.astro";
 import ButtonTop from "@components/navigation/ButtonTop.astro";
-import Pagination from "@components/navigation/Pagination.astro";
 import TOC from "@components/navigation/TOC.astro";
 import type { LabLayoutProps } from "../types/Labs";
 import BaseLayout from "./BaseLayout.astro";
 
 interface Props extends LabLayoutProps {}
 
-const { frontmatter, headinglist, labUrl }: Props = Astro.props;
+const { frontmatter, headinglist }: Props = Astro.props;
 
-let number: string = "";
-
-if (frontmatter.number) {
-    number = (parseInt(frontmatter.number) / 10)
-        .toFixed(1)
-        .toString()
-        .split(".")
-        .join("");
-}
-const courseId = labUrl.split("/")[0];
-const isFulltime = labUrl.includes("full-time");
-const labYear = labUrl.split("/")[2];
+let number: string = frontmatter.number && frontmatter.number.padStart(2, "0");
 ---
 
 <BaseLayout title={frontmatter.title}>
     <ButtonTop />
-    <Heading
-        title={frontmatter.title}
-        number={number}
-        backLink={labYear === "2024" || labYear === "2025" ? `labs/${courseId}${isFulltime ? "" : "-distance"}` : "labs/archive"}
-    />
+    <Heading title={frontmatter.title} number={number} />
     <article class="box-content max-w-[700px] xl:max-w-screen-xl m-auto px-3.5">
         <div
-            class="xl:grid grid-cols-[1fr_700px_1fr] gap-4 items-start text-text-inverted mb-5">
+            class="xl:grid grid-cols-[1fr_700px_1fr] gap-4 items-start text-text-inverted mb-5"
+        >
             <aside class="side mx-auto top-25 pt-6 xl:px-6 xl:pt-0 xl:sticky">
                 {
                     frontmatter.type !== "schedule" && (
@@ -44,18 +29,6 @@ const labYear = labUrl.split("/")[2];
             <div class="md">
                 <slot />
             </div>
-        </div>
-        <div class="mb-20">
-            {
-                frontmatter.type === "labs" && (
-                    <Pagination
-                        slug={frontmatter.number}
-                        collection={courseId}
-                        isFulltime={isFulltime}
-                        yearOnMain={labYear}
-                    />
-                )
-            }
         </div>
     </article>
 </BaseLayout>

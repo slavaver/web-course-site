@@ -1,15 +1,11 @@
 ---
-import BackLink from "@components/navigation/BackLink.astro";
-
 interface Props {
     title: string;
     description?: string;
     number?: string;
-    backLink?: string;
 }
 
-const { title, description, number, backLink } = Astro.props;
-const baseUrl = import.meta.env.BASE_URL;
+const { title, description, number } = Astro.props;
 ---
 
 <section
@@ -18,7 +14,6 @@ const baseUrl = import.meta.env.BASE_URL;
     <div
         class="hero-container flex flex-col justify-end h-full text-center items-center"
     >
-        {backLink && <BackLink path={`${baseUrl}/${backLink}`} />}
         {number && <h2>{number}</h2>}
         <h1 class="line-height-[1.1] max-w-[760px]">
             {title}

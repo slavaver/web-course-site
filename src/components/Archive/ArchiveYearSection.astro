@@ -1,0 +1,50 @@
+---
+import ArchiveCourseList from "./ArchiveCourseList.astro";
+import type { CoursesItems, FourDigitYear, Collections } from "@/types/Courses";
+
+interface Props {
+    year: FourDigitYear;
+    items: CoursesItems;
+}
+
+const { year, items } = Astro.props;
+
+const courseNamesMap = {
+    webBasics: "Основы веб-технологий",
+    clientSideBasics: "Основы веб-разработки на стороне клиента",
+    clientSide: "Веб-разработка на стороне клиента",
+};
+
+const courses = Object.groupBy(items, (item) => item.collection);
+type groupedByCourses = typeof courses
+const keys = Object.keys(courses) as [
+    "clientSide",
+    "webBasics",
+    "clientSideBasics",
+];
+
+function filterAndSortItems (courses: groupedByCourses, name: Collections) {
+    if (!courses[name]) throw new Error("Нет такого курса");
+    return courses[name].filter((course) => ["labs", "practice"].includes(course.data.type))
+                        .sort((a, b) => Number(a.data.number) - Number(b.data.number))
+}
+
+---
+
+<section>
+    <div
+        class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30"
+    >
+        <h2 class="text-center text-text-inverted mb-5">
+            {year} год поступления
+        </h2>
+        {
+            keys.map((name) => (
+                <ArchiveCourseList
+                    title={courseNamesMap[name]}
+                    items={filterAndSortItems(courses, name)}
+                />
+            ))
+        }
+    </div>
+</section>

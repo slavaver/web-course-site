@@ -1,6 +1,8 @@
 import type { MarkdownHeading } from "astro";
 import type { RenderedContent } from "astro:content";
 
+// TODO: Разобраться с типами, так как LabsSlug, можно собрать из типов в Astro
+
 export interface LabsSlug {
     entry: {
         id: string;
@@ -15,7 +17,6 @@ export interface LabsSlug {
 export interface LabLayoutProps {
     frontmatter: LabData;
     headinglist: MarkdownHeading[];
-    labUrl: string;
 }
 
 export interface LabData {

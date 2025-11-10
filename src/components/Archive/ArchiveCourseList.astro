@@ -1,0 +1,35 @@
+---
+import LinkCard from "@components/LinkCard.astro";
+import type { CoursesItems } from "@/types/Courses";
+
+interface Props {
+    title: string;
+    items: CoursesItems;
+}
+
+const { title, items } = Astro.props;
+---
+
+<div class="course">
+    <h3 class="text-center text-text-inverted mb-5 mt-10">
+        {title}
+    </h3>
+    <ol class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mb-5" start="1">
+        {
+            items.map((item) => (
+                <li>
+                    <LinkCard
+                        title={item.data.title}
+                        href={`/web-course-site/labs/${item.id}`}
+                        number={item.data.number}
+                    />
+                </li>
+            ))
+        }
+    </ol>
+    <button
+        class="font-titles w-full font-600 bg-bg-accent_second px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
+    >
+        Показать все
+    </button>
+</div>

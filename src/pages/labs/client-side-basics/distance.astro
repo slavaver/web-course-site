@@ -3,7 +3,7 @@ import CourseLayout from "@layouts/CourseLayout.astro";
 import { getCollection } from "astro:content";
 import { filterCourse } from "@utils/courses";
 
-const filter = filterCourse("2024", "full-time");
+const filter = filterCourse("2024", "distance");
 const course = await getCollection("clientSideBasics", filter);
 course.forEach((item) => {
     item.id = "client-side-basics/" + item.id;
