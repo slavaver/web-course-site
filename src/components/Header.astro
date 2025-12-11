@@ -132,11 +132,15 @@ const links = [
 
 <style>
     .header {
-        margin-bottom: 10px;
+        margin: 0 auto; /* Центрируем сам хедер */
+        max-width: screen-xl; /* или ваше значение */
     }
 
     .header-container {
-        transition: 0.3s ease-in-out;
+        width: 100%;
+        position: sticky; /* Сохраняем sticky */
+        top: 0;
+        z-index: 50;
         padding: 0.625rem;
     }
 
@@ -150,15 +154,30 @@ const links = [
     }
 
     .dropdown__list {
-        transition: 0.3s ease-in-out;
+        transition: .3s ease-in-out;
         max-height: 0px;
         width: 50%;
         max-width: 650px;
         padding: 0;
-        margin: 0 auto;
+        margin: 0; /* Убираем auto margin */
         pointer-events: none;
         opacity: 0;
         border-radius: 1rem;
+        
+        /* Абсолютное позиционирование относительно viewport */
+        position: fixed; /* Меняем на fixed */
+        left: 50%;
+        transform: translateX(-50%);
+        top: 80px; /* Подстройте под высоту хедера */
+        
+        /* Альтернатива без transform (более предсказуемая) */
+        /* 
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 80px;
+        margin: 0 auto;
+        */
     }
 
     .dropdown__list > li > a {
