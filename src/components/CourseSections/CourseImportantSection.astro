@@ -8,6 +8,8 @@ interface Props {
 }
 
 const { items } = Astro.props;
+const reversedItems = [...items].reverse();
+
 ---
 
 <section
@@ -16,7 +18,7 @@ const { items } = Astro.props;
     <h2 class="text-center mb-10 text-text-inverted">Важное</h2>
     <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
         {
-            items.map((item) => (
+            reversedItems.map((item) => (
                 <li>
                     <LinkCard
                         title={item.data.title}
