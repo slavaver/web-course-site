@@ -56,15 +56,13 @@ Navigator, Window и Document - важные части веб-браузера 
 - Переключиться на ветку main.
 - Инициализировать пакет с помощью команды `npm init -y`.
 - Установить ESLint с помощью `npm init @eslint/config`. Подсказки как отвечать на вопросы при установке:
-    1. How would you like to use ESLint - **To check syntax and find problems**
+    1. What do you want to lint? - **javascript**
+    1. How would you like to use ESLint? - **To check syntax and find problems**
     1. What type of modules does your project use? - **JavaScript modules (import/export)**
     1. Which framework does your project use? - **None of these**
     1. Does your project use TypeScript? - **No**
     1. Where does your code run? - **Browser**
-    1. How would you like to define a style for your project? - **Use a popular style guide**
-    1. Which style guide do you want to follow? - **Standard**
-    1. What format do you want your config file to be in? - **JSON**
-    1. Would you like to install them now? - **Yes**
+    1. Would you like to install them now? - **yes**
     1. Which package manager do you want to use? - **npm**
 - В файл `eslint.config.mjs` добавить правила приведенные ниже. Пример организации конфигурационного файла смотрите в [документации ESLint](https://eslint.org/docs/latest/use/getting-started#configuration).
 - По желанию установить расширение ESLint в VS Code или аналогичное для вашего редактора.
