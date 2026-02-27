@@ -14,9 +14,5 @@ const items = allUseful.map((item, index) => ({
 {
     items
         .sort((a, b) => a.data.title.localeCompare(b.data.title))
-        .map((post) => (
-            <div class="post-wrapper">
-                <UsefulCard useful={post} />
-            </div>
-        ))
+        .map((post) => <UsefulCard useful={post} />)
 }
