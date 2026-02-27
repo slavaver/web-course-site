@@ -8,13 +8,13 @@ type: "labs"
 
 - [Cайт факультета](//fit.mospolytech.ru)
 - vk:
-  - [Закрытая группа - FITmospolytech](//vk.com/fitmospolytech.team)
-  - [Открытая группа - ИТ-факультет Московского Политеха](//vk.com/fit.mospolytech)
+    - [Закрытая группа - FITmospolytech](//vk.com/fitmospolytech.team)
+    - [Открытая группа - ИТ-факультет Московского Политеха](//vk.com/fit.mospolytech)
 - telegram:
-  - [Официальная группа потока](//t.me/+50W-nlZa-s8xODEy)
-  - [Общая группа профиля Веб](//t.me/joinchat/b1k0ZPStUPY0M2Ji)
+    - [Официальная группа потока](//t.me/+50W-nlZa-s8xODEy)
+    - [Общая группа профиля Веб](//t.me/joinchat/b1k0ZPStUPY0M2Ji)
 - discord:
-  - [Работа с наставниками](//discord.gg/YZy7CF37gN)
+    - [Работа с наставниками](//discord.gg/YZy7CF37gN)
 
 ## Регистрации
 
@@ -25,7 +25,7 @@ type: "labs"
 ## Установка ПО
 
 1. VS Code или альтернатива
-   1. Расширение к VSCode - Live Server
+    1. Расширение к VSCode - Live Server
 1. Git
 1. Terminal
 
@@ -57,7 +57,7 @@ cp
 ### HTML
 
 1. Создать index.html
-   1. `header`, `nav`, `main`, `footer`, `h1`, `h2`, `p`, `a`, `img`, `ul/ol`, `li`
+    1. `header`, `nav`, `main`, `footer`, `h1`, `h2`, `p`, `a`, `img`, `ul/ol`, `li`
 1. Проверить на [валидаторе](https://validator.w3.org/)
 1. Исправить ошибки
 1. Отформатировать код
@@ -67,8 +67,8 @@ cp
 
 1. В папке проекта инициализировать репозиторий `git init --initial-branch=main`
 1. Задать имя и имейл:
-   1. `git config --global user.email "Ваш имейл на github"`
-   1. `git config --global user.name "Ваше имя"`
+    1. `git config --global user.email "Ваш имейл на github"`
+    1. `git config --global user.name "Ваше имя"`
 1. Добавить файл для коммита `git add index.html`
 1. Создать коммит с `git commit -m "текст вашего коммита"`
 1. Связать локальный репозиторий с удаленным `git remote add origin ссылка_с_github`

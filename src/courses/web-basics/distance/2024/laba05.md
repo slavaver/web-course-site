@@ -12,37 +12,37 @@ type: "labs"
 
 1. Изучить принципы работы flexbox и его свойств:
 
-   - flex-контейнер, flex-элементы;
-   - главная и поперечная оси;
-   - изменение направления осей;
-   - выравнивание элементов;
-   - управление размерами элементов;
-   - порядок элементов;
-   - свойство `gap`;
-   - прием использования `margin-right: auto`, `margin-right: auto`;
+    - flex-контейнер, flex-элементы;
+    - главная и поперечная оси;
+    - изменение направления осей;
+    - выравнивание элементов;
+    - управление размерами элементов;
+    - порядок элементов;
+    - свойство `gap`;
+    - прием использования `margin-right: auto`, `margin-right: auto`;
 
-   [Статья по flex](/web-course-site/useful/flex)
+    [Статья по flex](/web-course-site/useful/flex)
 
 1. Для выполнения работы необходимо в style.css из третьей работы:
-   - добавить `display: flex` для расположения элементов согласно макету;
-   - использовать необходимые свойства для контейнера и элементов для их выравнивания, расположения и управления размерами;
-   - использовать для задания размеров элементов относительные единицы измерения;
-   - скрыть заголовки и текст в label, которые отсутствуют по дизайну с помощью класса `sr-only`. Его код приведен ниже.
+    - добавить `display: flex` для расположения элементов согласно макету;
+    - использовать необходимые свойства для контейнера и элементов для их выравнивания, расположения и управления размерами;
+    - использовать для задания размеров элементов относительные единицы измерения;
+    - скрыть заголовки и текст в label, которые отсутствуют по дизайну с помощью класса `sr-only`. Его код приведен ниже.
 1. Зафиксировать результаты работы с помощью системы контроля версий git и отправить репозиторий на github.
 1. Загрузить проект на хостинг.
 
 ```css
 .sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  border: 0;
-  padding: 0;
-  white-space: nowrap;
-  clip-path: inset(100%);
-  clip: rect(0 0 0 0);
-  overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
 }
 ```
 
@@ -65,8 +65,8 @@ type: "labs"
 - [Спецификация CSS Flexible Box Layout](https://www.w3.org/TR/css-flexbox-1/)
 - [Flexbox MDN](https://developer.mozilla.org/ru/docs/Learn/CSS/CSS_layout/Flexbox)
 - Игры для тренировки:
-  - [Froggy](http://flexboxfroggy.com/)
-  - [Defence](http://www.flexboxdefense.com/)
+    - [Froggy](http://flexboxfroggy.com/)
+    - [Defence](http://www.flexboxdefense.com/)
 - [Интерактивная демонстрация](https://codepen.io/enxaneta/full/adLPwv)
 - [Flexbox](https://semicolon.dev/tutorial/css/complete-css-flex-tutorial)
 - [Шпаргалка по flexbox](https://www.freecodecamp.org/news/css-flexbox-tutorial-with-cheatsheet/)

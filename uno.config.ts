@@ -130,13 +130,13 @@ export default defineConfig({
                 src: url("/web-course-site/assets/fonts/gilroy/Gilroy-Medium.ttf");
                 font-weight: 500;
             }
-                
+
             @font-face {
                 font-family: "NextArt";
                 src: url("/web-course-site/assets/fonts/nextart/NEXTART_Regular.otf");
                 font-weight: 400;
             }
-                
+
             @font-face {
                 font-family: "NextArt";
                 src: url("/web-course-site/assets/fonts/nextart/NEXTART_SemiBold.otf");
