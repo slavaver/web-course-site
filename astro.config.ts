@@ -6,7 +6,7 @@ export default defineConfig({
     site: "https://slavaver.github.io",
     base: "/web-course-site",
     output: "static",
-    integrations: [UnoCSS({ injectReset: true })],
+    integrations: [UnoCSS()],
     markdown: {
         syntaxHighlight: "shiki",
         shikiConfig: {
