@@ -1,4 +1,7 @@
 ---
+import "../styles/reset.css";
+import "../styles/global.css";
+
 import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
 const { title } = Astro.props;
@@ -16,6 +19,7 @@ const isProd = import.meta.env.PROD;
             type="image/svg+xml"
             href="/web-course-site/favicon.svg"
         />
+
         <meta
             name="description"
             content="Сайт по веб-технологиям, созданный для студентов Московского Политехнического Университета."
