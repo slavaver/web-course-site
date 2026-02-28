@@ -1,0 +1,52 @@
+@font-face {
+    font-family: "Gilroy";
+    src: url(/web-course-site/assets/fonts/gilroy/Gilroy-Regular.ttf);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Gilroy";
+    src: url("/web-course-site/assets/fonts/gilroy/Gilroy-Medium.ttf");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "NextArt";
+    src: url("/web-course-site/assets/fonts/nextart/NEXTART_Regular.otf");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "NextArt";
+    src: url("/web-course-site/assets/fonts/nextart/NEXTART_SemiBold.otf");
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "NextArt";
+    src: url("/web-course-site/assets/fonts/nextart/NEXTART_Bold.otf");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "JetBrainsMono";
+    src: url(/web-course-site/assets/fonts/jetbrains/JetBrainsMono.ttf);
+    font-weight:1-999;
+}
+
+h1,h2,h3 {
+    font-family: "NextArt", sans-serif;
+}
+h1 {
+    font-size: clamp(72px, 5vw, 82px);
+    font-weight: 700;
+}
+h2 {
+    font-size: 48px;
+    font-weight: 700;
+}
+h3{
+    line-height: 2rem;
+    font-size: 32px;
+    font-weight: 600;
+}
