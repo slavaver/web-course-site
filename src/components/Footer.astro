@@ -1,57 +1,69 @@
 ---
-const today = new Date();
+const currentYear = new Date().getFullYear();
 
 const baseUrl = import.meta.env.BASE_URL;
 ---
 
-<footer
-    class="bg-bg-primary z-99 rounded-t-[30px] sm:rounded-t-[60px] px-10 py-14">
-    <div
-        class="top-content flex flex-col gap-5 lg:gap-0 lg:flex-row justify-between max-w-screen-xl mx-auto mb-2 items-center sm:items-start">
+<footer class="footer">
+    <div class="footer__container">
         <img
-            class="mb-auto"
+            class="footer__logo"
             width="200px"
             src={`${baseUrl}/assets/img/logo-full.svg`}
-            alt="Логотип Московского Политеха"
         />
-    </div>
-    <div class="bot-content max-w-prose mx-auto">
-        <p class="mb-4 text-center">
+        <p class="issue">
             Если вы заметили ошибку или хотите предложить изменения, пожалуйста, <a
-                class="border-b-2"
+                class="issue__link"
                 href="https://github.com/slavaver/web-course-site/issues/new"
                 >создайте issue</a
             > в репозитории.
         </p>
-    </div>
-    <div
-        class="flex flex-col text-center sm:text-start sm:flex-row justify-between w-full align-bottom max-w-screen-xl mx-auto">
-        <p class="text-center text-[16px] mt-auto">
-            &copy; {today.getFullYear()} Московский Политех
-        </p>
-        <div>
-            <p class="text-[16px]">
-                Дизайн сайта <a class="text-[16px]" href="https://t.me/shultsee"
-                    >@shultsee</a
-                >
-            </p>
-            <p class="text-[16px]">
-                Разработка сайта <a
-                    class="text-[16px]"
-                    href="https://t.me/qalqa_dev">@qalqa_dev</a
-                >
-            </p>
+        <div class="footer__copyright">
+            <p>&copy; {currentYear} Московский Политех</p>
+            <div>
+                <p>
+                    Дизайн сайта <a href="https://t.me/shultsee">@shultsee</a>
+                </p>
+                <p>
+                    Разработка сайта <a href="https://t.me/qalqa_dev"
+                        >@qalqa_dev</a
+                    >
+                </p>
+            </div>
         </div>
     </div>
 </footer>
-
 <style>
-    footer {
+    .footer {
         position: relative;
         overflow: hidden;
+        padding: 3.5rem 2.5rem;
+        background-color: var(--color-bg-primary);
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        z-index: 99;
+        font-size: 16px;
+
+        @media (min-width: 640px) {
+            border-top-left-radius: 60px;
+            border-top-right-radius: 60px;
+        }
     }
 
-    footer::before {
+    .footer__container {
+        margin-inline: auto;
+        max-width: 1280px;
+    }
+
+    .footer__logo {
+        margin-inline: auto;
+        margin-bottom: 0.5rem;
+        @media (min-width: 640px) {
+            margin-inline: 0;
+        }
+    }
+
+    .footer::before {
         content: "";
         position: absolute;
         z-index: -1;
@@ -60,11 +72,41 @@ const baseUrl = import.meta.env.BASE_URL;
         width: 100%;
         height: 100%;
         background-color: var(--color-bg-accent-first);
-        -webkit-mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 728" fill="none"%3E%3Cpath d="M-384.828 550.33C-279.518 431.882 -29.173 211.72 129.724 278.664C328.344 362.345 -156.414 623.403 -2.48331 780.746C176.815 964.017 967.034 -77.2714 1180.55 48.249C1394.07 173.769 1062.62 452.507 1180.55 550.33C1274.9 628.589 1460.28 401.827 1541.17 278.664" stroke="black" stroke-width="150"/%3E%3C/svg%3E');
         mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 728" fill="none"%3E%3Cpath d="M-384.828 550.33C-279.518 431.882 -29.173 211.72 129.724 278.664C328.344 362.345 -156.414 623.403 -2.48331 780.746C176.815 964.017 967.034 -77.2714 1180.55 48.249C1394.07 173.769 1062.62 452.507 1180.55 550.33C1274.9 628.589 1460.28 401.827 1541.17 278.664" stroke="black" stroke-width="150"/%3E%3C/svg%3E');
-        -webkit-mask-repeat: no-repeat;
         mask-repeat: no-repeat;
-        -webkit-mask-size: cover;
         mask-size: cover;
+    }
+
+    .issue {
+        text-align: center;
+        text-wrap: balance;
+        margin-bottom: 1rem;
+        max-width: 65ch;
+        margin-inline: auto;
+    }
+
+    .issue__link {
+        border-bottom-width: 2px;
+    }
+
+    .footer__copyright {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: space-between;
+
+        @media (min-width: 640px) {
+            text-align: start;
+            flex-direction: row;
+        }
+
+        /* TODO убрать когда уберется font-size на все элементы p, a, span, label из unicss */
+        p {
+            font-size: 16px;
+        }
+
+        a {
+            font-size: 16px;
+        }
     }
 </style>

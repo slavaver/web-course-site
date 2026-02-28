@@ -6,7 +6,7 @@ const isProd = import.meta.env.PROD;
 ---
 
 <!doctype html>
-<html lang="ru" class="scroll-smooth scroll-pt-16">
+<html lang="ru">
     <head>
         <script is:inline src="/web-course-site/themetoggle.js"></script>
         <meta charset="UTF-8" />
@@ -18,7 +18,7 @@ const isProd = import.meta.env.PROD;
         />
         <meta
             name="description"
-            content="Сайт по веб-технологиям, созданный для учеников Московского Политехнического Университета."
+            content="Сайт по веб-технологиям, созданный для студентов Московского Политехнического Университета."
         />
         {
             isProd && (
@@ -32,13 +32,38 @@ const isProd = import.meta.env.PROD;
         }
         <title>{title ? title : "Веб-технологии"}</title>
     </head>
-    <body
-        class="flex flex-col min-h-screen transition bg-bg-screen text-text-primary font-texts"
-    >
+    <body>
         <Header />
-        <main class="flex-grow">
+        <main>
             <slot />
         </main>
         <Footer />
     </body>
 </html>
+
+<style>
+    :root {
+        scroll-behavior: smooth;
+        scroll-padding-top: 4rem;
+    }
+
+    body {
+        transition-property:
+            color, background-color, border-color, text-decoration-color, fill,
+            stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+        margin: 0;
+        line-height: inherit;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        color: var(--color-text-primary);
+        font-family: Gilroy, sans-serif;
+        background-color: var(--color-bg-screen);
+    }
+
+    main {
+        flex-grow: 1;
+    }
+</style>
