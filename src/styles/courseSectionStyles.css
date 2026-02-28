@@ -46,7 +46,7 @@
 }
 
 .course-section__list_lecture {
-        @media (min-width: 1280px) {
+    @media (min-width: 1280px) {
         grid-template-columns: repeat(3, 1fr);
     }
 }
