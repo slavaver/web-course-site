@@ -25,54 +25,105 @@ const getTimeToRead = (length: number) => {
 };
 ---
 
-<li
-    class="useful-card aspect-ratio-square"
+<a
     data-course={useful.data.course}
     data-title={useful.data.title}
+    class="card"
+    href={href}
 >
-    <a
-        class="card rounded-[30px] aspect-ratio-square flex flex-col bg-bg-secondary p-5 lg:p-7.5 lg:p-10 justify-between w-full userActions"
-        aria-label="Перейти к статье"
-        href={href}
-    >
-        <div class="card__top-content">
-            <h3 class="useful-item-title">
-                {useful.data.title}
-            </h3>
-            <p class="useful-item-descr">
-                {useful.data.description}
+    <h3 class="card__title">
+        {useful.data.title}
+    </h3>
+    <p>
+        {useful.data.description}
+    </p>
+    <footer class="card__footer">
+        <div class="card__time-date">
+            <p class="card__time">
+                <img
+                    src=`${baseUrl}/assets/img/time-icon.svg`
+                    alt="время чтения"
+                /> ~{length && getTimeToRead(length)} мин
             </p>
+            {useful.data.date && <p>{formattedDate}</p>}
         </div>
-        <div class="card__bottom-content flex justify-between">
-            <div class="flex items-end gap-4">
-                <div class="flex items-center gap-2">
-                    <img
-                        class="mb-1"
-                        src=`${baseUrl}/assets/img/time-icon.svg`
-                        alt="time-icon"
-                    />
+        <div class="card__goto-icon"></div>
+    </footer>
+</a>
 
-                    <span class="text-[16px]"
-                        >~{length && getTimeToRead(length)} мин</span
-                    >
-                </div>
-                {
-                    useful.data.date && (
-                        <span class="text-[16px]">{formattedDate}</span>
-                    )
-                }
-            </div>
-            <i class="useful-item-goto-icon"></i>
-        </div>
-    </a>
-</li>
 <style>
-    .useful-item-goto-icon {
-        background: url("/web-course-site/assets/img/goto.svg") no-repeat center;
+    .card {
+        container-name: card;
+        container-type: inline-size;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: 0.5rem;
+        padding: 1.25em;
+        font-size: 16px;
+        aspect-ratio: 1;
+        background-color: var(--color-bg-secondary);
+        border-radius: 30px;
+        transition-property: background-color;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+
+        &:focus-visible {
+            background-color: var(--color-bg-accent-second);
+        }
+
+        &:hover {
+            background-color: var(--color-bg-accent-second);
+        }
+
+        &:active {
+            background-color: var(--color-bg-primary);
+        }
+
+        @media (min-width: 1024px) {
+            padding: 1.875rem;
+        }
+    }
+
+    .card__title {
+        font-size: 24px;
+        @media (min-width: 1200px) {
+            font-size: 32px;
+        }
+    }
+
+    .card__footer {
+        display: flex;
+        align-items: end;
+        @container card (width > 220px) {
+            justify-content: space-between;
+            gap: 1rem;
+        }
+    }
+
+    .card__time-date {
+        @container card (width > 220px) {
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            align-items: center;
+            gap: 0.5rem;
+            width: auto;
+            margin-top: 0;
+        }
+    }
+
+    .card__time {
+        display: flex;
+        gap: 0.25rem;
+    }
+
+    .card__goto-icon {
+        color: var(--color-border);
         width: 50px;
-        height: 50px;
+        aspect-ratio: 1;
         border: 1.5px solid var(--color-border);
         border-radius: 100%;
-        color: var(--color-border);
+        background: url("/web-course-site/assets/img/goto.svg") no-repeat center;
+        margin-left: auto;
     }
 </style>

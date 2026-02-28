@@ -94,46 +94,36 @@ const baseUrl = import.meta.env.BASE_URL;
             >
         </div>
     </section>
-    <section
-        id="useful"
-        class="section-useful bg-bg-primary py-15 rounded-[30px] sm:rounded-[60px] mb-30">
+    <section id="useful" class="knowledge-base">
         <div
-            class="useful-container max-w-screen px-5 md:px-10 xl:px-5 xl:max-w-screen-xl mx-auto">
+            class="max-w-screen px-5 md:px-10 xl:px-5 xl:max-w-screen-xl mx-auto">
             <h2 class="useful-title title">База знаний</h2>
-            <ul
-                class="useful-list grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div class="knowledge-base__items">
                 {
                     useful
                         .slice(0, 2)
                         .map((useful) => <UsefulCard useful={useful} />)
                 }
-                <li>
-                    <p class="order-0">
-                        Здесь вы найдете подборки полезных ресурсов, конспекты,
-                        а также статьи с теорией, раскрывающие ключевые темы
-                        курсов
-                    </p>
-                </li>
+                <p>
+                    Здесь вы найдете подборки полезных ресурсов, конспекты, а
+                    также статьи с теорией, раскрывающие ключевые темы курсов
+                </p>
                 <div class="hidden sm:block">
                     <UsefulCard useful={useful[2]} />
                 </div>
-                <li
+                <div
                     class="other-useful flex flex-col justify-between order-1 lg:order-0">
-                    <img
-                        src=`${baseUrl}/assets/img/cat-chill.svg`
-                        alt="чилл кот лежит за ноутбуком"
-                        aria-hidden="true"
-                    />
+                    <img src=`${baseUrl}/assets/img/cat-chill.svg` />
                     <a
                         class="font-titles text-base text-center font-600 bg-bg-accent_second sm:px-5 px-11.5 py-5 rounded-[20px] userActionsLinkAlt"
                         href="/web-course-site/useful/"
                         >Еще больше полезностей</a
                     >
-                </li>
+                </div>
                 <div class="hidden sm:block">
                     <UsefulCard useful={useful[3]} />
                 </div>
-            </ul>
+            </div>
         </div>
     </section>
     <section class="section-teachers mb-30">
@@ -159,15 +149,42 @@ const baseUrl = import.meta.env.BASE_URL;
 </BaseLayoutSnow>
 
 <style>
-    .section-hero,
-    .section-useful {
+    .knowledge-base {
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        border-radius: 60px;
+        padding-block: 3.75rem;
+        background-color: var(--color-bg-primary);
+        margin-bottom: 7.5rem;
+        @media (min-width: 640px) {
+            border-radius: 30px;
+        }
+    }
+
+    .knowledge-base__items {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        margin-inline: auto;
+        max-width: 350px;
+        @media (min-width: 600px) {
+            max-width: none;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        @media (min-width: 1024px) {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+    }
+
+    .section-hero {
         position: relative;
         overflow: hidden;
         z-index: 1;
     }
 
     .section-hero::before,
-    .section-useful::before {
+    .knowledge-base::before {
         content: "";
         position: absolute;
         z-index: -1;

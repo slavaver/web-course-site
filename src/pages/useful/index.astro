@@ -122,7 +122,7 @@ const baseUrl = import.meta.env.BASE_URL;
     <div
         class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-lg 2xl:max-w-screen-xl mx-auto pb-30"
     >
-        <ul
+        <div
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5 mb-10"
         >
             <div class="grid-col-span-1 2xl:col-span-1">
@@ -131,13 +131,13 @@ const baseUrl = import.meta.env.BASE_URL;
             <div class="grid-col-span-1 2xl:col-span-2 mt-auto">
                 <SearchInput placeholder="Введите название статьи" />
             </div>
-        </ul>
-        <ul
+        </div>
+        <div
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5"
             id="posts-container"
         >
             <ListOfPosts allUseful={allUseful} lengths={lengths} />
-        </ul>
+        </div>
         <div
             id="no-results"
             class="col-span-full text-center mt-10 hidden text-text-inverted"
