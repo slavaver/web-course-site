@@ -1,4 +1,6 @@
 ---
+import "../../styles/courseSectionStyles.css";
+
 import LectureCard from "@components/LectureCard.astro";
 import { getBasedUrl } from "@utils/paths";
 import type { LectureItems } from "@/types/Courses";
@@ -10,63 +12,56 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<section
-    class="section-lectures bg-bg-primary py-20 rounded-[30px] sm:rounded-[60px] mb-30"
->
-    <div class="px-5 lg:max-w-screen-lg xl:max-w-screen-xl mx-auto">
-        <h2 class="text-center mb-10">Лекции</h2>
-        <ul class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 w-full">
-            {
-                items.map((item, index) => (
-                    <>
-                        {(() => {
-                            switch (index % 9) {
-                                case 0:
-                                    return (
-                                        <div class="flex aspect-ratio-square rounded-[30px] overflow-hidden">
-                                            <img
-                                                src={getBasedUrl(
-                                                    "/assets/img/cat-chill-table.svg"
-                                                )}
-                                                alt="лапка котика с сердечками"
-                                                class="mx-auto"
-                                            />
-                                        </div>
-                                    );
-                                case 4:
-                                    return (
-                                        <div class="flex aspect-ratio-square rounded-[30px] overflow-hidden">
-                                            <img
-                                                src={getBasedUrl(
-                                                    "/assets/img/cat-table-vue.svg"
-                                                )}
-                                                alt="лапка котика с сердечками"
-                                                class="mx-auto"
-                                            />
-                                        </div>
-                                    );
-                                case 8:
-                                    return (
-                                        <div class="flex aspect-ratio-square rounded-[30px] overflow-hidden">
-                                            <img
-                                                src={getBasedUrl(
-                                                    "/assets/img/cat-cute.svg"
-                                                )}
-                                                alt="лапка котика с сердечками"
-                                                class="mx-auto"
-                                            />
-                                        </div>
-                                    );
-                            }
-                        })()}
-                        <LectureCard
-                            title={item.data.title}
-                            href={item.data.href}
-                            description={item.data.description}
-                        />
-                    </>
-                ))
-            }
-        </ul>
-    </div>
+<section class="course-section course-section_lecture">
+    <h2 class="course-section__title">Лекции</h2>
+    <ul class="course-section__list course-section__list_lecture">
+        {
+            items.map((item, index) => (
+                <>
+                    {(() => {
+                        switch (index % 9) {
+                            case 0:
+                                return (
+                                    <li>
+                                        <img
+                                            src={getBasedUrl(
+                                                "/assets/img/cat-chill-table.svg"
+                                            )}
+                                            class="course-section__img"
+                                        />
+                                    </li>
+                                );
+                            case 4:
+                                return (
+                                    <li>
+                                        <img
+                                            src={getBasedUrl(
+                                                "/assets/img/cat-table-vue.svg"
+                                            )}
+                                            class="course-section__img"
+                                        />
+                                    </li>
+                                );
+                            case 8:
+                                return (
+                                    <li>
+                                        <img
+                                            src={getBasedUrl(
+                                                "/assets/img/cat-cute.svg"
+                                            )}
+                                            class="course-section__img"
+                                        />
+                                    </li>
+                                );
+                        }
+                    })()}
+                    <LectureCard
+                        title={item.data.title}
+                        href={item.data.href}
+                        description={item.data.description}
+                    />
+                </>
+            ))
+        }
+    </ul>
 </section>
