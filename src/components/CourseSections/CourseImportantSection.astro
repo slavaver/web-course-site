@@ -11,20 +11,25 @@ const { items } = Astro.props;
 ---
 
 <section
-    class="max-w-screen px-5 lg:max-w-screen-lg xl:max-w-screen-xl mx-auto mb-30"
->
+    class="max-w-screen px-5 lg:max-w-screen-lg xl:max-w-screen-xl mx-auto mb-30">
     <h2 class="text-center mb-10 text-text-inverted">Важное</h2>
     <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
         {
-            items.map((item) => (
-                <li>
-                    <LinkCard
-                        title={item.data.title}
-                        href={getBasedUrl(`/labs/${item.id}`)}
-                        number={item.data.number.padStart(2, "0")}
-                    />
-                </li>
-            ))
+            items
+                .sort((prev, next) => {
+                    return (
+                        parseInt(prev.data.number) - parseInt(next.data.number)
+                    );
+                })
+                .map((item) => (
+                    <li>
+                        <LinkCard
+                            title={item.data.title}
+                            href={getBasedUrl(`/labs/${item.id}`)}
+                            number={item.data.number.padStart(2, "0")}
+                        />
+                    </li>
+                ))
         }
     </ul>
 </section>
