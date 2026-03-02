@@ -30,7 +30,8 @@
 }
 
 .course-section__title {
-    color: var(--color-text-inverted);
+
+    color: var(--color-text-primary);
     margin-bottom: 2.5rem;
     text-align: center;
 }
