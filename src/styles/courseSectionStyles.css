@@ -30,10 +30,13 @@
 }
 
 .course-section__title {
-
-    color: var(--color-text-primary);
+    color: var(--color-text-inverted);
     margin-bottom: 2.5rem;
     text-align: center;
+}
+
+.course-section__title-light {
+    color: var(--color-text-primary);
 }
 
 .course-section__list {
