@@ -29,7 +29,7 @@ type: "labs"
 - [Progressively Enhanced Form Validation, Part 2: Layering in JavaScript](https://cloudfour.com/thinks/progressively-enhanced-form-validation-part-2-layering-in-javascript/)
 - [Usable and Accessible Form Validation and Error Recovery](https://webaim.org/techniques/formvalidation/)
 - [autocomplete - doka.guide](https://doka.guide/html/autocomplete/)
-- [HTML attribute: autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/autocomplete#browser_compatibility)
+- [HTML attribute: autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/autocomplete)
 - [«Современный учебник JavaScript»](https://learn.javascript.ru/)
 
 ## Выполнение
@@ -40,7 +40,7 @@ type: "labs"
 
 Нажатие на эту кнопку открывает модальное окно. Используйте элемента dialog. После открытия модального окна у пользователя не должно быть возможности взаимодействовать с другими элементами до его закрытия. При нажатии вне модального окна или на кнопку закрытия, оно должно закрываться.
 
-В модальном окне создайте корректную форму с полями для ввода имени, почты, телефона, возраста, ссылки на профиль гитхаба, даты регистрации на гитхабе, пароля и три кнопки: для отправки формы, показа пароля и закрытия модального окна. Чтобы избежать конфликта с вашими проверками форме требуется задать атрибут novalidate. В label добавить указание об обязательности заполнения, но не звездочку.
+В модальном окне создайте корректную форму с полями для ввода имени, почты, телефона, возраста, ссылки на профиль гитхаба, даты регистрации на гитхабе, пароля и три кнопки: для отправки формы, показа пароля и закрытия модального окна. Чтобы избежать конфликта с вашими проверками форме требуется задать атрибут novalidate. В label добавить указание об обязательности заполнения, но не звездочку. К полям формы также добавьте возможность автодополнения через атрибут autocomplete и подходящий `<token-list>`.
 
 Ограничения:
 
