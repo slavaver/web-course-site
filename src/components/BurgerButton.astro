@@ -1,0 +1,51 @@
+<button class="burger-button">
+    <div></div>
+    <div></div>
+    <div></div>
+</button>
+
+<style>
+    .burger-button {
+        cursor: pointer;
+        width: 52px;
+        height: 52px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding: 0.6875rem;
+        border-radius: 10px;
+        z-index: 9999;
+
+        &:focus-visible {
+            background-color: var(--color-bg-accent-second);
+        }
+
+        div {
+            height: 2px;
+            background: var(--color-text-primary);
+            border-radius: 2px;
+            transition-property: translate, rotate, scale, opacity;
+            transition-duration: 0.2s;
+            transition-timing-function: ease-in-out;
+        }
+
+        &.open div:nth-child(1) {
+            translate: 0 10px;
+            rotate: 45deg;
+        }
+
+        &.open div:nth-child(2) {
+            scale: 0;
+            opacity: 0;
+        }
+
+        &.open div:nth-child(3) {
+            translate: 0 -10px;
+            rotate: -45deg;
+        }
+
+        @media (width > 768px) {
+            display: none;
+        }
+    }
+</style>
