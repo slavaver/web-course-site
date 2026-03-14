@@ -1,16 +1,20 @@
 ---
-const currentYear = new Date().getFullYear();
+import { Image } from "astro:assets";
+import LogoFullSvg from "./logo-full.svg";
 
-const baseUrl = import.meta.env.BASE_URL;
+const currentYear = new Date().getFullYear();
 ---
 
 <footer class="footer">
     <div class="footer__container">
-        <img
-            class="footer__logo"
-            width="200px"
-            src={`${baseUrl}/assets/img/logo-full.svg`}
+        <Image
+            src={LogoFullSvg}
             alt=""
+            width={200}
+            height={50}
+            loading={"eager"}
+            decoding={"auto"}
+            class="footer__logo"
         />
         <p class="issue">
             Если вы заметили ошибку или хотите предложить изменения, пожалуйста, <a
