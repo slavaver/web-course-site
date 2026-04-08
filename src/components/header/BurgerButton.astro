@@ -14,7 +14,14 @@
         justify-content: space-around;
         padding: 0.6875rem;
         border-radius: 10px;
-        z-index: 9999;
+
+        &:active {
+            background-color: var(--color-bg-primary);
+        }
+
+        &:hover {
+            background-color: var(--color-bg-accent-second);
+        }
 
         &:focus-visible {
             background-color: var(--color-bg-accent-second);

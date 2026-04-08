@@ -1,0 +1,129 @@
+---
+import Logo from "./Logo.astro";
+import BurgerButton from "./BurgerButton.astro";
+import ThemeToggler from "./ThemeToggler.astro";
+import Menu from "./Menu.astro";
+
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<div class="sidebar">
+    <ul class="sidebar__list">
+        <li class="sidebar__item">
+            <a href={`${baseUrl}`} class="sidebar__link">Главная</a>
+        </li>
+        <li class="sidebar__item">
+            <a href={`${baseUrl}/labs/web-basics/`} class="sidebar__link"
+                >Основы веб-технологий</a
+            >
+        </li>
+        <li class="sidebar__item">
+            <a
+                href={`${baseUrl}/labs/client-side-basics/`}
+                class="sidebar__link">Основы веб-разработки на клиенте</a
+            >
+        </li>
+        <li class="sidebar__item">
+            <a href={`${baseUrl}/labs/client-side/`} class="sidebar__link"
+                >Веб-разработка на клиенте</a
+            >
+        </li>
+        <li class="sidebar__item">
+            <a href={`${baseUrl}/labs/archive/`} class="sidebar__link">Архив</a>
+        </li>
+        <li class="sidebar__item">
+            <a href={`${baseUrl}/useful/`} class="sidebar__link">База знаний</a>
+        </li>
+    </ul>
+</div>
+
+<header class="header">
+    <div class="header__container">
+        <Logo />
+        <BurgerButton />
+        <Menu />
+        <ThemeToggler />
+    </div>
+</header>
+
+<script>
+    const burgerButton = document.querySelector(".burger-button")!;
+    const sidebar = document.querySelector(".sidebar")!;
+
+    function toggleSidebar() {
+        burgerButton.classList.toggle("open");
+        sidebar.classList.toggle("open");
+    }
+
+    burgerButton.addEventListener("click", toggleSidebar);
+</script>
+
+<style>
+    .header {
+        position: fixed;
+        width: 100%;
+        margin-top: 0.625rem;
+        padding: 0.625rem;
+        z-index: 10;
+    }
+
+    .header::before {
+        content: "";
+        display: block;
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        width: calc(100% - 2 * 0.625rem);
+        height: 100%;
+        background-color: var(--color-bg-menu);
+        backdrop-filter: blur(40px);
+        border-radius: 1rem;
+    }
+
+    .header__container {
+        display: flex;
+        align-items: center;
+        transition: all 0.3s ease-in-out;
+        padding-inline: 0.625rem;
+        color: var(--color-text-primary);
+        justify-content: space-between;
+        max-width: 1280px;
+        margin-inline: auto;
+    }
+
+    .sidebar {
+        visibility: hidden;
+        height: 100dvh;
+        width: 100%;
+        z-index: 2;
+        position: fixed;
+        top: 0;
+        opacity: 0;
+        scale: 0;
+        transition-property: visibility, opacity, scale;
+        transition-duration: 0.2s;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transform-origin: top left;
+        background-color: var(--color-bg-menu);
+        backdrop-filter: blur(40px);
+    }
+
+    .sidebar.open {
+        visibility: visible;
+        opacity: 1;
+        scale: 1;
+    }
+
+    .sidebar__list {
+        padding-top: 5.75rem;
+
+        @media (width > 768px) {
+            padding-top: 7.5rem;
+        }
+    }
+
+    .sidebar__item {
+        margin: 1.25rem;
+        padding: 0 clamp(0rem, 1vw, 1.25rem);
+    }
+</style>

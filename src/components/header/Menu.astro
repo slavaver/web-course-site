@@ -1,0 +1,166 @@
+---
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<nav class="menu">
+    <ul class="menu__list">
+        <li>
+            <a class="menu__link" href={`${baseUrl}`}>Главная</a>
+        </li>
+        <li>
+            <details>
+                <summary><p>Курсы</p></summary>
+                <ul class="dropdown-list">
+                    <li class="dropdown-list__item">
+                        <a
+                            href={`${baseUrl}/labs/web-basics/`}
+                            class="dropdown-list__link">Основы веб-технологий</a
+                        >
+                    </li>
+                    <li class="dropdown-list__item">
+                        <a
+                            href={`${baseUrl}/labs/client-side-basics/`}
+                            class="dropdown-list__link"
+                            >Основы веб-разработки на клиенте</a
+                        >
+                    </li>
+                    <li class="dropdown-list__item">
+                        <a
+                            href={`${baseUrl}/labs/client-side/`}
+                            class="dropdown-list__link"
+                            >Веб-разработка на клиенте</a
+                        >
+                    </li>
+                    <li class="dropdown-list__item">
+                        <a
+                            href={`${baseUrl}/labs/archive/`}
+                            class="dropdown-list__link">Архив</a
+                        >
+                    </li>
+                </ul>
+            </details>
+        </li>
+        <li>
+            <a class="menu__link" href={`${baseUrl}/useful/`}>База знаний</a>
+        </li>
+    </ul>
+</nav>
+
+<script>
+    const details = document.querySelector("details")!;
+
+    function closeDetails(e: PointerEvent) {
+        if (!e.target) {
+            return;
+        }
+        if (e.target instanceof HTMLElement) {
+            if (!e.target.closest("details")) {
+                details.open = false;
+            }
+        }
+    }
+
+    document.addEventListener("click", closeDetails);
+</script>
+
+<style>
+    .menu {
+        @media (width <= 768px) {
+            display: none;
+        }
+    }
+    .menu__list {
+        display: flex;
+        gap: clamp(0px, 2vw, 40px);
+        align-items: center;
+    }
+
+    .menu__link {
+        border-radius: 10px;
+        padding: 1.25rem clamp(0rem, 1vw, 1.25rem);
+        &:active {
+            background-color: var(--color-bg-primary);
+        }
+
+        &:hover {
+            background-color: var(--color-bg-accent-second);
+        }
+
+        &:focus-visible {
+            background-color: var(--color-bg-accent-second);
+        }
+    }
+
+    summary::after {
+        content: "";
+        transform-origin: 50%;
+        pointer-events: none;
+        justify-self: flex-end;
+        width: 0.375rem;
+        height: 0.375rem;
+        transition-property: rotate, translate;
+        transition-duration: 0.2s;
+        display: block;
+        translate: 0 1px;
+        rotate: 135deg;
+        box-shadow: inset 2px 2px;
+    }
+
+    details[open] summary::after {
+        translate: 0 1px;
+        rotate: 225deg;
+    }
+
+    summary {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 1.25rem clamp(0rem, 1vw, 1.25rem);
+        border-radius: 10px;
+
+        &:active {
+            background-color: var(--color-bg-primary);
+        }
+
+        &:hover {
+            background-color: var(--color-bg-accent-second);
+        }
+
+        &:focus-visible {
+            background-color: var(--color-bg-accent-second);
+        }
+    }
+
+    .dropdown-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        position: absolute;
+        width: max-content;
+        z-index: 1;
+        left: 50%;
+        translate: -50% 15%;
+        padding: 1rem;
+        background-color: var(--color-bg-menu);
+        border-radius: 1rem;
+        backdrop-filter: blur(40px);
+    }
+
+    .dropdown-list__link {
+        display: block;
+        padding: 1rem;
+        border-radius: 10px;
+
+        &:active {
+            background-color: var(--color-bg-primary);
+        }
+
+        &:hover {
+            background-color: var(--color-bg-accent-second);
+        }
+
+        &:focus-visible {
+            background-color: var(--color-bg-accent-second);
+        }
+    }
+</style>

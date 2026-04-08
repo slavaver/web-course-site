@@ -1,0 +1,47 @@
+---
+import { Image } from "astro:assets";
+import LogoSvg from "./logo.svg";
+---
+
+<a class="header-logo" href="/web-course-site/">
+    <Image
+        src={LogoSvg}
+        alt="на главную"
+        width={40}
+        height={40}
+        loading={"eager"}
+        decoding={"auto"}
+    />
+</a>
+
+<style>
+    .header-logo {
+        display: none;
+        padding: 1.25rem;
+        border-radius: 10px;
+        transition-property: background-color;
+        transition-duration: 300ms;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+        & img {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+
+        &:active {
+            background-color: var(--color-bg-primary);
+        }
+
+        &:hover {
+            background-color: var(--color-bg-accent-second);
+        }
+
+        &:focus-visible {
+            background-color: var(--color-bg-accent-second);
+        }
+
+        @media (width > 768px) {
+            display: block;
+        }
+    }
+</style>
