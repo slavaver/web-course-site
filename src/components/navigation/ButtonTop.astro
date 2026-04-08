@@ -7,14 +7,13 @@
         type="button"
         id="back-to-top-btn"
         aria-label="Кнопка наверх"
-        class="fixed bottom-5 right-5 hidden z-999 animate-fade-in animate-duration-300"
+        class="back-to-top-btn hidden"
         tabindex="1"
         ><svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            class="w-16 h-16 fill-bg-accent_second"
-        >
+            class="back-to-top-btn__svg">
             <path
                 fill-rule="evenodd"
                 d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm.53 5.47a.75.75 0 00-1.06 0l-3 3a.75.75 0 101.06 1.06l1.72-1.72v5.69a.75.75 0 001.5 0v-5.69l1.72 1.72a.75.75 0 101.06-1.06l-3-3z"
@@ -46,3 +45,33 @@
         }
     }
 </script>
+
+<style>
+    .back-to-top-btn {
+        animation: fade-in 300ms linear 1;
+        display: block;
+        z-index: 1;
+        right: 1.25rem;
+        bottom: 1.25rem;
+        position: fixed;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .back-to-top-btn__svg {
+        width: 4rem;
+        height: 4rem;
+        fill: var(--color-bg-accent-second);
+    }
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+</style>
