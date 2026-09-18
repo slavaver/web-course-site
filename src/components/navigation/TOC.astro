@@ -5,26 +5,41 @@ interface Props {
     headings: MarkdownHeading[];
 }
 const { headings } = Astro.props;
-
-const marginVariants: Record<number, string> = {
-    0: "ml-0",
-    1: "ml-2",
-    2: "ml-4",
-    3: "ml-6",
-    4: "ml-8",
-    5: "ml-10",
-};
 ---
 
-<h2 class="xl:mt-2">Содержание</h2>
-<ul class="list-none !p-0 leading-tight">
+<h2 class="toc__title">Содержание</h2>
+<ul class="toc__list">
     {
         headings.map((heading) => (
-            <li class:list={["mb-2.5", marginVariants[heading.depth - 1]]}>
-                <a class="font-thin" href={"#" + heading.slug}>
+            <li class="toc__item" style={`--toc-level: ${heading.depth - 1};`}>
+                <a class="toc__link" href={"#" + heading.slug}>
                     {heading.text}
                 </a>
             </li>
         ))
     }
 </ul>
+
+<style>
+    .toc__title {
+        @media (min-width: 1280px) {
+            margin-top: 0.5rem;
+        }
+    }
+
+    .toc__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        line-height: 1.25;
+    }
+
+    .toc__item {
+        margin-bottom: 0.625rem;
+        margin-left: calc(0.5rem * var(--toc-level));
+    }
+
+    .toc__link {
+        font-weight: 100;
+    }
+</style>

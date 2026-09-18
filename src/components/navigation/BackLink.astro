@@ -5,10 +5,26 @@ const { path } = Astro.props;
 
 <a
     href={path}
-    class="flex gap-2 font-bold font-titles text-[20px] items-center mb-5"
+    class="back-link"
     ><img
         src={getBasedUrl("/assets/img/chevron-right.svg")}
-        class="mb-1"
+        class="back-link__icon"
         alt=""
-    /><span>Назад</span></a
+    /><span class="back-link__text">Назад</span></a
 >
+
+<style>
+    .back-link {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        margin-bottom: 1.25rem;
+        font-family: "NextArt", sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .back-link__icon {
+        margin-bottom: 0.25rem;
+    }
+</style>
