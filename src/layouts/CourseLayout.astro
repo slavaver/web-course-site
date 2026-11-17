@@ -1,16 +1,35 @@
 ---
 import Heading from "@components/Heading.astro";
+import VariantNotice from "@components/VariantNotice.astro";
 import BaseLayoutSnow from "./BaseLayoutSnow.astro";
 import CourseImportantSection from "@components/CourseSections/CourseImportantSection.astro";
 import CourseExercisesSection from "@/components/CourseSections/CourseExercisesSection.astro";
 import CourseLectureSection from "@/components/CourseSections/CourseLectureSection.astro";
 import CourseRkSection from "@/components/CourseSections/CourseRkSection.astro";
+import type { VariantContext } from "@utils/registry";
 
-const { title, description, data } = Astro.props;
+interface Props {
+    title: string;
+    description?: string;
+    // Материалы, сгруппированные по типу (important/labs/practice/lecture/rk)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    data: Record<string, any>;
+    /** Контекст варианта курса (формат/год) — показывает плашку и ссылки на другие форматы */
+    variant?: VariantContext;
+}
+
+const { title, description, data, variant } = Astro.props;
 ---
 
 <BaseLayoutSnow>
     <Heading title={title} description={description} />
+    {
+        variant && (
+            <div class="max-w-screen px-5 md:px-10 xl:max-w-screen-xl mx-auto mb-15">
+                <VariantNotice {...variant} />
+            </div>
+        )
+    }
     {data.important && <CourseImportantSection items={data.important} />}
     {data.labs && <CourseExercisesSection items={data.labs} />}
     {data.practice && <CourseExercisesSection items={data.practice} />}

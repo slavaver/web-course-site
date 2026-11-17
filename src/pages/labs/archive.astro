@@ -1,106 +1,75 @@
 ---
-import { getCollection } from "astro:content";
-import type { FourDigitYear, CoursesItems } from "@/types/Courses";
-
 import Heading from "@components/Heading.astro";
+import LinkCard from "@components/LinkCard.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
-import ArchiveYearSection from "@components/Archive/ArchiveYearSection.astro";
+import { getCoursesInfo, variantPath } from "@utils/registry";
+import { getBasedUrl } from "@utils/paths";
+import type { FourDigitYear } from "@/types/Courses";
 
-const allCourses = (
-    await Promise.all([
-        getCollection("webBasics"),
-        getCollection("clientSideBasics"),
-        getCollection("clientSide"),
-    ])
-).flat();
-
-allCourses.forEach((item) => {
-    switch (item.collection) {
-        case "webBasics":
-            item.id = "web-basics/" + item.id;
-            break;
-        case "clientSideBasics":
-            item.id = "client-side-basics/" + item.id;
-            break;
-        case "clientSide":
-            item.id = "client-side/" + item.id;
-            break;
-        default:
-            break;
-    }
-});
-
-function getCoursesByYear(courses: CoursesItems, year: FourDigitYear) {
-    return courses.filter(
-        (course) => course.id.includes(year) && course.id.includes("full-time")
-    );
+/**
+ * Архив собирается автоматически: в него попадают все варианты
+ * (курс × формат × год), кроме текущих. Текущим считается самый свежий
+ * год формата (см. src/utils/registry.ts).
+ */
+interface ArchiveVariant {
+    courseTitle: string;
+    formatLabel: string;
+    url: string;
 }
 
-const years: FourDigitYear[] = ["2024", "2023", "2022"];
+const infos = await getCoursesInfo();
+
+const variantsByYear = new Map<FourDigitYear, ArchiveVariant[]>();
+for (const info of infos) {
+    for (const format of info.formats) {
+        for (const year of format.years) {
+            if (year === format.currentYear) continue;
+            const variants = variantsByYear.get(year) ?? [];
+            variants.push({
+                courseTitle: info.title,
+                formatLabel: format.label,
+                url: variantPath(info.id, format.format, year),
+            });
+            variantsByYear.set(year, variants);
+        }
+    }
+}
+
+const years = [...variantsByYear.keys()].sort().reverse();
 ---
 
 <BaseLayout>
-    <Heading title={`Архив`} />
-    <main class="prose lg:prose-lg mx-auto">
+    <Heading
+        title="Архив"
+        description="Варианты курсов прошлых лет: материалы для студентов старше текущих потоков"
+    />
+    <div class="prose lg:prose-lg mx-auto">
         {
             years.map((year) => (
-                <ArchiveYearSection
-                    year={year}
-                    items={getCoursesByYear(allCourses, year)}
-                />
+                <section class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30">
+                    <h2 class="text-center text-text-inverted mb-5">
+                        {year} год
+                    </h2>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+                        {(variantsByYear.get(year) ?? []).map((variant) => (
+                            <li>
+                                <LinkCard
+                                    title={variant.courseTitle}
+                                    info={`${variant.formatLabel} форма`}
+                                    href={getBasedUrl(variant.url)}
+                                />
+                            </li>
+                        ))}
+                    </ul>
+                </section>
             ))
         }
-    </main>
-</BaseLayout>
-
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        function changeItemsVisibility(
-            items: NodeListOf<HTMLElement>,
-            numberVisible: number,
-            show: boolean
-        ) {
-            items.forEach((item, index) => {
-                if (index >= numberVisible) {
-                    if (show) {
-                        item.classList.remove("hidden");
-                    } else {
-                        item.classList.add("hidden");
-                    }
-                }
-            });
+        {
+            years.length === 0 && (
+                <p class="text-center text-text-inverted max-w-screen px-5 mx-auto mb-30">
+                    Архив пока пуст — все варианты курсов актуальны.
+                </p>
+            )
         }
-
-        const lists = document.querySelectorAll(".course ol");
-        const main = document.querySelector("main");
-        const initialVisible = 4;
-
-        lists.forEach((list) => {
-            const items = list.querySelectorAll("li");
-            if (items.length <= initialVisible) {
-                list.parentElement?.querySelector("button")?.remove();
-            } else {
-                changeItemsVisibility(items, initialVisible, false);
-            }
-        });
-
-        main?.addEventListener("click", (e: PointerEvent) => {
-            const eventTarget = e.target;
-            if (eventTarget instanceof HTMLButtonElement) {
-                const list = eventTarget.parentElement?.querySelectorAll("li");
-                const hiddenItems =
-                    eventTarget.parentElement?.querySelectorAll("li.hidden");
-                if (!list || !hiddenItems) {
-                    return;
-                }
-                if (hiddenItems && hiddenItems.length > 0) {
-                    changeItemsVisibility(list, initialVisible, true);
-                    eventTarget.textContent = "Спрятать";
-                } else {
-                    changeItemsVisibility(list, initialVisible, false);
-                    eventTarget.textContent = "Показать все";
-                }
-            }
-        });
-    });
-</script>
+    </div>
+</BaseLayout>

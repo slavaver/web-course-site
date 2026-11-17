@@ -1,0 +1,52 @@
+---
+import LabLayout from "@layouts/LabLayout.astro";
+import { getCollection, render } from "astro:content";
+import courses from "@/data/courses";
+import { getCourseInfo, parseEntryId, variantPath } from "@utils/registry";
+import type { VariantContext } from "@utils/registry";
+
+/**
+ * Страницы отдельных работ: /labs/<курс>/<формат>/<год>/<работа>/.
+ * Один общий роут для всех курсов вместо отдельных папок.
+ */
+export async function getStaticPaths() {
+    const pathsByCourse = await Promise.all(
+        courses.map(async (course) => {
+            const entries = await getCollection(course.collection);
+            return entries.map((entry) => ({
+                params: { course: course.id, slug: entry.id },
+                props: { entry },
+            }));
+        }),
+    );
+    return pathsByCourse.flat();
+}
+
+const { entry } = Astro.props;
+const courseId = Astro.params.course as string;
+const { Content, headings } = await render(entry);
+
+// Определяем, к какому варианту (формат/год) относится работа,
+// чтобы показать плашку на устаревших страницах
+let notice: VariantContext | undefined;
+const parsed = parseEntryId(entry.id);
+if (parsed) {
+    const info = await getCourseInfo(courseId);
+    const formatInfo = info?.formats.find(
+        (item) => item.format === parsed.format,
+    );
+    if (formatInfo) {
+        notice = {
+            formatLabel: formatInfo.label,
+            year: parsed.year,
+            isCurrent: parsed.year === formatInfo.currentYear,
+            currentYear: formatInfo.currentYear,
+            currentUrl: variantPath(courseId, parsed.format),
+        };
+    }
+}
+---
+
+<LabLayout frontmatter={entry.data} headinglist={headings} notice={notice}>
+    <Content />
+</LabLayout>

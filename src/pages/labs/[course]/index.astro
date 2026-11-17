@@ -1,0 +1,41 @@
+---
+import CourseLayout from "@layouts/CourseLayout.astro";
+import { getCoursesInfo, getVariantPageData } from "@utils/registry";
+import type { FourDigitYear } from "@/types/Courses";
+
+/**
+ * Главная страница курса: всегда показывает ТЕКУЩИЙ очный вариант.
+ * Год определяется автоматически по самым свежим материалам в src/courses.
+ */
+export async function getStaticPaths() {
+    const infos = await getCoursesInfo();
+    return infos.flatMap((info) => {
+        const fullTime = info.formats.find((item) => item.format === "full-time");
+        if (!fullTime) return [];
+        return [
+            {
+                params: { course: info.id },
+                props: { courseId: info.id, year: fullTime.currentYear },
+            },
+        ];
+    });
+}
+
+interface Props {
+    courseId: string;
+    year: FourDigitYear;
+}
+
+const { courseId, year } = Astro.props as Props;
+const page = await getVariantPageData(courseId, "full-time", year);
+if (!page) {
+    throw new Error(`Вариант курса не найден: ${courseId}/full-time/${year}`);
+}
+---
+
+<CourseLayout
+    title={page.title}
+    description={page.description}
+    data={page.data}
+    variant={page.variant}
+/>

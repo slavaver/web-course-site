@@ -1,4 +1,6 @@
 ---
+import courses, { archiveMeta } from "@/data/courses";
+
 const baseUrl = import.meta.env.BASE_URL;
 ---
 
@@ -11,30 +13,22 @@ const baseUrl = import.meta.env.BASE_URL;
             <details>
                 <summary><p>Курсы</p></summary>
                 <ul class="dropdown-list">
+                    {
+                        courses.map((course) => (
+                            <li class="dropdown-list__item">
+                                <a
+                                    href={`${baseUrl}/labs/${course.id}/`}
+                                    class="dropdown-list__link"
+                                >
+                                    {course.title}
+                                </a>
+                            </li>
+                        ))
+                    }
                     <li class="dropdown-list__item">
                         <a
-                            href={`${baseUrl}/labs/web-basics/`}
-                            class="dropdown-list__link">Основы веб-технологий</a
-                        >
-                    </li>
-                    <li class="dropdown-list__item">
-                        <a
-                            href={`${baseUrl}/labs/client-side-basics/`}
-                            class="dropdown-list__link"
-                            >Основы веб-разработки на клиенте</a
-                        >
-                    </li>
-                    <li class="dropdown-list__item">
-                        <a
-                            href={`${baseUrl}/labs/client-side/`}
-                            class="dropdown-list__link"
-                            >Веб-разработка на клиенте</a
-                        >
-                    </li>
-                    <li class="dropdown-list__item">
-                        <a
-                            href={`${baseUrl}/labs/archive/`}
-                            class="dropdown-list__link">Архив</a
+                            href={`${baseUrl}/labs/${archiveMeta.id}/`}
+                            class="dropdown-list__link">{archiveMeta.title}</a
                         >
                     </li>
                 </ul>

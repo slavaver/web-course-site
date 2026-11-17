@@ -1,0 +1,102 @@
+---
+import { getBasedUrl } from "@utils/paths";
+
+interface Props {
+    formatLabel: string;
+    year: string;
+    isCurrent: boolean;
+    currentYear?: string;
+    /** Страница текущего года этого формата (без base) */
+    currentUrl?: string;
+    /** Ссылки на текущие варианты других форматов курса (без base) */
+    otherFormats?: { label: string; url: string }[];
+}
+
+const {
+    formatLabel,
+    year,
+    isCurrent,
+    currentYear,
+    currentUrl,
+    otherFormats = [],
+} = Astro.props;
+---
+
+<aside class:list={["variant-notice", { "variant-notice_archived": !isCurrent }]}>
+    <p class="variant-notice__label">
+        <span class="variant-notice__format">{formatLabel} форма</span>
+        <span class="variant-notice__year">{year} год</span>
+        {!isCurrent && <span class="variant-notice__tag">архив</span>}
+    </p>
+    <nav class="variant-notice__links" aria-label="Другие варианты курса">
+        {
+            !isCurrent && currentUrl && (
+                <a class="variant-notice__link" href={getBasedUrl(currentUrl)}>
+                    Актуальный вариант ({currentYear})
+                </a>
+            )
+        }
+        {
+            otherFormats.map((format) => (
+                <a class="variant-notice__link" href={getBasedUrl(format.url)}>
+                    {format.label} форма
+                </a>
+            ))
+        }
+    </nav>
+</aside>
+
+<style>
+    .variant-notice {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem 1.5rem;
+        padding: 1rem 1.5rem;
+        background-color: var(--color-bg-secondary);
+        border-radius: 20px;
+    }
+
+    .variant-notice_archived {
+        border: 2px dashed var(--color-border);
+    }
+
+    .variant-notice__label {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin: 0;
+    }
+
+    .variant-notice__format {
+        font-family: "NextArt", sans-serif;
+        font-weight: 600;
+    }
+
+    .variant-notice__tag {
+        padding: 0.25rem 0.75rem;
+        border-radius: 999px;
+        background-color: var(--color-bg-accent-second);
+        font-size: 0.875rem;
+        text-transform: lowercase;
+    }
+
+    .variant-notice__links {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem 1.25rem;
+    }
+
+    .variant-notice__link {
+        color: inherit;
+        text-decoration: underline;
+        font-weight: 500;
+
+        &:hover,
+        &:focus-visible {
+            text-decoration: none;
+        }
+    }
+</style>

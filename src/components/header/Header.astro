@@ -3,6 +3,7 @@ import Logo from "./Logo.astro";
 import BurgerButton from "./BurgerButton.astro";
 import ThemeToggler from "./ThemeToggler.astro";
 import Menu from "./Menu.astro";
+import courses, { archiveMeta } from "@/data/courses";
 
 const baseUrl = import.meta.env.BASE_URL;
 ---
@@ -12,24 +13,19 @@ const baseUrl = import.meta.env.BASE_URL;
         <li class="sidebar__item">
             <a href={`${baseUrl}`} class="sidebar__link">Главная</a>
         </li>
+        {
+            courses.map((course) => (
+                <li class="sidebar__item">
+                    <a href={`${baseUrl}/labs/${course.id}/`} class="sidebar__link">
+                        {course.title}
+                    </a>
+                </li>
+            ))
+        }
         <li class="sidebar__item">
-            <a href={`${baseUrl}/labs/web-basics/`} class="sidebar__link"
-                >Основы веб-технологий</a
+            <a href={`${baseUrl}/labs/${archiveMeta.id}/`} class="sidebar__link"
+                >{archiveMeta.title}</a
             >
-        </li>
-        <li class="sidebar__item">
-            <a
-                href={`${baseUrl}/labs/client-side-basics/`}
-                class="sidebar__link">Основы веб-разработки на клиенте</a
-            >
-        </li>
-        <li class="sidebar__item">
-            <a href={`${baseUrl}/labs/client-side/`} class="sidebar__link"
-                >Веб-разработка на клиенте</a
-            >
-        </li>
-        <li class="sidebar__item">
-            <a href={`${baseUrl}/labs/archive/`} class="sidebar__link">Архив</a>
         </li>
         <li class="sidebar__item">
             <a href={`${baseUrl}/useful/`} class="sidebar__link">База знаний</a>
