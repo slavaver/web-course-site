@@ -2,7 +2,6 @@ import { getCollection } from "astro:content";
 import courses, { formatLabels } from "@/data/courses";
 import type { CourseMeta } from "@/data/courses";
 import type {
-    Collections,
     CourseType,
     FourDigitYear,
     CoursesItems,
