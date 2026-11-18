@@ -1,17 +1,18 @@
 import { defineConfig } from "astro/config";
-import remarkMath from "remark-math";
-import rehypeKatex from "rehype-mathjax";
+import { satteri } from "@astrojs/markdown-satteri";
+import { satteriMathjax } from "satteri-mathjax";
 import UnoCSS from "unocss/astro";
 
-// https://astro.build/config
 export default defineConfig({
     site: "https://slavaver.github.io",
     base: "/web-course-site",
     output: "static",
     integrations: [UnoCSS()],
     markdown: {
-        remarkPlugins: [remarkMath],
-        rehypePlugins: [rehypeKatex],
+        processor: satteri({
+            features: { math: true },
+            mdastPlugins: [satteriMathjax()],
+        }),
         syntaxHighlight: "shiki",
         shikiConfig: {
             themes: {

@@ -11,15 +11,15 @@
         "astro": "astro"
     },
     "dependencies": {
-        "@astrojs/check": "^0.9.7",
-        "astro": "^6.0.4"
+        "astro": "^7.4.12"
     },
     "devDependencies": {
-        "@unocss/astro": "^66.6.6",
-        "prettier": "^3.8.1",
-        "rehype-mathjax": "^7.1.0",
-        "remark-math": "^6.0.0",
-        "typescript": "^5.9.3",
-        "unocss": "^66.6.6"
+        "typescript": "^6.0.3",
+        "@astrojs/check": "^0.9.12",
+        "@astrojs/markdown-satteri": "^0.4.10",
+        "unocss": "^66.13.0",
+        "@unocss/astro": "^66.13.0",
+        "satteri-mathjax": "^0.3.0",
+        "prettier": "^3.10.1"
     }
 }
