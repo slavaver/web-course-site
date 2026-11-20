@@ -23,12 +23,15 @@ export interface CourseInfo extends CourseMeta {
 
 /** Ссылки и подписи варианта курса, готовые для передачи в VariantNotice */
 export interface VariantContext {
+    courseTitle: string;
     formatLabel: string;
     year: FourDigitYear;
     isCurrent: boolean;
     currentYear: FourDigitYear;
     /** Страница текущего года этого же формата (без года в URL) */
     currentUrl: string;
+    /** Хаб курса: страница со всеми форматами и годами */
+    hubUrl: string;
     otherFormats?: { label: string; url: string }[];
 }
 
@@ -204,11 +207,13 @@ export async function getVariantPageData(
     const data = Object.groupBy([...entries, ...lectures], ({ data }) => data.type);
 
     const variant: VariantContext = {
+        courseTitle: info.title,
         formatLabel: formatInfo.label,
         year,
         isCurrent: year === formatInfo.currentYear,
         currentYear: formatInfo.currentYear,
         currentUrl: variantPath(courseId, format),
+        hubUrl: variantPath(courseId),
         otherFormats: info.formats
             .filter((item) => item.format !== format)
             .map((item) => ({

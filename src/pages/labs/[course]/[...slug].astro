@@ -37,11 +37,13 @@ if (parsed) {
     );
     if (formatInfo) {
         notice = {
+            courseTitle: info!.title,
             formatLabel: formatInfo.label,
             year: parsed.year,
             isCurrent: parsed.year === formatInfo.currentYear,
             currentYear: formatInfo.currentYear,
             currentUrl: variantPath(courseId, parsed.format),
+            hubUrl: variantPath(courseId),
         };
     }
 }

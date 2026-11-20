@@ -8,19 +8,17 @@ interface Props {
 const { href, title, description } = Astro.props;
 ---
 
-<li>
-    <a aria-label="Перейти к курсу" href={href} class="course-card">
-        <h3 class="course-card__title no-break-hyphen">
-            {title}
-        </h3>
-        <div class="course-card__content">
-            <p class="course-card__description">
-                {description}
-            </p>
-            <i class="course-card__goto-icon"></i>
-        </div>
-    </a>
-</li>
+<a aria-label="Перейти к курсу" href={href} class="course-card">
+    <h3 class="course-card__title no-break-hyphen">
+        {title}
+    </h3>
+    <div class="course-card__content">
+        <p class="course-card__description">
+            {description}
+        </p>
+        <i class="course-card__goto-icon"></i>
+    </div>
+</a>
 
 <style>
     .course-card {
@@ -38,6 +36,7 @@ const { href, title, description } = Astro.props;
 
         @media (min-width: 768px) {
             flex-direction: row;
+            gap: 3.5rem;
             padding: 1.875rem;
 
             &:hover {

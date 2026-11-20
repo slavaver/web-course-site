@@ -3,7 +3,7 @@ import Logo from "./Logo.astro";
 import BurgerButton from "./BurgerButton.astro";
 import ThemeToggler from "./ThemeToggler.astro";
 import Menu from "./Menu.astro";
-import courses, { archiveMeta } from "@/data/courses";
+import courses from "@/data/courses";
 
 const baseUrl = import.meta.env.BASE_URL;
 ---
@@ -22,11 +22,6 @@ const baseUrl = import.meta.env.BASE_URL;
                 </li>
             ))
         }
-        <li class="sidebar__item">
-            <a href={`${baseUrl}/labs/${archiveMeta.id}/`} class="sidebar__link"
-                >{archiveMeta.title}</a
-            >
-        </li>
         <li class="sidebar__item">
             <a href={`${baseUrl}/useful/`} class="sidebar__link">База знаний</a>
         </li>

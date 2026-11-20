@@ -8,6 +8,8 @@ interface Props {
     currentYear?: string;
     /** Страница текущего года этого формата (без base) */
     currentUrl?: string;
+    /** Хаб курса со всеми форматами и годами (без base) */
+    hubUrl?: string;
     /** Ссылки на текущие варианты других форматов курса (без base) */
     otherFormats?: { label: string; url: string }[];
 }
@@ -18,6 +20,7 @@ const {
     isCurrent,
     currentYear,
     currentUrl,
+    hubUrl,
     otherFormats = [],
 } = Astro.props;
 ---
@@ -33,6 +36,13 @@ const {
             !isCurrent && currentUrl && (
                 <a class="variant-notice__link" href={getBasedUrl(currentUrl)}>
                     Актуальный вариант ({currentYear})
+                </a>
+            )
+        }
+        {
+            hubUrl && (
+                <a class="variant-notice__link" href={getBasedUrl(hubUrl)}>
+                    Все варианты курса
                 </a>
             )
         }
