@@ -1,0 +1,104 @@
+---
+import UsefulCard from "@components/UsefulCard.astro";
+
+import { getCollection } from "astro:content";
+
+const allUseful = await getCollection("useful");
+const lengths = allUseful.map((post) => post.body?.length);
+
+const usefulItems = allUseful.map((item, index) => ({
+    ...item,
+    length: lengths[index],
+}));
+
+const usefulStatic = [
+    usefulItems.find((post) => post.id === "rules")!,
+    usefulItems.find((post) => post.id === "links")!,
+];
+
+const usefulDynamic = usefulItems
+    .filter((post) => post.id !== "rules" && post.id !== "links")
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 2);
+
+const useful = [...usefulStatic, ...usefulDynamic];
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<section id="useful" class="knowledge-base">
+    <div class="max-w-screen px-5 md:px-10 xl:px-5 xl:max-w-screen-xl mx-auto">
+        <h2 class="useful-title title">База знаний</h2>
+        <div class="knowledge-base__items">
+            {useful.slice(0, 2).map((useful) => (
+                <UsefulCard useful={useful} />
+            ))}
+            <p>
+                Здесь вы найдете подборки полезных ресурсов, конспекты, а также
+                статьи с теорией, раскрывающие ключевые темы курсов
+            </p>
+            <div class="hidden sm:block">
+                <UsefulCard useful={useful[2]} />
+            </div>
+            <div class="other-useful flex flex-col justify-between order-1 lg:order-0">
+                <img src=`${baseUrl}/assets/img/cat-chill.svg` alt="" />
+                <a
+                    class="font-titles text-base text-center font-600 bg-bg-accent_second sm:px-5 px-11.5 py-5 rounded-[20px] transition md:hover:bg-hover-secondary duration-300 md:active:bg-active-secondary focus-visible:bg-hover-secondary motion-reduce:transition-none"
+                    href="/web-course-site/useful/"
+                >
+                    Еще больше полезностей
+                </a>
+            </div>
+            <div class="hidden sm:block">
+                <UsefulCard useful={useful[3]} />
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .knowledge-base {
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        border-radius: 30px;
+        padding-block: 3.75rem;
+        background-color: var(--color-bg-primary);
+        margin-bottom: 7.5rem;
+
+        @media (width > 640px) {
+            border-radius: 60px;
+        }
+    }
+
+    .knowledge-base__items {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        margin-inline: auto;
+        max-width: 350px;
+        @media (width > 600px) {
+            max-width: none;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        @media (width > 1024px) {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+    }
+
+    .knowledge-base::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--color-bg-accent-first);
+        -webkit-mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 728" fill="none"%3E%3Cpath d="M-384.828 550.33C-279.518 431.882 -29.173 211.72 129.724 278.664C328.344 362.345 -156.414 623.403 -2.48331 780.746C176.815 964.017 967.034 -77.2714 1180.55 48.249C1394.07 173.769 1062.62 452.507 1180.55 550.33C1274.9 628.589 1460.28 401.827 1541.17 278.664" stroke="black" stroke-width="150"/%3E%3C/svg%3E');
+        mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 728" fill="none"%3E%3Cpath d="M-384.828 550.33C-279.518 431.882 -29.173 211.72 129.724 278.664C328.344 362.345 -156.414 623.403 -2.48331 780.746C176.815 964.017 967.034 -77.2714 1180.55 48.249C1394.07 173.769 1062.62 452.507 1180.55 550.33C1274.9 628.589 1460.28 401.827 1541.17 278.664" stroke="black" stroke-width="150"/%3E%3C/svg%3E');
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-size: cover;
+        mask-size: cover;
+    }
+</style>

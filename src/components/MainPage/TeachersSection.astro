@@ -1,0 +1,81 @@
+---
+import PeopleCard from "@components/MainPage/PeopleCard.astro";
+
+import ImgSlavaver from "./imgs/slavaver.webp";
+import ImgArtem from "./imgs/gnibedaArtem.webp";
+
+const slavaver = {
+    fullName: "Верещагин Владислав Юрьевич",
+    img: ImgSlavaver,
+    role: "Доцент, к.т.н.",
+};
+
+const artem = {
+    fullName: "Гнибеда Артем Юрьевич",
+    img: ImgArtem,
+    role: "Старший преподаватель",
+};
+---
+
+<section class="teachers">
+    <div class="teachers__container">
+        <h2 class="teachers__title light:text-text-secondary">Преподаватели</h2>
+        <ul class="teachers__list">
+            <li>
+                <PeopleCard
+                    name={slavaver.fullName}
+                    img={slavaver.img}
+                    role={slavaver.role}
+                />
+            </li>
+            <li>
+                <PeopleCard
+                    name={artem.fullName}
+                    img={artem.img}
+                    role={artem.role}
+                />
+            </li>
+        </ul>
+    </div>
+</section>
+
+<style>
+    .teachers {
+        margin-bottom: 7.5rem;
+    }
+
+    .teachers__container {
+        max-width: 1280px;
+        width: 100%;
+        margin-inline: auto;
+        padding-inline: 1.25rem;
+
+        @media (width > 768px) {
+            padding-inline: 2.5rem;
+        }
+
+        @media (width > 1280px) {
+            padding-inline: 1.25rem;
+        }
+    }
+
+    .teachers__title {
+        text-align: center;
+        margin-bottom: 2.5rem;
+    }
+
+    .teachers__list {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        @media (width > 480px) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        @media (width > 1024px) {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+    }
+</style>

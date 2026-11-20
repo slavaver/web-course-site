@@ -49,11 +49,6 @@ export default defineConfig({
             border: "var(--color-border)",
             code: "var(--color-code)",
         },
-        fontFamily: {
-            texts: ["Gilroy", "sans-serif"],
-            titles: ["NextArt", "sans-serif"],
-            mono: ["JetBrainsMono", "monospace"],
-        },
     },
 
     rules: [
@@ -108,60 +103,5 @@ export default defineConfig({
     ],
     shortcuts: {
         title: "text-center mb-10",
-        userActionsLink:
-            "p-5 rounded-[10px] transition duration-300 md:hover:bg-hover-primary md:active:bg-active-primary focus-visible:bg-hover-primary motion-reduce:transition-none",
-        userActions:
-            "transition md:hover:bg-hover-primary duration-300 md:active:bg-active-primary focus-visible:bg-hover-primary motion-reduce:transition-none",
-        userActionsLinkAlt:
-            "transition md:hover:bg-hover-secondary duration-300 md:active:bg-active-secondary focus-visible:bg-hover-secondary motion-reduce:transition-none",
     },
-
-    preflights: [
-        {
-            getCSS: () => `
-            p, a, span, label{
-                transition: all 0.2s ease-in-out;
-                font-size:20px;
-                font-weight: 400;
-            }
-            select, input{
-                transition: all 0.2s ease-in-out;
-                appearance: none;
-                font-size:20px;
-                padding: 20px;
-                border-radius: 20px;
-                width: 100%;
-            }
-
-            @media(max-width: 1200px) {
-                h1 {
-                    font-size: clamp(32px, 5vw, 72px);
-                }
-                h2 {
-                    font-size: 40px;
-                }
-                h3{
-                    font-size: 24px;
-                }
-                p, a, span, label{
-                    font-size:18px;
-                }
-            }
-                @media(max-width: 768px) {
-                h1 {
-                    font-size: 32px;
-                }
-                h2 {
-                    font-size: 28px;
-                }
-                h3{
-                    font-size: 24px;
-                }
-                p, a, span, label{
-                    font-size:16px;
-                }
-            }
-            `,
-        },
-    ],
 });

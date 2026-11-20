@@ -1,0 +1,48 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+    name: string;
+    img: ImageMetadata;
+    role: string;
+}
+
+const { name, img, role } = Astro.props;
+---
+
+<div class="persons-item">
+    <div class="persons-item__media">
+        <Image src={img} alt="" class="persons-item__image" />
+    </div>
+    <div class="persons-item__body">
+        <h3 class="persons-item__name light:text-text-secondary">{name}</h3>
+        <p class="persons-item__role">{role}</p>
+    </div>
+</div>
+
+<style>
+    .persons-item__media {
+        display: flex;
+        align-items: flex-end;
+        aspect-ratio: 1 / 1;
+        margin-bottom: 1.25rem;
+        border-radius: 30px;
+        background-color: var(--color-bg-tertiary);
+        overflow: hidden;
+    }
+
+    .persons-item__image {
+        width: 100%;
+    }
+
+    .persons-item__name {
+        margin-bottom: 0.5rem;
+        line-height: 1;
+    }
+
+    .persons-item__role {
+        line-height: 1;
+        color: var(--color-text-tertiary);
+    }
+</style>

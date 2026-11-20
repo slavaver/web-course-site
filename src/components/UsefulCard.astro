@@ -1,6 +1,8 @@
 ---
 import type { UsefulPost } from "../types/Useful";
 
+import TimeIcon from "../assets/imgs/time-icon.svg";
+
 interface Props {
     useful: UsefulPost;
 }
@@ -31,19 +33,14 @@ const getTimeToRead = (length: number) => {
     class="card"
     href={href}
 >
-    <h3 class="card__title">
-        {useful.data.title}
-    </h3>
-    <p>
-        {useful.data.description}
-    </p>
+    <h3 class="card__title">{useful.data.title}</h3>
+    <p>{useful.data.description}</p>
     <footer class="card__footer">
         <div class="card__time-date">
             <p class="card__time">
-                <img
-                    src=`${baseUrl}/assets/img/time-icon.svg`
-                    alt="время чтения"
-                /> ~{length && getTimeToRead(length)} мин
+                <TimeIcon />
+                <span class="sr-only">Время чтения</span>~
+                {length && getTimeToRead(length)} мин
             </p>
             {useful.data.date && <p>{formattedDate}</p>}
         </div>
@@ -114,6 +111,7 @@ const getTimeToRead = (length: number) => {
 
     .card__time {
         display: flex;
+        align-items: center;
         gap: 0.25rem;
     }
 

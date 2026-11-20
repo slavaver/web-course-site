@@ -61,36 +61,29 @@ const activeAuthor = people.find((person) => person.fullName.includes(author));
             </article>
             <address class="flex items-center justify-between gap-4 mt-10">
                 <div class="flex items-center gap-2.5">
-                    <div
-                        class="aspect-square w-12 flex rounded-full overflow-hidden bg-bg-tertiary"
-                    >
+                    <div class="aspect-square w-12 flex rounded-full overflow-hidden bg-bg-tertiary">
                         <img
-                            src={activeAuthor?.imgUrl ||
-                                `${baseUrl}/assets/img/cat-glasses.svg`}
+                            src={
+                                activeAuthor?.imgUrl ||
+                                `${baseUrl}/assets/img/cat-glasses.svg`
+                            }
                             class="w-full h-full object-contain object-bottom"
                             alt={author}
                         />
                     </div>
                     <div class="flex flex-col gap-1">
-                        <p
-                            class="text-xs xl:text-base text-text-inverted !leading-[1.2] not-italic"
-                        >
-                            {
-                                activeAuthor?.name ||
-                                    author ||
-                                    "Неизвестный автор"
-                            }
+                        <p class="text-xs xl:text-base text-text-inverted !leading-[1.2] not-italic">
+                            {activeAuthor?.name ||
+                                author ||
+                                "Неизвестный автор"}
                         </p>
                         <time
                             class="text-xs xl:text-base text-text-tertiary leading-[1.2] xl:leading-[1.2] not-italic"
                             id="last-edit-date"
-                        >
-                        </time>
+                        ></time>
                     </div>
                 </div>
-                <div
-                    class="aspect-square w-12 flex items-center justify-center border rounded-full border-bg-accent_second text-bg-accent_second hover:border-bg-hover active:border-bg-active focus:border-bg-active hover:text-bg-hover active:text-bg-active focus:text-bg-active cursor-pointer share-button"
-                >
+                <div class="aspect-square w-12 flex items-center justify-center border rounded-full border-bg-accent_second text-bg-accent_second hover:border-bg-hover active:border-bg-active focus:border-bg-active hover:text-bg-hover active:text-bg-active focus:text-bg-active cursor-pointer share-button">
                     <ShareIcon class="w-6 h-6 text-inherit" />
                 </div>
             </address>
@@ -138,7 +131,7 @@ const activeAuthor = people.find((person) => person.fullName.includes(author));
     .md :global(code) {
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 150ms;
-        font-family: "JetBrainsMono" !important;
+        font-family: var(--font-mono) !important;
     }
 
     .md {

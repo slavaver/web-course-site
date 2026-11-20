@@ -3,15 +3,14 @@ import { getBasedUrl } from "@utils/paths";
 const { path } = Astro.props;
 ---
 
-<a
-    href={path}
-    class="back-link"
-    ><img
+<a href={path} class="back-link">
+    <img
         src={getBasedUrl("/assets/img/chevron-right.svg")}
         class="back-link__icon"
         alt=""
-    /><span class="back-link__text">Назад</span></a
->
+    />
+    <span class="back-link__text">Назад</span>
+</a>
 
 <style>
     .back-link {
@@ -19,7 +18,7 @@ const { path } = Astro.props;
         gap: 0.5rem;
         align-items: center;
         margin-bottom: 1.25rem;
-        font-family: "NextArt", sans-serif;
+        font-family: var(--font-next-art);
         font-size: 20px;
         font-weight: 700;
     }

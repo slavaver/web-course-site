@@ -1,0 +1,80 @@
+---
+import CourseCard from "@components/MainPage/CourseCard.astro";
+
+import courses from "@/data/courses";
+
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<section class="section-courses pt-15 mb-30" id="courses">
+    <div class="courses-container max-w-screen px-5 md:px-10 xl:px-5 xl:max-w-screen-xl mx-auto">
+        <h2 class="courses-title light:text-text-secondary title">Курсы</h2>
+        <div class="courses-list flex flex-col">
+            <ul id="staticCourses" class="flex flex-col gap-5 mb-5">
+                {courses.slice(0, 3).map((course) => (
+                    <CourseCard
+                        {...course}
+                        href={`${baseUrl}/labs/${course.id}`}
+                    />
+                ))}
+            </ul>
+            <ul id="hiddenCourses" class="flex flex-col gap-5">
+                {courses.slice(3).map((course) => (
+                    <CourseCard
+                        {...course}
+                        href={`${baseUrl}/labs/${course.id}`}
+                    />
+                ))}
+            </ul>
+        </div>
+        <button
+            class="font-titles w-full font-600 bg-bg-accent_second px-11.5 py-5 rounded-[20px] transition md:hover:bg-hover-secondary duration-300 md:active:bg-active-secondary focus-visible:bg-hover-secondary motion-reduce:transition-none"
+            id="showMoreCoursesBtn"
+            aria-expanded="false"
+            aria-controls="hiddenCourses"
+        >
+            Показать все
+        </button>
+    </div>
+</section>
+
+<style>
+    #hiddenCourses {
+        height: 0px;
+        overflow: hidden;
+        transition: 0.3s ease-in-out;
+    }
+    #hiddenCourses.open {
+        max-height: 50vh;
+        margin-bottom: 1.25rem;
+    }
+</style>
+
+<script>
+    document.querySelectorAll(".no-break-hyphen").forEach((el) => {
+        el.innerHTML = el.innerHTML.replace(/-/g, "&#8209;");
+    });
+
+    const showMoreCoursesBtn = document.getElementById("showMoreCoursesBtn");
+    const hiddenCourses = document.getElementById("hiddenCourses");
+    const showMoreTexts = ["Показать все", "Спрятать"];
+    let isOpen: boolean = false;
+    showMoreCoursesBtn?.addEventListener("click", () => {
+        if (hiddenCourses) {
+            if (isOpen) {
+                hiddenCourses.style.height = "0px";
+            } else {
+                hiddenCourses.style.height =
+                    hiddenCourses.scrollHeight + 20 + "px";
+            }
+        }
+        isOpen = !isOpen;
+        showMoreCoursesBtn.textContent = showMoreCoursesBtn.textContent =
+            showMoreTexts[
+                showMoreTexts.indexOf(showMoreCoursesBtn.textContent ?? "") ===
+                0
+                    ? 1
+                    : 0
+            ];
+    });
+</script>

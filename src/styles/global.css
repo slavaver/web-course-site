@@ -1,43 +1,20 @@
-@font-face {
-    font-family: "Gilroy";
-    src: url(/web-course-site/assets/fonts/gilroy/Gilroy-Regular.ttf);
-    font-weight: 400;
-}
-
-@font-face {
-    font-family: "Gilroy";
-    src: url("/web-course-site/assets/fonts/gilroy/Gilroy-Medium.ttf");
-    font-weight: 500;
-}
-
-@font-face {
-    font-family: "NextArt";
-    src: url("/web-course-site/assets/fonts/nextart/NEXTART_Regular.otf");
-    font-weight: 400;
-}
-
-@font-face {
-    font-family: "NextArt";
-    src: url("/web-course-site/assets/fonts/nextart/NEXTART_SemiBold.otf");
-    font-weight: 600;
-}
-
-@font-face {
-    font-family: "NextArt";
-    src: url("/web-course-site/assets/fonts/nextart/NEXTART_Bold.otf");
-    font-weight: 700;
-}
-
-@font-face {
-    font-family: "JetBrainsMono";
-    src: url(/web-course-site/assets/fonts/jetbrains/JetBrainsMono.ttf);
-    font-weight: 1-999;
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
 }
 
 h1,
 h2,
 h3 {
-    font-family: "NextArt", sans-serif;
+    font-family: var(--font-next-art);
 }
 h1 {
     font-size: clamp(72px, 5vw, 82px);
@@ -51,4 +28,57 @@ h3 {
     line-height: 2rem;
     font-size: 32px;
     font-weight: 600;
+}
+
+p,
+a,
+span,
+label {
+    /*transition: all 0.2s ease-in-out;*/
+    font-size: 20px;
+    font-weight: 400;
+}
+select,
+input {
+    /*transition: all 0.2s ease-in-out;*/
+    appearance: none;
+    font-size: 20px;
+    padding: 20px;
+    border-radius: 20px;
+    width: 100%;
+}
+
+@media (max-width: 1200px) {
+    h1 {
+        font-size: clamp(32px, 5vw, 72px);
+    }
+    h2 {
+        font-size: 40px;
+    }
+    h3 {
+        font-size: 24px;
+    }
+    p,
+    a,
+    span,
+    label {
+        font-size: 18px;
+    }
+}
+@media (max-width: 768px) {
+    h1 {
+        font-size: 32px;
+    }
+    h2 {
+        font-size: 28px;
+    }
+    h3 {
+        font-size: 24px;
+    }
+    p,
+    a,
+    span,
+    label {
+        font-size: 16px;
+    }
 }

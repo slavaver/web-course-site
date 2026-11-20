@@ -16,15 +16,11 @@ let number: string = frontmatter.number && frontmatter.number.padStart(2, "0");
     <ButtonTop />
     <Heading title={frontmatter.title} number={number} />
     <article class="box-content max-w-[700px] xl:max-w-screen-xl m-auto px-3.5">
-        <div
-            class="xl:grid grid-cols-[1fr_700px_1fr] gap-4 items-start text-text-inverted mb-5"
-        >
+        <div class="xl:grid grid-cols-[1fr_700px_1fr] gap-4 items-start text-text-inverted mb-5">
             <aside class="side mx-auto top-25 pt-6 xl:px-6 xl:pt-0 xl:sticky">
-                {
-                    frontmatter.type !== "schedule" && (
-                        <TOC headings={headinglist} />
-                    )
-                }
+                {frontmatter.type !== "schedule" && (
+                    <TOC headings={headinglist} />
+                )}
             </aside>
             <div class="md">
                 <slot />
@@ -58,7 +54,7 @@ let number: string = frontmatter.number && frontmatter.number.padStart(2, "0");
     .md :global(code) {
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 150ms;
-        font-family: "JetBrainsMono" !important;
+        font-family: var(--font-mono) !important;
     }
 
     .md :global(code:not(pre code)) {
@@ -83,7 +79,7 @@ let number: string = frontmatter.number && frontmatter.number.padStart(2, "0");
     .md > :global(table > thead > tr > th) {
         padding: 10px clamp(0px, 0.5vw, 20px);
         color: var(--color-text-inverted);
-        font-family: "NextArt", sans-serif;
+        font-family: var(--font-next-art);
         font-size: 16px;
         font-weight: 600;
         text-align: left;

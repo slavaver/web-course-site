@@ -2,6 +2,8 @@
 import "../styles/reset.css";
 import "../styles/global.css";
 
+import { Font } from "astro:assets";
+
 import Footer from "@components/footer/Footer.astro";
 import Header from "@components/header/Header.astro";
 const { title } = Astro.props;
@@ -20,20 +22,22 @@ const isProd = import.meta.env.PROD;
             href="/web-course-site/favicon.svg"
         />
 
+        <Font cssVariable="--font-gilroy" />
+        <Font cssVariable="--font-next-art" />
+        <Font cssVariable="--font-mono" />
+
         <meta
             name="description"
             content="Сайт по веб-технологиям, созданный для студентов Московского Политехнического Университета."
         />
-        {
-            isProd && (
-                <script
-                    defer
-                    is:inline
-                    src="https://cloud.umami.is/script.js"
-                    data-website-id="b6ab8e19-a315-491e-931e-41ec87b0957f"
-                />
-            )
-        }
+        {isProd && (
+            <script
+                defer
+                is:inline
+                src="https://cloud.umami.is/script.js"
+                data-website-id="b6ab8e19-a315-491e-931e-41ec87b0957f"
+            />
+        )}
         <title>{title ? title : "Веб-технологии"}</title>
     </head>
     <body>
@@ -63,7 +67,7 @@ const isProd = import.meta.env.PROD;
         flex-direction: column;
         min-height: 100vh;
         color: var(--color-text-primary);
-        font-family: Gilroy, sans-serif;
+        font-family: var(--font-gilroy);
         background-color: var(--color-bg-screen);
     }
 

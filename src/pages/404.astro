@@ -8,7 +8,10 @@ const baseUrl = import.meta.env.BASE_URL;
 <BaseLayout>
     <Heading title="Страница не найдена" />
     <section id="no-results" class="page-404">
-        <a class="page-404__link" href={baseUrl}> На главную </a>
+        <a class="page-404__link" href={baseUrl}>
+            {" "}
+            На главную{" "}
+        </a>
         <p class="page-404__text">Ой, что-то лапка дрогнула!</p>
         <p class="page-404__text page-404__text_balanced">
             Котик пытался найти курс, но ничего не нашёл. Наверное, это что-то
@@ -41,7 +44,7 @@ const baseUrl = import.meta.env.BASE_URL;
         color: var(--color-text-tertiary);
         border: 1px solid var(--color-text-tertiary);
         border-radius: 20px;
-        font-family: "NextArt", sans-serif;
+        font-family: var(--font-next-art);
     }
 
     .page-404__text {

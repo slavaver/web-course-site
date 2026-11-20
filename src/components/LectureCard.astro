@@ -10,16 +10,14 @@ const { title, href, description } = Astro.props;
 
 <li>
     <a
-        class="aspect-ratio-square link-card w-full bg-bg-secondary rounded-[30px] p-7.5 flex flex-col justify-between userActions"
+        class="aspect-ratio-square link-card w-full bg-bg-secondary rounded-[30px] p-7.5 flex flex-col justify-between transition md:hover:bg-hover-primary duration-300 md:active:bg-active-primary focus-visible:bg-hover-primary motion-reduce:transition-none"
         href={href}
     >
         <div class="flex flex-col gap-5">
             <h3 class="font-titles font-500">{title}</h3>
             <ul class="flex flex-col gap-2">
-                {
-                    description &&
-                        description.map((element: string) => <li>{element}</li>)
-                }
+                {description &&
+                    description.map((element: string) => <li>{element}</li>)}
             </ul>
         </div>
         <div class="w-full flex justify-end">
