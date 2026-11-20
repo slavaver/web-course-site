@@ -14,12 +14,13 @@
         "astro": "^7.4.12"
     },
     "devDependencies": {
-        "typescript": "^6.0.3",
         "@astrojs/check": "^0.9.12",
         "@astrojs/markdown-satteri": "^0.4.10",
-        "unocss": "^66.13.0",
         "@unocss/astro": "^66.13.0",
+        "prettier": "^3.10.1",
+        "prettier-plugin-astro": "1.1.2",
         "satteri-mathjax": "^0.3.0",
-        "prettier": "^3.10.1"
+        "typescript": "^6.0.3",
+        "unocss": "^66.13.0"
     }
 }
