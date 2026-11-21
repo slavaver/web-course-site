@@ -1,9 +1,11 @@
 ---
 import Heading from "@components/Heading.astro";
 import LinkCard from "@components/LinkCard.astro";
+import Breadcrumbs from "@components/Navigation/Breadcrumbs.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCoursesInfo, variantPath } from "@utils/registry";
 import { getBasedUrl } from "@utils/paths";
+import { archiveMeta } from "@/data/courses";
 import type { FourDigitYear } from "@/types/Courses";
 
 /**
@@ -43,33 +45,28 @@ const years = [...variantsByYear.keys()].sort().reverse();
         title="Архив"
         description="Варианты курсов прошлых лет: материалы для студентов старше текущих потоков"
     />
+    <Breadcrumbs items={[{ label: archiveMeta.title }]} />
     <div class="prose lg:prose-lg mx-auto">
-        {
-            years.map((year) => (
-                <section class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30">
-                    <h2 class="text-center text-text-inverted mb-5">
-                        {year} год
-                    </h2>
-                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
-                        {(variantsByYear.get(year) ?? []).map((variant) => (
-                            <li>
-                                <LinkCard
-                                    title={variant.courseTitle}
-                                    info={`${variant.formatLabel} форма`}
-                                    href={getBasedUrl(variant.url)}
-                                />
-                            </li>
-                        ))}
-                    </ul>
-                </section>
-            ))
-        }
-        {
-            years.length === 0 && (
-                <p class="text-center text-text-inverted max-w-screen px-5 mx-auto mb-30">
-                    Архив пока пуст — все варианты курсов актуальны.
-                </p>
-            )
-        }
+        {years.map((year) => (
+            <section class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-xl mx-auto mb-30">
+                <h2 class="text-center text-text-inverted mb-5">{year} год</h2>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+                    {(variantsByYear.get(year) ?? []).map((variant) => (
+                        <li>
+                            <LinkCard
+                                title={variant.courseTitle}
+                                info={`${variant.formatLabel} форма`}
+                                href={getBasedUrl(variant.url)}
+                            />
+                        </li>
+                    ))}
+                </ul>
+            </section>
+        ))}
+        {years.length === 0 && (
+            <p class="text-center text-text-inverted max-w-screen px-5 mx-auto mb-30">
+                Архив пока пуст — все варианты курсов актуальны.
+            </p>
+        )}
     </div>
 </BaseLayout>

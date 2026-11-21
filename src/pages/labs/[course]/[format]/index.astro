@@ -1,6 +1,7 @@
 ---
 import CourseLayout from "@layouts/CourseLayout.astro";
 import { getCoursesInfo, getVariantPageData } from "@utils/registry";
+import { variantBreadcrumbs } from "@utils/breadcrumbs";
 import type { CourseType, FourDigitYear } from "@/types/Courses";
 
 /**
@@ -34,4 +35,9 @@ if (!page) {
 }
 ---
 
-<CourseLayout title={page.title} data={page.data} variant={page.variant} />
+<CourseLayout
+    title={page.title}
+    data={page.data}
+    variant={page.variant}
+    breadcrumbs={variantBreadcrumbs(courseId, format, year)}
+/>

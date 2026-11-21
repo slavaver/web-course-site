@@ -3,6 +3,7 @@ import LabLayout from "@layouts/LabLayout.astro";
 import { getCollection, render } from "astro:content";
 import courses from "@/data/courses";
 import { getCourseInfo, parseEntryId, variantPath } from "@utils/registry";
+import { variantBreadcrumbs } from "@utils/breadcrumbs";
 import type { VariantContext } from "@utils/registry";
 
 /**
@@ -17,7 +18,7 @@ export async function getStaticPaths() {
                 params: { course: course.id, slug: entry.id },
                 props: { entry },
             }));
-        }),
+        })
     );
     return pathsByCourse.flat();
 }
@@ -33,7 +34,7 @@ const parsed = parseEntryId(entry.id);
 if (parsed) {
     const info = await getCourseInfo(courseId);
     const formatInfo = info?.formats.find(
-        (item) => item.format === parsed.format,
+        (item) => item.format === parsed.format
     );
     if (formatInfo) {
         notice = {
@@ -47,8 +48,20 @@ if (parsed) {
         };
     }
 }
+
+// Хлебные крошки: Курс › Формат › Год › Название работы.
+// Год остаётся ссылкой, так как текущая страница глубже него.
+const breadcrumbs = [
+    ...variantBreadcrumbs(courseId, parsed?.format, parsed?.year),
+    { label: entry.data.title },
+];
 ---
 
-<LabLayout frontmatter={entry.data} headinglist={headings} notice={notice}>
+<LabLayout
+    frontmatter={entry.data}
+    headinglist={headings}
+    notice={notice}
+    breadcrumbs={breadcrumbs}
+>
     <Content />
 </LabLayout>

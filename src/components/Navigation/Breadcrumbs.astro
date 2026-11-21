@@ -1,0 +1,136 @@
+---
+import { getBasedUrl } from "@utils/paths";
+import type { BreadcrumbItem } from "@/types/Navigation";
+
+interface Props {
+    /** Уровни сверху вниз; «Главная» уже включена и передаваться не должна */
+    items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+const lastIndex = items.length - 1;
+---
+
+<nav class="breadcrumbs" aria-label="Хлебные крошки">
+    <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href={getBasedUrl("")}>
+                <svg
+                    class="breadcrumbs__home-icon"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    aria-hidden="true"
+                >
+                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z" />
+                </svg>
+                <span class="sr-only">Главная</span>
+            </a>
+        </li>
+        {items.map((item, index) => (
+            <li class="breadcrumbs__item">
+                {/* Правая угловая скобка — разделитель уровней */}
+                <svg
+                    class="breadcrumbs__separator"
+                    viewBox="0 0 9 16"
+                    fill="none"
+                    aria-hidden="true"
+                >
+                    <path
+                        d="m1 1 7 7-7 7"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+                {index === lastIndex ? (
+                    <span
+                        class="breadcrumbs__label breadcrumbs__label--current"
+                        aria-current="page"
+                    >
+                        {item.label}
+                    </span>
+                ) : item.href ? (
+                    <a class="breadcrumbs__link" href={getBasedUrl(item.href)}>
+                        {item.label}
+                    </a>
+                ) : (
+                    <span class="breadcrumbs__label">{item.label}</span>
+                )}
+            </li>
+        ))}
+    </ol>
+</nav>
+
+<style>
+    .breadcrumbs {
+        margin-block: 2rem;
+        margin-inline: auto;
+        padding-inline: 1.25rem;
+        max-width: 100%;
+        color: var(--color-text-inverted);
+
+        @media (width >= 768px) {
+            padding-inline: 2.5rem;
+        }
+
+        @media (width >= 1280px) {
+            max-width: 1280px;
+        }
+    }
+
+    .breadcrumbs__list {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: end;
+        gap: 0.75rem;
+    }
+
+    .breadcrumbs__item {
+        display: flex;
+        align-items: stretch;
+        gap: 0.5rem;
+        min-width: 0;
+    }
+
+    .breadcrumbs__link {
+        display: flex;
+        align-items: center;
+        line-height: 1;
+        font-size: 1rem;
+        transition-duration: 150ms;
+        transition-property: opacity;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0.75;
+
+        &:hover,
+        &:focus-visible {
+            text-decoration: underline;
+            opacity: 1;
+        }
+    }
+
+    .breadcrumbs__label {
+        font-size: 1rem;
+        opacity: 0.75;
+    }
+
+    .breadcrumbs__label--current {
+        line-height: 1;
+        font-weight: 600;
+        font-family: var(--font-next-art);
+        opacity: 1;
+    }
+
+    .breadcrumbs__separator {
+        flex-shrink: 0;
+        width: 0.4375rem;
+        height: 0.75rem;
+        opacity: 0.6;
+    }
+
+    .breadcrumbs__home-icon {
+        width: 1.125rem;
+        height: 1.125rem;
+    }
+</style>

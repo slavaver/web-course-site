@@ -1,8 +1,10 @@
 ---
 import BaseLayoutSnow from "@layouts/BaseLayoutSnow.astro";
 import Heading from "@components/Heading.astro";
+import Breadcrumbs from "@components/Navigation/Breadcrumbs.astro";
 import FormatHubCard from "@components/FormatHubCard.astro";
 import { getCoursesInfo } from "@utils/registry";
+import { variantBreadcrumbs } from "@utils/breadcrumbs";
 import type { CourseInfo } from "@utils/registry";
 
 /**
@@ -26,6 +28,7 @@ const { info } = Astro.props as Props;
 
 <BaseLayoutSnow>
     <Heading title={info.title} description={info.description} />
+    <Breadcrumbs items={variantBreadcrumbs(info.id)} />
     <section class="course-hub">
         <h2 class="course-hub__title">Варианты курса</h2>
         <div class="course-hub__grid">
