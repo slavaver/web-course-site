@@ -9,28 +9,26 @@ const { headings } = Astro.props;
 
 <h2 class="toc__title">Содержание</h2>
 <ul class="toc__list">
-    {
-        headings.map((heading) => (
-            <li class="toc__item" style={`--toc-level: ${heading.depth - 1};`}>
-                <a class="toc__link" href={"#" + heading.slug}>
-                    {heading.text}
-                </a>
-            </li>
-        ))
-    }
+    {headings.map((heading) => (
+        <li class="toc__item" style={`--toc-level: ${heading.depth - 1};`}>
+            <a class="toc__link" href={"#" + heading.slug}>
+                {heading.text}
+            </a>
+        </li>
+    ))}
 </ul>
 
 <style>
     .toc__title {
-        @media (min-width: 1280px) {
+        @media (width >= 1280px) {
             margin-top: 0.5rem;
         }
     }
 
     .toc__list {
-        list-style: none;
-        padding: 0;
         margin: 0;
+        padding: 0;
+        list-style: none;
         line-height: 1.25;
     }
 

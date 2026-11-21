@@ -6,14 +6,14 @@
 
 <style>
     .burger-button {
-        cursor: pointer;
-        width: 52px;
-        height: 52px;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
         padding: 0.6875rem;
+        width: 52px;
+        height: 52px;
         border-radius: 10px;
+        cursor: pointer;
 
         &:active {
             background-color: var(--color-bg-primary);
@@ -29,10 +29,10 @@
 
         div {
             height: 2px;
-            background: var(--color-text-primary);
             border-radius: 2px;
-            transition-property: translate, rotate, scale, opacity;
+            background: var(--color-text-primary);
             transition-duration: 0.2s;
+            transition-property: translate, rotate, scale, opacity;
             transition-timing-function: ease-in-out;
         }
 

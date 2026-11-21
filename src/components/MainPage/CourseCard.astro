@@ -9,13 +9,9 @@ const { href, title, description } = Astro.props;
 ---
 
 <a aria-label="Перейти к курсу" href={href} class="course-card">
-    <h3 class="course-card__title no-break-hyphen">
-        {title}
-    </h3>
+    <h3 class="course-card__title no-break-hyphen">{title}</h3>
     <div class="course-card__content">
-        <p class="course-card__description">
-            {description}
-        </p>
+        <p class="course-card__description">{description}</p>
         <i class="course-card__goto-icon"></i>
     </div>
 </a>
@@ -34,7 +30,7 @@ const { href, title, description } = Astro.props;
             background-color: var(--color-bg-accent-second);
         }
 
-        @media (min-width: 768px) {
+        @media (width >= 768px) {
             flex-direction: row;
             gap: 3.5rem;
             padding: 1.875rem;
@@ -48,7 +44,7 @@ const { href, title, description } = Astro.props;
             }
         }
 
-        @media (min-width: 1024px) {
+        @media (width >= 1024px) {
             padding: 2.5rem;
         }
 
@@ -64,7 +60,7 @@ const { href, title, description } = Astro.props;
         gap: 3.5rem;
         max-width: none;
 
-        @media (min-width: 768px) {
+        @media (width >= 768px) {
             max-width: 365px;
         }
     }
@@ -74,11 +70,17 @@ const { href, title, description } = Astro.props;
     }
 
     .course-card__goto-icon {
-        background: url("/web-course-site/assets/img/goto.svg") no-repeat center;
         width: 50px;
         height: 50px;
         border: 1.5px solid var(--color-border);
         border-radius: 100%;
+        background: url("/web-course-site/assets/img/goto.svg") no-repeat center;
         color: var(--color-border);
     }
 </style>
+
+<script>
+    document.querySelectorAll(".no-break-hyphen").forEach((el) => {
+        el.innerHTML = el.innerHTML.replace(/-/g, "&#8209;");
+    });
+</script>

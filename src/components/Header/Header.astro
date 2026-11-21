@@ -3,27 +3,35 @@ import Logo from "./Logo.astro";
 import BurgerButton from "./BurgerButton.astro";
 import ThemeToggler from "./ThemeToggler.astro";
 import Menu from "./Menu.astro";
-import courses from "@/data/courses";
+import { getBasedUrl } from "@utils/paths";
+import { getCoursesInfo, variantPath } from "@utils/registry";
 
-const baseUrl = import.meta.env.BASE_URL;
+const courses = (await getCoursesInfo()).filter(
+    (course) => course.formats.length > 0
+);
 ---
 
 <div class="sidebar">
     <ul class="sidebar__list">
         <li class="sidebar__item">
-            <a href={`${baseUrl}`} class="sidebar__link">Главная</a>
+            <a href={getBasedUrl("")} class="sidebar__link">
+                Главная
+            </a>
         </li>
-        {
-            courses.map((course) => (
-                <li class="sidebar__item">
-                    <a href={`${baseUrl}/labs/${course.id}/`} class="sidebar__link">
-                        {course.title}
-                    </a>
-                </li>
-            ))
-        }
+        {courses.map((course) => (
+            <li class="sidebar__item">
+                <a
+                    href={getBasedUrl(variantPath(course.id))}
+                    class="sidebar__link"
+                >
+                    {course.title}
+                </a>
+            </li>
+        ))}
         <li class="sidebar__item">
-            <a href={`${baseUrl}/useful/`} class="sidebar__link">База знаний</a>
+            <a href={getBasedUrl("/useful/")} class="sidebar__link">
+                База знаний
+            </a>
         </li>
     </ul>
 </div>
@@ -52,57 +60,57 @@ const baseUrl = import.meta.env.BASE_URL;
 <style>
     .header {
         position: fixed;
-        width: 100%;
+        z-index: 10;
         margin-top: 0.625rem;
         padding: 0.625rem;
-        z-index: 10;
+        width: 100%;
     }
 
     .header::before {
-        content: "";
-        display: block;
         position: absolute;
-        z-index: -1;
         top: 0;
+        z-index: -1;
+        display: block;
         width: calc(100% - 2 * 0.625rem);
         height: 100%;
-        background-color: var(--color-bg-menu);
-        backdrop-filter: blur(40px);
         border-radius: 1rem;
+        background-color: var(--color-bg-menu);
+        content: "";
+        backdrop-filter: blur(40px);
     }
 
     .header__container {
         display: flex;
-        align-items: center;
-        transition: all 0.3s ease-in-out;
-        padding-inline: 0.625rem;
-        color: var(--color-text-primary);
         justify-content: space-between;
-        max-width: 1280px;
+        align-items: center;
         margin-inline: auto;
+        padding-inline: 0.625rem;
+        max-width: 1280px;
+        color: var(--color-text-primary);
+        transition: all 0.3s ease-in-out;
     }
 
     .sidebar {
-        visibility: hidden;
-        height: 100dvh;
-        width: 100%;
-        z-index: 2;
         position: fixed;
         top: 0;
-        opacity: 0;
-        scale: 0;
-        transition-property: visibility, opacity, scale;
-        transition-duration: 0.2s;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transform-origin: top left;
+        z-index: 2;
+        width: 100%;
+        height: 100dvh;
         background-color: var(--color-bg-menu);
+        transform-origin: top left;
+        scale: 0;
+        transition-duration: 0.2s;
+        transition-property: visibility, opacity, scale;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0;
+        visibility: hidden;
         backdrop-filter: blur(40px);
     }
 
     .sidebar.open {
-        visibility: visible;
-        opacity: 1;
         scale: 1;
+        opacity: 1;
+        visibility: visible;
     }
 
     .sidebar__list {

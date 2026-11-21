@@ -1,35 +1,42 @@
 ---
-import courses from "@/data/courses";
+import { getBasedUrl } from "@utils/paths";
+import { getCoursesInfo, variantPath } from "@utils/registry";
 
-const baseUrl = import.meta.env.BASE_URL;
+const courses = (await getCoursesInfo()).filter(
+    (course) => course.formats.length > 0
+);
 ---
 
 <nav class="menu">
     <ul class="menu__list">
         <li>
-            <a class="menu__link" href={`${baseUrl}`}>Главная</a>
+            <a class="menu__link" href={getBasedUrl("")}>
+                Главная
+            </a>
         </li>
         <li>
             <details>
-                <summary><p>Курсы</p></summary>
+                <summary>
+                    <p>Курсы</p>
+                </summary>
                 <ul class="dropdown-list">
-                    {
-                        courses.map((course) => (
-                            <li class="dropdown-list__item">
-                                <a
-                                    href={`${baseUrl}/labs/${course.id}/`}
-                                    class="dropdown-list__link"
-                                >
-                                    {course.title}
-                                </a>
-                            </li>
-                        ))
-                    }
+                    {courses.map((course) => (
+                        <li class="dropdown-list__item">
+                            <a
+                                href={getBasedUrl(variantPath(course.id))}
+                                class="dropdown-list__link"
+                            >
+                                {course.title}
+                            </a>
+                        </li>
+                    ))}
                 </ul>
             </details>
         </li>
         <li>
-            <a class="menu__link" href={`${baseUrl}/useful/`}>База знаний</a>
+            <a class="menu__link" href={getBasedUrl("/useful/")}>
+                База знаний
+            </a>
         </li>
     </ul>
 </nav>
@@ -57,15 +64,17 @@ const baseUrl = import.meta.env.BASE_URL;
             display: none;
         }
     }
+
     .menu__list {
         display: flex;
-        gap: clamp(0px, 2vw, 40px);
         align-items: center;
+        gap: clamp(0px, 2vw, 40px);
     }
 
     .menu__link {
-        border-radius: 10px;
         padding: 1.25rem clamp(0rem, 1vw, 1.25rem);
+        border-radius: 10px;
+
         &:active {
             background-color: var(--color-bg-primary);
         }
@@ -80,18 +89,18 @@ const baseUrl = import.meta.env.BASE_URL;
     }
 
     summary::after {
-        content: "";
-        transform-origin: 50%;
-        pointer-events: none;
+        display: block;
         justify-self: flex-end;
         width: 0.375rem;
         height: 0.375rem;
-        transition-property: rotate, translate;
-        transition-duration: 0.2s;
-        display: block;
+        box-shadow: inset 2px 2px;
+        transform-origin: 50%;
         translate: 0 1px;
         rotate: 135deg;
-        box-shadow: inset 2px 2px;
+        transition-duration: 0.2s;
+        transition-property: rotate, translate;
+        content: "";
+        pointer-events: none;
     }
 
     details[open] summary::after {
@@ -120,17 +129,17 @@ const baseUrl = import.meta.env.BASE_URL;
     }
 
     .dropdown-list {
+        position: absolute;
+        left: 50%;
+        z-index: 1;
         display: flex;
         flex-direction: column;
         gap: 0.75rem;
-        position: absolute;
-        width: max-content;
-        z-index: 1;
-        left: 50%;
-        translate: -50% 15%;
         padding: 1rem;
-        background-color: var(--color-bg-menu);
+        width: max-content;
         border-radius: 1rem;
+        background-color: var(--color-bg-menu);
+        translate: -50% 15%;
         backdrop-filter: blur(40px);
     }
 

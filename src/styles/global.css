@@ -1,14 +1,14 @@
 .sr-only {
     position: absolute;
+    margin: -1px;
+    padding: 0;
     width: 1px;
     height: 1px;
-    margin: -1px;
-    border: 0;
-    padding: 0;
-    white-space: nowrap;
-    clip-path: inset(100%);
-    clip: rect(0 0 0 0);
     overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(100%);
+    border: 0;
+    white-space: nowrap;
 }
 
 h1,
@@ -16,47 +16,56 @@ h2,
 h3 {
     font-family: var(--font-next-art);
 }
+
 h1 {
+    font-weight: 700;
     font-size: clamp(72px, 5vw, 82px);
-    font-weight: 700;
 }
+
 h2 {
-    font-size: 2rem;
     font-weight: 700;
+    font-size: 3rem;
 }
+
 h3 {
-    font-size: 1.5rem;
     font-weight: 600;
+    font-size: 2rem;
 }
 
 p,
 a,
 span,
 label {
-    /*transition: all 0.2s ease-in-out;*/
-    font-size: 20px;
     font-weight: 400;
-}
-select,
-input {
-    /*transition: all 0.2s ease-in-out;*/
-    appearance: none;
+
+    /* transition: all 0.2s ease-in-out; */
     font-size: 20px;
-    padding: 20px;
-    border-radius: 20px;
-    width: 100%;
 }
 
-@media (max-width: 1200px) {
+select,
+input {
+    padding: 20px;
+    width: 100%;
+
+    /* transition: all 0.2s ease-in-out; */
+    appearance: none;
+    border-radius: 20px;
+    font-size: 20px;
+}
+
+@media (width <= 1200px) {
     h1 {
         font-size: clamp(32px, 5vw, 72px);
     }
+
     h2 {
         font-size: 40px;
     }
+
     h3 {
         font-size: 24px;
     }
+
     p,
     a,
     span,
@@ -64,16 +73,20 @@ input {
         font-size: 18px;
     }
 }
-@media (max-width: 768px) {
+
+@media (width <= 768px) {
     h1 {
         font-size: 32px;
     }
+
     h2 {
         font-size: 28px;
     }
+
     h3 {
         font-size: 24px;
     }
+
     p,
     a,
     span,

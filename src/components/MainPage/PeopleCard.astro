@@ -16,7 +16,7 @@ const { name, img, role } = Astro.props;
         <Image src={img} alt="" class="persons-item__image" />
     </div>
     <div class="persons-item__body">
-        <h3 class="persons-item__name light:text-text-secondary">{name}</h3>
+        <h3 class="persons-item__name">{name}</h3>
         <p class="persons-item__role">{role}</p>
     </div>
 </div>
@@ -25,11 +25,11 @@ const { name, img, role } = Astro.props;
     .persons-item__media {
         display: flex;
         align-items: flex-end;
-        aspect-ratio: 1 / 1;
         margin-bottom: 1.25rem;
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
         border-radius: 30px;
         background-color: var(--color-bg-tertiary);
-        overflow: hidden;
     }
 
     .persons-item__image {
@@ -41,8 +41,12 @@ const { name, img, role } = Astro.props;
         line-height: 1;
     }
 
+    html.light .persons-item__name {
+        color: var(--color-text-secondary);
+    }
+
     .persons-item__role {
-        line-height: 1;
         color: var(--color-text-tertiary);
+        line-height: 1;
     }
 </style>

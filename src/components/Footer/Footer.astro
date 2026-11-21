@@ -12,16 +12,17 @@ const currentYear = new Date().getFullYear();
             alt=""
             width={200}
             height={50}
-            loading={"eager"}
-            decoding={"auto"}
             class="footer__logo"
         />
         <p class="issue">
-            Если вы заметили ошибку или хотите предложить изменения, пожалуйста, <a
+            Если вы заметили ошибку или хотите предложить изменения, пожалуйста,{" "}
+            <a
                 class="issue__link"
                 href="https://github.com/slavaver/web-course-site/issues/new"
-                >создайте issue</a
-            > в репозитории.
+            >
+                создайте issue
+            </a>{" "}
+            в репозитории.
         </p>
         <div class="footer__copyright">
             <p>&copy; {currentYear} Московский Политех</p>
@@ -30,9 +31,8 @@ const currentYear = new Date().getFullYear();
                     Дизайн сайта <a href="https://t.me/shultsee">@shultsee</a>
                 </p>
                 <p>
-                    Разработка сайта <a href="https://t.me/qalqa_dev"
-                        >@qalqa_dev</a
-                    >
+                    Разработка сайта{" "}
+                    <a href="https://t.me/qalqa_dev">@qalqa_dev</a>
                 </p>
             </div>
         </div>
@@ -41,15 +41,15 @@ const currentYear = new Date().getFullYear();
 <style>
     .footer {
         position: relative;
-        overflow: hidden;
+        z-index: 0;
         padding: 3.5rem 2.5rem;
-        background-color: var(--color-bg-primary);
+        overflow: hidden;
         border-top-left-radius: 30px;
         border-top-right-radius: 30px;
-        z-index: 0;
+        background-color: var(--color-bg-primary);
         font-size: 16px;
 
-        @media (min-width: 640px) {
+        @media (width >= 640px) {
             border-top-left-radius: 60px;
             border-top-right-radius: 60px;
         }
@@ -61,33 +61,34 @@ const currentYear = new Date().getFullYear();
     }
 
     .footer__logo {
-        margin-inline: auto;
         margin-bottom: 0.5rem;
-        @media (min-width: 640px) {
+        margin-inline: auto;
+
+        @media (width >= 640px) {
             margin-inline: 0;
         }
     }
 
     .footer::before {
-        content: "";
         position: absolute;
-        z-index: -1;
         top: 0;
         left: 0;
+        z-index: -1;
         width: 100%;
         height: 100%;
         background-color: var(--color-bg-accent-first);
         mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 728" fill="none"%3E%3Cpath d="M-384.828 550.33C-279.518 431.882 -29.173 211.72 129.724 278.664C328.344 362.345 -156.414 623.403 -2.48331 780.746C176.815 964.017 967.034 -77.2714 1180.55 48.249C1394.07 173.769 1062.62 452.507 1180.55 550.33C1274.9 628.589 1460.28 401.827 1541.17 278.664" stroke="black" stroke-width="150"/%3E%3C/svg%3E');
         mask-repeat: no-repeat;
         mask-size: cover;
+        content: "";
     }
 
     .issue {
+        margin-bottom: 1rem;
+        margin-inline: auto;
+        max-width: 65ch;
         text-align: center;
         text-wrap: balance;
-        margin-bottom: 1rem;
-        max-width: 65ch;
-        margin-inline: auto;
     }
 
     .issue__link {
@@ -97,15 +98,16 @@ const currentYear = new Date().getFullYear();
     .footer__copyright {
         display: flex;
         flex-direction: column;
-        text-align: center;
         justify-content: space-between;
+        text-align: center;
 
-        @media (min-width: 640px) {
-            text-align: start;
+        @media (width >= 640px) {
             flex-direction: row;
+            text-align: start;
         }
 
         /* TODO убрать когда уберется font-size на все элементы p, a, span, label из unicss */
+
         p {
             font-size: 16px;
         }

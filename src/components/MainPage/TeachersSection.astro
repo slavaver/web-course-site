@@ -19,7 +19,7 @@ const artem = {
 
 <section class="teachers">
     <div class="teachers__container">
-        <h2 class="teachers__title light:text-text-secondary">Преподаватели</h2>
+        <h2 class="teachers__title">Преподаватели</h2>
         <ul class="teachers__list">
             <li>
                 <PeopleCard
@@ -41,14 +41,14 @@ const artem = {
 
 <style>
     .teachers {
-        margin-bottom: 7.5rem;
+        padding-block: 3.75rem;
     }
 
     .teachers__container {
-        max-width: 1280px;
-        width: 100%;
         margin-inline: auto;
         padding-inline: 1.25rem;
+        width: 100%;
+        max-width: 1280px;
 
         @media (width > 768px) {
             padding-inline: 2.5rem;
@@ -60,20 +60,26 @@ const artem = {
     }
 
     .teachers__title {
+        margin-bottom: 1.2rem;
         text-align: center;
-        margin-bottom: 2.5rem;
+    }
+
+    html.light .teachers__title {
+        color: var(--color-text-secondary);
     }
 
     .teachers__list {
         display: grid;
         grid-template-columns: 1fr;
         gap: 1.25rem;
-        list-style: none;
         margin: 0;
         padding: 0;
+        list-style: none;
+
         @media (width > 480px) {
             grid-template-columns: repeat(2, minmax(0, 1fr));
         }
+
         @media (width > 1024px) {
             grid-template-columns: repeat(3, minmax(0, 1fr));
         }

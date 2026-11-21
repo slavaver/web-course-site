@@ -1,80 +1,82 @@
 ---
 import CourseCard from "@components/MainPage/CourseCard.astro";
 
-import courses from "@/data/courses";
+import { getBasedUrl } from "@utils/paths";
+import { getCoursesInfo, variantPath } from "@utils/registry";
 
-const baseUrl = import.meta.env.BASE_URL;
+const courses = (await getCoursesInfo()).filter(
+    (course) => course.formats.length > 0
+);
 ---
 
-<section class="section-courses pt-15 mb-30" id="courses">
-    <div class="courses-container max-w-screen px-5 md:px-10 xl:px-5 xl:max-w-screen-xl mx-auto">
-        <h2 class="courses-title light:text-text-secondary title">Курсы</h2>
-        <div class="courses-list flex flex-col">
-            <ul id="staticCourses" class="flex flex-col gap-5 mb-5">
-                {courses.slice(0, 3).map((course) => (
-                    <CourseCard
-                        {...course}
-                        href={`${baseUrl}/labs/${course.id}`}
-                    />
-                ))}
-            </ul>
-            <ul id="hiddenCourses" class="flex flex-col gap-5">
-                {courses.slice(3).map((course) => (
-                    <CourseCard
-                        {...course}
-                        href={`${baseUrl}/labs/${course.id}`}
-                    />
+<section class="courses" id="courses">
+    <div class="courses__container">
+        <h2 class="courses__title">Курсы</h2>
+        <p class="courses__description">
+            Три курса последовательно погружают в разработку на стороне клиента
+        </p>
+        <div class="courses__list-wrapper">
+            <ul class="courses__list">
+                {courses.map((course) => (
+                    <li>
+                        <CourseCard
+                            {...course}
+                            href={getBasedUrl(variantPath(course.id))}
+                        />
+                    </li>
                 ))}
             </ul>
         </div>
-        <button
-            class="font-titles w-full font-600 bg-bg-accent_second px-11.5 py-5 rounded-[20px] transition md:hover:bg-hover-secondary duration-300 md:active:bg-active-secondary focus-visible:bg-hover-secondary motion-reduce:transition-none"
-            id="showMoreCoursesBtn"
-            aria-expanded="false"
-            aria-controls="hiddenCourses"
-        >
-            Показать все
-        </button>
     </div>
 </section>
 
 <style>
-    #hiddenCourses {
-        height: 0px;
-        overflow: hidden;
-        transition: 0.3s ease-in-out;
+    .courses {
+        padding-block: 3.75rem;
     }
-    #hiddenCourses.open {
-        max-height: 50vh;
+
+    .courses__container {
+        margin-inline: auto;
+        padding-inline: 1.25rem;
+        width: 100%;
+        max-width: 1280px;
+
+        @media (width > 768px) {
+            padding-inline: 2.5rem;
+        }
+
+        @media (width > 1280px) {
+            padding-inline: 1.25rem;
+        }
+    }
+
+    .courses__title {
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+
+    .courses__description {
+        margin-bottom: 1.2rem;
+        margin-inline: auto;
+        max-width: 45ch;
+        text-align: center;
+        text-wrap: balance;
+    }
+
+    .courses__list-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .courses__list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
         margin-bottom: 1.25rem;
     }
+
+    html.light .courses__title,
+    html.light .courses__description {
+        color: var(--color-text-secondary);
+    }
 </style>
-
-<script>
-    document.querySelectorAll(".no-break-hyphen").forEach((el) => {
-        el.innerHTML = el.innerHTML.replace(/-/g, "&#8209;");
-    });
-
-    const showMoreCoursesBtn = document.getElementById("showMoreCoursesBtn");
-    const hiddenCourses = document.getElementById("hiddenCourses");
-    const showMoreTexts = ["Показать все", "Спрятать"];
-    let isOpen: boolean = false;
-    showMoreCoursesBtn?.addEventListener("click", () => {
-        if (hiddenCourses) {
-            if (isOpen) {
-                hiddenCourses.style.height = "0px";
-            } else {
-                hiddenCourses.style.height =
-                    hiddenCourses.scrollHeight + 20 + "px";
-            }
-        }
-        isOpen = !isOpen;
-        showMoreCoursesBtn.textContent = showMoreCoursesBtn.textContent =
-            showMoreTexts[
-                showMoreTexts.indexOf(showMoreCoursesBtn.textContent ?? "") ===
-                0
-                    ? 1
-                    : 0
-            ];
-    });
-</script>

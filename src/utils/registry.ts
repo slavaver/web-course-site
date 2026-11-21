@@ -119,12 +119,12 @@ export async function getCoursesInfo(): Promise<CourseInfo[]> {
                 });
 
             return { ...course, formats };
-        }),
+        })
     );
 }
 
 export async function getCourseInfo(
-    courseId: string,
+    courseId: string
 ): Promise<CourseInfo | undefined> {
     const infos = await getCoursesInfo();
     return infos.find((info) => info.id === courseId);
@@ -134,7 +134,7 @@ export async function getCourseInfo(
 export function variantPath(
     courseId: string,
     format?: CourseType,
-    year?: FourDigitYear,
+    year?: FourDigitYear
 ): string {
     if (!format) return `/labs/${courseId}/`;
     if (!year) return `/labs/${courseId}/${format}/`;
@@ -145,7 +145,7 @@ export function variantPath(
 export async function getVariantEntries(
     courseId: string,
     format: CourseType,
-    year: FourDigitYear,
+    year: FourDigitYear
 ): Promise<CoursesItems> {
     const course = getCourseMeta(courseId);
     if (!course) {
@@ -153,8 +153,9 @@ export async function getVariantEntries(
     }
     const entries = await getCollection(
         course.collection,
-        (entry) => entry.id === `${format}/${year}` ||
-            entry.id.startsWith(`${format}/${year}/`),
+        (entry) =>
+            entry.id === `${format}/${year}` ||
+            entry.id.startsWith(`${format}/${year}/`)
     );
     return entries.map((entry) => ({
         ...entry,
@@ -168,7 +169,7 @@ export async function getVariantEntries(
  */
 export async function getVariantLectures(
     courseId: string,
-    format: CourseType,
+    format: CourseType
 ): Promise<LectureItems> {
     if (courseId === "client-side" && format === "distance") {
         const lectures = await getCollection("clientSideLectures");
@@ -192,7 +193,7 @@ export interface VariantPageData {
 export async function getVariantPageData(
     courseId: string,
     format: CourseType,
-    year: FourDigitYear,
+    year: FourDigitYear
 ): Promise<VariantPageData | null> {
     const info = await getCourseInfo(courseId);
     const formatInfo = info?.formats.find((item) => item.format === format);
@@ -204,7 +205,10 @@ export async function getVariantPageData(
         getVariantEntries(courseId, format, year),
         getVariantLectures(courseId, format),
     ]);
-    const data = Object.groupBy([...entries, ...lectures], ({ data }) => data.type);
+    const data = Object.groupBy(
+        [...entries, ...lectures],
+        ({ data }) => data.type
+    );
 
     const variant: VariantContext = {
         courseTitle: info.title,
