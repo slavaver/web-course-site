@@ -44,7 +44,7 @@ export const archiveMeta = {
 
 export const formatLabels: Record<CourseType, string> = {
     "full-time": "Очная",
-    "distance": "Дистанционная",
+    "distance": "Заочная",
 };
 
 export default courses;
