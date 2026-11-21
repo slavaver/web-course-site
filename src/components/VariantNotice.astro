@@ -25,34 +25,30 @@ const {
 } = Astro.props;
 ---
 
-<aside class:list={["variant-notice", { "variant-notice_archived": !isCurrent }]}>
+<aside
+    class:list={["variant-notice", { "variant-notice_archived": !isCurrent }]}
+>
     <p class="variant-notice__label">
         <span class="variant-notice__format">{formatLabel} форма</span>
         <span class="variant-notice__year">{year} год</span>
         {!isCurrent && <span class="variant-notice__tag">архив</span>}
     </p>
     <nav class="variant-notice__links" aria-label="Другие варианты курса">
-        {
-            !isCurrent && currentUrl && (
-                <a class="variant-notice__link" href={getBasedUrl(currentUrl)}>
-                    Актуальный вариант ({currentYear})
-                </a>
-            )
-        }
-        {
-            hubUrl && (
-                <a class="variant-notice__link" href={getBasedUrl(hubUrl)}>
-                    Все варианты курса
-                </a>
-            )
-        }
-        {
-            otherFormats.map((format) => (
-                <a class="variant-notice__link" href={getBasedUrl(format.url)}>
-                    {format.label} форма
-                </a>
-            ))
-        }
+        {!isCurrent && currentUrl && (
+            <a class="variant-notice__link" href={getBasedUrl(currentUrl)}>
+                Актуальный вариант ({currentYear})
+            </a>
+        )}
+        {hubUrl && (
+            <a class="variant-notice__link" href={getBasedUrl(hubUrl)}>
+                Все варианты курса
+            </a>
+        )}
+        {otherFormats.map((format) => (
+            <a class="variant-notice__link" href={getBasedUrl(format.url)}>
+                {format.label} форма
+            </a>
+        ))}
     </nav>
 </aside>
 
@@ -80,7 +76,7 @@ const {
     }
 
     .variant-notice__format {
-        font-family: "NextArt", sans-serif;
+        font-family: var(--font-next-art);
         font-weight: 600;
     }
 

@@ -6,7 +6,7 @@ import type { CourseType, FourDigitYear } from "@/types/Courses";
 /**
  * Канонический URL конкретного варианта: /labs/<курс>/<формат>/<год>/.
  * Страницы создаются для всех существующих комбинаций, архивные варианты
- * помечаются плашкой со ссылкой на актуальный.
+ * помечаются ярлыком рядом с формой и годом поступления.
  */
 export async function getStaticPaths() {
     const infos = await getCoursesInfo();
@@ -33,9 +33,4 @@ if (!page) {
 }
 ---
 
-<CourseLayout
-    title={page.title}
-    description={page.description}
-    data={page.data}
-    variant={page.variant}
-/>
+<CourseLayout title={page.title} data={page.data} variant={page.variant} />

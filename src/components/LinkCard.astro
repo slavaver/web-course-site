@@ -49,6 +49,7 @@ const { title, href, number, info } = Astro.props;
 
     .link-card__header {
         display: flex;
+        align-items: center;
         gap: 1.25rem;
     }
 
@@ -59,6 +60,12 @@ const { title, href, number, info } = Astro.props;
     .link-card__title {
         font-family: var(--font-next-art);
         font-weight: 500;
+        text-box-trim: trim-both;
+        hyphens: auto;
+
+        @media (width < 350px) {
+            font-size: 1.25rem;
+        }
     }
 
     .link-card__footer {

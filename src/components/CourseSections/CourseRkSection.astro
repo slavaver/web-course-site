@@ -16,13 +16,13 @@ const { items } = Astro.props;
 <section class="course-section">
     <h2 class="course-section__title">Рубежный контроль</h2>
     <ul class="course-section__list">
-        {
-            items.map((item) => (
+        {items.map((item) => (
+            <li>
                 <LinkCard
                     title={item.data.title}
                     href={getBasedUrl(`/labs/${item.id}`)}
                 />
-            ))
-        }
+            </li>
+        ))}
     </ul>
 </section>

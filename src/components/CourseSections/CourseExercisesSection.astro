@@ -15,22 +15,20 @@ const { items } = Astro.props;
 <section class="course-section">
     <h2 class="course-section__title">Лабораторные работы</h2>
     <ul class="course-section__list">
-        {
-            items
-                .sort((prev, next) => {
-                    return (
-                        parseInt(prev.data.number) - parseInt(next.data.number)
-                    );
-                })
-                .map((item) => {
-                    return (
+        {items
+            .sort((prev, next) => {
+                return parseInt(prev.data.number) - parseInt(next.data.number);
+            })
+            .map((item) => {
+                return (
+                    <li>
                         <LinkCard
                             title={item.data.title}
                             number={item.data.number}
                             href={getBasedUrl(`/labs/${item.id}`)}
                         />
-                    );
-                })
-        }
+                    </li>
+                );
+            })}
     </ul>
 </section>

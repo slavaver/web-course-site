@@ -15,6 +15,7 @@ const { title, description, number } = Astro.props;
         {description && (
             <p class="section-heading__description">{description}</p>
         )}
+        <slot />
     </div>
 </section>
 
@@ -28,7 +29,6 @@ const { title, description, number } = Astro.props;
         background-color: var(--color-bg-primary);
         padding-top: 7.5rem;
         padding-bottom: 4rem;
-        margin-bottom: 5rem;
         padding-inline: 1.25rem;
 
         @media (width >= 640px) {

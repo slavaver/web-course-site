@@ -119,10 +119,8 @@ const baseUrl = import.meta.env.BASE_URL;
         title="База знаний"
         description="Здесь вы найдете подборки полезных ресурсов, статьи с теорией, раскрывающие темы курсов"
     />
-    <div
-        class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-lg 2xl:max-w-screen-xl mx-auto pb-30">
-        <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5 mb-10">
+    <div class="max-w-screen px-5 md:px-15 xl:px-0 xl:max-w-screen-lg 2xl:max-w-screen-xl mx-auto pb-30">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5 mb-10">
             <div class="grid-col-span-1 2xl:col-span-1">
                 <CustomSelect options={options} />
             </div>
@@ -131,13 +129,15 @@ const baseUrl = import.meta.env.BASE_URL;
             </div>
         </div>
         <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5"
-            id="posts-container">
+            class="grid grid-cols-1 max-w-sm mx-auto md:max-w-full md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5"
+            id="posts-container"
+        >
             <ListOfPosts allUseful={allUseful} lengths={lengths} />
         </div>
         <div
             id="no-results"
-            class="col-span-full text-center mt-10 hidden text-text-inverted">
+            class="col-span-full text-center mt-10 hidden text-text-inverted"
+        >
             <h2 class="font-400">Ой, что-то лапка дрогнула!</h2>
             <p class="mb-3 mx-auto w-full md:w-2/3">
                 Котик проверил всю базу и даже заглянул под диван, но ничего не
@@ -151,7 +151,8 @@ const baseUrl = import.meta.env.BASE_URL;
             />
             <button
                 class="border-1 rounded-[20px] border-text-tertiary p-[20px] w-full md:w-2/3 color-text-tertiary font-titles hover:bg-bg-tertiary hover:text-text-inverted transition duration-300"
-                id="clear-btn">
+                id="clear-btn"
+            >
                 Вернуться к статьям
             </button>
         </div>
