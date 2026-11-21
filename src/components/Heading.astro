@@ -11,14 +11,10 @@ const { title, description, number } = Astro.props;
 <section class="section-heading">
     <div class="section-heading__wrapper">
         {number && <h2 class="">{number}</h2>}
-        <h1 class="section-heading__title">
-            {title}
-        </h1>
-        {
-            description && (
-                <p class="section-heading__description">{description}</p>
-            )
-        }
+        <h1 class="section-heading__title">{title}</h1>
+        {description && (
+            <p class="section-heading__description">{description}</p>
+        )}
     </div>
 </section>
 
@@ -30,14 +26,18 @@ const { title, description, number } = Astro.props;
         border-bottom-left-radius: 30px;
         border-bottom-right-radius: 30px;
         background-color: var(--color-bg-primary);
-        padding-top: 10.625rem;
-        padding-bottom: 6.25rem;
+        padding-top: 7.5rem;
+        padding-bottom: 4rem;
         margin-bottom: 5rem;
         padding-inline: 1.25rem;
 
-        @media (min-width: 640px) {
+        @media (width >= 640px) {
             border-bottom-left-radius: 60px;
             border-bottom-right-radius: 60px;
+        }
+
+        @media (width >= 768px) {
+            padding-top: 9.25rem;
         }
     }
 
@@ -56,7 +56,6 @@ const { title, description, number } = Astro.props;
 
     .section-heading__description {
         margin-inline: auto;
-        margin-bottom: 1.875rem;
         max-width: 55ch;
     }
 
