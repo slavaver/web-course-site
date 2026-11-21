@@ -23,13 +23,11 @@ const { title, description, data, variant } = Astro.props;
 
 <BaseLayoutSnow>
     <Heading title={title} description={description} />
-    {
-        variant && (
-            <div class="max-w-screen px-5 md:px-10 xl:max-w-screen-xl mx-auto mb-15">
-                <VariantNotice {...variant} />
-            </div>
-        )
-    }
+    {variant && (
+        <div class="max-w-screen px-5 md:px-10 xl:max-w-screen-xl mx-auto mb-15">
+            <VariantNotice {...variant} />
+        </div>
+    )}
     {data.important && <CourseImportantSection items={data.important} />}
     {data.labs && <CourseExercisesSection items={data.labs} />}
     {data.practice && <CourseExercisesSection items={data.practice} />}
