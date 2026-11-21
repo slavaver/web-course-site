@@ -7,7 +7,7 @@ import type { CourseInfo } from "@utils/registry";
 
 /**
  * Хаб курса: вместо списка материалов показываем форматы (очная/дистанционная)
- * с актуальным годом и раскрывающимся списком прошлых лет.
+ * с годом поступления, ссылкой на материалы и открытым списком прошлых лет.
  * История курса живёт здесь же — глобальный архив больше не нужен в меню.
  */
 export async function getStaticPaths() {
@@ -26,15 +26,12 @@ const { info } = Astro.props as Props;
 
 <BaseLayoutSnow>
     <Heading title={info.title} description={info.description} />
-    <section
-        class="max-w-screen px-5 md:px-10 xl:max-w-screen-xl mx-auto mb-30">
+    <section class="max-w-screen px-5 md:px-10 xl:max-w-screen-xl mx-auto mb-30">
         <h2 class="text-center text-text-inverted mb-10">Варианты курса</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {
-                info.formats.map((format) => (
-                    <FormatHubCard courseId={info.id} format={format} />
-                ))
-            }
+            {info.formats.map((format) => (
+                <FormatHubCard courseId={info.id} format={format} />
+            ))}
         </div>
     </section>
 </BaseLayoutSnow>

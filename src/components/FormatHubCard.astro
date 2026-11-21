@@ -9,43 +9,36 @@ interface Props {
 }
 
 const { courseId, format } = Astro.props;
-const archiveYears = format.years.filter(
-    (year) => year !== format.currentYear,
-);
+const archiveYears = format.years.filter((year) => year !== format.currentYear);
 ---
 
 <div class="format-card">
     <div class="format-card__header">
         <h3 class="format-card__title">{format.label} форма</h3>
-        <span class="format-card__year">{format.currentYear} год</span>
     </div>
     <a
-        class="format-card__cta font-titles font-600 bg-bg-accent_second userActionsLinkAlt"
+        class="format-card__cta font-titles font-600"
         href={getBasedUrl(variantPath(courseId, format.format))}
     >
-        Перейти к материалам
+        {format.currentYear} год поступления
+        <i class="format-card__goto-icon"></i>
     </a>
-    {
-        archiveYears.length > 0 && (
-            <details class="format-card__years">
-                <summary>Прошлые годы ({archiveYears.length})</summary>
-                <ul class="format-card__years-list">
-                    {archiveYears.map((year) => (
-                        <li>
-                            <a
-                                class="format-card__year-link"
-                                href={getBasedUrl(
-                                    variantPath(courseId, format.format, year),
-                                )}
-                            >
-                                {year} год
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-            </details>
-        )
-    }
+    {archiveYears.length > 0 && (
+        <ul class="format-card__years-list">
+            {archiveYears.map((year) => (
+                <li>
+                    <a
+                        class="format-card__year-link"
+                        href={getBasedUrl(
+                            variantPath(courseId, format.format, year)
+                        )}
+                    >
+                        {year}
+                    </a>
+                </li>
+            ))}
+        </ul>
+    )}
 </div>
 
 <style>
@@ -54,62 +47,69 @@ const archiveYears = format.years.filter(
         flex-direction: column;
         gap: 1.5rem;
         padding: 1.875rem;
-        background-color: var(--color-bg-secondary);
         border-radius: 30px;
+        background-color: var(--color-bg-secondary);
     }
 
     .format-card__header {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
         flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
         gap: 1rem;
     }
 
     .format-card__title {
-        font-family: "NextArt", sans-serif;
         font-weight: 600;
+        font-family: NextArt, sans-serif;
     }
 
     .format-card__year {
         padding: 0.25rem 0.875rem;
         border-radius: 999px;
         background-color: var(--color-bg-accent-second);
-        font-size: 1rem;
-        font-weight: 500;
         white-space: nowrap;
+        font-weight: 500;
+        font-size: 1rem;
     }
 
     .format-card__cta {
-        display: block;
-        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
         padding: 1rem 1.5rem;
+        width: 100%;
+        border: 1.5px solid var(--color-border);
         border-radius: 20px;
         color: inherit;
         text-decoration: none;
-    }
+        transition-duration: 300ms;
+        transition-property: background-color;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 
-    .format-card__years summary {
-        cursor: pointer;
-        text-decoration: underline;
-        font-weight: 500;
-        list-style: none;
-
-        &::-webkit-details-marker {
-            display: none;
-        }
-
+        &:active,
         &:hover,
         &:focus-visible {
-            color: var(--color-bg-accent-second);
+            background-color: var(--color-bg-accent-second);
         }
+    }
+
+    .format-card__goto-icon {
+        flex-shrink: 0;
+        width: 50px;
+        height: 50px;
+        border: 1.5px solid var(--color-border);
+        border-radius: 100%;
+        background: url("/web-course-site/assets/img/goto.svg") no-repeat center;
+        color: var(--color-border);
     }
 
     .format-card__years-list {
         display: flex;
         flex-wrap: wrap;
         gap: 0.5rem 0.75rem;
-        margin: 0.875rem 0 0;
+        margin: 0;
         padding: 0;
         list-style: none;
     }
@@ -122,7 +122,11 @@ const archiveYears = format.years.filter(
         color: inherit;
         text-decoration: none;
         font-size: 1rem;
+        transition-duration: 300ms;
+        transition-property: background-color;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 
+        &:active,
         &:hover,
         &:focus-visible {
             background-color: var(--color-bg-accent-second);
