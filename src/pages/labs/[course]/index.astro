@@ -26,12 +26,45 @@ const { info } = Astro.props as Props;
 
 <BaseLayoutSnow>
     <Heading title={info.title} description={info.description} />
-    <section class="max-w-screen px-5 md:px-10 xl:max-w-screen-xl mx-auto mb-30">
-        <h2 class="text-center text-text-inverted mb-10">Варианты курса</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+    <section class="course-hub">
+        <h2 class="course-hub__title">Варианты курса</h2>
+        <div class="course-hub__grid">
             {info.formats.map((format) => (
                 <FormatHubCard courseId={info.id} format={format} />
             ))}
         </div>
     </section>
 </BaseLayoutSnow>
+
+<style>
+    .course-hub {
+        margin-bottom: 7.5rem;
+        margin-inline: auto;
+        padding-inline: 1.25rem;
+        max-width: 100vw;
+
+        @media (width >= 768px) {
+            padding-inline: 2.5rem;
+        }
+
+        @media (width >= 1280px) {
+            max-width: 1280px;
+        }
+    }
+
+    .course-hub__title {
+        margin-bottom: 2.5rem;
+        color: var(--color-text-inverted);
+        text-align: center;
+    }
+
+    .course-hub__grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.25rem;
+
+        @media (width >= 768px) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+</style>
