@@ -3,16 +3,20 @@ import { getCourseMeta, variantPath } from "@utils/registry";
 import type { BreadcrumbItem } from "@/types/Navigation";
 import type { CourseType, FourDigitYear } from "@/types/Courses";
 
+/** Формат и год поступления — один уровень «форма и год» в хлебных крошках */
+export interface BreadcrumbVariant {
+    format: CourseType;
+    year: FourDigitYear;
+}
+
 /**
- * Хлебные крошки для страниц курса: Курс › Формат › Год.
- * Каждый уровень ссылается на свою страницу; «Главную» добавляет сам
- * компонент Breadcrumbs, а текущую страницу определяет вызывающий код
- * (последний элемент списка остаётся без ссылки).
+ * Хлебные крошки для страниц курса: Курс › Форма и год.
+ * «Главную» добавляет сам компонент Breadcrumbs, а текущую страницу
+ * определяет вызывающий код (последний элемент списка остаётся без ссылки).
  */
 export function variantBreadcrumbs(
     courseId: string,
-    format?: CourseType,
-    year?: FourDigitYear
+    variant?: BreadcrumbVariant
 ): BreadcrumbItem[] {
     const meta = getCourseMeta(courseId);
     if (!meta) {
@@ -22,16 +26,10 @@ export function variantBreadcrumbs(
     const items: BreadcrumbItem[] = [
         { label: meta.title, href: variantPath(courseId) },
     ];
-    if (format) {
+    if (variant) {
         items.push({
-            label: `${formatLabels[format]} форма`,
-            href: variantPath(courseId, format),
-        });
-    }
-    if (format && year) {
-        items.push({
-            label: year,
-            href: variantPath(courseId, format, year),
+            label: `${formatLabels[variant.format]} форма, ${variant.year}`,
+            href: variantPath(courseId, variant.format, variant.year),
         });
     }
     return items;

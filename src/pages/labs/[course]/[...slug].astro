@@ -49,10 +49,14 @@ if (parsed) {
     }
 }
 
-// Хлебные крошки: Курс › Формат › Год › Название работы.
-// Год остаётся ссылкой, так как текущая страница глубже него.
+// Хлебные крошки: Курс › Форма и год › Название работы.
+// «Форма и год» остаётся ссылкой на страницу варианта со списком заданий,
+// так как текущая страница глубже этого уровня.
 const breadcrumbs = [
-    ...variantBreadcrumbs(courseId, parsed?.format, parsed?.year),
+    ...variantBreadcrumbs(
+        courseId,
+        parsed ? { format: parsed.format, year: parsed.year } : undefined
+    ),
     { label: entry.data.title },
 ];
 ---
