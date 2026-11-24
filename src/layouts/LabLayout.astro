@@ -4,7 +4,10 @@ import ButtonTop from "@/components/Navigation/ButtonTop.astro";
 import Breadcrumbs from "@components/Navigation/Breadcrumbs.astro";
 import TOC from "@/components/Navigation/TOC.astro";
 import type { LabLayoutProps } from "../types/Labs";
-import type { BreadcrumbItem } from "@/types/Navigation";
+import type {
+    BreadcrumbDropdownItem,
+    BreadcrumbItem,
+} from "@/types/Navigation";
 import type { VariantContext } from "@utils/registry";
 import BaseLayout from "./BaseLayout.astro";
 
@@ -13,9 +16,12 @@ interface Props extends LabLayoutProps {
     notice?: VariantContext;
     /** Хлебные крошки для навигации по уровням курса */
     breadcrumbs?: BreadcrumbItem[];
+    /** Выпадающий список последней крошки — материалы курса */
+    dropdown?: BreadcrumbDropdownItem[];
 }
 
-const { frontmatter, headinglist, notice, breadcrumbs }: Props = Astro.props;
+const { frontmatter, headinglist, notice, breadcrumbs, dropdown }: Props =
+    Astro.props;
 
 let number: string = frontmatter.number && frontmatter.number.padStart(2, "0");
 ---
@@ -23,7 +29,7 @@ let number: string = frontmatter.number && frontmatter.number.padStart(2, "0");
 <BaseLayout title={frontmatter.title}>
     <ButtonTop />
     <Heading title={frontmatter.title} number={number} />
-    {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
+    {breadcrumbs && <Breadcrumbs items={breadcrumbs} dropdown={dropdown} />}
     <article class="box-content max-w-[700px] xl:max-w-screen-xl m-auto px-3.5">
         <div class="xl:grid grid-cols-[1fr_700px_1fr] gap-4 items-start text-text-inverted mb-5 py-12">
             <aside class="side mx-auto top-25 pt-6 xl:px-6 xl:pt-0 xl:sticky">

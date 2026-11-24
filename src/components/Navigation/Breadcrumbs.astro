@@ -1,14 +1,21 @@
 ---
 import { getBasedUrl } from "@utils/paths";
-import type { BreadcrumbItem } from "@/types/Navigation";
+import type {
+    BreadcrumbDropdownItem,
+    BreadcrumbItem,
+} from "@/types/Navigation";
 
 interface Props {
     /** Уровни сверху вниз; «Главная» уже включена и передаваться не должна */
     items: BreadcrumbItem[];
+    /** Выпадающий список последней крошки — материалы курса для быстрого перехода */
+    dropdown?: BreadcrumbDropdownItem[];
 }
 
-const { items } = Astro.props;
+const { items, dropdown } = Astro.props;
 const lastIndex = items.length - 1;
+const dropdownItems = dropdown ?? [];
+const hasDropdown = dropdownItems.length > 0;
 ---
 
 <nav class="breadcrumbs" aria-label="Хлебные крошки">
@@ -43,7 +50,74 @@ const lastIndex = items.length - 1;
                         stroke-linejoin="round"
                     />
                 </svg>
-                {index === lastIndex ? (
+                {index === lastIndex && hasDropdown ? (
+                    <details class="breadcrumbs__dropdown">
+                        <summary class="breadcrumbs__dropdown-toggle">
+                            <span
+                                class="breadcrumbs__label breadcrumbs__label--current"
+                                aria-current="page"
+                            >
+                                {item.label}
+                            </span>
+                            {/* Треугольник — открывает список материалов курса */}
+                            <svg
+                                class="breadcrumbs__dropdown-arrow"
+                                viewBox="0 0 10 6"
+                                fill="currentColor"
+                                aria-hidden="true"
+                            >
+                                <path d="M0 0h10L5 6z" />
+                            </svg>
+                        </summary>
+                        <div class="breadcrumbs__dropdown-area">
+                            <ul class="breadcrumbs__dropdown-list">
+                                {dropdownItems.map((material) => (
+                                    <li>
+                                        <a
+                                            class:list={[
+                                                "breadcrumbs__dropdown-link",
+                                                {
+                                                    "breadcrumbs__dropdown-link--current":
+                                                        material.isCurrent,
+                                                },
+                                            ]}
+                                            href={
+                                                material.external
+                                                    ? material.href
+                                                    : getBasedUrl(material.href)
+                                            }
+                                            aria-current={
+                                                material.isCurrent
+                                                    ? "page"
+                                                    : undefined
+                                            }
+                                        >
+                                            <span class="breadcrumbs__dropdown-check">
+                                                {material.isCurrent && (
+                                                    <svg
+                                                        class="breadcrumbs__check-icon"
+                                                        viewBox="0 0 12 10"
+                                                        fill="none"
+                                                        aria-hidden="true"
+                                                    >
+                                                        <path
+                                                            d="m1 5 3.5 3.5L11 1.5"
+                                                            stroke="currentColor"
+                                                            stroke-width="2"
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                        />
+                                                    </svg>
+                                                )}
+                                            </span>
+                                            <span>{material.label}</span>
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </details>
+                ) : index === lastIndex ? (
                     <span
                         class="breadcrumbs__label breadcrumbs__label--current"
                         aria-current="page"
@@ -62,9 +136,42 @@ const lastIndex = items.length - 1;
     </ol>
 </nav>
 
+<script>
+    const dropdown = document.querySelector<HTMLDetailsElement>(
+        ".breadcrumbs__dropdown"
+    );
+
+    if (dropdown) {
+        document.addEventListener("click", (event) => {
+            const target = event.target;
+            if (
+                target instanceof HTMLElement &&
+                !target.closest(".breadcrumbs__dropdown")
+            ) {
+                dropdown.open = false;
+            }
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                dropdown.open = false;
+            }
+        });
+
+        // С position: fixed список привязан к вьюпорку, а не к странице —
+        // при прокрутке страницы закрываем его, чтобы он не «отлипал» от крошек
+        if (CSS.supports("anchor-name", "--x")) {
+            window.addEventListener("scroll", () => {
+                dropdown.open = false;
+            });
+        }
+    }
+</script>
+
 <style>
     .breadcrumbs {
-        margin-block: 2rem;
+        margin-top: 1.5rem;
+        /*margin-bottom: 1rem;*/
         margin-inline: auto;
         padding-inline: 1.25rem;
         max-width: 100%;
@@ -89,7 +196,7 @@ const lastIndex = items.length - 1;
     .breadcrumbs__item {
         display: flex;
         align-items: stretch;
-        gap: 0.5rem;
+        gap: 0.625rem;
         min-width: 0;
     }
 
@@ -97,7 +204,7 @@ const lastIndex = items.length - 1;
         display: flex;
         align-items: center;
         line-height: 1;
-        font-size: 1rem;
+        font-size: 0.875rem;
         transition-duration: 150ms;
         transition-property: opacity;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -111,7 +218,7 @@ const lastIndex = items.length - 1;
     }
 
     .breadcrumbs__label {
-        font-size: 1rem;
+        font-size: 0.875rem;
         opacity: 0.75;
     }
 
@@ -132,5 +239,142 @@ const lastIndex = items.length - 1;
     .breadcrumbs__home-icon {
         width: 1.125rem;
         height: 1.125rem;
+    }
+
+    .breadcrumbs__dropdown {
+        position: relative;
+        min-width: 0;
+    }
+
+    .breadcrumbs__dropdown-toggle {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        list-style: none;
+        cursor: pointer;
+
+        &::-webkit-details-marker {
+            display: none;
+        }
+    }
+
+    .breadcrumbs__dropdown-arrow {
+        flex-shrink: 0;
+        width: 0.625rem;
+        height: 0.375rem;
+        transition-duration: 0.2s;
+        transition-property: rotate;
+    }
+
+    .breadcrumbs__dropdown[open] .breadcrumbs__dropdown-arrow {
+        rotate: 180deg;
+    }
+
+    /* Позиционирующий контейнер выпадающего списка.
+          Базовый вариант (без anchor positioning) — абсолютный внутри details */
+
+    .breadcrumbs__dropdown-area {
+        position: absolute;
+        top: calc(100% + 0.5rem);
+        left: 0;
+        z-index: 5;
+        width: max-content;
+        max-width: min(28rem, calc(100vw - 2.5rem));
+        padding: 0.5rem;
+        background-color: var(--color-bg-menu);
+        backdrop-filter: blur(40px);
+        border-radius: 1rem;
+    }
+
+    .breadcrumbs__dropdown-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        max-height: min(26rem, 60vh);
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-text-primary) var(--color-bg-menu);
+    }
+
+    .breadcrumbs__dropdown-link {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.625rem;
+        color: var(--color-text-primary);
+        line-height: 1.2;
+        font-size: 0.9375rem;
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--color-bg-accent-second);
+        }
+        & span {
+            font-size: 0.875rem;
+        }
+    }
+
+    .breadcrumbs__dropdown-link--current {
+        font-weight: 600;
+        font-family: var(--font-next-art);
+    }
+
+    .breadcrumbs__dropdown-check {
+        display: flex;
+        flex-shrink: 0;
+        justify-content: center;
+        align-items: center;
+        width: 0.875rem;
+        height: 0.875rem;
+    }
+
+    .breadcrumbs__check-icon {
+        width: 0.75rem;
+        height: 0.625rem;
+    }
+
+    /* Раскрытие влево, когда справа от переключателя не хватает места */
+
+    @position-try --breadcrumbs-flip-left {
+        right: anchor(right);
+        left: auto;
+    }
+
+    /* Фиксация в границах экрана, когда места не хватает ни справа,
+          ни слева от переключателя (узкие экраны) */
+
+    @position-try --breadcrumbs-page-fit {
+        right: 1.25rem;
+        left: 1.25rem;
+        width: auto;
+        max-width: none;
+    }
+
+    /* CSS anchor positioning: контейнер привязан к переключателю и растянут
+          от него до нижнего края вьюпорта (top/bottom), поэтому список любой
+          длины всегда помещается на экране; за горизонтальные границы отвечают
+          position-try-фолбэки. position: fixed делает все отсчеты относительно
+          вьюпорта. */
+
+    @supports (anchor-name: --breadcrumbs-toggle) {
+        .breadcrumbs__dropdown-toggle {
+            anchor-name: --breadcrumbs-toggle;
+        }
+
+        .breadcrumbs__dropdown-area {
+            position: fixed;
+            position-anchor: --breadcrumbs-toggle;
+            position-try-fallbacks:
+                --breadcrumbs-flip-left, --breadcrumbs-page-fit;
+            top: anchor(bottom);
+            bottom: 1.25rem;
+            left: anchor(left);
+            margin-top: 0.5rem;
+        }
+
+        .breadcrumbs__dropdown-list {
+            max-height: min(26rem, 100%);
+        }
     }
 </style>

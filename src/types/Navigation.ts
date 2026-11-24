@@ -8,3 +8,15 @@ export interface BreadcrumbItem {
      */
     href?: string;
 }
+
+/** Пункт выпадающего списка последней хлебной крошки (материал курса) */
+export interface BreadcrumbDropdownItem {
+    /** Подпись пункта, как на странице курса */
+    label: string;
+    /** URL материала без base либо полная внешняя ссылка (лекции) */
+    href: string;
+    /** Ссылка ведёт на внешний ресурс — base добавлять не нужно */
+    external?: boolean;
+    /** Текущий материал — отмечается галочкой */
+    isCurrent?: boolean;
+}

@@ -3,7 +3,7 @@ import LabLayout from "@layouts/LabLayout.astro";
 import { getCollection, render } from "astro:content";
 import courses from "@/data/courses";
 import { getCourseInfo, parseEntryId, variantPath } from "@utils/registry";
-import { variantBreadcrumbs } from "@utils/breadcrumbs";
+import { variantBreadcrumbs, variantContents } from "@utils/breadcrumbs";
 import type { VariantContext } from "@utils/registry";
 
 /**
@@ -59,6 +59,12 @@ const breadcrumbs = [
     ),
     { label: entry.data.title },
 ];
+
+// Выпадающий список последней крошки: материалы варианта в том же
+// порядке, что и на странице курса; текущая работа отмечена галочкой.
+const dropdown = parsed
+    ? await variantContents(courseId, parsed.format, parsed.year, entry.id)
+    : [];
 ---
 
 <LabLayout
@@ -66,6 +72,7 @@ const breadcrumbs = [
     headinglist={headings}
     notice={notice}
     breadcrumbs={breadcrumbs}
+    dropdown={dropdown}
 >
     <Content />
 </LabLayout>
