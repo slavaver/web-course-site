@@ -1,4 +1,4 @@
-import { glob, file } from "astro/loaders";
+import { glob } from "astro/loaders";
 import { defineCollection } from "astro:content";
 import { z } from "astro/zod";
 
@@ -8,17 +8,29 @@ const courseSchema = z.object({
     type: z.enum(["important", "labs", "practice", "lecture", "rk"]),
 });
 
+/** Лекции — внешние материалы: обязательны темы (description) и ссылка (href) */
 const lectureSchema = courseSchema.extend({
+    type: z.literal("lecture"),
     description: z.array(z.string()),
     href: z.string(),
 });
+
+const workSchema = courseSchema.extend({
+    type: z.enum(["important", "labs", "practice", "rk"]),
+});
+
+/** Материалы курса: работы и лекции хранятся в одной коллекции */
+const materialSchema = z.discriminatedUnion("type", [
+    workSchema,
+    lectureSchema,
+]);
 
 const webBasics = defineCollection({
     loader: glob({
         pattern: ["**/*.md"],
         base: "./src/courses/web-basics",
     }),
-    schema: courseSchema,
+    schema: materialSchema,
 });
 
 const clientSideBasics = defineCollection({
@@ -26,7 +38,7 @@ const clientSideBasics = defineCollection({
         pattern: ["**/*.md"],
         base: "./src/courses/client-side-basics",
     }),
-    schema: courseSchema,
+    schema: materialSchema,
 });
 
 const clientSide = defineCollection({
@@ -34,12 +46,7 @@ const clientSide = defineCollection({
         pattern: ["**/*.md"],
         base: "./src/courses/client-side",
     }),
-    schema: courseSchema,
-});
-
-const clientSideLectures = defineCollection({
-    loader: file("./src/courses/client-side/full-time/lectures.json"),
-    schema: lectureSchema,
+    schema: materialSchema,
 });
 
 const useful = defineCollection({
@@ -50,6 +57,5 @@ export const collections = {
     webBasics,
     clientSideBasics,
     clientSide,
-    clientSideLectures,
     useful,
 };

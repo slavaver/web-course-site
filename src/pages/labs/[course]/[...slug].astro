@@ -14,10 +14,14 @@ export async function getStaticPaths() {
     const pathsByCourse = await Promise.all(
         courses.map(async (course) => {
             const entries = await getCollection(course.collection);
-            return entries.map((entry) => ({
-                params: { course: course.id, slug: entry.id },
-                props: { entry },
-            }));
+            // Лекции — внешние материалы (href во frontmatter),
+            // отдельных страниц на сайте для них нет
+            return entries
+                .filter((entry) => entry.data.type !== "lecture")
+                .map((entry) => ({
+                    params: { course: course.id, slug: entry.id },
+                    props: { entry },
+                }));
         })
     );
     return pathsByCourse.flat();

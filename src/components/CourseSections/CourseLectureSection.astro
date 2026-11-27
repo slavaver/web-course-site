@@ -15,54 +15,59 @@ const { items } = Astro.props;
 <section class="course-section course-section_lecture">
     <h2 class="course-section__title course-section__title-light">Лекции</h2>
     <ul class="course-section__list course-section__list_lecture">
-        {items.map((item, index) => (
-            <>
-                {(() => {
-                    switch (index % 9) {
-                        case 0:
-                            return (
-                                <li>
-                                    <img
-                                        src={getBasedUrl(
-                                            "/assets/img/cat-chill-table.svg"
-                                        )}
-                                        alt=""
-                                        class="course-section__img"
-                                    />
-                                </li>
-                            );
-                        case 4:
-                            return (
-                                <li>
-                                    <img
-                                        src={getBasedUrl(
-                                            "/assets/img/cat-table-vue.svg"
-                                        )}
-                                        alt=""
-                                        class="course-section__img"
-                                    />
-                                </li>
-                            );
-                        case 8:
-                            return (
-                                <li>
-                                    <img
-                                        src={getBasedUrl(
-                                            "/assets/img/cat-cute.svg"
-                                        )}
-                                        alt=""
-                                        class="course-section__img"
-                                    />
-                                </li>
-                            );
-                    }
-                })()}
-                <LectureCard
-                    title={item.data.title}
-                    href={item.data.href}
-                    description={item.data.description}
-                />
-            </>
-        ))}
+        {items
+            .sort(
+                (prev, next) =>
+                    parseInt(prev.data.number) - parseInt(next.data.number)
+            )
+            .map((item, index) => (
+                <>
+                    {(() => {
+                        switch (index % 9) {
+                            case 0:
+                                return (
+                                    <li>
+                                        <img
+                                            src={getBasedUrl(
+                                                "/assets/img/cat-chill-table.svg"
+                                            )}
+                                            alt=""
+                                            class="course-section__img"
+                                        />
+                                    </li>
+                                );
+                            case 4:
+                                return (
+                                    <li>
+                                        <img
+                                            src={getBasedUrl(
+                                                "/assets/img/cat-table-vue.svg"
+                                            )}
+                                            alt=""
+                                            class="course-section__img"
+                                        />
+                                    </li>
+                                );
+                            case 8:
+                                return (
+                                    <li>
+                                        <img
+                                            src={getBasedUrl(
+                                                "/assets/img/cat-cute.svg"
+                                            )}
+                                            alt=""
+                                            class="course-section__img"
+                                        />
+                                    </li>
+                                );
+                        }
+                    })()}
+                    <LectureCard
+                        title={item.data.title}
+                        href={item.data.href}
+                        description={item.data.description}
+                    />
+                </>
+            ))}
     </ul>
 </section>

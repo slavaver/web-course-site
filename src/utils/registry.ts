@@ -1,12 +1,7 @@
 import { getCollection } from "astro:content";
 import courses, { formatLabels } from "@/data/courses";
 import type { CourseMeta } from "@/data/courses";
-import type {
-    CourseType,
-    FourDigitYear,
-    CoursesItems,
-    LectureItems,
-} from "@/types/Courses";
+import type { CourseType, FourDigitYear, CoursesItems } from "@/types/Courses";
 
 export interface CourseFormatInfo {
     format: CourseType;
@@ -102,7 +97,7 @@ export async function getCoursesInfo(): Promise<CourseInfo[]> {
             const formats: CourseFormatInfo[] = formatOrder
                 .filter((format) => yearsByFormat.has(format))
                 .map((format) => {
-                    const years = [...yearsByFormat.get(format)!]
+                    const years = [...(yearsByFormat.get(format) ?? [])]
                         .sort()
                         .reverse();
                     const override = currentYearOverrides[course.id]?.[format];
@@ -163,25 +158,10 @@ export async function getVariantEntries(
     })) as CoursesItems;
 }
 
-/**
- * Особый случай: у дистанционного варианта «Веб-разработки на клиенте»
- * список лекций хранится отдельной коллекцией (clientSideLectures).
- */
-export async function getVariantLectures(
-    courseId: string,
-    format: CourseType
-): Promise<LectureItems> {
-    if (courseId === "client-side" && format === "distance") {
-        const lectures = await getCollection("clientSideLectures");
-        return lectures.slice(0, 8);
-    }
-    return [];
-}
-
 export interface VariantPageData {
     title: string;
     description: string;
-    data: Record<string, (CoursesItems | LectureItems)[number][]>;
+    data: Record<string, CoursesItems[number][]>;
     variant: VariantContext;
 }
 
@@ -201,14 +181,8 @@ export async function getVariantPageData(
         return null;
     }
 
-    const [entries, lectures] = await Promise.all([
-        getVariantEntries(courseId, format, year),
-        getVariantLectures(courseId, format),
-    ]);
-    const data = Object.groupBy(
-        [...entries, ...lectures],
-        ({ data }) => data.type
-    );
+    const entries = await getVariantEntries(courseId, format, year);
+    const data = Object.groupBy(entries, ({ data }) => data.type);
 
     const variant: VariantContext = {
         courseTitle: info.title,
