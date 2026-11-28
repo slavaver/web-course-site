@@ -41,8 +41,10 @@ const { title, data, variant, breadcrumbs } = Astro.props;
     </Heading>
     {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
     {data.important && <CourseImportantSection items={data.important} />}
-    {data.labs && <CourseExercisesSection items={data.labs} />}
-    {data.practice && <CourseExercisesSection items={data.practice} />}
+    {data.practice && (
+        <CourseExercisesSection type="practice" items={data.practice} />
+    )}
+    {data.labs && <CourseExercisesSection type="labs" items={data.labs} />}
     {data.lecture && <CourseLectureSection items={data.lecture} />}
     {data.rk && <CourseRkSection items={data.rk} />}
 </BaseLayoutSnow>

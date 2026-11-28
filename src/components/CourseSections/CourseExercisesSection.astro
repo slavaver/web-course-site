@@ -7,13 +7,20 @@ import type { CoursesItems } from "@/types/Courses";
 
 interface Props {
     items: CoursesItems;
+    /** Тип материалов секции: определяет заголовок */
+    type: "labs" | "practice";
 }
 
-const { items } = Astro.props;
+const { items, type } = Astro.props;
+
+const sectionTitles = {
+    labs: "Лабораторные работы",
+    practice: "Практические задания",
+} as const;
 ---
 
 <section class="course-section">
-    <h2 class="course-section__title">Лабораторные работы</h2>
+    <h2 class="course-section__title">{sectionTitles[type]}</h2>
     <ul class="course-section__list">
         {items
             .sort((prev, next) => {
